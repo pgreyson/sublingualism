@@ -1,13 +1,14 @@
 # Security & Credentials
 
 ## Overview
-All credentials stored encrypted with single master password (SSO).
+Credentials currently stored in .env file (gitignored but NOT encrypted).
+TODO: Implement proper encryption with single master password.
 
 ## Required Credentials
-- GitHub account access
-- AWS account access  
+- GitHub account access ✓
+- AWS account access ✓
+- Vimeo account access ✓
 - Social media accounts (Instagram, etc.) - *pending strategy*
-- Vimeo account access - *for video management*
 
 ## Setup Process
 1. Agent requests master password from user

@@ -31,3 +31,21 @@
 **Action Required**:
 - User must verify domain via email to someone.named.paul@gmail.com
 - User should delete temporary IAM user: sublingualism-setup-temp
+
+## Session: 2026-01-02 - Website Launch
+**Agent**: Claude Opus 4
+**Tasks Completed**:
+- Connected GitHub to Amplify with new classic token
+- Fixed amplify.yml for static site deployment
+- Created initial website with artist statement
+- Debugged 404 issues and fixed artifact configuration
+- Created AGENT_PROTOCOL.md emphasizing verification before declaring success
+- **SITE NOW LIVE AT sublingualism.com**
+
+**Key Issues Resolved**:
+- Initial Amplify build failed due to npm commands in static site
+- 404 errors due to incorrect artifact baseDirectory
+- Learned importance of verifying deployments before declaring success
+
+**Next Priority**:
+- View and describe Vimeo anchor piece
