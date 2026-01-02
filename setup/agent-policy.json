@@ -1,0 +1,20 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "amplify:*",
+        "amplifybackend:*",
+        "route53:*",
+        "route53domains:*",
+        "acm:*",
+        "cloudfront:*",
+        "s3:*",
+        "iam:GetRole",
+        "iam:PassRole"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "FirstName": "Paul",
+  "LastName": "Greyson",
+  "ContactType": "PERSON",
+  "AddressLine1": "5415 Brann St",
+  "City": "Oakland",
+  "State": "CA",
+  "CountryCode": "US",
+  "ZipCode": "94619",
+  "PhoneNumber": "+1.5103163946",
+  "Email": "someone.named.paul@gmail.com"
+}
