@@ -4,9 +4,10 @@ frontend:
     build:
       commands:
         - echo "Static site - no build needed"
+        - ls -la
   artifacts:
-    baseDirectory: /
+    baseDirectory: ./
     files:
-      - '**/*'
+      - index.html
   cache:
     paths: []
