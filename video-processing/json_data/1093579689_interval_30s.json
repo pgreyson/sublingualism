@@ -1,0 +1,399 @@
+{
+  "video_id": "1093579689",
+  "video_name": "charybdis",
+  "duration": 1157,
+  "interval": 30,
+  "cut_points": [
+    30,
+    60,
+    90,
+    120,
+    150,
+    180,
+    210,
+    240,
+    270,
+    300,
+    330,
+    360,
+    390,
+    420,
+    450,
+    480,
+    510,
+    540,
+    570,
+    600,
+    630,
+    660,
+    690,
+    720,
+    750,
+    780,
+    810,
+    840,
+    870,
+    900,
+    930,
+    960,
+    990,
+    1020,
+    1050,
+    1080,
+    1110,
+    1140
+  ],
+  "segments": [
+    {
+      "index": 0,
+      "start": 0,
+      "end": 30,
+      "duration": 30,
+      "start_tc": "00:00:00:00",
+      "end_tc": "00:00:30:00",
+      "vimeo_url": "https://vimeo.com/1093579689#0"
+    },
+    {
+      "index": 1,
+      "start": 30,
+      "end": 60,
+      "duration": 30,
+      "start_tc": "00:00:30:00",
+      "end_tc": "00:01:00:00",
+      "vimeo_url": "https://vimeo.com/1093579689#30"
+    },
+    {
+      "index": 2,
+      "start": 60,
+      "end": 90,
+      "duration": 30,
+      "start_tc": "00:01:00:00",
+      "end_tc": "00:01:30:00",
+      "vimeo_url": "https://vimeo.com/1093579689#60"
+    },
+    {
+      "index": 3,
+      "start": 90,
+      "end": 120,
+      "duration": 30,
+      "start_tc": "00:01:30:00",
+      "end_tc": "00:02:00:00",
+      "vimeo_url": "https://vimeo.com/1093579689#90"
+    },
+    {
+      "index": 4,
+      "start": 120,
+      "end": 150,
+      "duration": 30,
+      "start_tc": "00:02:00:00",
+      "end_tc": "00:02:30:00",
+      "vimeo_url": "https://vimeo.com/1093579689#120"
+    },
+    {
+      "index": 5,
+      "start": 150,
+      "end": 180,
+      "duration": 30,
+      "start_tc": "00:02:30:00",
+      "end_tc": "00:03:00:00",
+      "vimeo_url": "https://vimeo.com/1093579689#150"
+    },
+    {
+      "index": 6,
+      "start": 180,
+      "end": 210,
+      "duration": 30,
+      "start_tc": "00:03:00:00",
+      "end_tc": "00:03:30:00",
+      "vimeo_url": "https://vimeo.com/1093579689#180"
+    },
+    {
+      "index": 7,
+      "start": 210,
+      "end": 240,
+      "duration": 30,
+      "start_tc": "00:03:30:00",
+      "end_tc": "00:04:00:00",
+      "vimeo_url": "https://vimeo.com/1093579689#210"
+    },
+    {
+      "index": 8,
+      "start": 240,
+      "end": 270,
+      "duration": 30,
+      "start_tc": "00:04:00:00",
+      "end_tc": "00:04:30:00",
+      "vimeo_url": "https://vimeo.com/1093579689#240"
+    },
+    {
+      "index": 9,
+      "start": 270,
+      "end": 300,
+      "duration": 30,
+      "start_tc": "00:04:30:00",
+      "end_tc": "00:05:00:00",
+      "vimeo_url": "https://vimeo.com/1093579689#270"
+    },
+    {
+      "index": 10,
+      "start": 300,
+      "end": 330,
+      "duration": 30,
+      "start_tc": "00:05:00:00",
+      "end_tc": "00:05:30:00",
+      "vimeo_url": "https://vimeo.com/1093579689#300"
+    },
+    {
+      "index": 11,
+      "start": 330,
+      "end": 360,
+      "duration": 30,
+      "start_tc": "00:05:30:00",
+      "end_tc": "00:06:00:00",
+      "vimeo_url": "https://vimeo.com/1093579689#330"
+    },
+    {
+      "index": 12,
+      "start": 360,
+      "end": 390,
+      "duration": 30,
+      "start_tc": "00:06:00:00",
+      "end_tc": "00:06:30:00",
+      "vimeo_url": "https://vimeo.com/1093579689#360"
+    },
+    {
+      "index": 13,
+      "start": 390,
+      "end": 420,
+      "duration": 30,
+      "start_tc": "00:06:30:00",
+      "end_tc": "00:07:00:00",
+      "vimeo_url": "https://vimeo.com/1093579689#390"
+    },
+    {
+      "index": 14,
+      "start": 420,
+      "end": 450,
+      "duration": 30,
+      "start_tc": "00:07:00:00",
+      "end_tc": "00:07:30:00",
+      "vimeo_url": "https://vimeo.com/1093579689#420"
+    },
+    {
+      "index": 15,
+      "start": 450,
+      "end": 480,
+      "duration": 30,
+      "start_tc": "00:07:30:00",
+      "end_tc": "00:08:00:00",
+      "vimeo_url": "https://vimeo.com/1093579689#450"
+    },
+    {
+      "index": 16,
+      "start": 480,
+      "end": 510,
+      "duration": 30,
+      "start_tc": "00:08:00:00",
+      "end_tc": "00:08:30:00",
+      "vimeo_url": "https://vimeo.com/1093579689#480"
+    },
+    {
+      "index": 17,
+      "start": 510,
+      "end": 540,
+      "duration": 30,
+      "start_tc": "00:08:30:00",
+      "end_tc": "00:09:00:00",
+      "vimeo_url": "https://vimeo.com/1093579689#510"
+    },
+    {
+      "index": 18,
+      "start": 540,
+      "end": 570,
+      "duration": 30,
+      "start_tc": "00:09:00:00",
+      "end_tc": "00:09:30:00",
+      "vimeo_url": "https://vimeo.com/1093579689#540"
+    },
+    {
+      "index": 19,
+      "start": 570,
+      "end": 600,
+      "duration": 30,
+      "start_tc": "00:09:30:00",
+      "end_tc": "00:10:00:00",
+      "vimeo_url": "https://vimeo.com/1093579689#570"
+    },
+    {
+      "index": 20,
+      "start": 600,
+      "end": 630,
+      "duration": 30,
+      "start_tc": "00:10:00:00",
+      "end_tc": "00:10:30:00",
+      "vimeo_url": "https://vimeo.com/1093579689#600"
+    },
+    {
+      "index": 21,
+      "start": 630,
+      "end": 660,
+      "duration": 30,
+      "start_tc": "00:10:30:00",
+      "end_tc": "00:11:00:00",
+      "vimeo_url": "https://vimeo.com/1093579689#630"
+    },
+    {
+      "index": 22,
+      "start": 660,
+      "end": 690,
+      "duration": 30,
+      "start_tc": "00:11:00:00",
+      "end_tc": "00:11:30:00",
+      "vimeo_url": "https://vimeo.com/1093579689#660"
+    },
+    {
+      "index": 23,
+      "start": 690,
+      "end": 720,
+      "duration": 30,
+      "start_tc": "00:11:30:00",
+      "end_tc": "00:12:00:00",
+      "vimeo_url": "https://vimeo.com/1093579689#690"
+    },
+    {
+      "index": 24,
+      "start": 720,
+      "end": 750,
+      "duration": 30,
+      "start_tc": "00:12:00:00",
+      "end_tc": "00:12:30:00",
+      "vimeo_url": "https://vimeo.com/1093579689#720"
+    },
+    {
+      "index": 25,
+      "start": 750,
+      "end": 780,
+      "duration": 30,
+      "start_tc": "00:12:30:00",
+      "end_tc": "00:13:00:00",
+      "vimeo_url": "https://vimeo.com/1093579689#750"
+    },
+    {
+      "index": 26,
+      "start": 780,
+      "end": 810,
+      "duration": 30,
+      "start_tc": "00:13:00:00",
+      "end_tc": "00:13:30:00",
+      "vimeo_url": "https://vimeo.com/1093579689#780"
+    },
+    {
+      "index": 27,
+      "start": 810,
+      "end": 840,
+      "duration": 30,
+      "start_tc": "00:13:30:00",
+      "end_tc": "00:14:00:00",
+      "vimeo_url": "https://vimeo.com/1093579689#810"
+    },
+    {
+      "index": 28,
+      "start": 840,
+      "end": 870,
+      "duration": 30,
+      "start_tc": "00:14:00:00",
+      "end_tc": "00:14:30:00",
+      "vimeo_url": "https://vimeo.com/1093579689#840"
+    },
+    {
+      "index": 29,
+      "start": 870,
+      "end": 900,
+      "duration": 30,
+      "start_tc": "00:14:30:00",
+      "end_tc": "00:15:00:00",
+      "vimeo_url": "https://vimeo.com/1093579689#870"
+    },
+    {
+      "index": 30,
+      "start": 900,
+      "end": 930,
+      "duration": 30,
+      "start_tc": "00:15:00:00",
+      "end_tc": "00:15:30:00",
+      "vimeo_url": "https://vimeo.com/1093579689#900"
+    },
+    {
+      "index": 31,
+      "start": 930,
+      "end": 960,
+      "duration": 30,
+      "start_tc": "00:15:30:00",
+      "end_tc": "00:16:00:00",
+      "vimeo_url": "https://vimeo.com/1093579689#930"
+    },
+    {
+      "index": 32,
+      "start": 960,
+      "end": 990,
+      "duration": 30,
+      "start_tc": "00:16:00:00",
+      "end_tc": "00:16:30:00",
+      "vimeo_url": "https://vimeo.com/1093579689#960"
+    },
+    {
+      "index": 33,
+      "start": 990,
+      "end": 1020,
+      "duration": 30,
+      "start_tc": "00:16:30:00",
+      "end_tc": "00:17:00:00",
+      "vimeo_url": "https://vimeo.com/1093579689#990"
+    },
+    {
+      "index": 34,
+      "start": 1020,
+      "end": 1050,
+      "duration": 30,
+      "start_tc": "00:17:00:00",
+      "end_tc": "00:17:30:00",
+      "vimeo_url": "https://vimeo.com/1093579689#1020"
+    },
+    {
+      "index": 35,
+      "start": 1050,
+      "end": 1080,
+      "duration": 30,
+      "start_tc": "00:17:30:00",
+      "end_tc": "00:18:00:00",
+      "vimeo_url": "https://vimeo.com/1093579689#1050"
+    },
+    {
+      "index": 36,
+      "start": 1080,
+      "end": 1110,
+      "duration": 30,
+      "start_tc": "00:18:00:00",
+      "end_tc": "00:18:30:00",
+      "vimeo_url": "https://vimeo.com/1093579689#1080"
+    },
+    {
+      "index": 37,
+      "start": 1110,
+      "end": 1140,
+      "duration": 30,
+      "start_tc": "00:18:30:00",
+      "end_tc": "00:19:00:00",
+      "vimeo_url": "https://vimeo.com/1093579689#1110"
+    },
+    {
+      "index": 38,
+      "start": 1140,
+      "end": 1157,
+      "duration": 17,
+      "start_tc": "00:19:00:00",
+      "end_tc": "00:19:17:00",
+      "vimeo_url": "https://vimeo.com/1093579689#1140"
+    }
+  ]
+}

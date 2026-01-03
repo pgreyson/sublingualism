@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<playlist xmlns="http://xspf.org/ns/0/" xmlns:vlc="http://www.videolan.org/vlc/playlist/ns/0/" version="1">
+  <title>charybdis - Segments</title>
+  <trackList>
+    <track>
+      <location>https://vimeo.com/1093579689</location>
+      <title>charybdis - Segment 1 (00:00:00:00)</title>
+      <duration>30000</duration>
+      <extension application="http://www.videolan.org/vlc/playlist/0">
+        <vlc:option>start-time=0</vlc:option>
+        <vlc:option>stop-time=30</vlc:option>
+      </extension>
+    </track>
+    <track>
+      <location>https://vimeo.com/1093579689</location>
+      <title>charybdis - Segment 2 (00:00:30:00)</title>
+      <duration>30000</duration>
+      <extension application="http://www.videolan.org/vlc/playlist/0">
+        <vlc:option>start-time=30</vlc:option>
+        <vlc:option>stop-time=60</vlc:option>
+      </extension>
+    </track>
+    <track>
+      <location>https://vimeo.com/1093579689</location>
+      <title>charybdis - Segment 3 (00:01:00:00)</title>
+      <duration>30000</duration>
+      <extension application="http://www.videolan.org/vlc/playlist/0">
+        <vlc:option>start-time=60</vlc:option>
+        <vlc:option>stop-time=90</vlc:option>
+      </extension>
+    </track>
+    <track>
+      <location>https://vimeo.com/1093579689</location>
+      <title>charybdis - Segment 4 (00:01:30:00)</title>
+      <duration>30000</duration>
+      <extension application="http://www.videolan.org/vlc/playlist/0">
+        <vlc:option>start-time=90</vlc:option>
+        <vlc:option>stop-time=120</vlc:option>
+      </extension>
+    </track>
+    <track>
+      <location>https://vimeo.com/1093579689</location>
+      <title>charybdis - Segment 5 (00:02:00:00)</title>
+      <duration>30000</duration>
+      <extension application="http://www.videolan.org/vlc/playlist/0">
+        <vlc:option>start-time=120</vlc:option>
+        <vlc:option>stop-time=150</vlc:option>
+      </extension>
+    </track>
+    <track>
+      <location>https://vimeo.com/1093579689</location>
+      <title>charybdis - Segment 6 (00:02:30:00)</title>
+      <duration>30000</duration>
+      <extension application="http://www.videolan.org/vlc/playlist/0">
+        <vlc:option>start-time=150</vlc:option>
+        <vlc:option>stop-time=180</vlc:option>
+      </extension>
+    </track>
+    <track>
+      <location>https://vimeo.com/1093579689</location>
+      <title>charybdis - Segment 7 (00:03:00:00)</title>
+      <duration>30000</duration>
+      <extension application="http://www.videolan.org/vlc/playlist/0">
+        <vlc:option>start-time=180</vlc:option>
+        <vlc:option>stop-time=210</vlc:option>
+      </extension>
+    </track>
+    <track>
+      <location>https://vimeo.com/1093579689</location>
+      <title>charybdis - Segment 8 (00:03:30:00)</title>
+      <duration>30000</duration>
+      <extension application="http://www.videolan.org/vlc/playlist/0">
+        <vlc:option>start-time=210</vlc:option>
+        <vlc:option>stop-time=240</vlc:option>
+      </extension>
+    </track>
+    <track>
+      <location>https://vimeo.com/1093579689</location>
+      <title>charybdis - Segment 9 (00:04:00:00)</title>
+      <duration>30000</duration>
+      <extension application="http://www.videolan.org/vlc/playlist/0">
+        <vlc:option>start-time=240</vlc:option>
+        <vlc:option>stop-time=270</vlc:option>
+      </extension>
+    </track>
+    <track>
+      <location>https://vimeo.com/1093579689</location>
+      <title>charybdis - Segment 10 (00:04:30:00)</title>
+      <duration>30000</duration>
+      <extension application="http://www.videolan.org/vlc/playlist/0">
+        <vlc:option>start-time=270</vlc:option>
+        <vlc:option>stop-time=300</vlc:option>
+      </extension>
+    </track>
+    <track>
+      <location>https://vimeo.com/1093579689</location>
+      <title>charybdis - Segment 11 (00:05:00:00)</title>
+      <duration>30000</duration>
+      <extension application="http://www.videolan.org/vlc/playlist/0">
+        <vlc:option>start-time=300</vlc:option>
+        <vlc:option>stop-time=330</vlc:option>
+      </extension>
+    </track>
+    <track>
+      <location>https://vimeo.com/1093579689</location>
+      <title>charybdis - Segment 12 (00:05:30:00)</title>
+      <duration>30000</duration>
+      <extension application="http://www.videolan.org/vlc/playlist/0">
+        <vlc:option>start-time=330</vlc:option>
+        <vlc:option>stop-time=360</vlc:option>
+      </extension>
+    </track>
+    <track>
+      <location>https://vimeo.com/1093579689</location>
+      <title>charybdis - Segment 13 (00:06:00:00)</title>
+      <duration>30000</duration>
+      <extension application="http://www.videolan.org/vlc/playlist/0">
+        <vlc:option>start-time=360</vlc:option>
+        <vlc:option>stop-time=390</vlc:option>
+      </extension>
+    </track>
+    <track>
+      <location>https://vimeo.com/1093579689</location>
+      <title>charybdis - Segment 14 (00:06:30:00)</title>
+      <duration>30000</duration>
+      <extension application="http://www.videolan.org/vlc/playlist/0">
+        <vlc:option>start-time=390</vlc:option>
+        <vlc:option>stop-time=420</vlc:option>
+      </extension>
+    </track>
+    <track>
+      <location>https://vimeo.com/1093579689</location>
+      <title>charybdis - Segment 15 (00:07:00:00)</title>
+      <duration>30000</duration>
+      <extension application="http://www.videolan.org/vlc/playlist/0">
+        <vlc:option>start-time=420</vlc:option>
+        <vlc:option>stop-time=450</vlc:option>
+      </extension>
+    </track>
+    <track>
+      <location>https://vimeo.com/1093579689</location>
+      <title>charybdis - Segment 16 (00:07:30:00)</title>
+      <duration>30000</duration>
+      <extension application="http://www.videolan.org/vlc/playlist/0">
+        <vlc:option>start-time=450</vlc:option>
+        <vlc:option>stop-time=480</vlc:option>
+      </extension>
+    </track>
+    <track>
+      <location>https://vimeo.com/1093579689</location>
+      <title>charybdis - Segment 17 (00:08:00:00)</title>
+      <duration>30000</duration>
+      <extension application="http://www.videolan.org/vlc/playlist/0">
+        <vlc:option>start-time=480</vlc:option>
+        <vlc:option>stop-time=510</vlc:option>
+      </extension>
+    </track>
+    <track>
+      <location>https://vimeo.com/1093579689</location>
+      <title>charybdis - Segment 18 (00:08:30:00)</title>
+      <duration>30000</duration>
+      <extension application="http://www.videolan.org/vlc/playlist/0">
+        <vlc:option>start-time=510</vlc:option>
+        <vlc:option>stop-time=540</vlc:option>
+      </extension>
+    </track>
+    <track>
+      <location>https://vimeo.com/1093579689</location>
+      <title>charybdis - Segment 19 (00:09:00:00)</title>
+      <duration>30000</duration>
+      <extension application="http://www.videolan.org/vlc/playlist/0">
+        <vlc:option>start-time=540</vlc:option>
+        <vlc:option>stop-time=570</vlc:option>
+      </extension>
+    </track>
+    <track>
+      <location>https://vimeo.com/1093579689</location>
+      <title>charybdis - Segment 20 (00:09:30:00)</title>
+      <duration>30000</duration>
+      <extension application="http://www.videolan.org/vlc/playlist/0">
+        <vlc:option>start-time=570</vlc:option>
+        <vlc:option>stop-time=600</vlc:option>
+      </extension>
+    </track>
+    <track>
+      <location>https://vimeo.com/1093579689</location>
+      <title>charybdis - Segment 21 (00:10:00:00)</title>
+      <duration>30000</duration>
+      <extension application="http://www.videolan.org/vlc/playlist/0">
+        <vlc:option>start-time=600</vlc:option>
+        <vlc:option>stop-time=630</vlc:option>
+      </extension>
+    </track>
+    <track>
+      <location>https://vimeo.com/1093579689</location>
+      <title>charybdis - Segment 22 (00:10:30:00)</title>
+      <duration>30000</duration>
+      <extension application="http://www.videolan.org/vlc/playlist/0">
+        <vlc:option>start-time=630</vlc:option>
+        <vlc:option>stop-time=660</vlc:option>
+      </extension>
+    </track>
+    <track>
+      <location>https://vimeo.com/1093579689</location>
+      <title>charybdis - Segment 23 (00:11:00:00)</title>
+      <duration>30000</duration>
+      <extension application="http://www.videolan.org/vlc/playlist/0">
+        <vlc:option>start-time=660</vlc:option>
+        <vlc:option>stop-time=690</vlc:option>
+      </extension>
+    </track>
+    <track>
+      <location>https://vimeo.com/1093579689</location>
+      <title>charybdis - Segment 24 (00:11:30:00)</title>
+      <duration>30000</duration>
+      <extension application="http://www.videolan.org/vlc/playlist/0">
+        <vlc:option>start-time=690</vlc:option>
+        <vlc:option>stop-time=720</vlc:option>
+      </extension>
+    </track>
+    <track>
+      <location>https://vimeo.com/1093579689</location>
+      <title>charybdis - Segment 25 (00:12:00:00)</title>
+      <duration>30000</duration>
+      <extension application="http://www.videolan.org/vlc/playlist/0">
+        <vlc:option>start-time=720</vlc:option>
+        <vlc:option>stop-time=750</vlc:option>
+      </extension>
+    </track>
+    <track>
+      <location>https://vimeo.com/1093579689</location>
+      <title>charybdis - Segment 26 (00:12:30:00)</title>
+      <duration>30000</duration>
+      <extension application="http://www.videolan.org/vlc/playlist/0">
+        <vlc:option>start-time=750</vlc:option>
+        <vlc:option>stop-time=780</vlc:option>
+      </extension>
+    </track>
+    <track>
+      <location>https://vimeo.com/1093579689</location>
+      <title>charybdis - Segment 27 (00:13:00:00)</title>
+      <duration>30000</duration>
+      <extension application="http://www.videolan.org/vlc/playlist/0">
+        <vlc:option>start-time=780</vlc:option>
+        <vlc:option>stop-time=810</vlc:option>
+      </extension>
+    </track>
+    <track>
+      <location>https://vimeo.com/1093579689</location>
+      <title>charybdis - Segment 28 (00:13:30:00)</title>
+      <duration>30000</duration>
+      <extension application="http://www.videolan.org/vlc/playlist/0">
+        <vlc:option>start-time=810</vlc:option>
+        <vlc:option>stop-time=840</vlc:option>
+      </extension>
+    </track>
+    <track>
+      <location>https://vimeo.com/1093579689</location>
+      <title>charybdis - Segment 29 (00:14:00:00)</title>
+      <duration>30000</duration>
+      <extension application="http://www.videolan.org/vlc/playlist/0">
+        <vlc:option>start-time=840</vlc:option>
+        <vlc:option>stop-time=870</vlc:option>
+      </extension>
+    </track>
+    <track>
+      <location>https://vimeo.com/1093579689</location>
+      <title>charybdis - Segment 30 (00:14:30:00)</title>
+      <duration>30000</duration>
+      <extension application="http://www.videolan.org/vlc/playlist/0">
+        <vlc:option>start-time=870</vlc:option>
+        <vlc:option>stop-time=900</vlc:option>
+      </extension>
+    </track>
+    <track>
+      <location>https://vimeo.com/1093579689</location>
+      <title>charybdis - Segment 31 (00:15:00:00)</title>
+      <duration>30000</duration>
+      <extension application="http://www.videolan.org/vlc/playlist/0">
+        <vlc:option>start-time=900</vlc:option>
+        <vlc:option>stop-time=930</vlc:option>
+      </extension>
+    </track>
+    <track>
+      <location>https://vimeo.com/1093579689</location>
+      <title>charybdis - Segment 32 (00:15:30:00)</title>
+      <duration>30000</duration>
+      <extension application="http://www.videolan.org/vlc/playlist/0">
+        <vlc:option>start-time=930</vlc:option>
+        <vlc:option>stop-time=960</vlc:option>
+      </extension>
+    </track>
+    <track>
+      <location>https://vimeo.com/1093579689</location>
+      <title>charybdis - Segment 33 (00:16:00:00)</title>
+      <duration>30000</duration>
+      <extension application="http://www.videolan.org/vlc/playlist/0">
+        <vlc:option>start-time=960</vlc:option>
+        <vlc:option>stop-time=990</vlc:option>
+      </extension>
+    </track>
+    <track>
+      <location>https://vimeo.com/1093579689</location>
+      <title>charybdis - Segment 34 (00:16:30:00)</title>
+      <duration>30000</duration>
+      <extension application="http://www.videolan.org/vlc/playlist/0">
+        <vlc:option>start-time=990</vlc:option>
+        <vlc:option>stop-time=1020</vlc:option>
+      </extension>
+    </track>
+    <track>
+      <location>https://vimeo.com/1093579689</location>
+      <title>charybdis - Segment 35 (00:17:00:00)</title>
+      <duration>30000</duration>
+      <extension application="http://www.videolan.org/vlc/playlist/0">
+        <vlc:option>start-time=1020</vlc:option>
+        <vlc:option>stop-time=1050</vlc:option>
+      </extension>
+    </track>
+    <track>
+      <location>https://vimeo.com/1093579689</location>
+      <title>charybdis - Segment 36 (00:17:30:00)</title>
+      <duration>30000</duration>
+      <extension application="http://www.videolan.org/vlc/playlist/0">
+        <vlc:option>start-time=1050</vlc:option>
+        <vlc:option>stop-time=1080</vlc:option>
+      </extension>
+    </track>
+    <track>
+      <location>https://vimeo.com/1093579689</location>
+      <title>charybdis - Segment 37 (00:18:00:00)</title>
+      <duration>30000</duration>
+      <extension application="http://www.videolan.org/vlc/playlist/0">
+        <vlc:option>start-time=1080</vlc:option>
+        <vlc:option>stop-time=1110</vlc:option>
+      </extension>
+    </track>
+    <track>
+      <location>https://vimeo.com/1093579689</location>
+      <title>charybdis - Segment 38 (00:18:30:00)</title>
+      <duration>30000</duration>
+      <extension application="http://www.videolan.org/vlc/playlist/0">
+        <vlc:option>start-time=1110</vlc:option>
+        <vlc:option>stop-time=1140</vlc:option>
+      </extension>
+    </track>
+    <track>
+      <location>https://vimeo.com/1093579689</location>
+      <title>charybdis - Segment 39 (00:19:00:00)</title>
+      <duration>17000</duration>
+      <extension application="http://www.videolan.org/vlc/playlist/0">
+        <vlc:option>start-time=1140</vlc:option>
+        <vlc:option>stop-time=1157</vlc:option>
+      </extension>
+    </track>
+  </trackList>
+</playlist>

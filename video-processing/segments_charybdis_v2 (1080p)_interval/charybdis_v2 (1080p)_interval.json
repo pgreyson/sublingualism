@@ -1,0 +1,191 @@
+{
+  "video_file": "/Volumes/Workspace/Downloads/charybdis_v2 (1080p).mp4",
+  "video_name": "charybdis_v2 (1080p)",
+  "duration": 1157.5,
+  "method": "interval",
+  "threshold": null,
+  "interval": 60,
+  "cut_points": [
+    60,
+    120,
+    180,
+    240,
+    300,
+    360,
+    420,
+    480,
+    540,
+    600,
+    660,
+    720,
+    780,
+    840,
+    900,
+    960,
+    1020,
+    1080,
+    1140
+  ],
+  "segments": [
+    {
+      "index": 0,
+      "start": 0,
+      "end": 60,
+      "duration": 60,
+      "start_tc": "00:00:00:00",
+      "end_tc": "00:01:00:00"
+    },
+    {
+      "index": 1,
+      "start": 60,
+      "end": 120,
+      "duration": 60,
+      "start_tc": "00:01:00:00",
+      "end_tc": "00:02:00:00"
+    },
+    {
+      "index": 2,
+      "start": 120,
+      "end": 180,
+      "duration": 60,
+      "start_tc": "00:02:00:00",
+      "end_tc": "00:03:00:00"
+    },
+    {
+      "index": 3,
+      "start": 180,
+      "end": 240,
+      "duration": 60,
+      "start_tc": "00:03:00:00",
+      "end_tc": "00:04:00:00"
+    },
+    {
+      "index": 4,
+      "start": 240,
+      "end": 300,
+      "duration": 60,
+      "start_tc": "00:04:00:00",
+      "end_tc": "00:05:00:00"
+    },
+    {
+      "index": 5,
+      "start": 300,
+      "end": 360,
+      "duration": 60,
+      "start_tc": "00:05:00:00",
+      "end_tc": "00:06:00:00"
+    },
+    {
+      "index": 6,
+      "start": 360,
+      "end": 420,
+      "duration": 60,
+      "start_tc": "00:06:00:00",
+      "end_tc": "00:07:00:00"
+    },
+    {
+      "index": 7,
+      "start": 420,
+      "end": 480,
+      "duration": 60,
+      "start_tc": "00:07:00:00",
+      "end_tc": "00:08:00:00"
+    },
+    {
+      "index": 8,
+      "start": 480,
+      "end": 540,
+      "duration": 60,
+      "start_tc": "00:08:00:00",
+      "end_tc": "00:09:00:00"
+    },
+    {
+      "index": 9,
+      "start": 540,
+      "end": 600,
+      "duration": 60,
+      "start_tc": "00:09:00:00",
+      "end_tc": "00:10:00:00"
+    },
+    {
+      "index": 10,
+      "start": 600,
+      "end": 660,
+      "duration": 60,
+      "start_tc": "00:10:00:00",
+      "end_tc": "00:11:00:00"
+    },
+    {
+      "index": 11,
+      "start": 660,
+      "end": 720,
+      "duration": 60,
+      "start_tc": "00:11:00:00",
+      "end_tc": "00:12:00:00"
+    },
+    {
+      "index": 12,
+      "start": 720,
+      "end": 780,
+      "duration": 60,
+      "start_tc": "00:12:00:00",
+      "end_tc": "00:13:00:00"
+    },
+    {
+      "index": 13,
+      "start": 780,
+      "end": 840,
+      "duration": 60,
+      "start_tc": "00:13:00:00",
+      "end_tc": "00:14:00:00"
+    },
+    {
+      "index": 14,
+      "start": 840,
+      "end": 900,
+      "duration": 60,
+      "start_tc": "00:14:00:00",
+      "end_tc": "00:15:00:00"
+    },
+    {
+      "index": 15,
+      "start": 900,
+      "end": 960,
+      "duration": 60,
+      "start_tc": "00:15:00:00",
+      "end_tc": "00:16:00:00"
+    },
+    {
+      "index": 16,
+      "start": 960,
+      "end": 1020,
+      "duration": 60,
+      "start_tc": "00:16:00:00",
+      "end_tc": "00:17:00:00"
+    },
+    {
+      "index": 17,
+      "start": 1020,
+      "end": 1080,
+      "duration": 60,
+      "start_tc": "00:17:00:00",
+      "end_tc": "00:18:00:00"
+    },
+    {
+      "index": 18,
+      "start": 1080,
+      "end": 1140,
+      "duration": 60,
+      "start_tc": "00:18:00:00",
+      "end_tc": "00:19:00:00"
+    },
+    {
+      "index": 19,
+      "start": 1140,
+      "end": 1157.5,
+      "duration": 17.5,
+      "start_tc": "00:19:00:00",
+      "end_tc": "00:19:17:15"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "video_file": "/Volumes/Workspace/Downloads/charybdis_v2 (1080p).mp4",
+  "video_name": "charybdis_v2 (1080p)",
+  "duration": 1157.5,
+  "method": "scene",
+  "threshold": 0.1,
+  "interval": null,
+  "cut_points": [
+    430.1,
+    768.433333
+  ],
+  "segments": [
+    {
+      "index": 0,
+      "start": 0,
+      "end": 430.1,
+      "duration": 430.1,
+      "start_tc": "00:00:00:00",
+      "end_tc": "00:07:10:03"
+    },
+    {
+      "index": 1,
+      "start": 430.1,
+      "end": 768.433333,
+      "duration": 338.3333329999999,
+      "start_tc": "00:07:10:03",
+      "end_tc": "00:12:48:12"
+    },
+    {
+      "index": 2,
+      "start": 768.433333,
+      "end": 1157.5,
+      "duration": 389.06666700000005,
+      "start_tc": "00:12:48:12",
+      "end_tc": "00:19:17:15"
+    }
+  ]
+}

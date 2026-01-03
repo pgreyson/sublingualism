@@ -1,0 +1,37 @@
+#EXTM3U
+#PLAYLIST:synesthesia.mp4 - Segments
+
+#EXTINF:30,synesthesia.mp4 - Segment 1
+#EXTVLCOPT:start-time=0
+#EXTVLCOPT:stop-time=30
+https://vimeo.com/800192539
+
+#EXTINF:30,synesthesia.mp4 - Segment 2
+#EXTVLCOPT:start-time=30
+#EXTVLCOPT:stop-time=60
+https://vimeo.com/800192539
+
+#EXTINF:30,synesthesia.mp4 - Segment 3
+#EXTVLCOPT:start-time=60
+#EXTVLCOPT:stop-time=90
+https://vimeo.com/800192539
+
+#EXTINF:30,synesthesia.mp4 - Segment 4
+#EXTVLCOPT:start-time=90
+#EXTVLCOPT:stop-time=120
+https://vimeo.com/800192539
+
+#EXTINF:30,synesthesia.mp4 - Segment 5
+#EXTVLCOPT:start-time=120
+#EXTVLCOPT:stop-time=150
+https://vimeo.com/800192539
+
+#EXTINF:30,synesthesia.mp4 - Segment 6
+#EXTVLCOPT:start-time=150
+#EXTVLCOPT:stop-time=180
+https://vimeo.com/800192539
+
+#EXTINF:16,synesthesia.mp4 - Segment 7
+#EXTVLCOPT:start-time=180
+#EXTVLCOPT:stop-time=196
+https://vimeo.com/800192539

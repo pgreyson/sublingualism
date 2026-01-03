@@ -1,8 +1,36 @@
+# Environment and credentials
 .env
 .env.local
 *.pem
 *.key
-node_modules/
-.DS_Store
 credentials/
+
+# Dependencies
+node_modules/
+
+# Large video files
+*.mp4
+*.mov
+*.avi
+*.webm
+*.mkv
+
+# Temporary processing artifacts
+video-processing/temp_frames/
+video-processing/temp_*
+video-processing/*.download
+
+# Python
+__pycache__/
+*.py[cod]
+venv/
+
+# OS files
+.DS_Store
+
+# Cache files
+andc/.preview_cache/
+*.cache
+
+# Logs
 *.log

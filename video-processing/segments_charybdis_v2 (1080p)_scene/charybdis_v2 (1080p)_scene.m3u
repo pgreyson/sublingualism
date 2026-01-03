@@ -1,0 +1,17 @@
+#EXTM3U
+#PLAYLIST:charybdis_v2 (1080p) - scene segments
+
+#EXTINF:430,charybdis_v2 (1080p) - Segment 1
+#EXTVLCOPT:start-time=0
+#EXTVLCOPT:stop-time=430.1
+file:///Volumes/Workspace/Downloads/charybdis_v2 (1080p).mp4
+
+#EXTINF:338,charybdis_v2 (1080p) - Segment 2
+#EXTVLCOPT:start-time=430.1
+#EXTVLCOPT:stop-time=768.433333
+file:///Volumes/Workspace/Downloads/charybdis_v2 (1080p).mp4
+
+#EXTINF:389,charybdis_v2 (1080p) - Segment 3
+#EXTVLCOPT:start-time=768.433333
+#EXTVLCOPT:stop-time=1157.5
+file:///Volumes/Workspace/Downloads/charybdis_v2 (1080p).mp4

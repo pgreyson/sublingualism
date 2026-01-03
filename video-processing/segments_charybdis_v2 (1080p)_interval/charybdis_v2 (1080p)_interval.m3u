@@ -1,0 +1,102 @@
+#EXTM3U
+#PLAYLIST:charybdis_v2 (1080p) - interval segments
+
+#EXTINF:60,charybdis_v2 (1080p) - Segment 1
+#EXTVLCOPT:start-time=0
+#EXTVLCOPT:stop-time=60
+file:///Volumes/Workspace/Downloads/charybdis_v2 (1080p).mp4
+
+#EXTINF:60,charybdis_v2 (1080p) - Segment 2
+#EXTVLCOPT:start-time=60
+#EXTVLCOPT:stop-time=120
+file:///Volumes/Workspace/Downloads/charybdis_v2 (1080p).mp4
+
+#EXTINF:60,charybdis_v2 (1080p) - Segment 3
+#EXTVLCOPT:start-time=120
+#EXTVLCOPT:stop-time=180
+file:///Volumes/Workspace/Downloads/charybdis_v2 (1080p).mp4
+
+#EXTINF:60,charybdis_v2 (1080p) - Segment 4
+#EXTVLCOPT:start-time=180
+#EXTVLCOPT:stop-time=240
+file:///Volumes/Workspace/Downloads/charybdis_v2 (1080p).mp4
+
+#EXTINF:60,charybdis_v2 (1080p) - Segment 5
+#EXTVLCOPT:start-time=240
+#EXTVLCOPT:stop-time=300
+file:///Volumes/Workspace/Downloads/charybdis_v2 (1080p).mp4
+
+#EXTINF:60,charybdis_v2 (1080p) - Segment 6
+#EXTVLCOPT:start-time=300
+#EXTVLCOPT:stop-time=360
+file:///Volumes/Workspace/Downloads/charybdis_v2 (1080p).mp4
+
+#EXTINF:60,charybdis_v2 (1080p) - Segment 7
+#EXTVLCOPT:start-time=360
+#EXTVLCOPT:stop-time=420
+file:///Volumes/Workspace/Downloads/charybdis_v2 (1080p).mp4
+
+#EXTINF:60,charybdis_v2 (1080p) - Segment 8
+#EXTVLCOPT:start-time=420
+#EXTVLCOPT:stop-time=480
+file:///Volumes/Workspace/Downloads/charybdis_v2 (1080p).mp4
+
+#EXTINF:60,charybdis_v2 (1080p) - Segment 9
+#EXTVLCOPT:start-time=480
+#EXTVLCOPT:stop-time=540
+file:///Volumes/Workspace/Downloads/charybdis_v2 (1080p).mp4
+
+#EXTINF:60,charybdis_v2 (1080p) - Segment 10
+#EXTVLCOPT:start-time=540
+#EXTVLCOPT:stop-time=600
+file:///Volumes/Workspace/Downloads/charybdis_v2 (1080p).mp4
+
+#EXTINF:60,charybdis_v2 (1080p) - Segment 11
+#EXTVLCOPT:start-time=600
+#EXTVLCOPT:stop-time=660
+file:///Volumes/Workspace/Downloads/charybdis_v2 (1080p).mp4
+
+#EXTINF:60,charybdis_v2 (1080p) - Segment 12
+#EXTVLCOPT:start-time=660
+#EXTVLCOPT:stop-time=720
+file:///Volumes/Workspace/Downloads/charybdis_v2 (1080p).mp4
+
+#EXTINF:60,charybdis_v2 (1080p) - Segment 13
+#EXTVLCOPT:start-time=720
+#EXTVLCOPT:stop-time=780
+file:///Volumes/Workspace/Downloads/charybdis_v2 (1080p).mp4
+
+#EXTINF:60,charybdis_v2 (1080p) - Segment 14
+#EXTVLCOPT:start-time=780
+#EXTVLCOPT:stop-time=840
+file:///Volumes/Workspace/Downloads/charybdis_v2 (1080p).mp4
+
+#EXTINF:60,charybdis_v2 (1080p) - Segment 15
+#EXTVLCOPT:start-time=840
+#EXTVLCOPT:stop-time=900
+file:///Volumes/Workspace/Downloads/charybdis_v2 (1080p).mp4
+
+#EXTINF:60,charybdis_v2 (1080p) - Segment 16
+#EXTVLCOPT:start-time=900
+#EXTVLCOPT:stop-time=960
+file:///Volumes/Workspace/Downloads/charybdis_v2 (1080p).mp4
+
+#EXTINF:60,charybdis_v2 (1080p) - Segment 17
+#EXTVLCOPT:start-time=960
+#EXTVLCOPT:stop-time=1020
+file:///Volumes/Workspace/Downloads/charybdis_v2 (1080p).mp4
+
+#EXTINF:60,charybdis_v2 (1080p) - Segment 18
+#EXTVLCOPT:start-time=1020
+#EXTVLCOPT:stop-time=1080
+file:///Volumes/Workspace/Downloads/charybdis_v2 (1080p).mp4
+
+#EXTINF:60,charybdis_v2 (1080p) - Segment 19
+#EXTVLCOPT:start-time=1080
+#EXTVLCOPT:stop-time=1140
+file:///Volumes/Workspace/Downloads/charybdis_v2 (1080p).mp4
+
+#EXTINF:17,charybdis_v2 (1080p) - Segment 20
+#EXTVLCOPT:start-time=1140
+#EXTVLCOPT:stop-time=1157.5
+file:///Volumes/Workspace/Downloads/charybdis_v2 (1080p).mp4

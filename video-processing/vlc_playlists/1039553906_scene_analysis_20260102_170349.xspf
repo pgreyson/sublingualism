@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<playlist xmlns="http://xspf.org/ns/0/" xmlns:vlc="http://www.videolan.org/vlc/playlist/ns/0/" version="1">
+  <title>b0.0_c1.0_g1.0_l0.5_sbsl - Segments</title>
+  <trackList>
+    <track>
+      <location>https://vimeo.com/1039553906</location>
+      <title>b0.0_c1.0_g1.0_l0.5_sbsl - Segment 1 (00:00:00:00)</title>
+      <duration>13000</duration>
+      <extension application="http://www.videolan.org/vlc/playlist/0">
+        <vlc:option>start-time=0</vlc:option>
+        <vlc:option>stop-time=13</vlc:option>
+      </extension>
+    </track>
+    <track>
+      <location>https://vimeo.com/1039553906</location>
+      <title>b0.0_c1.0_g1.0_l0.5_sbsl - Segment 2 (00:00:13:00)</title>
+      <duration>16000</duration>
+      <extension application="http://www.videolan.org/vlc/playlist/0">
+        <vlc:option>start-time=13</vlc:option>
+        <vlc:option>stop-time=29</vlc:option>
+      </extension>
+    </track>
+    <track>
+      <location>https://vimeo.com/1039553906</location>
+      <title>b0.0_c1.0_g1.0_l0.5_sbsl - Segment 3 (00:00:29:00)</title>
+      <duration>32000</duration>
+      <extension application="http://www.videolan.org/vlc/playlist/0">
+        <vlc:option>start-time=29</vlc:option>
+        <vlc:option>stop-time=61</vlc:option>
+      </extension>
+    </track>
+    <track>
+      <location>https://vimeo.com/1039553906</location>
+      <title>b0.0_c1.0_g1.0_l0.5_sbsl - Segment 4 (00:01:01:00)</title>
+      <duration>16000</duration>
+      <extension application="http://www.videolan.org/vlc/playlist/0">
+        <vlc:option>start-time=61</vlc:option>
+        <vlc:option>stop-time=77</vlc:option>
+      </extension>
+    </track>
+    <track>
+      <location>https://vimeo.com/1039553906</location>
+      <title>b0.0_c1.0_g1.0_l0.5_sbsl - Segment 5 (00:01:17:00)</title>
+      <duration>13000</duration>
+      <extension application="http://www.videolan.org/vlc/playlist/0">
+        <vlc:option>start-time=77</vlc:option>
+        <vlc:option>stop-time=90</vlc:option>
+      </extension>
+    </track>
+    <track>
+      <location>https://vimeo.com/1039553906</location>
+      <title>b0.0_c1.0_g1.0_l0.5_sbsl - Segment 6 (00:01:30:00)</title>
+      <duration>15000</duration>
+      <extension application="http://www.videolan.org/vlc/playlist/0">
+        <vlc:option>start-time=90</vlc:option>
+        <vlc:option>stop-time=105</vlc:option>
+      </extension>
+    </track>
+    <track>
+      <location>https://vimeo.com/1039553906</location>
+      <title>b0.0_c1.0_g1.0_l0.5_sbsl - Segment 7 (00:01:45:00)</title>
+      <duration>15000</duration>
+      <extension application="http://www.videolan.org/vlc/playlist/0">
+        <vlc:option>start-time=105</vlc:option>
+        <vlc:option>stop-time=120</vlc:option>
+      </extension>
+    </track>
+    <track>
+      <location>https://vimeo.com/1039553906</location>
+      <title>b0.0_c1.0_g1.0_l0.5_sbsl - Segment 8 (00:02:00:00)</title>
+      <duration>14000</duration>
+      <extension application="http://www.videolan.org/vlc/playlist/0">
+        <vlc:option>start-time=120</vlc:option>
+        <vlc:option>stop-time=134</vlc:option>
+      </extension>
+    </track>
+    <track>
+      <location>https://vimeo.com/1039553906</location>
+      <title>b0.0_c1.0_g1.0_l0.5_sbsl - Segment 9 (00:02:14:00)</title>
+      <duration>15000</duration>
+      <extension application="http://www.videolan.org/vlc/playlist/0">
+        <vlc:option>start-time=134</vlc:option>
+        <vlc:option>stop-time=149</vlc:option>
+      </extension>
+    </track>
+    <track>
+      <location>https://vimeo.com/1039553906</location>
+      <title>b0.0_c1.0_g1.0_l0.5_sbsl - Segment 10 (00:02:29:00)</title>
+      <duration>32000</duration>
+      <extension application="http://www.videolan.org/vlc/playlist/0">
+        <vlc:option>start-time=149</vlc:option>
+        <vlc:option>stop-time=181</vlc:option>
+      </extension>
+    </track>
+    <track>
+      <location>https://vimeo.com/1039553906</location>
+      <title>b0.0_c1.0_g1.0_l0.5_sbsl - Segment 11 (00:03:01:00)</title>
+      <duration>12000</duration>
+      <extension application="http://www.videolan.org/vlc/playlist/0">
+        <vlc:option>start-time=181</vlc:option>
+        <vlc:option>stop-time=193</vlc:option>
+      </extension>
+    </track>
+    <track>
+      <location>https://vimeo.com/1039553906</location>
+      <title>b0.0_c1.0_g1.0_l0.5_sbsl - Segment 12 (00:03:13:00)</title>
+      <duration>15000</duration>
+      <extension application="http://www.videolan.org/vlc/playlist/0">
+        <vlc:option>start-time=193</vlc:option>
+        <vlc:option>stop-time=208</vlc:option>
+      </extension>
+    </track>
+    <track>
+      <location>https://vimeo.com/1039553906</location>
+      <title>b0.0_c1.0_g1.0_l0.5_sbsl - Segment 13 (00:03:28:00)</title>
+      <duration>32000</duration>
+      <extension application="http://www.videolan.org/vlc/playlist/0">
+        <vlc:option>start-time=208</vlc:option>
+        <vlc:option>stop-time=240</vlc:option>
+      </extension>
+    </track>
+  </trackList>
+</playlist>

@@ -16,12 +16,23 @@ Art website project. Agent assists with development, curation, and promotion.
 5. Manage deployments
 
 ## Project Status
-- [ ] Set up credential encryption
-- [ ] Configure GitHub repository
-- [ ] Connect AWS account
-- [ ] Plan site architecture
+- [x] Set up credentials (.env)
+- [x] Configure GitHub repository
+- [x] Connect AWS account (Route 53, Amplify)
+- [x] Deploy website to sublingualism.com
+- [x] Create video segmentation tools
 - [ ] Develop promotion strategy
 - [ ] Set up social media accounts (post-strategy)
+
+## Repository Structure
+- `/website/` - Website files (deployed to sublingualism.com)
+  - `index.html` - Homepage with artist statement
+  - `works.html` - Video gallery (20 works)
+- `/video-processing/` - Video analysis and segmentation tools
+  - `/tools/` - Python scripts for processing
+  - Generated EDLs, playlists, and segment data
+- `/setup/` - AWS configuration files
+- `/andc/` - Additional project files
 
 ## For Returning Agents
 1. Read this file first

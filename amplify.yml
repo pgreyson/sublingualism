@@ -6,7 +6,7 @@ frontend:
         - echo "Static site - no build needed"
         - ls -la
   artifacts:
-    baseDirectory: ./
+    baseDirectory: website/
     files:
       - '**/*'
   cache:

@@ -28,5 +28,17 @@ exiftool -r -if '($DateTimeOriginal =~ /:12:20/ or $DateTimeOriginal =~ /:12:21/
     -printFormat '$Directory/$FileName' "$PHOTO_DIR" >> "$OUTPUT_FILE"
 
 echo ""
+echo "Searching by filename patterns (for photos without EXIF dates)..."
+find "$PHOTO_DIR" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.tif" -o -iname "*.tiff" -o -iname "*.png" -o -iname "*.cr2" -o -iname "*.nef" -o -iname "*.dng" \) \
+    \( -name "*03-19*" -o -name "*03-20*" -o -name "*03-21*" \
+       -o -name "*06-20*" -o -name "*06-21*" -o -name "*06-22*" \
+       -o -name "*09-22*" -o -name "*09-23*" -o -name "*09-24*" \
+       -o -name "*12-20*" -o -name "*12-21*" -o -name "*12-22*" -o -name "*12-23*" \) \
+    ! -name "._*" 2>/dev/null >> "$OUTPUT_FILE"
+
+echo "Removing duplicates..."
+sort -u "$OUTPUT_FILE" -o "$OUTPUT_FILE"
+
+echo ""
 echo "Done! Output file: $OUTPUT_FILE"
 echo "Total photos found: $(wc -l < "$OUTPUT_FILE")"

@@ -1,0 +1,42 @@
+#EXTM3U
+#PLAYLIST:b0.0_c1.0_g1.0_l0.5_sbsl - Segments
+
+#EXTINF:30,b0.0_c1.0_g1.0_l0.5_sbsl - Segment 1
+#EXTVLCOPT:start-time=0
+#EXTVLCOPT:stop-time=30
+https://vimeo.com/1039553906
+
+#EXTINF:30,b0.0_c1.0_g1.0_l0.5_sbsl - Segment 2
+#EXTVLCOPT:start-time=30
+#EXTVLCOPT:stop-time=60
+https://vimeo.com/1039553906
+
+#EXTINF:30,b0.0_c1.0_g1.0_l0.5_sbsl - Segment 3
+#EXTVLCOPT:start-time=60
+#EXTVLCOPT:stop-time=90
+https://vimeo.com/1039553906
+
+#EXTINF:30,b0.0_c1.0_g1.0_l0.5_sbsl - Segment 4
+#EXTVLCOPT:start-time=90
+#EXTVLCOPT:stop-time=120
+https://vimeo.com/1039553906
+
+#EXTINF:30,b0.0_c1.0_g1.0_l0.5_sbsl - Segment 5
+#EXTVLCOPT:start-time=120
+#EXTVLCOPT:stop-time=150
+https://vimeo.com/1039553906
+
+#EXTINF:30,b0.0_c1.0_g1.0_l0.5_sbsl - Segment 6
+#EXTVLCOPT:start-time=150
+#EXTVLCOPT:stop-time=180
+https://vimeo.com/1039553906
+
+#EXTINF:30,b0.0_c1.0_g1.0_l0.5_sbsl - Segment 7
+#EXTVLCOPT:start-time=180
+#EXTVLCOPT:stop-time=210
+https://vimeo.com/1039553906
+
+#EXTINF:30,b0.0_c1.0_g1.0_l0.5_sbsl - Segment 8
+#EXTVLCOPT:start-time=210
+#EXTVLCOPT:stop-time=240
+https://vimeo.com/1039553906

@@ -1,0 +1,141 @@
+{
+  "video": "charybdis",
+  "duration": 1157,
+  "fps": 30,
+  "cuts": [
+    60,
+    116,
+    167,
+    234,
+    294,
+    363,
+    429,
+    492,
+    545,
+    604,
+    657,
+    722,
+    790,
+    843,
+    901,
+    967,
+    1017,
+    1067
+  ],
+  "segments": [
+    {
+      "index": 0,
+      "start": 0,
+      "end": 60,
+      "duration": 60
+    },
+    {
+      "index": 1,
+      "start": 60,
+      "end": 116,
+      "duration": 56
+    },
+    {
+      "index": 2,
+      "start": 116,
+      "end": 167,
+      "duration": 51
+    },
+    {
+      "index": 3,
+      "start": 167,
+      "end": 234,
+      "duration": 67
+    },
+    {
+      "index": 4,
+      "start": 234,
+      "end": 294,
+      "duration": 60
+    },
+    {
+      "index": 5,
+      "start": 294,
+      "end": 363,
+      "duration": 69
+    },
+    {
+      "index": 6,
+      "start": 363,
+      "end": 429,
+      "duration": 66
+    },
+    {
+      "index": 7,
+      "start": 429,
+      "end": 492,
+      "duration": 63
+    },
+    {
+      "index": 8,
+      "start": 492,
+      "end": 545,
+      "duration": 53
+    },
+    {
+      "index": 9,
+      "start": 545,
+      "end": 604,
+      "duration": 59
+    },
+    {
+      "index": 10,
+      "start": 604,
+      "end": 657,
+      "duration": 53
+    },
+    {
+      "index": 11,
+      "start": 657,
+      "end": 722,
+      "duration": 65
+    },
+    {
+      "index": 12,
+      "start": 722,
+      "end": 790,
+      "duration": 68
+    },
+    {
+      "index": 13,
+      "start": 790,
+      "end": 843,
+      "duration": 53
+    },
+    {
+      "index": 14,
+      "start": 843,
+      "end": 901,
+      "duration": 58
+    },
+    {
+      "index": 15,
+      "start": 901,
+      "end": 967,
+      "duration": 66
+    },
+    {
+      "index": 16,
+      "start": 967,
+      "end": 1017,
+      "duration": 50
+    },
+    {
+      "index": 17,
+      "start": 1017,
+      "end": 1067,
+      "duration": 50
+    },
+    {
+      "index": 18,
+      "start": 1067,
+      "end": 1157,
+      "duration": 90
+    }
+  ]
+}

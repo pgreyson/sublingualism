@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<playlist xmlns="http://xspf.org/ns/0/" xmlns:vlc="http://www.videolan.org/vlc/playlist/ns/0/" version="1">
+  <title>synesthesia.mp4 - Segments</title>
+  <trackList>
+    <track>
+      <location>https://vimeo.com/800192539</location>
+      <title>synesthesia.mp4 - Segment 1 (00:00:00:00)</title>
+      <duration>30000</duration>
+      <extension application="http://www.videolan.org/vlc/playlist/0">
+        <vlc:option>start-time=0</vlc:option>
+        <vlc:option>stop-time=30</vlc:option>
+      </extension>
+    </track>
+    <track>
+      <location>https://vimeo.com/800192539</location>
+      <title>synesthesia.mp4 - Segment 2 (00:00:30:00)</title>
+      <duration>30000</duration>
+      <extension application="http://www.videolan.org/vlc/playlist/0">
+        <vlc:option>start-time=30</vlc:option>
+        <vlc:option>stop-time=60</vlc:option>
+      </extension>
+    </track>
+    <track>
+      <location>https://vimeo.com/800192539</location>
+      <title>synesthesia.mp4 - Segment 3 (00:01:00:00)</title>
+      <duration>30000</duration>
+      <extension application="http://www.videolan.org/vlc/playlist/0">
+        <vlc:option>start-time=60</vlc:option>
+        <vlc:option>stop-time=90</vlc:option>
+      </extension>
+    </track>
+    <track>
+      <location>https://vimeo.com/800192539</location>
+      <title>synesthesia.mp4 - Segment 4 (00:01:30:00)</title>
+      <duration>30000</duration>
+      <extension application="http://www.videolan.org/vlc/playlist/0">
+        <vlc:option>start-time=90</vlc:option>
+        <vlc:option>stop-time=120</vlc:option>
+      </extension>
+    </track>
+    <track>
+      <location>https://vimeo.com/800192539</location>
+      <title>synesthesia.mp4 - Segment 5 (00:02:00:00)</title>
+      <duration>30000</duration>
+      <extension application="http://www.videolan.org/vlc/playlist/0">
+        <vlc:option>start-time=120</vlc:option>
+        <vlc:option>stop-time=150</vlc:option>
+      </extension>
+    </track>
+    <track>
+      <location>https://vimeo.com/800192539</location>
+      <title>synesthesia.mp4 - Segment 6 (00:02:30:00)</title>
+      <duration>30000</duration>
+      <extension application="http://www.videolan.org/vlc/playlist/0">
+        <vlc:option>start-time=150</vlc:option>
+        <vlc:option>stop-time=180</vlc:option>
+      </extension>
+    </track>
+    <track>
+      <location>https://vimeo.com/800192539</location>
+      <title>synesthesia.mp4 - Segment 7 (00:03:00:00)</title>
+      <duration>16000</duration>
+      <extension application="http://www.videolan.org/vlc/playlist/0">
+        <vlc:option>start-time=180</vlc:option>
+        <vlc:option>stop-time=196</vlc:option>
+      </extension>
+    </track>
+  </trackList>
+</playlist>
