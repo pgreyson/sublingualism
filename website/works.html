@@ -34,44 +34,16 @@
             gap: 1rem;
         }
         .video-wrap {
-            padding: 28.125% 0 0 0;
             position: relative;
+            overflow: hidden;
+            padding: 28.125% 0 0 0;
         }
         .video-wrap iframe {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
-        }
-        .video-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            cursor: pointer;
-            z-index: 2;
-        }
-        .play-icon {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 60px;
-            height: 60px;
-            opacity: 0.8;
-            transition: opacity 0.3s;
-            pointer-events: none;
-        }
-        .video-overlay:hover .play-icon {
-            opacity: 1;
-        }
-        .video-wrap.playing .play-icon {
-            opacity: 0;
-        }
-        .video-wrap.playing:hover .play-icon {
-            opacity: 0.6;
+            height: calc(100% + 50px);
         }
         .fs-btn {
             position: absolute;
@@ -110,68 +82,55 @@
         </div>
         <div class="works-grid">
             <div class="video-wrap">
-                <iframe src="https://player.vimeo.com/video/1164392447?h=36db536ac3&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-                <div class="video-overlay"><svg class="play-icon" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" fill="rgba(0,0,0,0.4)" stroke="#fff" stroke-width="2"/><polygon points="26,20 26,44 46,32" fill="#fff"/></svg></div>
+                <iframe src="https://player.vimeo.com/video/1164392447?h=36db536ac3&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
                 <button class="fs-btn" title="Fullscreen"><svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg></button>
             </div>
             <div class="video-wrap">
-                <iframe src="https://player.vimeo.com/video/1164243847?h=e1d10a4747&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-                <div class="video-overlay"><svg class="play-icon" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" fill="rgba(0,0,0,0.4)" stroke="#fff" stroke-width="2"/><polygon points="26,20 26,44 46,32" fill="#fff"/></svg></div>
+                <iframe src="https://player.vimeo.com/video/1164243847?h=e1d10a4747&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
                 <button class="fs-btn" title="Fullscreen"><svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg></button>
             </div>
             <div class="video-wrap">
-                <iframe src="https://player.vimeo.com/video/1164244113?h=67e1057f7b&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-                <div class="video-overlay"><svg class="play-icon" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" fill="rgba(0,0,0,0.4)" stroke="#fff" stroke-width="2"/><polygon points="26,20 26,44 46,32" fill="#fff"/></svg></div>
+                <iframe src="https://player.vimeo.com/video/1164244113?h=67e1057f7b&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
                 <button class="fs-btn" title="Fullscreen"><svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg></button>
             </div>
             <div class="video-wrap">
-                <iframe src="https://player.vimeo.com/video/1164244151?h=a6b145333f&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-                <div class="video-overlay"><svg class="play-icon" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" fill="rgba(0,0,0,0.4)" stroke="#fff" stroke-width="2"/><polygon points="26,20 26,44 46,32" fill="#fff"/></svg></div>
+                <iframe src="https://player.vimeo.com/video/1164244151?h=a6b145333f&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
                 <button class="fs-btn" title="Fullscreen"><svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg></button>
             </div>
             <div class="video-wrap">
-                <iframe src="https://player.vimeo.com/video/1164243753?h=434d8dd2cd&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-                <div class="video-overlay"><svg class="play-icon" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" fill="rgba(0,0,0,0.4)" stroke="#fff" stroke-width="2"/><polygon points="26,20 26,44 46,32" fill="#fff"/></svg></div>
+                <iframe src="https://player.vimeo.com/video/1164243753?h=434d8dd2cd&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
                 <button class="fs-btn" title="Fullscreen"><svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg></button>
             </div>
             <div class="video-wrap">
-                <iframe src="https://player.vimeo.com/video/1164244944?h=9defeaf627&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-                <div class="video-overlay"><svg class="play-icon" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" fill="rgba(0,0,0,0.4)" stroke="#fff" stroke-width="2"/><polygon points="26,20 26,44 46,32" fill="#fff"/></svg></div>
+                <iframe src="https://player.vimeo.com/video/1164244944?h=9defeaf627&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
                 <button class="fs-btn" title="Fullscreen"><svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg></button>
             </div>
             <div class="video-wrap">
-                <iframe src="https://player.vimeo.com/video/1164245084?h=251ed28177&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-                <div class="video-overlay"><svg class="play-icon" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" fill="rgba(0,0,0,0.4)" stroke="#fff" stroke-width="2"/><polygon points="26,20 26,44 46,32" fill="#fff"/></svg></div>
+                <iframe src="https://player.vimeo.com/video/1164245084?h=251ed28177&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
                 <button class="fs-btn" title="Fullscreen"><svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg></button>
             </div>
             <div class="video-wrap">
-                <iframe src="https://player.vimeo.com/video/1164244034?h=b5beed86ac&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-                <div class="video-overlay"><svg class="play-icon" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" fill="rgba(0,0,0,0.4)" stroke="#fff" stroke-width="2"/><polygon points="26,20 26,44 46,32" fill="#fff"/></svg></div>
+                <iframe src="https://player.vimeo.com/video/1164244034?h=b5beed86ac&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
                 <button class="fs-btn" title="Fullscreen"><svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg></button>
             </div>
             <div class="video-wrap">
-                <iframe src="https://player.vimeo.com/video/1164244722?h=dfb8a241b6&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-                <div class="video-overlay"><svg class="play-icon" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" fill="rgba(0,0,0,0.4)" stroke="#fff" stroke-width="2"/><polygon points="26,20 26,44 46,32" fill="#fff"/></svg></div>
+                <iframe src="https://player.vimeo.com/video/1164244722?h=dfb8a241b6&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
                 <button class="fs-btn" title="Fullscreen"><svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg></button>
             </div>
             <div class="video-wrap">
-                <iframe src="https://player.vimeo.com/video/1164243895?h=2efe5c89ba&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-                <div class="video-overlay"><svg class="play-icon" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" fill="rgba(0,0,0,0.4)" stroke="#fff" stroke-width="2"/><polygon points="26,20 26,44 46,32" fill="#fff"/></svg></div>
+                <iframe src="https://player.vimeo.com/video/1164243895?h=2efe5c89ba&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
                 <button class="fs-btn" title="Fullscreen"><svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg></button>
             </div>
             <div class="video-wrap">
-                <iframe src="https://player.vimeo.com/video/1164244176?h=24ad45b56b&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-                <div class="video-overlay"><svg class="play-icon" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" fill="rgba(0,0,0,0.4)" stroke="#fff" stroke-width="2"/><polygon points="26,20 26,44 46,32" fill="#fff"/></svg></div>
+                <iframe src="https://player.vimeo.com/video/1164244176?h=24ad45b56b&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
                 <button class="fs-btn" title="Fullscreen"><svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg></button>
             </div>
             <div class="video-wrap">
-                <iframe src="https://player.vimeo.com/video/1164243870?h=98d211afe3&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-                <div class="video-overlay"><svg class="play-icon" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" fill="rgba(0,0,0,0.4)" stroke="#fff" stroke-width="2"/><polygon points="26,20 26,44 46,32" fill="#fff"/></svg></div>
+                <iframe src="https://player.vimeo.com/video/1164243870?h=98d211afe3&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
                 <button class="fs-btn" title="Fullscreen"><svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg></button>
             </div>
             <div class="video-wrap">
-                <iframe src="https://player.vimeo.com/video/1164244958?h=2e935e3d07&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-                <div class="video-overlay"><svg class="play-icon" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" fill="rgba(0,0,0,0.4)" stroke="#fff" stroke-width="2"/><polygon points="26,20 26,44 46,32" fill="#fff"/></svg></div>
+                <iframe src="https://player.vimeo.com/video/1164244958?h=2e935e3d07&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
                 <button class="fs-btn" title="Fullscreen"><svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg></button>
             </div>
         </div>
@@ -180,35 +139,8 @@
     <script>
         document.querySelectorAll('.video-wrap').forEach(function(wrap) {
             var iframe = wrap.querySelector('iframe');
-            var overlay = wrap.querySelector('.video-overlay');
             var fsBtn = wrap.querySelector('.fs-btn');
             var player = new Vimeo.Player(iframe);
-            var ready = false;
-
-            player.ready().then(function() {
-                ready = true;
-            });
-
-            overlay.addEventListener('click', function() {
-                if (!ready) return;
-                player.getPaused().then(function(paused) {
-                    if (paused) {
-                        player.play();
-                    } else {
-                        player.pause();
-                    }
-                });
-            });
-
-            // Once playing, hide overlay so taps go directly to iframe
-            player.on('play', function() {
-                wrap.classList.add('playing');
-                overlay.style.pointerEvents = 'none';
-            });
-            player.on('pause', function() {
-                wrap.classList.remove('playing');
-                overlay.style.pointerEvents = '';
-            });
 
             fsBtn.addEventListener('click', function(e) {
                 e.stopPropagation();
