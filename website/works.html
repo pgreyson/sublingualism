@@ -183,8 +183,14 @@
             var overlay = wrap.querySelector('.video-overlay');
             var fsBtn = wrap.querySelector('.fs-btn');
             var player = new Vimeo.Player(iframe);
+            var ready = false;
+
+            player.ready().then(function() {
+                ready = true;
+            });
 
             overlay.addEventListener('click', function() {
+                if (!ready) return;
                 player.getPaused().then(function(paused) {
                     if (paused) {
                         player.play();
@@ -194,8 +200,15 @@
                 });
             });
 
-            player.on('play', function() { wrap.classList.add('playing'); });
-            player.on('pause', function() { wrap.classList.remove('playing'); });
+            // Once playing, hide overlay so taps go directly to iframe
+            player.on('play', function() {
+                wrap.classList.add('playing');
+                overlay.style.pointerEvents = 'none';
+            });
+            player.on('pause', function() {
+                wrap.classList.remove('playing');
+                overlay.style.pointerEvents = '';
+            });
 
             fsBtn.addEventListener('click', function(e) {
                 e.stopPropagation();
