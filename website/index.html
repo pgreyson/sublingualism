@@ -39,13 +39,84 @@
         a:hover {
             opacity: 0.8;
         }
+        .video-wrap {
+            padding: 28.125% 0 0 0;
+            position: relative;
+        }
+        .video-wrap iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+            z-index: 2;
+        }
+        .play-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+        .video-overlay:hover .play-icon {
+            opacity: 1;
+        }
+        .video-wrap.playing .play-icon {
+            opacity: 0;
+        }
+        .video-wrap.playing:hover .play-icon {
+            opacity: 0.6;
+        }
+        .fs-btn {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            z-index: 3;
+            background: none;
+            border: none;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s;
+            padding: 4px;
+        }
+        .video-wrap:hover .fs-btn {
+            opacity: 0.8;
+        }
+        .fs-btn:hover {
+            opacity: 1 !important;
+        }
+        .fs-btn svg {
+            width: 24px;
+            height: 24px;
+            fill: #fff;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>sublingualism</h1>
         <p>Absorbed under the tongue, no chewing or swallowing required.</p>
-        <div style="padding:28.125% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1163517831?h=5ae3265958&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>
+        <div class="video-wrap">
+            <iframe src="https://player.vimeo.com/video/1163517831?h=5ae3265958&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+            <div class="video-overlay">
+                <svg class="play-icon" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" fill="rgba(0,0,0,0.4)" stroke="#fff" stroke-width="2"/><polygon points="26,20 26,44 46,32" fill="#fff"/></svg>
+            </div>
+            <button class="fs-btn" title="Fullscreen">
+                <svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
+            </button>
+        </div>
         <p style="margin: 1.5rem 0 0 0;">
             <a href="works.html" style="
                 color: #fff;
@@ -62,5 +133,32 @@
             </a>
         </p>
     </div>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script>
+        document.querySelectorAll('.video-wrap').forEach(function(wrap) {
+            var iframe = wrap.querySelector('iframe');
+            var overlay = wrap.querySelector('.video-overlay');
+            var fsBtn = wrap.querySelector('.fs-btn');
+            var player = new Vimeo.Player(iframe);
+
+            overlay.addEventListener('click', function() {
+                player.getPaused().then(function(paused) {
+                    if (paused) {
+                        player.play();
+                    } else {
+                        player.pause();
+                    }
+                });
+            });
+
+            player.on('play', function() { wrap.classList.add('playing'); });
+            player.on('pause', function() { wrap.classList.remove('playing'); });
+
+            fsBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                player.requestFullscreen();
+            });
+        });
+    </script>
 </body>
 </html>
