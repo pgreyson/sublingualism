@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sublingualism</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #000;
+            color: #fff;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .nav {
+            margin-bottom: 2rem;
+        }
+        .nav a {
+            color: #fff;
+            text-decoration: none;
+            opacity: 0.7;
+        }
+        .nav a:hover {
+            opacity: 1;
+        }
+        .page-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        .page-link {
+            display: block;
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 1.5rem;
+            text-decoration: none;
+            color: #fff;
+            transition: border-color 0.2s;
+        }
+        .page-link:hover {
+            border-color: rgba(255,255,255,0.6);
+        }
+        .page-link .label {
+            font-size: 1.2rem;
+            margin-bottom: 0.3rem;
+        }
+        .page-link .count {
+            opacity: 0.5;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav">
+            <a href="/">← home</a>
+        </div>
+        <h2 style="opacity:0.8; font-weight:normal; margin-bottom:1.5rem;">all clips</h2>
+        <div class="page-links">
+            <a class="page-link" href="/works-1.html">
+                <div class="label">page 1</div>
+                <div class="count">20 clips</div>
+            </a>
+            <a class="page-link" href="/works-2.html">
+                <div class="label">page 2</div>
+                <div class="count">20 clips</div>
+            </a>
+            <a class="page-link" href="/works-3.html">
+                <div class="label">page 3</div>
+                <div class="count">20 clips</div>
+            </a>
+            <a class="page-link" href="/works-4.html">
+                <div class="label">page 4</div>
+                <div class="count">20 clips</div>
+            </a>
+            <a class="page-link" href="/works-5.html">
+                <div class="label">page 5</div>
+                <div class="count">20 clips</div>
+            </a>
+            <a class="page-link" href="/works-6.html">
+                <div class="label">page 6</div>
+                <div class="count">20 clips</div>
+            </a>
+            <a class="page-link" href="/works-7.html">
+                <div class="label">page 7</div>
+                <div class="count">20 clips</div>
+            </a>
+            <a class="page-link" href="/works-8.html">
+                <div class="label">page 8</div>
+                <div class="count">20 clips</div>
+            </a>
+            <a class="page-link" href="/works-9.html">
+                <div class="label">page 9</div>
+                <div class="count">13 clips</div>
+            </a>
+        </div>
+    </div>
+    <script>
+        if (location.search.indexOf('review') !== -1) {
+            document.querySelectorAll('.page-link').forEach(function(a) {
+                a.href = a.href + '?review';
+            });
+        }
+    </script>
+</body>
+</html>

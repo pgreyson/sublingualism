@@ -19,6 +19,9 @@
         }
         .nav {
             margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         .nav a {
             color: #fff;
@@ -28,30 +31,37 @@
         .nav a:hover {
             opacity: 1;
         }
-        .page-links {
+        .works-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin-top: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 1rem;
         }
-        .page-link {
-            display: block;
-            border: 1px solid rgba(255,255,255,0.2);
-            padding: 1.5rem;
-            text-decoration: none;
-            color: #fff;
-            transition: border-color 0.2s;
+        .video-wrap {
+            position: relative;
+            overflow: hidden;
+            padding: 28.125% 0 0 0;
+            cursor: pointer;
         }
-        .page-link:hover {
-            border-color: rgba(255,255,255,0.6);
+        .video-wrap iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
         }
-        .page-link .label {
-            font-size: 1.2rem;
-            margin-bottom: 0.3rem;
+        .video-wrap .tap-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 3;
         }
-        .page-link .count {
-            opacity: 0.5;
-            font-size: 0.9rem;
+        @media (max-width: 768px) {
+            .works-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -60,52 +70,14 @@
         <div class="nav">
             <a href="/">← home</a>
         </div>
-        <h2 style="opacity:0.8; font-weight:normal; margin-bottom:1.5rem;">see more</h2>
-        <div class="page-links">
-            <a class="page-link" href="/works-1.html">
-                <div class="label">page 1</div>
-                <div class="count">20 clips</div>
-            </a>
-            <a class="page-link" href="/works-2.html">
-                <div class="label">page 2</div>
-                <div class="count">20 clips</div>
-            </a>
-            <a class="page-link" href="/works-3.html">
-                <div class="label">page 3</div>
-                <div class="count">20 clips</div>
-            </a>
-            <a class="page-link" href="/works-4.html">
-                <div class="label">page 4</div>
-                <div class="count">20 clips</div>
-            </a>
-            <a class="page-link" href="/works-5.html">
-                <div class="label">page 5</div>
-                <div class="count">20 clips</div>
-            </a>
-            <a class="page-link" href="/works-6.html">
-                <div class="label">page 6</div>
-                <div class="count">20 clips</div>
-            </a>
-            <a class="page-link" href="/works-7.html">
-                <div class="label">page 7</div>
-                <div class="count">20 clips</div>
-            </a>
-            <a class="page-link" href="/works-8.html">
-                <div class="label">page 8</div>
-                <div class="count">20 clips</div>
-            </a>
-            <a class="page-link" href="/works-9.html">
-                <div class="label">page 9</div>
-                <div class="count">13 clips</div>
-            </a>
+        <div class="works-grid">
+            <div class="video-wrap">
+                <iframe src="https://player.vimeo.com/video/1164594430?h=28ed930697&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;transparent=0&amp;background=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+                <div class="tap-overlay"></div>
+            </div>
         </div>
     </div>
-    <script>
-        if (location.search.indexOf('review') !== -1) {
-            document.querySelectorAll('.page-link').forEach(function(a) {
-                a.href = a.href + '?review';
-            });
-        }
-    </script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="/review.js"></script>
 </body>
 </html>
