@@ -180,30 +180,6 @@
         </div>
     </div>
     <script src="https://player.vimeo.com/api/player.js"></script>
-    <script>
-        document.querySelectorAll('.video-wrap').forEach(function(wrap) {
-            var iframe = wrap.querySelector('iframe');
-            var overlay = wrap.querySelector('.tap-overlay');
-            var player = new Vimeo.Player(iframe);
-            var isFullscreen = false;
-
-            overlay.addEventListener('click', function() {
-                if (!isFullscreen) {
-                    player.requestFullscreen().then(function() {
-                        isFullscreen = true;
-                        player.play();
-                    });
-                }
-            });
-
-            player.on('fullscreenchange', function(data) {
-                isFullscreen = data.fullscreen;
-                if (!data.fullscreen) {
-                    player.pause();
-                    player.setCurrentTime(0);
-                }
-            });
-        });
-    </script>
+    <script src="/review.js"></script>
 </body>
 </html>
