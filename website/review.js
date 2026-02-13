@@ -84,6 +84,7 @@
         btns.appendChild(exportBtn);
         bar.appendChild(btns);
         document.body.appendChild(bar);
+        document.body.style.paddingBottom = '60px';
         updateCount();
     }
 
