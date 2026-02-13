@@ -93,35 +93,38 @@
         countEl.textContent = parts.length > 0 ? parts.join(', ') : 'no changes';
     }
 
-    // Extract video ID from Vimeo embed URL
-    function getVideoId(src) {
-        var m = src.match(/video\/(\d+)/);
-        return m ? m[1] : null;
-    }
+    // Lazy-load iframes: store src in data-src, load when scrolled into view
+    var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+                var iframe = entry.target.querySelector('iframe');
+                if (iframe && iframe.dataset.src) {
+                    iframe.src = iframe.dataset.src;
+                    delete iframe.dataset.src;
+                }
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { rootMargin: '200px' });
 
-    // Replace iframe with thumbnail, create player on tap
+    // Set up each video wrap
     document.querySelectorAll('.video-wrap').forEach(function(wrap) {
         var iframe = wrap.querySelector('iframe');
         var overlay = wrap.querySelector('.tap-overlay');
         var src = iframe.getAttribute('src');
-        var videoId = getVideoId(src);
 
-        // Replace iframe with thumbnail image
-        iframe.remove();
-        var thumb = document.createElement('img');
-        thumb.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;background:#111;';
-        thumb.alt = '';
-        // Use vumbnail for thumbnail, fallback to oEmbed
-        if (videoId) {
-            thumb.src = 'https://vumbnail.com/' + videoId + '.jpg';
-            thumb.onerror = function() {
-                fetch('https://vimeo.com/api/oembed.json?url=https://vimeo.com/' + videoId + '&width=960')
-                    .then(function(r) { return r.json(); })
-                    .then(function(data) { if (data.thumbnail_url) thumb.src = data.thumbnail_url; })
-                    .catch(function() {});
-            };
+        // Defer loading: move src to data-src
+        iframe.dataset.src = src;
+        iframe.removeAttribute('src');
+        observer.observe(wrap);
+
+        var player = null;
+        var isFullscreen = false;
+
+        function getPlayer() {
+            if (!player) player = new Vimeo.Player(iframe);
+            return player;
         }
-        wrap.insertBefore(thumb, overlay);
 
         // Review mode buttons
         if (isReview) {
@@ -175,41 +178,38 @@
             wrap.appendChild(btn);
         }
 
-        // Tap to play: create iframe, fullscreen the wrap, then play
+        // Tap to play fullscreen
         overlay.addEventListener('click', function() {
-            var newIframe = document.createElement('iframe');
-            newIframe.src = src;
-            newIframe.setAttribute('frameborder', '0');
-            newIframe.setAttribute('allow', 'autoplay; fullscreen; picture-in-picture');
-            newIframe.setAttribute('allowfullscreen', '');
-            newIframe.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;';
-            thumb.style.display = 'none';
-            wrap.insertBefore(newIframe, overlay);
-
-            // Fullscreen the wrap container synchronously (user gesture)
-            var fsEl = wrap;
-            var fsReq = fsEl.requestFullscreen || fsEl.webkitRequestFullscreen;
-            if (fsReq) {
-                fsReq.call(fsEl).then(function() {
-                    var player = new Vimeo.Player(newIframe);
-                    player.ready().then(function() { player.play(); });
-
-                    document.addEventListener('fullscreenchange', onFsChange);
-                    document.addEventListener('webkitfullscreenchange', onFsChange);
-
-                    function onFsChange() {
-                        var fsActive = document.fullscreenElement || document.webkitFullscreenElement;
-                        if (!fsActive) {
-                            document.removeEventListener('fullscreenchange', onFsChange);
-                            document.removeEventListener('webkitfullscreenchange', onFsChange);
-                            player.pause();
-                            newIframe.remove();
-                            thumb.style.display = '';
-                        }
-                    }
-                });
+            if (isFullscreen) return;
+            // Make sure iframe is loaded
+            if (iframe.dataset.src) {
+                iframe.src = iframe.dataset.src;
+                delete iframe.dataset.src;
             }
+            var p = getPlayer();
+            p.requestFullscreen().then(function() {
+                isFullscreen = true;
+                p.play();
+            });
         });
+
+        // Listen for fullscreen exit via Vimeo API
+        function setupFsListener() {
+            var p = getPlayer();
+            p.on('fullscreenchange', function(data) {
+                isFullscreen = data.fullscreen;
+                if (!data.fullscreen) {
+                    p.pause();
+                    p.setCurrentTime(0);
+                }
+            });
+        }
+
+        // Set up fullscreen listener once iframe loads
+        var origObserve = observer.observe.bind(observer);
+        iframe.addEventListener('load', function() {
+            if (iframe.src) setupFsListener();
+        }, { once: true });
     });
 
     // Preserve ?review on pagination links
