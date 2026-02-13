@@ -162,6 +162,13 @@
             wrap.appendChild(btn);
         }
 
+        // Pause after loading a frame so not all embeds stream at once
+        player.on('playing', function() {
+            if (!isFullscreen) {
+                setTimeout(function() { player.pause(); }, 500);
+            }
+        });
+
         // Normal playback behavior
         overlay.addEventListener('click', function() {
             if (!isFullscreen) {
