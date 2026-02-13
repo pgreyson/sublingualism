@@ -57,54 +57,29 @@
             <a href="/">← home</a>
         </div>
         <div class="clips-grid">
-            <div class="clip">
-                <video src="/video/1164594478.mp4#t=0.001" preload="metadata" loop muted playsinline></video>
+            <div class="clip" data-id="1164594478">
+                <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164594478.mp4#t=0.001" preload="metadata" loop muted playsinline></video>
             </div>
-            <div class="clip">
-                <video src="/video/1164634856.mp4#t=0.001" preload="metadata" loop muted playsinline></video>
+            <div class="clip" data-id="1164634856">
+                <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164634856.mp4#t=0.001" preload="metadata" loop muted playsinline></video>
             </div>
-            <div class="clip">
-                <video src="/video/1164635062.mp4#t=0.001" preload="metadata" loop muted playsinline></video>
+            <div class="clip" data-id="1164635062">
+                <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164635062.mp4#t=0.001" preload="metadata" loop muted playsinline></video>
             </div>
-            <div class="clip">
-                <video src="/video/1164635008.mp4#t=0.001" preload="metadata" loop muted playsinline></video>
+            <div class="clip" data-id="1164635008">
+                <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164635008.mp4#t=0.001" preload="metadata" loop muted playsinline></video>
             </div>
-            <div class="clip">
-                <video src="/video/1164635021.mp4#t=0.001" preload="metadata" loop muted playsinline></video>
+            <div class="clip" data-id="1164635021">
+                <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164635021.mp4#t=0.001" preload="metadata" loop muted playsinline></video>
             </div>
-            <div class="clip">
-                <video src="/video/1164634924.mp4#t=0.001" preload="metadata" loop muted playsinline></video>
+            <div class="clip" data-id="1164634924">
+                <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164634924.mp4#t=0.001" preload="metadata" loop muted playsinline></video>
             </div>
-            <div class="clip">
-                <video src="/video/1164634995.mp4#t=0.001" preload="metadata" loop muted playsinline></video>
+            <div class="clip" data-id="1164634995">
+                <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164634995.mp4#t=0.001" preload="metadata" loop muted playsinline></video>
             </div>
         </div>
     </div>
-    <script>
-        document.querySelectorAll('.clip').forEach(function(clip) {
-            var video = clip.querySelector('video');
-            clip.addEventListener('click', function() {
-                if (video.requestFullscreen) {
-                    video.requestFullscreen();
-                } else if (video.webkitEnterFullscreen) {
-                    video.webkitEnterFullscreen();
-                }
-                video.muted = false;
-                video.play();
-            });
-            video.addEventListener('fullscreenchange', function() {
-                if (!document.fullscreenElement) {
-                    video.pause();
-                    video.currentTime = 0;
-                    video.muted = true;
-                }
-            });
-            video.addEventListener('webkitendfullscreen', function() {
-                video.pause();
-                video.currentTime = 0;
-                video.muted = true;
-            });
-        });
-    </script>
+    <script src="/review.js"></script>
 </body>
 </html>

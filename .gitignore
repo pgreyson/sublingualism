@@ -15,9 +15,6 @@ node_modules/
 *.webm
 *.mkv
 
-# Allow curated clips for the website
-!website/video/*.mp4
-
 # Temporary processing artifacts
 video-processing/temp_frames/
 video-processing/temp_*

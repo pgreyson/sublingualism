@@ -31,32 +31,18 @@
         .nav a:hover {
             opacity: 1;
         }
-        .works-grid {
+        .clips-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
             gap: 1rem;
         }
-        .video-wrap {
-            position: relative;
-            overflow: hidden;
-            padding: 28.125% 0 0 0;
+        .clip {
             cursor: pointer;
         }
-        .video-wrap iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
+        .clip video {
             width: 100%;
-            height: 100%;
-            pointer-events: none;
-        }
-        .video-wrap .tap-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 3;
+            display: block;
+            background: #111;
         }
         .page-nav {
             margin-top: 2rem;
@@ -72,7 +58,7 @@
             opacity: 1;
         }
         @media (max-width: 768px) {
-            .works-grid {
+            .clips-grid {
                 grid-template-columns: 1fr;
             }
         }
@@ -84,86 +70,66 @@
             <a href="/">← home</a>
             <a href="/clips-all.html">all clips</a>
         </div>
-        <div class="works-grid">
-            <div class="video-wrap">
-                <iframe src="https://player.vimeo.com/video/1164392447?h=36db536ac3&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;transparent=0&amp;background=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-                <div class="tap-overlay"></div>
+        <div class="clips-grid">
+            <div class="clip" data-id="1164392447">
+                <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164392447.mp4#t=0.001" preload="metadata" loop muted playsinline></video>
             </div>
-            <div class="video-wrap">
-                <iframe src="https://player.vimeo.com/video/1164594424?h=2da000b7e2&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;transparent=0&amp;background=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-                <div class="tap-overlay"></div>
+            <div class="clip" data-id="1164594424">
+                <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164594424.mp4#t=0.001" preload="metadata" loop muted playsinline></video>
             </div>
-            <div class="video-wrap">
-                <iframe src="https://player.vimeo.com/video/1164594430?h=28ed930697&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;transparent=0&amp;background=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-                <div class="tap-overlay"></div>
+            <div class="clip" data-id="1164594430">
+                <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164594430.mp4#t=0.001" preload="metadata" loop muted playsinline></video>
             </div>
-            <div class="video-wrap">
-                <iframe src="https://player.vimeo.com/video/1164593946?h=db6faa49a5&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;transparent=0&amp;background=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-                <div class="tap-overlay"></div>
+            <div class="clip" data-id="1164593946">
+                <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164593946.mp4#t=0.001" preload="metadata" loop muted playsinline></video>
             </div>
-            <div class="video-wrap">
-                <iframe src="https://player.vimeo.com/video/1164593955?h=ad507dccb5&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;transparent=0&amp;background=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-                <div class="tap-overlay"></div>
+            <div class="clip" data-id="1164593955">
+                <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164593955.mp4#t=0.001" preload="metadata" loop muted playsinline></video>
             </div>
-            <div class="video-wrap">
-                <iframe src="https://player.vimeo.com/video/1164594438?h=20bd18b07f&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;transparent=0&amp;background=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-                <div class="tap-overlay"></div>
+            <div class="clip" data-id="1164594438">
+                <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164594438.mp4#t=0.001" preload="metadata" loop muted playsinline></video>
             </div>
-            <div class="video-wrap">
-                <iframe src="https://player.vimeo.com/video/1164594444?h=879c2aa8da&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;transparent=0&amp;background=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-                <div class="tap-overlay"></div>
+            <div class="clip" data-id="1164594444">
+                <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164594444.mp4#t=0.001" preload="metadata" loop muted playsinline></video>
             </div>
-            <div class="video-wrap">
-                <iframe src="https://player.vimeo.com/video/1164593999?h=a690e12848&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;transparent=0&amp;background=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-                <div class="tap-overlay"></div>
+            <div class="clip" data-id="1164593999">
+                <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164593999.mp4#t=0.001" preload="metadata" loop muted playsinline></video>
             </div>
-            <div class="video-wrap">
-                <iframe src="https://player.vimeo.com/video/1164594452?h=dc098553b9&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;transparent=0&amp;background=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-                <div class="tap-overlay"></div>
+            <div class="clip" data-id="1164594452">
+                <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164594452.mp4#t=0.001" preload="metadata" loop muted playsinline></video>
             </div>
-            <div class="video-wrap">
-                <iframe src="https://player.vimeo.com/video/1164594020?h=b2f1bd4c07&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;transparent=0&amp;background=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-                <div class="tap-overlay"></div>
+            <div class="clip" data-id="1164594020">
+                <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164594020.mp4#t=0.001" preload="metadata" loop muted playsinline></video>
             </div>
-            <div class="video-wrap">
-                <iframe src="https://player.vimeo.com/video/1164594458?h=7ce4575321&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;transparent=0&amp;background=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-                <div class="tap-overlay"></div>
+            <div class="clip" data-id="1164594458">
+                <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164594458.mp4#t=0.001" preload="metadata" loop muted playsinline></video>
             </div>
-            <div class="video-wrap">
-                <iframe src="https://player.vimeo.com/video/1164594469?h=7a46da60a5&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;transparent=0&amp;background=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-                <div class="tap-overlay"></div>
+            <div class="clip" data-id="1164594469">
+                <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164594469.mp4#t=0.001" preload="metadata" loop muted playsinline></video>
             </div>
-            <div class="video-wrap">
-                <iframe src="https://player.vimeo.com/video/1164594478?h=d7f1d0b640&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;transparent=0&amp;background=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-                <div class="tap-overlay"></div>
+            <div class="clip" data-id="1164594478">
+                <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164594478.mp4#t=0.001" preload="metadata" loop muted playsinline></video>
             </div>
-            <div class="video-wrap">
-                <iframe src="https://player.vimeo.com/video/1164634761?h=423511c90e&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;transparent=0&amp;background=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-                <div class="tap-overlay"></div>
+            <div class="clip" data-id="1164634761">
+                <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164634761.mp4#t=0.001" preload="metadata" loop muted playsinline></video>
             </div>
-            <div class="video-wrap">
-                <iframe src="https://player.vimeo.com/video/1164634770?h=513c5c9581&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;transparent=0&amp;background=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-                <div class="tap-overlay"></div>
+            <div class="clip" data-id="1164634770">
+                <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164634770.mp4#t=0.001" preload="metadata" loop muted playsinline></video>
             </div>
-            <div class="video-wrap">
-                <iframe src="https://player.vimeo.com/video/1164634785?h=b334e17347&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;transparent=0&amp;background=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-                <div class="tap-overlay"></div>
+            <div class="clip" data-id="1164634785">
+                <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164634785.mp4#t=0.001" preload="metadata" loop muted playsinline></video>
             </div>
-            <div class="video-wrap">
-                <iframe src="https://player.vimeo.com/video/1164634808?h=cef462ad71&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;transparent=0&amp;background=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-                <div class="tap-overlay"></div>
+            <div class="clip" data-id="1164634808">
+                <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164634808.mp4#t=0.001" preload="metadata" loop muted playsinline></video>
             </div>
-            <div class="video-wrap">
-                <iframe src="https://player.vimeo.com/video/1164634833?h=e850a733bb&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;transparent=0&amp;background=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-                <div class="tap-overlay"></div>
+            <div class="clip" data-id="1164634833">
+                <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164634833.mp4#t=0.001" preload="metadata" loop muted playsinline></video>
             </div>
-            <div class="video-wrap">
-                <iframe src="https://player.vimeo.com/video/1164634856?h=df72df7223&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;transparent=0&amp;background=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-                <div class="tap-overlay"></div>
+            <div class="clip" data-id="1164634856">
+                <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164634856.mp4#t=0.001" preload="metadata" loop muted playsinline></video>
             </div>
-            <div class="video-wrap">
-                <iframe src="https://player.vimeo.com/video/1164634912?h=92a795648e&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;transparent=0&amp;background=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-                <div class="tap-overlay"></div>
+            <div class="clip" data-id="1164634912">
+                <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164634912.mp4#t=0.001" preload="metadata" loop muted playsinline></video>
             </div>
         </div>
         <div class="page-nav">
@@ -179,7 +145,6 @@
             <a href="/clips-2.html">next →</a>
         </div>
     </div>
-    <script src="https://player.vimeo.com/api/player.js"></script>
     <script src="/review.js"></script>
 </body>
 </html>
