@@ -93,11 +93,23 @@
             var iframe = wrap.querySelector('iframe');
             var overlay = wrap.querySelector('.tap-overlay');
             var player = new Vimeo.Player(iframe);
+            var isFullscreen = false;
 
             overlay.addEventListener('click', function() {
-                player.requestFullscreen().then(function() {
-                    player.play();
-                });
+                if (!isFullscreen) {
+                    player.requestFullscreen().then(function() {
+                        isFullscreen = true;
+                        player.play();
+                    });
+                }
+            });
+
+            player.on('fullscreenchange', function(data) {
+                isFullscreen = data.fullscreen;
+                if (!data.fullscreen) {
+                    player.pause();
+                    player.setCurrentTime(0);
+                }
             });
         });
     </script>
