@@ -93,38 +93,31 @@
         countEl.textContent = parts.length > 0 ? parts.join(', ') : 'no changes';
     }
 
-    // Lazy-load iframes: store src in data-src, load when scrolled into view
-    var observer = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry) {
-            if (entry.isIntersecting) {
-                var iframe = entry.target.querySelector('iframe');
-                if (iframe && iframe.dataset.src) {
-                    iframe.src = iframe.dataset.src;
-                    delete iframe.dataset.src;
-                }
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { rootMargin: '200px' });
+    function getVideoId(src) {
+        var m = src.match(/video\/(\d+)/);
+        return m ? m[1] : null;
+    }
 
-    // Set up each video wrap
+    // Build a non-background embed URL (shows play button, no autoplay)
+    function makePlayerUrl(src) {
+        return src.replace('&background=1', '').replace('&amp;background=1', '');
+    }
+
     document.querySelectorAll('.video-wrap').forEach(function(wrap) {
         var iframe = wrap.querySelector('iframe');
         var overlay = wrap.querySelector('.tap-overlay');
         var src = iframe.getAttribute('src');
+        var videoId = getVideoId(src);
 
-        // Defer loading: move src to data-src
-        iframe.dataset.src = src;
-        iframe.removeAttribute('src');
-        observer.observe(wrap);
-
-        var player = null;
-        var isFullscreen = false;
-
-        function getPlayer() {
-            if (!player) player = new Vimeo.Player(iframe);
-            return player;
+        // Replace iframe with thumbnail
+        iframe.remove();
+        var thumb = document.createElement('img');
+        thumb.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;background:#111;';
+        thumb.alt = '';
+        if (videoId) {
+            thumb.src = 'https://vumbnail.com/' + videoId + '.jpg';
         }
+        wrap.insertBefore(thumb, overlay);
 
         // Review mode buttons
         if (isReview) {
@@ -178,38 +171,29 @@
             wrap.appendChild(btn);
         }
 
-        // Tap to play fullscreen
+        // Tap thumbnail: swap in iframe with Vimeo player controls
         overlay.addEventListener('click', function() {
-            if (isFullscreen) return;
-            // Make sure iframe is loaded
-            if (iframe.dataset.src) {
-                iframe.src = iframe.dataset.src;
-                delete iframe.dataset.src;
-            }
-            var p = getPlayer();
-            p.requestFullscreen().then(function() {
-                isFullscreen = true;
-                p.play();
-            });
-        });
+            var newIframe = document.createElement('iframe');
+            newIframe.src = makePlayerUrl(src);
+            newIframe.setAttribute('frameborder', '0');
+            newIframe.setAttribute('allow', 'autoplay; fullscreen; picture-in-picture');
+            newIframe.setAttribute('allowfullscreen', '');
+            newIframe.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;';
+            thumb.style.display = 'none';
+            overlay.style.display = 'none';
+            wrap.appendChild(newIframe);
 
-        // Listen for fullscreen exit via Vimeo API
-        function setupFsListener() {
-            var p = getPlayer();
-            p.on('fullscreenchange', function(data) {
-                isFullscreen = data.fullscreen;
+            // When user exits fullscreen or video ends, restore thumbnail
+            var player = new Vimeo.Player(newIframe);
+            player.on('fullscreenchange', function(data) {
                 if (!data.fullscreen) {
-                    p.pause();
-                    p.setCurrentTime(0);
+                    player.pause();
+                    newIframe.remove();
+                    thumb.style.display = '';
+                    overlay.style.display = '';
                 }
             });
-        }
-
-        // Set up fullscreen listener once iframe loads
-        var origObserve = observer.observe.bind(observer);
-        iframe.addEventListener('load', function() {
-            if (iframe.src) setupFsListener();
-        }, { once: true });
+        });
     });
 
     // Preserve ?review on pagination links
