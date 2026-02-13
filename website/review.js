@@ -175,32 +175,40 @@
             wrap.appendChild(btn);
         }
 
-        // Tap to play: create iframe on demand, go fullscreen
+        // Tap to play: create iframe, fullscreen the wrap, then play
         overlay.addEventListener('click', function() {
             var newIframe = document.createElement('iframe');
             newIframe.src = src;
             newIframe.setAttribute('frameborder', '0');
             newIframe.setAttribute('allow', 'autoplay; fullscreen; picture-in-picture');
             newIframe.setAttribute('allowfullscreen', '');
-            newIframe.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;';
+            newIframe.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;';
             thumb.style.display = 'none';
             wrap.insertBefore(newIframe, overlay);
 
-            var player = new Vimeo.Player(newIframe);
-            player.ready().then(function() {
-                player.requestFullscreen().then(function() {
-                    player.play();
-                });
-            });
+            // Fullscreen the wrap container synchronously (user gesture)
+            var fsEl = wrap;
+            var fsReq = fsEl.requestFullscreen || fsEl.webkitRequestFullscreen;
+            if (fsReq) {
+                fsReq.call(fsEl).then(function() {
+                    var player = new Vimeo.Player(newIframe);
+                    player.ready().then(function() { player.play(); });
 
-            player.on('fullscreenchange', function(data) {
-                if (!data.fullscreen) {
-                    player.pause();
-                    // Remove iframe, show thumbnail again
-                    newIframe.remove();
-                    thumb.style.display = '';
-                }
-            });
+                    document.addEventListener('fullscreenchange', onFsChange);
+                    document.addEventListener('webkitfullscreenchange', onFsChange);
+
+                    function onFsChange() {
+                        var fsActive = document.fullscreenElement || document.webkitFullscreenElement;
+                        if (!fsActive) {
+                            document.removeEventListener('fullscreenchange', onFsChange);
+                            document.removeEventListener('webkitfullscreenchange', onFsChange);
+                            player.pause();
+                            newIframe.remove();
+                            thumb.style.display = '';
+                        }
+                    }
+                });
+            }
         });
     });
 
