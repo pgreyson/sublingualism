@@ -3,7 +3,6 @@
     var ADD_KEY = 'sublingualism_add';
     var REMOVE_KEY = 'sublingualism_remove';
 
-    // Detect if we're on the curated clips page (clips.html, not clips-N.html or clips-all.html)
     var path = location.pathname;
     var isCuratedPage = /\/clips\.html/.test(path) || path === '/clips';
 
@@ -22,10 +21,6 @@
         saveList(key, list);
         updateCount();
         return idx === -1;
-    }
-
-    function getVideoSrc(wrap) {
-        return wrap.querySelector('iframe').getAttribute('src');
     }
 
     // Floating bar
@@ -98,21 +93,43 @@
         countEl.textContent = parts.length > 0 ? parts.join(', ') : 'no changes';
     }
 
-    // Set up each video wrap
+    // Extract video ID from Vimeo embed URL
+    function getVideoId(src) {
+        var m = src.match(/video\/(\d+)/);
+        return m ? m[1] : null;
+    }
+
+    // Replace iframe with thumbnail, create player on tap
     document.querySelectorAll('.video-wrap').forEach(function(wrap) {
         var iframe = wrap.querySelector('iframe');
         var overlay = wrap.querySelector('.tap-overlay');
-        var player = new Vimeo.Player(iframe);
-        var isFullscreen = false;
-        var src = getVideoSrc(wrap);
+        var src = iframe.getAttribute('src');
+        var videoId = getVideoId(src);
 
+        // Replace iframe with thumbnail image
+        iframe.remove();
+        var thumb = document.createElement('img');
+        thumb.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;background:#111;';
+        thumb.alt = '';
+        // Use vumbnail for thumbnail, fallback to oEmbed
+        if (videoId) {
+            thumb.src = 'https://vumbnail.com/' + videoId + '.jpg';
+            thumb.onerror = function() {
+                fetch('https://vimeo.com/api/oembed.json?url=https://vimeo.com/' + videoId + '&width=960')
+                    .then(function(r) { return r.json(); })
+                    .then(function(data) { if (data.thumbnail_url) thumb.src = data.thumbnail_url; })
+                    .catch(function() {});
+            };
+        }
+        wrap.insertBefore(thumb, overlay);
+
+        // Review mode buttons
         if (isReview) {
             var btn = document.createElement('button');
             btn.className = 'review-btn';
             btn.style.cssText = 'position:absolute;top:8px;right:8px;z-index:5;width:36px;height:36px;border-radius:50%;border:2px solid rgba(255,255,255,0.7);color:#fff;font-size:20px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;';
 
             if (isCuratedPage) {
-                // Remove button on curated page
                 var isRemoved = getList(REMOVE_KEY).indexOf(src) !== -1;
                 btn.innerHTML = '&times;';
                 btn.style.background = 'rgba(200,0,0,0.7)';
@@ -120,7 +137,6 @@
                     wrap.style.opacity = '0.3';
                     wrap.style.outline = '2px solid rgba(200,0,0,0.6)';
                 }
-
                 btn.addEventListener('click', function(e) {
                     e.stopPropagation();
                     var nowRemoved = toggleInList(REMOVE_KEY, src);
@@ -133,7 +149,6 @@
                     }
                 });
             } else {
-                // Add button on browse pages
                 var isAdded = getList(ADD_KEY).indexOf(src) !== -1;
                 if (isAdded) {
                     btn.textContent = '\u2713';
@@ -143,7 +158,6 @@
                     btn.textContent = '+';
                     btn.style.background = 'rgba(0,0,0,0.6)';
                 }
-
                 btn.addEventListener('click', function(e) {
                     e.stopPropagation();
                     var nowAdded = toggleInList(ADD_KEY, src);
@@ -158,33 +172,35 @@
                     }
                 });
             }
-
             wrap.appendChild(btn);
         }
 
-        // Pause after loading a frame so not all embeds stream at once
-        player.on('playing', function() {
-            if (!isFullscreen) {
-                setTimeout(function() { player.pause(); }, 500);
-            }
-        });
-
-        // Normal playback behavior
+        // Tap to play: create iframe on demand, go fullscreen
         overlay.addEventListener('click', function() {
-            if (!isFullscreen) {
+            var newIframe = document.createElement('iframe');
+            newIframe.src = src;
+            newIframe.setAttribute('frameborder', '0');
+            newIframe.setAttribute('allow', 'autoplay; fullscreen; picture-in-picture');
+            newIframe.setAttribute('allowfullscreen', '');
+            newIframe.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;';
+            thumb.style.display = 'none';
+            wrap.insertBefore(newIframe, overlay);
+
+            var player = new Vimeo.Player(newIframe);
+            player.ready().then(function() {
                 player.requestFullscreen().then(function() {
-                    isFullscreen = true;
                     player.play();
                 });
-            }
-        });
+            });
 
-        player.on('fullscreenchange', function(data) {
-            isFullscreen = data.fullscreen;
-            if (!data.fullscreen) {
-                player.pause();
-                player.setCurrentTime(0);
-            }
+            player.on('fullscreenchange', function(data) {
+                if (!data.fullscreen) {
+                    player.pause();
+                    // Remove iframe, show thumbnail again
+                    newIframe.remove();
+                    thumb.style.display = '';
+                }
+            });
         });
     });
 
