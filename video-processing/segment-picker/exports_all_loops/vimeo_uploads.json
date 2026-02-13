@@ -1,0 +1,452 @@
+[
+  {
+    "output_file": "2026-02-08_21-49-46_t0125_loop.mp4",
+    "vimeo_id": "1164635712",
+    "vimeo_uri": "/videos/1164635712",
+    "loop_score": 0.005144,
+    "loop_duration": 7.33,
+    "visual_interest": 85.27,
+    "embed_url": "https://player.vimeo.com/video/1164635712?h=407f342e25"
+  },
+  {
+    "output_file": "2026-02-08_21-49-46_t0435_loop.mp4",
+    "vimeo_id": "1164635722",
+    "vimeo_uri": "/videos/1164635722",
+    "loop_score": 0.002258,
+    "loop_duration": 7.0,
+    "visual_interest": 78.65,
+    "embed_url": "https://player.vimeo.com/video/1164635722?h=c0c58665ca"
+  },
+  {
+    "output_file": "2026-02-08_21-49-46_t0260_loop.mp4",
+    "vimeo_id": "1164635740",
+    "vimeo_uri": "/videos/1164635740",
+    "loop_score": 0.003719,
+    "loop_duration": 6.67,
+    "visual_interest": 81.61,
+    "embed_url": "https://player.vimeo.com/video/1164635740?h=f31e56b3c6"
+  },
+  {
+    "output_file": "2026-02-08_21-49-46_t0245_loop.mp4",
+    "vimeo_id": "1164635754",
+    "vimeo_uri": "/videos/1164635754",
+    "loop_score": 0.005913,
+    "loop_duration": 10.33,
+    "visual_interest": 82.12,
+    "embed_url": "https://player.vimeo.com/video/1164635754?h=fd122611f5"
+  },
+  {
+    "output_file": "2026-02-08_21-49-46_t0275_loop.mp4",
+    "vimeo_id": "1164635768",
+    "vimeo_uri": "/videos/1164635768",
+    "loop_score": 0.007701,
+    "loop_duration": 10.0,
+    "visual_interest": 81.27,
+    "embed_url": "https://player.vimeo.com/video/1164635768?h=c674d04bb9"
+  },
+  {
+    "output_file": "2026-02-08_22-09-45_t0110_loop.mp4",
+    "vimeo_id": "1164635776",
+    "vimeo_uri": "/videos/1164635776",
+    "loop_score": 0.001967,
+    "loop_duration": 6.67,
+    "visual_interest": 68.66,
+    "embed_url": "https://player.vimeo.com/video/1164635776?h=52e1ef880a"
+  },
+  {
+    "output_file": "2026-02-08_22-09-45_t0065_loop.mp4",
+    "vimeo_id": "1164635793",
+    "vimeo_uri": "/videos/1164635793",
+    "loop_score": 0.002087,
+    "loop_duration": 6.0,
+    "visual_interest": 68.77,
+    "embed_url": "https://player.vimeo.com/video/1164635793?h=6f26d03b06"
+  },
+  {
+    "output_file": "2026-02-08_22-09-45_t0035_loop.mp4",
+    "vimeo_id": "1164635814",
+    "vimeo_uri": "/videos/1164635814",
+    "loop_score": 0.001973,
+    "loop_duration": 6.67,
+    "visual_interest": 66.45,
+    "embed_url": "https://player.vimeo.com/video/1164635814?h=24b26f30f7"
+  },
+  {
+    "output_file": "2026-02-08_22-09-45_t0090_loop.mp4",
+    "vimeo_id": "1164635832",
+    "vimeo_uri": "/videos/1164635832",
+    "loop_score": 0.003188,
+    "loop_duration": 6.0,
+    "visual_interest": 66.22,
+    "embed_url": "https://player.vimeo.com/video/1164635832?h=3b15bf0dff"
+  },
+  {
+    "output_file": "2026-02-08_22-09-45_t0145_loop.mp4",
+    "vimeo_id": "1164635843",
+    "vimeo_uri": "/videos/1164635843",
+    "loop_score": 0.004306,
+    "loop_duration": 6.67,
+    "visual_interest": 67.28,
+    "embed_url": "https://player.vimeo.com/video/1164635843?h=7229bc41c7"
+  },
+  {
+    "output_file": "2026-02-08_22-09-45_t0290_loop.mp4",
+    "vimeo_id": "1164635856",
+    "vimeo_uri": "/videos/1164635856",
+    "loop_score": 0.002912,
+    "loop_duration": 8.0,
+    "visual_interest": 63.07,
+    "embed_url": "https://player.vimeo.com/video/1164635856?h=fbd8db6496"
+  },
+  {
+    "output_file": "2026-02-09_21-35-26_t0000_loop.mp4",
+    "vimeo_id": "1164635867",
+    "vimeo_uri": "/videos/1164635867",
+    "loop_score": 0.00189,
+    "loop_duration": 9.67,
+    "visual_interest": 60.14,
+    "embed_url": "https://player.vimeo.com/video/1164635867?h=ac43def414"
+  },
+  {
+    "output_file": "2026-02-08_21-49-46_t0325_loop.mp4",
+    "vimeo_id": "1164635880",
+    "vimeo_uri": "/videos/1164635880",
+    "loop_score": 0.007849,
+    "loop_duration": 9.67,
+    "visual_interest": 70.79,
+    "embed_url": "https://player.vimeo.com/video/1164635880?h=f56d308c7c"
+  },
+  {
+    "output_file": "2026-02-08_22-09-45_t0000_loop.mp4",
+    "vimeo_id": "1164635895",
+    "vimeo_uri": "/videos/1164635895",
+    "loop_score": 0.005049,
+    "loop_duration": 10.0,
+    "visual_interest": 62.55,
+    "embed_url": "https://player.vimeo.com/video/1164635895?h=c537ad13bd"
+  },
+  {
+    "output_file": "2026-02-08_22-28-31_t0060_loop.mp4",
+    "vimeo_id": "1164635916",
+    "vimeo_uri": "/videos/1164635916",
+    "loop_score": 0.012825,
+    "loop_duration": 6.0,
+    "visual_interest": 78.91,
+    "embed_url": "https://player.vimeo.com/video/1164635916?h=177ec4997a"
+  },
+  {
+    "output_file": "2026-02-09_21-30-07_t0030_loop.mp4",
+    "vimeo_id": "1164635936",
+    "vimeo_uri": "/videos/1164635936",
+    "loop_score": 0.001648,
+    "loop_duration": 8.0,
+    "visual_interest": 54.96,
+    "embed_url": "https://player.vimeo.com/video/1164635936?h=02a8d6c916"
+  },
+  {
+    "output_file": "2026-02-08_21-49-46_t0195_loop.mp4",
+    "vimeo_id": "1164635951",
+    "vimeo_uri": "/videos/1164635951",
+    "loop_score": 0.002724,
+    "loop_duration": 9.67,
+    "visual_interest": 57.1,
+    "embed_url": "https://player.vimeo.com/video/1164635951?h=b54c75a390"
+  },
+  {
+    "output_file": "2026-02-08_22-28-31_t0040_loop.mp4",
+    "vimeo_id": "1164635961",
+    "vimeo_uri": "/videos/1164635961",
+    "loop_score": 0.013131,
+    "loop_duration": 6.33,
+    "visual_interest": 79.18,
+    "embed_url": "https://player.vimeo.com/video/1164635961?h=04299cc028"
+  },
+  {
+    "output_file": "2026-02-08_22-09-45_t0360_loop.mp4",
+    "vimeo_id": "1164635973",
+    "vimeo_uri": "/videos/1164635973",
+    "loop_score": 0.003128,
+    "loop_duration": 6.67,
+    "visual_interest": 53.84,
+    "embed_url": "https://player.vimeo.com/video/1164635973?h=8bd39e8bbd"
+  },
+  {
+    "output_file": "2026-02-09_21-30-07_t0005_loop.mp4",
+    "vimeo_id": "1164635985",
+    "vimeo_uri": "/videos/1164635985",
+    "loop_score": 0.003844,
+    "loop_duration": 6.0,
+    "visual_interest": 55.0,
+    "embed_url": "https://player.vimeo.com/video/1164635985?h=e858c0d9cd"
+  },
+  {
+    "output_file": "2026-02-08_22-09-45_t0050_loop.mp4",
+    "vimeo_id": "1164635997",
+    "vimeo_uri": "/videos/1164635997",
+    "loop_score": 0.009168,
+    "loop_duration": 13.33,
+    "visual_interest": 64.42,
+    "embed_url": "https://player.vimeo.com/video/1164635997?h=fc5b2d13be"
+  },
+  {
+    "output_file": "2026-02-09_21-35-26_t0245_loop.mp4",
+    "vimeo_id": "1164636022",
+    "vimeo_uri": "/videos/1164636022",
+    "loop_score": 0.002123,
+    "loop_duration": 6.67,
+    "visual_interest": 49.14,
+    "embed_url": "https://player.vimeo.com/video/1164636022?h=ab2586f6e2"
+  },
+  {
+    "output_file": "2026-02-09_21-35-26_t0270_loop.mp4",
+    "vimeo_id": "1164636036",
+    "vimeo_uri": "/videos/1164636036",
+    "loop_score": 0.002158,
+    "loop_duration": 7.0,
+    "visual_interest": 49.21,
+    "embed_url": "https://player.vimeo.com/video/1164636036?h=faa2d4f32d"
+  },
+  {
+    "output_file": "2026-02-08_21-49-46_t0480_loop.mp4",
+    "vimeo_id": "1164636047",
+    "vimeo_uri": "/videos/1164636047",
+    "loop_score": 0.016085,
+    "loop_duration": 7.33,
+    "visual_interest": 76.76,
+    "embed_url": "https://player.vimeo.com/video/1164636047?h=b56f644c4e"
+  },
+  {
+    "output_file": "2026-02-09_21-35-26_t0160_loop.mp4",
+    "vimeo_id": "1164636057",
+    "vimeo_uri": "/videos/1164636057",
+    "loop_score": 0.00197,
+    "loop_duration": 7.0,
+    "visual_interest": 46.29,
+    "embed_url": "https://player.vimeo.com/video/1164636057?h=b72435f272"
+  },
+  {
+    "output_file": "2026-02-09_21-35-26_t0290_loop.mp4",
+    "vimeo_id": "1164636081",
+    "vimeo_uri": "/videos/1164636081",
+    "loop_score": 0.004563,
+    "loop_duration": 6.33,
+    "visual_interest": 49.02,
+    "embed_url": "https://player.vimeo.com/video/1164636081?h=45958b4ca3"
+  },
+  {
+    "output_file": "2026-02-09_21-35-26_t0390_loop.mp4",
+    "vimeo_id": "1164636094",
+    "vimeo_uri": "/videos/1164636094",
+    "loop_score": 0.010647,
+    "loop_duration": 6.33,
+    "visual_interest": 61.54,
+    "embed_url": "https://player.vimeo.com/video/1164636094?h=5b2bad4e27"
+  },
+  {
+    "output_file": "2026-02-07_19-42-19_t0325_loop.mp4",
+    "vimeo_id": "1164636103",
+    "vimeo_uri": "/videos/1164636103",
+    "loop_score": 0.003239,
+    "loop_duration": 13.67,
+    "visual_interest": 43.75,
+    "embed_url": "https://player.vimeo.com/video/1164636103?h=bb825d6ab3"
+  },
+  {
+    "output_file": "2026-02-09_21-50-56_t0000_loop.mp4",
+    "vimeo_id": "1164636125",
+    "vimeo_uri": "/videos/1164636125",
+    "loop_score": 0.002091,
+    "loop_duration": 13.0,
+    "visual_interest": 41.01,
+    "embed_url": "https://player.vimeo.com/video/1164636125?h=119f46b10d"
+  },
+  {
+    "output_file": "2026-02-09_19-44-56_t0490_loop.mp4",
+    "vimeo_id": "1164636135",
+    "vimeo_uri": "/videos/1164636135",
+    "loop_score": 0.001985,
+    "loop_duration": 13.67,
+    "visual_interest": 40.46,
+    "embed_url": "https://player.vimeo.com/video/1164636135?h=ccf154539b"
+  },
+  {
+    "output_file": "2026-02-09_19-44-56_t0875_loop.mp4",
+    "vimeo_id": "1164636153",
+    "vimeo_uri": "/videos/1164636153",
+    "loop_score": 0.001936,
+    "loop_duration": 7.33,
+    "visual_interest": 38.63,
+    "embed_url": "https://player.vimeo.com/video/1164636153?h=81371e525d"
+  },
+  {
+    "output_file": "2026-02-09_19-44-56_t0475_loop.mp4",
+    "vimeo_id": "1164636170",
+    "vimeo_uri": "/videos/1164636170",
+    "loop_score": 0.002713,
+    "loop_duration": 7.33,
+    "visual_interest": 40.14,
+    "embed_url": "https://player.vimeo.com/video/1164636170?h=b952bfbad9"
+  },
+  {
+    "output_file": "2026-02-09_18-49-32_t0135_loop.mp4",
+    "vimeo_id": "1164636185",
+    "vimeo_uri": "/videos/1164636185",
+    "loop_score": 0.001756,
+    "loop_duration": 8.67,
+    "visual_interest": 37.93,
+    "embed_url": "https://player.vimeo.com/video/1164636185?h=ab0ad6ddfa"
+  },
+  {
+    "output_file": "2026-02-09_19-44-56_t0855_loop.mp4",
+    "vimeo_id": "1164636197",
+    "vimeo_uri": "/videos/1164636197",
+    "loop_score": 0.001968,
+    "loop_duration": 6.67,
+    "visual_interest": 38.06,
+    "embed_url": "https://player.vimeo.com/video/1164636197?h=20bd6a5115"
+  },
+  {
+    "output_file": "2026-02-08_21-49-46_t0220_loop.mp4",
+    "vimeo_id": "1164636213",
+    "vimeo_uri": "/videos/1164636213",
+    "loop_score": 0.011535,
+    "loop_duration": 6.67,
+    "visual_interest": 57.12,
+    "embed_url": "https://player.vimeo.com/video/1164636213?h=2da659ad52"
+  },
+  {
+    "output_file": "2026-02-07_19-42-19_t0375_loop.mp4",
+    "vimeo_id": "1164636230",
+    "vimeo_uri": "/videos/1164636230",
+    "loop_score": 0.003175,
+    "loop_duration": 7.67,
+    "visual_interest": 39.0,
+    "embed_url": "https://player.vimeo.com/video/1164636230?h=eb0edc5157"
+  },
+  {
+    "output_file": "2026-02-07_19-42-19_t0115_loop.mp4",
+    "vimeo_id": "1164636243",
+    "vimeo_uri": "/videos/1164636243",
+    "loop_score": 0.002849,
+    "loop_duration": 11.33,
+    "visual_interest": 38.01,
+    "embed_url": "https://player.vimeo.com/video/1164636243?h=31d5c77d66"
+  },
+  {
+    "output_file": "2026-02-09_21-35-26_t0230_loop.mp4",
+    "vimeo_id": "1164636254",
+    "vimeo_uri": "/videos/1164636254",
+    "loop_score": 0.007848,
+    "loop_duration": 6.33,
+    "visual_interest": 48.57,
+    "embed_url": "https://player.vimeo.com/video/1164636254?h=59701983c1"
+  },
+  {
+    "output_file": "2026-02-09_19-44-56_t0920_loop.mp4",
+    "vimeo_id": "1164636277",
+    "vimeo_uri": "/videos/1164636277",
+    "loop_score": 0.002561,
+    "loop_duration": 6.67,
+    "visual_interest": 37.15,
+    "embed_url": "https://player.vimeo.com/video/1164636277?h=38f29079df"
+  },
+  {
+    "output_file": "2026-02-09_19-44-56_t0975_loop.mp4",
+    "vimeo_id": "1164636295",
+    "vimeo_uri": "/videos/1164636295",
+    "loop_score": 0.002846,
+    "loop_duration": 6.67,
+    "visual_interest": 36.97,
+    "embed_url": "https://player.vimeo.com/video/1164636295?h=d09202de59"
+  },
+  {
+    "output_file": "2026-02-09_19-44-56_t0510_loop.mp4",
+    "vimeo_id": "1164636308",
+    "vimeo_uri": "/videos/1164636308",
+    "loop_score": 0.005313,
+    "loop_duration": 6.33,
+    "visual_interest": 42.17,
+    "embed_url": "https://player.vimeo.com/video/1164636308?h=2b43159a90"
+  },
+  {
+    "output_file": "2026-02-09_21-35-26_t0115_loop.mp4",
+    "vimeo_id": "1164636324",
+    "vimeo_uri": "/videos/1164636324",
+    "loop_score": 0.003515,
+    "loop_duration": 8.0,
+    "visual_interest": 38.23,
+    "embed_url": "https://player.vimeo.com/video/1164636324?h=f966d9cfad"
+  },
+  {
+    "output_file": "2026-02-08_21-49-46_t0065_loop.mp4",
+    "vimeo_id": "1164636340",
+    "vimeo_uri": "/videos/1164636340",
+    "loop_score": 0.020264,
+    "loop_duration": 8.67,
+    "visual_interest": 73.71,
+    "embed_url": "https://player.vimeo.com/video/1164636340?h=adf29d6155"
+  },
+  {
+    "output_file": "2026-02-09_19-44-56_t0835_loop.mp4",
+    "vimeo_id": "1164636355",
+    "vimeo_uri": "/videos/1164636355",
+    "loop_score": 0.001848,
+    "loop_duration": 13.0,
+    "visual_interest": 34.1,
+    "embed_url": "https://player.vimeo.com/video/1164636355?h=8cd7b96d2b"
+  },
+  {
+    "output_file": "2026-02-09_21-35-26_t0100_loop.mp4",
+    "vimeo_id": "1164636375",
+    "vimeo_uri": "/videos/1164636375",
+    "loop_score": 0.009065,
+    "loop_duration": 6.0,
+    "visual_interest": 49.16,
+    "embed_url": "https://player.vimeo.com/video/1164636375?h=0131787766"
+  },
+  {
+    "output_file": "2026-02-09_18-49-32_t0095_loop.mp4",
+    "vimeo_id": "1164636399",
+    "vimeo_uri": "/videos/1164636399",
+    "loop_score": 0.00256,
+    "loop_duration": 7.0,
+    "visual_interest": 35.27,
+    "embed_url": "https://player.vimeo.com/video/1164636399?h=c80a951727"
+  },
+  {
+    "output_file": "2026-02-08_22-09-45_t0305_loop.mp4",
+    "vimeo_id": "1164636413",
+    "vimeo_uri": "/videos/1164636413",
+    "loop_score": 0.016193,
+    "loop_duration": 11.67,
+    "visual_interest": 64.18,
+    "embed_url": "https://player.vimeo.com/video/1164636413?h=be93c2e9c0"
+  },
+  {
+    "output_file": "2026-02-07_19-42-19_t0305_loop.mp4",
+    "vimeo_id": "1164636439",
+    "vimeo_uri": "/videos/1164636439",
+    "loop_score": 0.006966,
+    "loop_duration": 8.0,
+    "visual_interest": 44.44,
+    "embed_url": "https://player.vimeo.com/video/1164636439?h=b2345b2cf9"
+  },
+  {
+    "output_file": "2026-02-07_19-42-19_t0290_loop.mp4",
+    "vimeo_id": "1164636449",
+    "vimeo_uri": "/videos/1164636449",
+    "loop_score": 0.008179,
+    "loop_duration": 7.33,
+    "visual_interest": 45.98,
+    "embed_url": "https://player.vimeo.com/video/1164636449?h=06b7b54a77"
+  },
+  {
+    "output_file": "2026-02-09_19-44-56_t0710_loop.mp4",
+    "vimeo_id": "1164636462",
+    "vimeo_uri": "/videos/1164636462",
+    "loop_score": 0.001917,
+    "loop_duration": 7.33,
+    "visual_interest": 31.55,
+    "embed_url": "https://player.vimeo.com/video/1164636462?h=354ee2d0fb"
+  }
+]

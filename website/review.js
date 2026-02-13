@@ -3,9 +3,9 @@
     var ADD_KEY = 'sublingualism_add';
     var REMOVE_KEY = 'sublingualism_remove';
 
-    // Detect if we're on the curated works page (works.html, not works-N.html or works-all.html)
+    // Detect if we're on the curated clips page (clips.html, not clips-N.html or clips-all.html)
     var path = location.pathname;
-    var isCuratedPage = /\/works\.html/.test(path) || path === '/works';
+    var isCuratedPage = /\/clips\.html/.test(path) || path === '/clips';
 
     function getList(key) {
         try { return JSON.parse(localStorage.getItem(key)) || []; }
@@ -192,7 +192,7 @@
         });
         document.querySelectorAll('.nav a').forEach(function(a) {
             var href = a.getAttribute('href');
-            if (href && href.indexOf('works') !== -1 && href.indexOf('?') === -1) {
+            if (href && href.indexOf('clips') !== -1 && href.indexOf('?') === -1) {
                 a.setAttribute('href', href + '?review');
             }
         });

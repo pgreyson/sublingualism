@@ -1,0 +1,3870 @@
+[
+  {
+    "video_id": "2026-02-07_19-39-37",
+    "path": "/Volumes/Workspace/obs_recordings/2026-02-07 19-39-37.mov",
+    "duration": 103.27,
+    "segments": [
+      {
+        "index": 0,
+        "start": 0,
+        "end": 10,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-07_19-39-37/000.jpg",
+        "group": 0,
+        "group_size": 2,
+        "group_representative": false
+      },
+      {
+        "index": 1,
+        "start": 10,
+        "end": 20,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-07_19-39-37/001.jpg",
+        "group": 0,
+        "group_size": 2,
+        "group_representative": true
+      },
+      {
+        "index": 2,
+        "start": 20,
+        "end": 30,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-07_19-39-37/002.jpg",
+        "group": 1,
+        "group_size": 2,
+        "group_representative": false
+      },
+      {
+        "index": 3,
+        "start": 30,
+        "end": 40,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-07_19-39-37/003.jpg",
+        "group": 1,
+        "group_size": 2,
+        "group_representative": true
+      },
+      {
+        "index": 4,
+        "start": 40,
+        "end": 50,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-07_19-39-37/004.jpg",
+        "group": 2,
+        "group_size": 1,
+        "group_representative": true
+      },
+      {
+        "index": 5,
+        "start": 50,
+        "end": 60,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-07_19-39-37/005.jpg",
+        "group": 3,
+        "group_size": 4,
+        "group_representative": false
+      },
+      {
+        "index": 6,
+        "start": 60,
+        "end": 70,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-07_19-39-37/006.jpg",
+        "group": 3,
+        "group_size": 4,
+        "group_representative": false
+      },
+      {
+        "index": 7,
+        "start": 70,
+        "end": 80,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-07_19-39-37/007.jpg",
+        "group": 3,
+        "group_size": 4,
+        "group_representative": true
+      },
+      {
+        "index": 8,
+        "start": 80,
+        "end": 90,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-07_19-39-37/008.jpg",
+        "group": 3,
+        "group_size": 4,
+        "group_representative": false
+      },
+      {
+        "index": 9,
+        "start": 90,
+        "end": 100,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-07_19-39-37/009.jpg",
+        "group": 4,
+        "group_size": 2,
+        "group_representative": false
+      },
+      {
+        "index": 10,
+        "start": 100,
+        "end": 103.27,
+        "duration": 3.27,
+        "thumbnail": "thumbnails/2026-02-07_19-39-37/010.jpg",
+        "group": 4,
+        "group_size": 2,
+        "group_representative": true
+      }
+    ]
+  },
+  {
+    "video_id": "2026-02-07_19-42-19",
+    "path": "/Volumes/Workspace/obs_recordings/2026-02-07 19-42-19.mov",
+    "duration": 397.4,
+    "segments": [
+      {
+        "index": 0,
+        "start": 0,
+        "end": 10,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-07_19-42-19/000.jpg",
+        "group": 0,
+        "group_size": 1,
+        "group_representative": true
+      },
+      {
+        "index": 1,
+        "start": 10,
+        "end": 20,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-07_19-42-19/001.jpg",
+        "group": 1,
+        "group_size": 1,
+        "group_representative": true
+      },
+      {
+        "index": 2,
+        "start": 20,
+        "end": 30,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-07_19-42-19/002.jpg",
+        "group": 2,
+        "group_size": 1,
+        "group_representative": true
+      },
+      {
+        "index": 3,
+        "start": 30,
+        "end": 40,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-07_19-42-19/003.jpg",
+        "group": 3,
+        "group_size": 4,
+        "group_representative": false
+      },
+      {
+        "index": 4,
+        "start": 40,
+        "end": 50,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-07_19-42-19/004.jpg",
+        "group": 3,
+        "group_size": 4,
+        "group_representative": false
+      },
+      {
+        "index": 5,
+        "start": 50,
+        "end": 60,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-07_19-42-19/005.jpg",
+        "group": 3,
+        "group_size": 4,
+        "group_representative": true
+      },
+      {
+        "index": 6,
+        "start": 60,
+        "end": 70,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-07_19-42-19/006.jpg",
+        "group": 3,
+        "group_size": 4,
+        "group_representative": false
+      },
+      {
+        "index": 7,
+        "start": 70,
+        "end": 80,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-07_19-42-19/007.jpg",
+        "group": 4,
+        "group_size": 2,
+        "group_representative": false
+      },
+      {
+        "index": 8,
+        "start": 80,
+        "end": 90,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-07_19-42-19/008.jpg",
+        "group": 4,
+        "group_size": 2,
+        "group_representative": true
+      },
+      {
+        "index": 9,
+        "start": 90,
+        "end": 100,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-07_19-42-19/009.jpg",
+        "group": 5,
+        "group_size": 1,
+        "group_representative": true
+      },
+      {
+        "index": 10,
+        "start": 100,
+        "end": 110,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-07_19-42-19/010.jpg",
+        "group": 6,
+        "group_size": 1,
+        "group_representative": true
+      },
+      {
+        "index": 11,
+        "start": 110,
+        "end": 120,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-07_19-42-19/011.jpg",
+        "group": 7,
+        "group_size": 3,
+        "group_representative": false
+      },
+      {
+        "index": 12,
+        "start": 120,
+        "end": 130,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-07_19-42-19/012.jpg",
+        "group": 7,
+        "group_size": 3,
+        "group_representative": true
+      },
+      {
+        "index": 13,
+        "start": 130,
+        "end": 140,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-07_19-42-19/013.jpg",
+        "group": 7,
+        "group_size": 3,
+        "group_representative": false
+      },
+      {
+        "index": 14,
+        "start": 140,
+        "end": 150,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-07_19-42-19/014.jpg",
+        "group": 8,
+        "group_size": 2,
+        "group_representative": false
+      },
+      {
+        "index": 15,
+        "start": 150,
+        "end": 160,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-07_19-42-19/015.jpg",
+        "group": 8,
+        "group_size": 2,
+        "group_representative": true
+      },
+      {
+        "index": 16,
+        "start": 160,
+        "end": 170,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-07_19-42-19/016.jpg",
+        "group": 9,
+        "group_size": 1,
+        "group_representative": true
+      },
+      {
+        "index": 17,
+        "start": 170,
+        "end": 180,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-07_19-42-19/017.jpg",
+        "group": 10,
+        "group_size": 1,
+        "group_representative": true
+      },
+      {
+        "index": 18,
+        "start": 180,
+        "end": 190,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-07_19-42-19/018.jpg",
+        "group": 11,
+        "group_size": 22,
+        "group_representative": false
+      },
+      {
+        "index": 19,
+        "start": 190,
+        "end": 200,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-07_19-42-19/019.jpg",
+        "group": 11,
+        "group_size": 22,
+        "group_representative": false
+      },
+      {
+        "index": 20,
+        "start": 200,
+        "end": 210,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-07_19-42-19/020.jpg",
+        "group": 11,
+        "group_size": 22,
+        "group_representative": false
+      },
+      {
+        "index": 21,
+        "start": 210,
+        "end": 220,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-07_19-42-19/021.jpg",
+        "group": 11,
+        "group_size": 22,
+        "group_representative": false
+      },
+      {
+        "index": 22,
+        "start": 220,
+        "end": 230,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-07_19-42-19/022.jpg",
+        "group": 11,
+        "group_size": 22,
+        "group_representative": false
+      },
+      {
+        "index": 23,
+        "start": 230,
+        "end": 240,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-07_19-42-19/023.jpg",
+        "group": 11,
+        "group_size": 22,
+        "group_representative": false
+      },
+      {
+        "index": 24,
+        "start": 240,
+        "end": 250,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-07_19-42-19/024.jpg",
+        "group": 11,
+        "group_size": 22,
+        "group_representative": false
+      },
+      {
+        "index": 25,
+        "start": 250,
+        "end": 260,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-07_19-42-19/025.jpg",
+        "group": 11,
+        "group_size": 22,
+        "group_representative": false
+      },
+      {
+        "index": 26,
+        "start": 260,
+        "end": 270,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-07_19-42-19/026.jpg",
+        "group": 11,
+        "group_size": 22,
+        "group_representative": false
+      },
+      {
+        "index": 27,
+        "start": 270,
+        "end": 280,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-07_19-42-19/027.jpg",
+        "group": 11,
+        "group_size": 22,
+        "group_representative": false
+      },
+      {
+        "index": 28,
+        "start": 280,
+        "end": 290,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-07_19-42-19/028.jpg",
+        "group": 11,
+        "group_size": 22,
+        "group_representative": false
+      },
+      {
+        "index": 29,
+        "start": 290,
+        "end": 300,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-07_19-42-19/029.jpg",
+        "group": 11,
+        "group_size": 22,
+        "group_representative": true
+      },
+      {
+        "index": 30,
+        "start": 300,
+        "end": 310,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-07_19-42-19/030.jpg",
+        "group": 11,
+        "group_size": 22,
+        "group_representative": false
+      },
+      {
+        "index": 31,
+        "start": 310,
+        "end": 320,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-07_19-42-19/031.jpg",
+        "group": 11,
+        "group_size": 22,
+        "group_representative": false
+      },
+      {
+        "index": 32,
+        "start": 320,
+        "end": 330,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-07_19-42-19/032.jpg",
+        "group": 11,
+        "group_size": 22,
+        "group_representative": false
+      },
+      {
+        "index": 33,
+        "start": 330,
+        "end": 340,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-07_19-42-19/033.jpg",
+        "group": 11,
+        "group_size": 22,
+        "group_representative": false
+      },
+      {
+        "index": 34,
+        "start": 340,
+        "end": 350,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-07_19-42-19/034.jpg",
+        "group": 11,
+        "group_size": 22,
+        "group_representative": false
+      },
+      {
+        "index": 35,
+        "start": 350,
+        "end": 360,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-07_19-42-19/035.jpg",
+        "group": 11,
+        "group_size": 22,
+        "group_representative": false
+      },
+      {
+        "index": 36,
+        "start": 360,
+        "end": 370,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-07_19-42-19/036.jpg",
+        "group": 11,
+        "group_size": 22,
+        "group_representative": false
+      },
+      {
+        "index": 37,
+        "start": 370,
+        "end": 380,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-07_19-42-19/037.jpg",
+        "group": 11,
+        "group_size": 22,
+        "group_representative": false
+      },
+      {
+        "index": 38,
+        "start": 380,
+        "end": 390,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-07_19-42-19/038.jpg",
+        "group": 11,
+        "group_size": 22,
+        "group_representative": false
+      },
+      {
+        "index": 39,
+        "start": 390,
+        "end": 397.4,
+        "duration": 7.4,
+        "thumbnail": "thumbnails/2026-02-07_19-42-19/039.jpg",
+        "group": 11,
+        "group_size": 22,
+        "group_representative": false
+      }
+    ]
+  },
+  {
+    "video_id": "2026-02-08_17-07-25",
+    "path": "/Volumes/Workspace/obs_recordings/2026-02-08 17-07-25.mov",
+    "duration": 10.7,
+    "segments": [
+      {
+        "index": 0,
+        "start": 0,
+        "end": 10,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_17-07-25/000.jpg",
+        "group": 0,
+        "group_size": 2,
+        "group_representative": false
+      },
+      {
+        "index": 1,
+        "start": 10,
+        "end": 10.7,
+        "duration": 0.7,
+        "thumbnail": "thumbnails/2026-02-08_17-07-25/001.jpg",
+        "group": 0,
+        "group_size": 2,
+        "group_representative": true
+      }
+    ]
+  },
+  {
+    "video_id": "2026-02-08_18-37-52",
+    "path": "/Volumes/Workspace/obs_recordings/2026-02-08 18-37-52.mov",
+    "duration": 138.03,
+    "segments": [
+      {
+        "index": 0,
+        "start": 0,
+        "end": 10,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_18-37-52/000.jpg",
+        "group": 0,
+        "group_size": 1,
+        "group_representative": true
+      },
+      {
+        "index": 1,
+        "start": 10,
+        "end": 20,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_18-37-52/001.jpg",
+        "group": 1,
+        "group_size": 2,
+        "group_representative": false
+      },
+      {
+        "index": 2,
+        "start": 20,
+        "end": 30,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_18-37-52/002.jpg",
+        "group": 1,
+        "group_size": 2,
+        "group_representative": true
+      },
+      {
+        "index": 3,
+        "start": 30,
+        "end": 40,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_18-37-52/003.jpg",
+        "group": 2,
+        "group_size": 2,
+        "group_representative": false
+      },
+      {
+        "index": 4,
+        "start": 40,
+        "end": 50,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_18-37-52/004.jpg",
+        "group": 2,
+        "group_size": 2,
+        "group_representative": true
+      },
+      {
+        "index": 5,
+        "start": 50,
+        "end": 60,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_18-37-52/005.jpg",
+        "group": 3,
+        "group_size": 1,
+        "group_representative": true
+      },
+      {
+        "index": 6,
+        "start": 60,
+        "end": 70,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_18-37-52/006.jpg",
+        "group": 4,
+        "group_size": 1,
+        "group_representative": true
+      },
+      {
+        "index": 7,
+        "start": 70,
+        "end": 80,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_18-37-52/007.jpg",
+        "group": 5,
+        "group_size": 1,
+        "group_representative": true
+      },
+      {
+        "index": 8,
+        "start": 80,
+        "end": 90,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_18-37-52/008.jpg",
+        "group": 6,
+        "group_size": 2,
+        "group_representative": false
+      },
+      {
+        "index": 9,
+        "start": 90,
+        "end": 100,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_18-37-52/009.jpg",
+        "group": 6,
+        "group_size": 2,
+        "group_representative": true
+      },
+      {
+        "index": 10,
+        "start": 100,
+        "end": 110,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_18-37-52/010.jpg",
+        "group": 7,
+        "group_size": 1,
+        "group_representative": true
+      },
+      {
+        "index": 11,
+        "start": 110,
+        "end": 120,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_18-37-52/011.jpg",
+        "group": 8,
+        "group_size": 3,
+        "group_representative": false
+      },
+      {
+        "index": 12,
+        "start": 120,
+        "end": 130,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_18-37-52/012.jpg",
+        "group": 8,
+        "group_size": 3,
+        "group_representative": true
+      },
+      {
+        "index": 13,
+        "start": 130,
+        "end": 138.03,
+        "duration": 8.03,
+        "thumbnail": "thumbnails/2026-02-08_18-37-52/013.jpg",
+        "group": 8,
+        "group_size": 3,
+        "group_representative": false
+      }
+    ]
+  },
+  {
+    "video_id": "2026-02-08_18-41-33",
+    "path": "/Volumes/Workspace/obs_recordings/2026-02-08 18-41-33.mov",
+    "duration": 8.17,
+    "segments": [
+      {
+        "index": 0,
+        "start": 0,
+        "end": 8.17,
+        "duration": 8.17,
+        "thumbnail": "thumbnails/2026-02-08_18-41-33/000.jpg",
+        "group": 0,
+        "group_size": 1,
+        "group_representative": true
+      }
+    ]
+  },
+  {
+    "video_id": "2026-02-08_21-49-46",
+    "path": "/Volumes/Workspace/obs_recordings/2026-02-08 21-49-46.mov",
+    "duration": 489.02,
+    "segments": [
+      {
+        "index": 0,
+        "start": 0,
+        "end": 10,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_21-49-46/000.jpg",
+        "group": 0,
+        "group_size": 2,
+        "group_representative": false
+      },
+      {
+        "index": 1,
+        "start": 10,
+        "end": 20,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_21-49-46/001.jpg",
+        "group": 0,
+        "group_size": 2,
+        "group_representative": true
+      },
+      {
+        "index": 2,
+        "start": 20,
+        "end": 30,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_21-49-46/002.jpg",
+        "group": 1,
+        "group_size": 1,
+        "group_representative": true
+      },
+      {
+        "index": 3,
+        "start": 30,
+        "end": 40,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_21-49-46/003.jpg",
+        "group": 2,
+        "group_size": 2,
+        "group_representative": false
+      },
+      {
+        "index": 4,
+        "start": 40,
+        "end": 50,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_21-49-46/004.jpg",
+        "group": 2,
+        "group_size": 2,
+        "group_representative": true
+      },
+      {
+        "index": 5,
+        "start": 50,
+        "end": 60,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_21-49-46/005.jpg",
+        "group": 3,
+        "group_size": 2,
+        "group_representative": false
+      },
+      {
+        "index": 6,
+        "start": 60,
+        "end": 70,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_21-49-46/006.jpg",
+        "group": 3,
+        "group_size": 2,
+        "group_representative": true
+      },
+      {
+        "index": 7,
+        "start": 70,
+        "end": 80,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_21-49-46/007.jpg",
+        "group": 4,
+        "group_size": 2,
+        "group_representative": false
+      },
+      {
+        "index": 8,
+        "start": 80,
+        "end": 90,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_21-49-46/008.jpg",
+        "group": 4,
+        "group_size": 2,
+        "group_representative": true
+      },
+      {
+        "index": 9,
+        "start": 90,
+        "end": 100,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_21-49-46/009.jpg",
+        "group": 5,
+        "group_size": 3,
+        "group_representative": false
+      },
+      {
+        "index": 10,
+        "start": 100,
+        "end": 110,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_21-49-46/010.jpg",
+        "group": 5,
+        "group_size": 3,
+        "group_representative": true
+      },
+      {
+        "index": 11,
+        "start": 110,
+        "end": 120,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_21-49-46/011.jpg",
+        "group": 5,
+        "group_size": 3,
+        "group_representative": false
+      },
+      {
+        "index": 12,
+        "start": 120,
+        "end": 130,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_21-49-46/012.jpg",
+        "group": 6,
+        "group_size": 2,
+        "group_representative": false
+      },
+      {
+        "index": 13,
+        "start": 130,
+        "end": 140,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_21-49-46/013.jpg",
+        "group": 6,
+        "group_size": 2,
+        "group_representative": true
+      },
+      {
+        "index": 14,
+        "start": 140,
+        "end": 150,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_21-49-46/014.jpg",
+        "group": 7,
+        "group_size": 4,
+        "group_representative": false
+      },
+      {
+        "index": 15,
+        "start": 150,
+        "end": 160,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_21-49-46/015.jpg",
+        "group": 7,
+        "group_size": 4,
+        "group_representative": false
+      },
+      {
+        "index": 16,
+        "start": 160,
+        "end": 170,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_21-49-46/016.jpg",
+        "group": 7,
+        "group_size": 4,
+        "group_representative": true
+      },
+      {
+        "index": 17,
+        "start": 170,
+        "end": 180,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_21-49-46/017.jpg",
+        "group": 7,
+        "group_size": 4,
+        "group_representative": false
+      },
+      {
+        "index": 18,
+        "start": 180,
+        "end": 190,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_21-49-46/018.jpg",
+        "group": 8,
+        "group_size": 11,
+        "group_representative": false
+      },
+      {
+        "index": 19,
+        "start": 190,
+        "end": 200,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_21-49-46/019.jpg",
+        "group": 8,
+        "group_size": 11,
+        "group_representative": false
+      },
+      {
+        "index": 20,
+        "start": 200,
+        "end": 210,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_21-49-46/020.jpg",
+        "group": 8,
+        "group_size": 11,
+        "group_representative": false
+      },
+      {
+        "index": 21,
+        "start": 210,
+        "end": 220,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_21-49-46/021.jpg",
+        "group": 8,
+        "group_size": 11,
+        "group_representative": false
+      },
+      {
+        "index": 22,
+        "start": 220,
+        "end": 230,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_21-49-46/022.jpg",
+        "group": 8,
+        "group_size": 11,
+        "group_representative": false
+      },
+      {
+        "index": 23,
+        "start": 230,
+        "end": 240,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_21-49-46/023.jpg",
+        "group": 8,
+        "group_size": 11,
+        "group_representative": true
+      },
+      {
+        "index": 24,
+        "start": 240,
+        "end": 250,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_21-49-46/024.jpg",
+        "group": 8,
+        "group_size": 11,
+        "group_representative": false
+      },
+      {
+        "index": 25,
+        "start": 250,
+        "end": 260,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_21-49-46/025.jpg",
+        "group": 8,
+        "group_size": 11,
+        "group_representative": false
+      },
+      {
+        "index": 26,
+        "start": 260,
+        "end": 270,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_21-49-46/026.jpg",
+        "group": 8,
+        "group_size": 11,
+        "group_representative": false
+      },
+      {
+        "index": 27,
+        "start": 270,
+        "end": 280,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_21-49-46/027.jpg",
+        "group": 8,
+        "group_size": 11,
+        "group_representative": false
+      },
+      {
+        "index": 28,
+        "start": 280,
+        "end": 290,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_21-49-46/028.jpg",
+        "group": 8,
+        "group_size": 11,
+        "group_representative": false
+      },
+      {
+        "index": 29,
+        "start": 290,
+        "end": 300,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_21-49-46/029.jpg",
+        "group": 9,
+        "group_size": 1,
+        "group_representative": true
+      },
+      {
+        "index": 30,
+        "start": 300,
+        "end": 310,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_21-49-46/030.jpg",
+        "group": 10,
+        "group_size": 9,
+        "group_representative": false
+      },
+      {
+        "index": 31,
+        "start": 310,
+        "end": 320,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_21-49-46/031.jpg",
+        "group": 10,
+        "group_size": 9,
+        "group_representative": false
+      },
+      {
+        "index": 32,
+        "start": 320,
+        "end": 330,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_21-49-46/032.jpg",
+        "group": 10,
+        "group_size": 9,
+        "group_representative": false
+      },
+      {
+        "index": 33,
+        "start": 330,
+        "end": 340,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_21-49-46/033.jpg",
+        "group": 10,
+        "group_size": 9,
+        "group_representative": false
+      },
+      {
+        "index": 34,
+        "start": 340,
+        "end": 350,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_21-49-46/034.jpg",
+        "group": 10,
+        "group_size": 9,
+        "group_representative": true
+      },
+      {
+        "index": 35,
+        "start": 350,
+        "end": 360,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_21-49-46/035.jpg",
+        "group": 10,
+        "group_size": 9,
+        "group_representative": false
+      },
+      {
+        "index": 36,
+        "start": 360,
+        "end": 370,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_21-49-46/036.jpg",
+        "group": 10,
+        "group_size": 9,
+        "group_representative": false
+      },
+      {
+        "index": 37,
+        "start": 370,
+        "end": 380,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_21-49-46/037.jpg",
+        "group": 10,
+        "group_size": 9,
+        "group_representative": false
+      },
+      {
+        "index": 38,
+        "start": 380,
+        "end": 390,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_21-49-46/038.jpg",
+        "group": 10,
+        "group_size": 9,
+        "group_representative": false
+      },
+      {
+        "index": 39,
+        "start": 390,
+        "end": 400,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_21-49-46/039.jpg",
+        "group": 11,
+        "group_size": 10,
+        "group_representative": false
+      },
+      {
+        "index": 40,
+        "start": 400,
+        "end": 410,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_21-49-46/040.jpg",
+        "group": 11,
+        "group_size": 10,
+        "group_representative": false
+      },
+      {
+        "index": 41,
+        "start": 410,
+        "end": 420,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_21-49-46/041.jpg",
+        "group": 11,
+        "group_size": 10,
+        "group_representative": false
+      },
+      {
+        "index": 42,
+        "start": 420,
+        "end": 430,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_21-49-46/042.jpg",
+        "group": 11,
+        "group_size": 10,
+        "group_representative": false
+      },
+      {
+        "index": 43,
+        "start": 430,
+        "end": 440,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_21-49-46/043.jpg",
+        "group": 11,
+        "group_size": 10,
+        "group_representative": false
+      },
+      {
+        "index": 44,
+        "start": 440,
+        "end": 450,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_21-49-46/044.jpg",
+        "group": 11,
+        "group_size": 10,
+        "group_representative": true
+      },
+      {
+        "index": 45,
+        "start": 450,
+        "end": 460,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_21-49-46/045.jpg",
+        "group": 11,
+        "group_size": 10,
+        "group_representative": false
+      },
+      {
+        "index": 46,
+        "start": 460,
+        "end": 470,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_21-49-46/046.jpg",
+        "group": 11,
+        "group_size": 10,
+        "group_representative": false
+      },
+      {
+        "index": 47,
+        "start": 470,
+        "end": 480,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_21-49-46/047.jpg",
+        "group": 11,
+        "group_size": 10,
+        "group_representative": false
+      },
+      {
+        "index": 48,
+        "start": 480,
+        "end": 489.02,
+        "duration": 9.02,
+        "thumbnail": "thumbnails/2026-02-08_21-49-46/048.jpg",
+        "group": 11,
+        "group_size": 10,
+        "group_representative": false
+      }
+    ]
+  },
+  {
+    "video_id": "2026-02-08_22-09-45",
+    "path": "/Volumes/Workspace/obs_recordings/2026-02-08 22-09-45.mov",
+    "duration": 379.03,
+    "segments": [
+      {
+        "index": 0,
+        "start": 0,
+        "end": 10,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_22-09-45/000.jpg",
+        "group": 0,
+        "group_size": 3,
+        "group_representative": false
+      },
+      {
+        "index": 1,
+        "start": 10,
+        "end": 20,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_22-09-45/001.jpg",
+        "group": 0,
+        "group_size": 3,
+        "group_representative": true
+      },
+      {
+        "index": 2,
+        "start": 20,
+        "end": 30,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_22-09-45/002.jpg",
+        "group": 0,
+        "group_size": 3,
+        "group_representative": false
+      },
+      {
+        "index": 3,
+        "start": 30,
+        "end": 40,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_22-09-45/003.jpg",
+        "group": 1,
+        "group_size": 13,
+        "group_representative": false
+      },
+      {
+        "index": 4,
+        "start": 40,
+        "end": 50,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_22-09-45/004.jpg",
+        "group": 1,
+        "group_size": 13,
+        "group_representative": false
+      },
+      {
+        "index": 5,
+        "start": 50,
+        "end": 60,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_22-09-45/005.jpg",
+        "group": 1,
+        "group_size": 13,
+        "group_representative": false
+      },
+      {
+        "index": 6,
+        "start": 60,
+        "end": 70,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_22-09-45/006.jpg",
+        "group": 1,
+        "group_size": 13,
+        "group_representative": false
+      },
+      {
+        "index": 7,
+        "start": 70,
+        "end": 80,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_22-09-45/007.jpg",
+        "group": 1,
+        "group_size": 13,
+        "group_representative": false
+      },
+      {
+        "index": 8,
+        "start": 80,
+        "end": 90,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_22-09-45/008.jpg",
+        "group": 1,
+        "group_size": 13,
+        "group_representative": false
+      },
+      {
+        "index": 9,
+        "start": 90,
+        "end": 100,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_22-09-45/009.jpg",
+        "group": 1,
+        "group_size": 13,
+        "group_representative": true
+      },
+      {
+        "index": 10,
+        "start": 100,
+        "end": 110,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_22-09-45/010.jpg",
+        "group": 1,
+        "group_size": 13,
+        "group_representative": false
+      },
+      {
+        "index": 11,
+        "start": 110,
+        "end": 120,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_22-09-45/011.jpg",
+        "group": 1,
+        "group_size": 13,
+        "group_representative": false
+      },
+      {
+        "index": 12,
+        "start": 120,
+        "end": 130,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_22-09-45/012.jpg",
+        "group": 1,
+        "group_size": 13,
+        "group_representative": false
+      },
+      {
+        "index": 13,
+        "start": 130,
+        "end": 140,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_22-09-45/013.jpg",
+        "group": 1,
+        "group_size": 13,
+        "group_representative": false
+      },
+      {
+        "index": 14,
+        "start": 140,
+        "end": 150,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_22-09-45/014.jpg",
+        "group": 1,
+        "group_size": 13,
+        "group_representative": false
+      },
+      {
+        "index": 15,
+        "start": 150,
+        "end": 160,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_22-09-45/015.jpg",
+        "group": 1,
+        "group_size": 13,
+        "group_representative": false
+      },
+      {
+        "index": 16,
+        "start": 160,
+        "end": 170,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_22-09-45/016.jpg",
+        "group": 2,
+        "group_size": 2,
+        "group_representative": false
+      },
+      {
+        "index": 17,
+        "start": 170,
+        "end": 180,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_22-09-45/017.jpg",
+        "group": 2,
+        "group_size": 2,
+        "group_representative": true
+      },
+      {
+        "index": 18,
+        "start": 180,
+        "end": 190,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_22-09-45/018.jpg",
+        "group": 3,
+        "group_size": 1,
+        "group_representative": true
+      },
+      {
+        "index": 19,
+        "start": 190,
+        "end": 200,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_22-09-45/019.jpg",
+        "group": 4,
+        "group_size": 1,
+        "group_representative": true
+      },
+      {
+        "index": 20,
+        "start": 200,
+        "end": 210,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_22-09-45/020.jpg",
+        "group": 5,
+        "group_size": 18,
+        "group_representative": false
+      },
+      {
+        "index": 21,
+        "start": 210,
+        "end": 220,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_22-09-45/021.jpg",
+        "group": 5,
+        "group_size": 18,
+        "group_representative": false
+      },
+      {
+        "index": 22,
+        "start": 220,
+        "end": 230,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_22-09-45/022.jpg",
+        "group": 5,
+        "group_size": 18,
+        "group_representative": false
+      },
+      {
+        "index": 23,
+        "start": 230,
+        "end": 240,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_22-09-45/023.jpg",
+        "group": 5,
+        "group_size": 18,
+        "group_representative": false
+      },
+      {
+        "index": 24,
+        "start": 240,
+        "end": 250,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_22-09-45/024.jpg",
+        "group": 5,
+        "group_size": 18,
+        "group_representative": false
+      },
+      {
+        "index": 25,
+        "start": 250,
+        "end": 260,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_22-09-45/025.jpg",
+        "group": 5,
+        "group_size": 18,
+        "group_representative": false
+      },
+      {
+        "index": 26,
+        "start": 260,
+        "end": 270,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_22-09-45/026.jpg",
+        "group": 5,
+        "group_size": 18,
+        "group_representative": false
+      },
+      {
+        "index": 27,
+        "start": 270,
+        "end": 280,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_22-09-45/027.jpg",
+        "group": 5,
+        "group_size": 18,
+        "group_representative": false
+      },
+      {
+        "index": 28,
+        "start": 280,
+        "end": 290,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_22-09-45/028.jpg",
+        "group": 5,
+        "group_size": 18,
+        "group_representative": false
+      },
+      {
+        "index": 29,
+        "start": 290,
+        "end": 300,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_22-09-45/029.jpg",
+        "group": 5,
+        "group_size": 18,
+        "group_representative": true
+      },
+      {
+        "index": 30,
+        "start": 300,
+        "end": 310,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_22-09-45/030.jpg",
+        "group": 5,
+        "group_size": 18,
+        "group_representative": false
+      },
+      {
+        "index": 31,
+        "start": 310,
+        "end": 320,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_22-09-45/031.jpg",
+        "group": 5,
+        "group_size": 18,
+        "group_representative": false
+      },
+      {
+        "index": 32,
+        "start": 320,
+        "end": 330,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_22-09-45/032.jpg",
+        "group": 5,
+        "group_size": 18,
+        "group_representative": false
+      },
+      {
+        "index": 33,
+        "start": 330,
+        "end": 340,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_22-09-45/033.jpg",
+        "group": 5,
+        "group_size": 18,
+        "group_representative": false
+      },
+      {
+        "index": 34,
+        "start": 340,
+        "end": 350,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_22-09-45/034.jpg",
+        "group": 5,
+        "group_size": 18,
+        "group_representative": false
+      },
+      {
+        "index": 35,
+        "start": 350,
+        "end": 360,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_22-09-45/035.jpg",
+        "group": 5,
+        "group_size": 18,
+        "group_representative": false
+      },
+      {
+        "index": 36,
+        "start": 360,
+        "end": 370,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_22-09-45/036.jpg",
+        "group": 5,
+        "group_size": 18,
+        "group_representative": false
+      },
+      {
+        "index": 37,
+        "start": 370,
+        "end": 379.03,
+        "duration": 9.03,
+        "thumbnail": "thumbnails/2026-02-08_22-09-45/037.jpg",
+        "group": 5,
+        "group_size": 18,
+        "group_representative": false
+      }
+    ]
+  },
+  {
+    "video_id": "2026-02-08_22-28-31",
+    "path": "/Volumes/Workspace/obs_recordings/2026-02-08 22-28-31.mov",
+    "duration": 278.36,
+    "segments": [
+      {
+        "index": 0,
+        "start": 0,
+        "end": 10,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_22-28-31/000.jpg",
+        "group": 0,
+        "group_size": 28,
+        "group_representative": false
+      },
+      {
+        "index": 1,
+        "start": 10,
+        "end": 20,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_22-28-31/001.jpg",
+        "group": 0,
+        "group_size": 28,
+        "group_representative": false
+      },
+      {
+        "index": 2,
+        "start": 20,
+        "end": 30,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_22-28-31/002.jpg",
+        "group": 0,
+        "group_size": 28,
+        "group_representative": false
+      },
+      {
+        "index": 3,
+        "start": 30,
+        "end": 40,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_22-28-31/003.jpg",
+        "group": 0,
+        "group_size": 28,
+        "group_representative": false
+      },
+      {
+        "index": 4,
+        "start": 40,
+        "end": 50,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_22-28-31/004.jpg",
+        "group": 0,
+        "group_size": 28,
+        "group_representative": false
+      },
+      {
+        "index": 5,
+        "start": 50,
+        "end": 60,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_22-28-31/005.jpg",
+        "group": 0,
+        "group_size": 28,
+        "group_representative": false
+      },
+      {
+        "index": 6,
+        "start": 60,
+        "end": 70,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_22-28-31/006.jpg",
+        "group": 0,
+        "group_size": 28,
+        "group_representative": false
+      },
+      {
+        "index": 7,
+        "start": 70,
+        "end": 80,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_22-28-31/007.jpg",
+        "group": 0,
+        "group_size": 28,
+        "group_representative": false
+      },
+      {
+        "index": 8,
+        "start": 80,
+        "end": 90,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_22-28-31/008.jpg",
+        "group": 0,
+        "group_size": 28,
+        "group_representative": false
+      },
+      {
+        "index": 9,
+        "start": 90,
+        "end": 100,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_22-28-31/009.jpg",
+        "group": 0,
+        "group_size": 28,
+        "group_representative": false
+      },
+      {
+        "index": 10,
+        "start": 100,
+        "end": 110,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_22-28-31/010.jpg",
+        "group": 0,
+        "group_size": 28,
+        "group_representative": false
+      },
+      {
+        "index": 11,
+        "start": 110,
+        "end": 120,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_22-28-31/011.jpg",
+        "group": 0,
+        "group_size": 28,
+        "group_representative": false
+      },
+      {
+        "index": 12,
+        "start": 120,
+        "end": 130,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_22-28-31/012.jpg",
+        "group": 0,
+        "group_size": 28,
+        "group_representative": false
+      },
+      {
+        "index": 13,
+        "start": 130,
+        "end": 140,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_22-28-31/013.jpg",
+        "group": 0,
+        "group_size": 28,
+        "group_representative": false
+      },
+      {
+        "index": 14,
+        "start": 140,
+        "end": 150,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_22-28-31/014.jpg",
+        "group": 0,
+        "group_size": 28,
+        "group_representative": true
+      },
+      {
+        "index": 15,
+        "start": 150,
+        "end": 160,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_22-28-31/015.jpg",
+        "group": 0,
+        "group_size": 28,
+        "group_representative": false
+      },
+      {
+        "index": 16,
+        "start": 160,
+        "end": 170,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_22-28-31/016.jpg",
+        "group": 0,
+        "group_size": 28,
+        "group_representative": false
+      },
+      {
+        "index": 17,
+        "start": 170,
+        "end": 180,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_22-28-31/017.jpg",
+        "group": 0,
+        "group_size": 28,
+        "group_representative": false
+      },
+      {
+        "index": 18,
+        "start": 180,
+        "end": 190,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_22-28-31/018.jpg",
+        "group": 0,
+        "group_size": 28,
+        "group_representative": false
+      },
+      {
+        "index": 19,
+        "start": 190,
+        "end": 200,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_22-28-31/019.jpg",
+        "group": 0,
+        "group_size": 28,
+        "group_representative": false
+      },
+      {
+        "index": 20,
+        "start": 200,
+        "end": 210,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_22-28-31/020.jpg",
+        "group": 0,
+        "group_size": 28,
+        "group_representative": false
+      },
+      {
+        "index": 21,
+        "start": 210,
+        "end": 220,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_22-28-31/021.jpg",
+        "group": 0,
+        "group_size": 28,
+        "group_representative": false
+      },
+      {
+        "index": 22,
+        "start": 220,
+        "end": 230,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_22-28-31/022.jpg",
+        "group": 0,
+        "group_size": 28,
+        "group_representative": false
+      },
+      {
+        "index": 23,
+        "start": 230,
+        "end": 240,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_22-28-31/023.jpg",
+        "group": 0,
+        "group_size": 28,
+        "group_representative": false
+      },
+      {
+        "index": 24,
+        "start": 240,
+        "end": 250,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_22-28-31/024.jpg",
+        "group": 0,
+        "group_size": 28,
+        "group_representative": false
+      },
+      {
+        "index": 25,
+        "start": 250,
+        "end": 260,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_22-28-31/025.jpg",
+        "group": 0,
+        "group_size": 28,
+        "group_representative": false
+      },
+      {
+        "index": 26,
+        "start": 260,
+        "end": 270,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_22-28-31/026.jpg",
+        "group": 0,
+        "group_size": 28,
+        "group_representative": false
+      },
+      {
+        "index": 27,
+        "start": 270,
+        "end": 278.36,
+        "duration": 8.36,
+        "thumbnail": "thumbnails/2026-02-08_22-28-31/027.jpg",
+        "group": 0,
+        "group_size": 28,
+        "group_representative": false
+      }
+    ]
+  },
+  {
+    "video_id": "2026-02-08_22-33-12",
+    "path": "/Volumes/Workspace/obs_recordings/2026-02-08 22-33-12.mov",
+    "duration": 56.28,
+    "segments": [
+      {
+        "index": 0,
+        "start": 0,
+        "end": 10,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_22-33-12/000.jpg",
+        "group": 0,
+        "group_size": 6,
+        "group_representative": false
+      },
+      {
+        "index": 1,
+        "start": 10,
+        "end": 20,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_22-33-12/001.jpg",
+        "group": 0,
+        "group_size": 6,
+        "group_representative": false
+      },
+      {
+        "index": 2,
+        "start": 20,
+        "end": 30,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_22-33-12/002.jpg",
+        "group": 0,
+        "group_size": 6,
+        "group_representative": false
+      },
+      {
+        "index": 3,
+        "start": 30,
+        "end": 40,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_22-33-12/003.jpg",
+        "group": 0,
+        "group_size": 6,
+        "group_representative": true
+      },
+      {
+        "index": 4,
+        "start": 40,
+        "end": 50,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-08_22-33-12/004.jpg",
+        "group": 0,
+        "group_size": 6,
+        "group_representative": false
+      },
+      {
+        "index": 5,
+        "start": 50,
+        "end": 56.28,
+        "duration": 6.28,
+        "thumbnail": "thumbnails/2026-02-08_22-33-12/005.jpg",
+        "group": 0,
+        "group_size": 6,
+        "group_representative": false
+      }
+    ]
+  },
+  {
+    "video_id": "2026-02-09_18-49-32",
+    "path": "/Volumes/Workspace/obs_recordings/2026-02-09 18-49-32.mov",
+    "duration": 153.53,
+    "segments": [
+      {
+        "index": 0,
+        "start": 0,
+        "end": 10,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_18-49-32/000.jpg",
+        "group": 0,
+        "group_size": 5,
+        "group_representative": false
+      },
+      {
+        "index": 1,
+        "start": 10,
+        "end": 20,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_18-49-32/001.jpg",
+        "group": 0,
+        "group_size": 5,
+        "group_representative": false
+      },
+      {
+        "index": 2,
+        "start": 20,
+        "end": 30,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_18-49-32/002.jpg",
+        "group": 0,
+        "group_size": 5,
+        "group_representative": true
+      },
+      {
+        "index": 3,
+        "start": 30,
+        "end": 40,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_18-49-32/003.jpg",
+        "group": 0,
+        "group_size": 5,
+        "group_representative": false
+      },
+      {
+        "index": 4,
+        "start": 40,
+        "end": 50,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_18-49-32/004.jpg",
+        "group": 0,
+        "group_size": 5,
+        "group_representative": false
+      },
+      {
+        "index": 5,
+        "start": 50,
+        "end": 60,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_18-49-32/005.jpg",
+        "group": 1,
+        "group_size": 1,
+        "group_representative": true
+      },
+      {
+        "index": 6,
+        "start": 60,
+        "end": 70,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_18-49-32/006.jpg",
+        "group": 2,
+        "group_size": 10,
+        "group_representative": false
+      },
+      {
+        "index": 7,
+        "start": 70,
+        "end": 80,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_18-49-32/007.jpg",
+        "group": 2,
+        "group_size": 10,
+        "group_representative": false
+      },
+      {
+        "index": 8,
+        "start": 80,
+        "end": 90,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_18-49-32/008.jpg",
+        "group": 2,
+        "group_size": 10,
+        "group_representative": false
+      },
+      {
+        "index": 9,
+        "start": 90,
+        "end": 100,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_18-49-32/009.jpg",
+        "group": 2,
+        "group_size": 10,
+        "group_representative": false
+      },
+      {
+        "index": 10,
+        "start": 100,
+        "end": 110,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_18-49-32/010.jpg",
+        "group": 2,
+        "group_size": 10,
+        "group_representative": false
+      },
+      {
+        "index": 11,
+        "start": 110,
+        "end": 120,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_18-49-32/011.jpg",
+        "group": 2,
+        "group_size": 10,
+        "group_representative": true
+      },
+      {
+        "index": 12,
+        "start": 120,
+        "end": 130,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_18-49-32/012.jpg",
+        "group": 2,
+        "group_size": 10,
+        "group_representative": false
+      },
+      {
+        "index": 13,
+        "start": 130,
+        "end": 140,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_18-49-32/013.jpg",
+        "group": 2,
+        "group_size": 10,
+        "group_representative": false
+      },
+      {
+        "index": 14,
+        "start": 140,
+        "end": 150,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_18-49-32/014.jpg",
+        "group": 2,
+        "group_size": 10,
+        "group_representative": false
+      },
+      {
+        "index": 15,
+        "start": 150,
+        "end": 153.53,
+        "duration": 3.53,
+        "thumbnail": "thumbnails/2026-02-09_18-49-32/015.jpg",
+        "group": 2,
+        "group_size": 10,
+        "group_representative": false
+      }
+    ]
+  },
+  {
+    "video_id": "2026-02-09_19-44-56",
+    "path": "/Volumes/Workspace/obs_recordings/2026-02-09 19-44-56.mov",
+    "duration": 1200.68,
+    "segments": [
+      {
+        "index": 0,
+        "start": 0,
+        "end": 10,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/000.jpg",
+        "group": 0,
+        "group_size": 9,
+        "group_representative": false
+      },
+      {
+        "index": 1,
+        "start": 10,
+        "end": 20,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/001.jpg",
+        "group": 0,
+        "group_size": 9,
+        "group_representative": false
+      },
+      {
+        "index": 2,
+        "start": 20,
+        "end": 30,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/002.jpg",
+        "group": 0,
+        "group_size": 9,
+        "group_representative": false
+      },
+      {
+        "index": 3,
+        "start": 30,
+        "end": 40,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/003.jpg",
+        "group": 0,
+        "group_size": 9,
+        "group_representative": false
+      },
+      {
+        "index": 4,
+        "start": 40,
+        "end": 50,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/004.jpg",
+        "group": 0,
+        "group_size": 9,
+        "group_representative": true
+      },
+      {
+        "index": 5,
+        "start": 50,
+        "end": 60,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/005.jpg",
+        "group": 0,
+        "group_size": 9,
+        "group_representative": false
+      },
+      {
+        "index": 6,
+        "start": 60,
+        "end": 70,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/006.jpg",
+        "group": 0,
+        "group_size": 9,
+        "group_representative": false
+      },
+      {
+        "index": 7,
+        "start": 70,
+        "end": 80,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/007.jpg",
+        "group": 0,
+        "group_size": 9,
+        "group_representative": false
+      },
+      {
+        "index": 8,
+        "start": 80,
+        "end": 90,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/008.jpg",
+        "group": 0,
+        "group_size": 9,
+        "group_representative": false
+      },
+      {
+        "index": 9,
+        "start": 90,
+        "end": 100,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/009.jpg",
+        "group": 1,
+        "group_size": 8,
+        "group_representative": false
+      },
+      {
+        "index": 10,
+        "start": 100,
+        "end": 110,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/010.jpg",
+        "group": 1,
+        "group_size": 8,
+        "group_representative": false
+      },
+      {
+        "index": 11,
+        "start": 110,
+        "end": 120,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/011.jpg",
+        "group": 1,
+        "group_size": 8,
+        "group_representative": false
+      },
+      {
+        "index": 12,
+        "start": 120,
+        "end": 130,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/012.jpg",
+        "group": 1,
+        "group_size": 8,
+        "group_representative": false
+      },
+      {
+        "index": 13,
+        "start": 130,
+        "end": 140,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/013.jpg",
+        "group": 1,
+        "group_size": 8,
+        "group_representative": true
+      },
+      {
+        "index": 14,
+        "start": 140,
+        "end": 150,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/014.jpg",
+        "group": 1,
+        "group_size": 8,
+        "group_representative": false
+      },
+      {
+        "index": 15,
+        "start": 150,
+        "end": 160,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/015.jpg",
+        "group": 1,
+        "group_size": 8,
+        "group_representative": false
+      },
+      {
+        "index": 16,
+        "start": 160,
+        "end": 170,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/016.jpg",
+        "group": 1,
+        "group_size": 8,
+        "group_representative": false
+      },
+      {
+        "index": 17,
+        "start": 170,
+        "end": 180,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/017.jpg",
+        "group": 2,
+        "group_size": 4,
+        "group_representative": false
+      },
+      {
+        "index": 18,
+        "start": 180,
+        "end": 190,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/018.jpg",
+        "group": 2,
+        "group_size": 4,
+        "group_representative": false
+      },
+      {
+        "index": 19,
+        "start": 190,
+        "end": 200,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/019.jpg",
+        "group": 2,
+        "group_size": 4,
+        "group_representative": true
+      },
+      {
+        "index": 20,
+        "start": 200,
+        "end": 210,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/020.jpg",
+        "group": 2,
+        "group_size": 4,
+        "group_representative": false
+      },
+      {
+        "index": 21,
+        "start": 210,
+        "end": 220,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/021.jpg",
+        "group": 3,
+        "group_size": 2,
+        "group_representative": false
+      },
+      {
+        "index": 22,
+        "start": 220,
+        "end": 230,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/022.jpg",
+        "group": 3,
+        "group_size": 2,
+        "group_representative": true
+      },
+      {
+        "index": 23,
+        "start": 230,
+        "end": 240,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/023.jpg",
+        "group": 4,
+        "group_size": 4,
+        "group_representative": false
+      },
+      {
+        "index": 24,
+        "start": 240,
+        "end": 250,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/024.jpg",
+        "group": 4,
+        "group_size": 4,
+        "group_representative": false
+      },
+      {
+        "index": 25,
+        "start": 250,
+        "end": 260,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/025.jpg",
+        "group": 4,
+        "group_size": 4,
+        "group_representative": true
+      },
+      {
+        "index": 26,
+        "start": 260,
+        "end": 270,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/026.jpg",
+        "group": 4,
+        "group_size": 4,
+        "group_representative": false
+      },
+      {
+        "index": 27,
+        "start": 270,
+        "end": 280,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/027.jpg",
+        "group": 5,
+        "group_size": 3,
+        "group_representative": false
+      },
+      {
+        "index": 28,
+        "start": 280,
+        "end": 290,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/028.jpg",
+        "group": 5,
+        "group_size": 3,
+        "group_representative": true
+      },
+      {
+        "index": 29,
+        "start": 290,
+        "end": 300,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/029.jpg",
+        "group": 5,
+        "group_size": 3,
+        "group_representative": false
+      },
+      {
+        "index": 30,
+        "start": 300,
+        "end": 310,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/030.jpg",
+        "group": 6,
+        "group_size": 1,
+        "group_representative": true
+      },
+      {
+        "index": 31,
+        "start": 310,
+        "end": 320,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/031.jpg",
+        "group": 7,
+        "group_size": 5,
+        "group_representative": false
+      },
+      {
+        "index": 32,
+        "start": 320,
+        "end": 330,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/032.jpg",
+        "group": 7,
+        "group_size": 5,
+        "group_representative": false
+      },
+      {
+        "index": 33,
+        "start": 330,
+        "end": 340,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/033.jpg",
+        "group": 7,
+        "group_size": 5,
+        "group_representative": true
+      },
+      {
+        "index": 34,
+        "start": 340,
+        "end": 350,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/034.jpg",
+        "group": 7,
+        "group_size": 5,
+        "group_representative": false
+      },
+      {
+        "index": 35,
+        "start": 350,
+        "end": 360,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/035.jpg",
+        "group": 7,
+        "group_size": 5,
+        "group_representative": false
+      },
+      {
+        "index": 36,
+        "start": 360,
+        "end": 370,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/036.jpg",
+        "group": 8,
+        "group_size": 17,
+        "group_representative": false
+      },
+      {
+        "index": 37,
+        "start": 370,
+        "end": 380,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/037.jpg",
+        "group": 8,
+        "group_size": 17,
+        "group_representative": false
+      },
+      {
+        "index": 38,
+        "start": 380,
+        "end": 390,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/038.jpg",
+        "group": 8,
+        "group_size": 17,
+        "group_representative": false
+      },
+      {
+        "index": 39,
+        "start": 390,
+        "end": 400,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/039.jpg",
+        "group": 8,
+        "group_size": 17,
+        "group_representative": false
+      },
+      {
+        "index": 40,
+        "start": 400,
+        "end": 410,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/040.jpg",
+        "group": 8,
+        "group_size": 17,
+        "group_representative": false
+      },
+      {
+        "index": 41,
+        "start": 410,
+        "end": 420,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/041.jpg",
+        "group": 8,
+        "group_size": 17,
+        "group_representative": false
+      },
+      {
+        "index": 42,
+        "start": 420,
+        "end": 430,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/042.jpg",
+        "group": 8,
+        "group_size": 17,
+        "group_representative": false
+      },
+      {
+        "index": 43,
+        "start": 430,
+        "end": 440,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/043.jpg",
+        "group": 8,
+        "group_size": 17,
+        "group_representative": false
+      },
+      {
+        "index": 44,
+        "start": 440,
+        "end": 450,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/044.jpg",
+        "group": 8,
+        "group_size": 17,
+        "group_representative": true
+      },
+      {
+        "index": 45,
+        "start": 450,
+        "end": 460,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/045.jpg",
+        "group": 8,
+        "group_size": 17,
+        "group_representative": false
+      },
+      {
+        "index": 46,
+        "start": 460,
+        "end": 470,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/046.jpg",
+        "group": 8,
+        "group_size": 17,
+        "group_representative": false
+      },
+      {
+        "index": 47,
+        "start": 470,
+        "end": 480,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/047.jpg",
+        "group": 8,
+        "group_size": 17,
+        "group_representative": false
+      },
+      {
+        "index": 48,
+        "start": 480,
+        "end": 490,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/048.jpg",
+        "group": 8,
+        "group_size": 17,
+        "group_representative": false
+      },
+      {
+        "index": 49,
+        "start": 490,
+        "end": 500,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/049.jpg",
+        "group": 8,
+        "group_size": 17,
+        "group_representative": false
+      },
+      {
+        "index": 50,
+        "start": 500,
+        "end": 510,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/050.jpg",
+        "group": 8,
+        "group_size": 17,
+        "group_representative": false
+      },
+      {
+        "index": 51,
+        "start": 510,
+        "end": 520,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/051.jpg",
+        "group": 8,
+        "group_size": 17,
+        "group_representative": false
+      },
+      {
+        "index": 52,
+        "start": 520,
+        "end": 530,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/052.jpg",
+        "group": 8,
+        "group_size": 17,
+        "group_representative": false
+      },
+      {
+        "index": 53,
+        "start": 530,
+        "end": 540,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/053.jpg",
+        "group": 9,
+        "group_size": 2,
+        "group_representative": false
+      },
+      {
+        "index": 54,
+        "start": 540,
+        "end": 550,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/054.jpg",
+        "group": 9,
+        "group_size": 2,
+        "group_representative": true
+      },
+      {
+        "index": 55,
+        "start": 550,
+        "end": 560,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/055.jpg",
+        "group": 10,
+        "group_size": 7,
+        "group_representative": false
+      },
+      {
+        "index": 56,
+        "start": 560,
+        "end": 570,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/056.jpg",
+        "group": 10,
+        "group_size": 7,
+        "group_representative": false
+      },
+      {
+        "index": 57,
+        "start": 570,
+        "end": 580,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/057.jpg",
+        "group": 10,
+        "group_size": 7,
+        "group_representative": false
+      },
+      {
+        "index": 58,
+        "start": 580,
+        "end": 590,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/058.jpg",
+        "group": 10,
+        "group_size": 7,
+        "group_representative": true
+      },
+      {
+        "index": 59,
+        "start": 590,
+        "end": 600,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/059.jpg",
+        "group": 10,
+        "group_size": 7,
+        "group_representative": false
+      },
+      {
+        "index": 60,
+        "start": 600,
+        "end": 610,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/060.jpg",
+        "group": 10,
+        "group_size": 7,
+        "group_representative": false
+      },
+      {
+        "index": 61,
+        "start": 610,
+        "end": 620,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/061.jpg",
+        "group": 10,
+        "group_size": 7,
+        "group_representative": false
+      },
+      {
+        "index": 62,
+        "start": 620,
+        "end": 630,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/062.jpg",
+        "group": 11,
+        "group_size": 5,
+        "group_representative": false
+      },
+      {
+        "index": 63,
+        "start": 630,
+        "end": 640,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/063.jpg",
+        "group": 11,
+        "group_size": 5,
+        "group_representative": false
+      },
+      {
+        "index": 64,
+        "start": 640,
+        "end": 650,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/064.jpg",
+        "group": 11,
+        "group_size": 5,
+        "group_representative": true
+      },
+      {
+        "index": 65,
+        "start": 650,
+        "end": 660,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/065.jpg",
+        "group": 11,
+        "group_size": 5,
+        "group_representative": false
+      },
+      {
+        "index": 66,
+        "start": 660,
+        "end": 670,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/066.jpg",
+        "group": 11,
+        "group_size": 5,
+        "group_representative": false
+      },
+      {
+        "index": 67,
+        "start": 670,
+        "end": 680,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/067.jpg",
+        "group": 12,
+        "group_size": 2,
+        "group_representative": false
+      },
+      {
+        "index": 68,
+        "start": 680,
+        "end": 690,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/068.jpg",
+        "group": 12,
+        "group_size": 2,
+        "group_representative": true
+      },
+      {
+        "index": 69,
+        "start": 690,
+        "end": 700,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/069.jpg",
+        "group": 13,
+        "group_size": 1,
+        "group_representative": true
+      },
+      {
+        "index": 70,
+        "start": 700,
+        "end": 710,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/070.jpg",
+        "group": 14,
+        "group_size": 7,
+        "group_representative": false
+      },
+      {
+        "index": 71,
+        "start": 710,
+        "end": 720,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/071.jpg",
+        "group": 14,
+        "group_size": 7,
+        "group_representative": false
+      },
+      {
+        "index": 72,
+        "start": 720,
+        "end": 730,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/072.jpg",
+        "group": 14,
+        "group_size": 7,
+        "group_representative": false
+      },
+      {
+        "index": 73,
+        "start": 730,
+        "end": 740,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/073.jpg",
+        "group": 14,
+        "group_size": 7,
+        "group_representative": true
+      },
+      {
+        "index": 74,
+        "start": 740,
+        "end": 750,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/074.jpg",
+        "group": 14,
+        "group_size": 7,
+        "group_representative": false
+      },
+      {
+        "index": 75,
+        "start": 750,
+        "end": 760,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/075.jpg",
+        "group": 14,
+        "group_size": 7,
+        "group_representative": false
+      },
+      {
+        "index": 76,
+        "start": 760,
+        "end": 770,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/076.jpg",
+        "group": 14,
+        "group_size": 7,
+        "group_representative": false
+      },
+      {
+        "index": 77,
+        "start": 770,
+        "end": 780,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/077.jpg",
+        "group": 15,
+        "group_size": 3,
+        "group_representative": false
+      },
+      {
+        "index": 78,
+        "start": 780,
+        "end": 790,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/078.jpg",
+        "group": 15,
+        "group_size": 3,
+        "group_representative": true
+      },
+      {
+        "index": 79,
+        "start": 790,
+        "end": 800,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/079.jpg",
+        "group": 15,
+        "group_size": 3,
+        "group_representative": false
+      },
+      {
+        "index": 80,
+        "start": 800,
+        "end": 810,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/080.jpg",
+        "group": 16,
+        "group_size": 10,
+        "group_representative": false
+      },
+      {
+        "index": 81,
+        "start": 810,
+        "end": 820,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/081.jpg",
+        "group": 16,
+        "group_size": 10,
+        "group_representative": false
+      },
+      {
+        "index": 82,
+        "start": 820,
+        "end": 830,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/082.jpg",
+        "group": 16,
+        "group_size": 10,
+        "group_representative": false
+      },
+      {
+        "index": 83,
+        "start": 830,
+        "end": 840,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/083.jpg",
+        "group": 16,
+        "group_size": 10,
+        "group_representative": false
+      },
+      {
+        "index": 84,
+        "start": 840,
+        "end": 850,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/084.jpg",
+        "group": 16,
+        "group_size": 10,
+        "group_representative": false
+      },
+      {
+        "index": 85,
+        "start": 850,
+        "end": 860,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/085.jpg",
+        "group": 16,
+        "group_size": 10,
+        "group_representative": true
+      },
+      {
+        "index": 86,
+        "start": 860,
+        "end": 870,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/086.jpg",
+        "group": 16,
+        "group_size": 10,
+        "group_representative": false
+      },
+      {
+        "index": 87,
+        "start": 870,
+        "end": 880,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/087.jpg",
+        "group": 16,
+        "group_size": 10,
+        "group_representative": false
+      },
+      {
+        "index": 88,
+        "start": 880,
+        "end": 890,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/088.jpg",
+        "group": 16,
+        "group_size": 10,
+        "group_representative": false
+      },
+      {
+        "index": 89,
+        "start": 890,
+        "end": 900,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/089.jpg",
+        "group": 16,
+        "group_size": 10,
+        "group_representative": false
+      },
+      {
+        "index": 90,
+        "start": 900,
+        "end": 910,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/090.jpg",
+        "group": 17,
+        "group_size": 4,
+        "group_representative": false
+      },
+      {
+        "index": 91,
+        "start": 910,
+        "end": 920,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/091.jpg",
+        "group": 17,
+        "group_size": 4,
+        "group_representative": false
+      },
+      {
+        "index": 92,
+        "start": 920,
+        "end": 930,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/092.jpg",
+        "group": 17,
+        "group_size": 4,
+        "group_representative": true
+      },
+      {
+        "index": 93,
+        "start": 930,
+        "end": 940,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/093.jpg",
+        "group": 17,
+        "group_size": 4,
+        "group_representative": false
+      },
+      {
+        "index": 94,
+        "start": 940,
+        "end": 950,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/094.jpg",
+        "group": 18,
+        "group_size": 6,
+        "group_representative": false
+      },
+      {
+        "index": 95,
+        "start": 950,
+        "end": 960,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/095.jpg",
+        "group": 18,
+        "group_size": 6,
+        "group_representative": false
+      },
+      {
+        "index": 96,
+        "start": 960,
+        "end": 970,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/096.jpg",
+        "group": 18,
+        "group_size": 6,
+        "group_representative": false
+      },
+      {
+        "index": 97,
+        "start": 970,
+        "end": 980,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/097.jpg",
+        "group": 18,
+        "group_size": 6,
+        "group_representative": true
+      },
+      {
+        "index": 98,
+        "start": 980,
+        "end": 990,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/098.jpg",
+        "group": 18,
+        "group_size": 6,
+        "group_representative": false
+      },
+      {
+        "index": 99,
+        "start": 990,
+        "end": 1000,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/099.jpg",
+        "group": 18,
+        "group_size": 6,
+        "group_representative": false
+      },
+      {
+        "index": 100,
+        "start": 1000,
+        "end": 1010,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/100.jpg",
+        "group": 19,
+        "group_size": 2,
+        "group_representative": false
+      },
+      {
+        "index": 101,
+        "start": 1010,
+        "end": 1020,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/101.jpg",
+        "group": 19,
+        "group_size": 2,
+        "group_representative": true
+      },
+      {
+        "index": 102,
+        "start": 1020,
+        "end": 1030,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/102.jpg",
+        "group": 20,
+        "group_size": 1,
+        "group_representative": true
+      },
+      {
+        "index": 103,
+        "start": 1030,
+        "end": 1040,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/103.jpg",
+        "group": 21,
+        "group_size": 2,
+        "group_representative": false
+      },
+      {
+        "index": 104,
+        "start": 1040,
+        "end": 1050,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/104.jpg",
+        "group": 21,
+        "group_size": 2,
+        "group_representative": true
+      },
+      {
+        "index": 105,
+        "start": 1050,
+        "end": 1060,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/105.jpg",
+        "group": 22,
+        "group_size": 2,
+        "group_representative": false
+      },
+      {
+        "index": 106,
+        "start": 1060,
+        "end": 1070,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/106.jpg",
+        "group": 22,
+        "group_size": 2,
+        "group_representative": true
+      },
+      {
+        "index": 107,
+        "start": 1070,
+        "end": 1080,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/107.jpg",
+        "group": 23,
+        "group_size": 1,
+        "group_representative": true
+      },
+      {
+        "index": 108,
+        "start": 1080,
+        "end": 1090,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/108.jpg",
+        "group": 24,
+        "group_size": 1,
+        "group_representative": true
+      },
+      {
+        "index": 109,
+        "start": 1090,
+        "end": 1100,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/109.jpg",
+        "group": 25,
+        "group_size": 3,
+        "group_representative": false
+      },
+      {
+        "index": 110,
+        "start": 1100,
+        "end": 1110,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/110.jpg",
+        "group": 25,
+        "group_size": 3,
+        "group_representative": true
+      },
+      {
+        "index": 111,
+        "start": 1110,
+        "end": 1120,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/111.jpg",
+        "group": 25,
+        "group_size": 3,
+        "group_representative": false
+      },
+      {
+        "index": 112,
+        "start": 1120,
+        "end": 1130,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/112.jpg",
+        "group": 26,
+        "group_size": 6,
+        "group_representative": false
+      },
+      {
+        "index": 113,
+        "start": 1130,
+        "end": 1140,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/113.jpg",
+        "group": 26,
+        "group_size": 6,
+        "group_representative": false
+      },
+      {
+        "index": 114,
+        "start": 1140,
+        "end": 1150,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/114.jpg",
+        "group": 26,
+        "group_size": 6,
+        "group_representative": false
+      },
+      {
+        "index": 115,
+        "start": 1150,
+        "end": 1160,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/115.jpg",
+        "group": 26,
+        "group_size": 6,
+        "group_representative": true
+      },
+      {
+        "index": 116,
+        "start": 1160,
+        "end": 1170,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/116.jpg",
+        "group": 26,
+        "group_size": 6,
+        "group_representative": false
+      },
+      {
+        "index": 117,
+        "start": 1170,
+        "end": 1180,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/117.jpg",
+        "group": 26,
+        "group_size": 6,
+        "group_representative": false
+      },
+      {
+        "index": 118,
+        "start": 1180,
+        "end": 1190,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/118.jpg",
+        "group": 27,
+        "group_size": 3,
+        "group_representative": false
+      },
+      {
+        "index": 119,
+        "start": 1190,
+        "end": 1200,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/119.jpg",
+        "group": 27,
+        "group_size": 3,
+        "group_representative": true
+      },
+      {
+        "index": 120,
+        "start": 1200,
+        "end": 1200.68,
+        "duration": 0.68,
+        "thumbnail": "thumbnails/2026-02-09_19-44-56/120.jpg",
+        "group": 27,
+        "group_size": 3,
+        "group_representative": false
+      }
+    ]
+  },
+  {
+    "video_id": "2026-02-09_21-30-07",
+    "path": "/Volumes/Workspace/obs_recordings/2026-02-09 21-30-07.mov",
+    "duration": 74.41,
+    "segments": [
+      {
+        "index": 0,
+        "start": 0,
+        "end": 10,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_21-30-07/000.jpg",
+        "group": 0,
+        "group_size": 8,
+        "group_representative": false
+      },
+      {
+        "index": 1,
+        "start": 10,
+        "end": 20,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_21-30-07/001.jpg",
+        "group": 0,
+        "group_size": 8,
+        "group_representative": false
+      },
+      {
+        "index": 2,
+        "start": 20,
+        "end": 30,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_21-30-07/002.jpg",
+        "group": 0,
+        "group_size": 8,
+        "group_representative": false
+      },
+      {
+        "index": 3,
+        "start": 30,
+        "end": 40,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_21-30-07/003.jpg",
+        "group": 0,
+        "group_size": 8,
+        "group_representative": false
+      },
+      {
+        "index": 4,
+        "start": 40,
+        "end": 50,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_21-30-07/004.jpg",
+        "group": 0,
+        "group_size": 8,
+        "group_representative": true
+      },
+      {
+        "index": 5,
+        "start": 50,
+        "end": 60,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_21-30-07/005.jpg",
+        "group": 0,
+        "group_size": 8,
+        "group_representative": false
+      },
+      {
+        "index": 6,
+        "start": 60,
+        "end": 70,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_21-30-07/006.jpg",
+        "group": 0,
+        "group_size": 8,
+        "group_representative": false
+      },
+      {
+        "index": 7,
+        "start": 70,
+        "end": 74.41,
+        "duration": 4.41,
+        "thumbnail": "thumbnails/2026-02-09_21-30-07/007.jpg",
+        "group": 0,
+        "group_size": 8,
+        "group_representative": false
+      }
+    ]
+  },
+  {
+    "video_id": "2026-02-09_21-35-26",
+    "path": "/Volumes/Workspace/obs_recordings/2026-02-09 21-35-26.mov",
+    "duration": 405.2,
+    "segments": [
+      {
+        "index": 0,
+        "start": 0,
+        "end": 10,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_21-35-26/000.jpg",
+        "group": 0,
+        "group_size": 4,
+        "group_representative": false
+      },
+      {
+        "index": 1,
+        "start": 10,
+        "end": 20,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_21-35-26/001.jpg",
+        "group": 0,
+        "group_size": 4,
+        "group_representative": false
+      },
+      {
+        "index": 2,
+        "start": 20,
+        "end": 30,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_21-35-26/002.jpg",
+        "group": 0,
+        "group_size": 4,
+        "group_representative": true
+      },
+      {
+        "index": 3,
+        "start": 30,
+        "end": 40,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_21-35-26/003.jpg",
+        "group": 0,
+        "group_size": 4,
+        "group_representative": false
+      },
+      {
+        "index": 4,
+        "start": 40,
+        "end": 50,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_21-35-26/004.jpg",
+        "group": 1,
+        "group_size": 7,
+        "group_representative": false
+      },
+      {
+        "index": 5,
+        "start": 50,
+        "end": 60,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_21-35-26/005.jpg",
+        "group": 1,
+        "group_size": 7,
+        "group_representative": false
+      },
+      {
+        "index": 6,
+        "start": 60,
+        "end": 70,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_21-35-26/006.jpg",
+        "group": 1,
+        "group_size": 7,
+        "group_representative": false
+      },
+      {
+        "index": 7,
+        "start": 70,
+        "end": 80,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_21-35-26/007.jpg",
+        "group": 1,
+        "group_size": 7,
+        "group_representative": true
+      },
+      {
+        "index": 8,
+        "start": 80,
+        "end": 90,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_21-35-26/008.jpg",
+        "group": 1,
+        "group_size": 7,
+        "group_representative": false
+      },
+      {
+        "index": 9,
+        "start": 90,
+        "end": 100,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_21-35-26/009.jpg",
+        "group": 1,
+        "group_size": 7,
+        "group_representative": false
+      },
+      {
+        "index": 10,
+        "start": 100,
+        "end": 110,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_21-35-26/010.jpg",
+        "group": 1,
+        "group_size": 7,
+        "group_representative": false
+      },
+      {
+        "index": 11,
+        "start": 110,
+        "end": 120,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_21-35-26/011.jpg",
+        "group": 2,
+        "group_size": 4,
+        "group_representative": false
+      },
+      {
+        "index": 12,
+        "start": 120,
+        "end": 130,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_21-35-26/012.jpg",
+        "group": 2,
+        "group_size": 4,
+        "group_representative": false
+      },
+      {
+        "index": 13,
+        "start": 130,
+        "end": 140,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_21-35-26/013.jpg",
+        "group": 2,
+        "group_size": 4,
+        "group_representative": true
+      },
+      {
+        "index": 14,
+        "start": 140,
+        "end": 150,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_21-35-26/014.jpg",
+        "group": 2,
+        "group_size": 4,
+        "group_representative": false
+      },
+      {
+        "index": 15,
+        "start": 150,
+        "end": 160,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_21-35-26/015.jpg",
+        "group": 3,
+        "group_size": 16,
+        "group_representative": false
+      },
+      {
+        "index": 16,
+        "start": 160,
+        "end": 170,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_21-35-26/016.jpg",
+        "group": 3,
+        "group_size": 16,
+        "group_representative": false
+      },
+      {
+        "index": 17,
+        "start": 170,
+        "end": 180,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_21-35-26/017.jpg",
+        "group": 3,
+        "group_size": 16,
+        "group_representative": false
+      },
+      {
+        "index": 18,
+        "start": 180,
+        "end": 190,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_21-35-26/018.jpg",
+        "group": 3,
+        "group_size": 16,
+        "group_representative": false
+      },
+      {
+        "index": 19,
+        "start": 190,
+        "end": 200,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_21-35-26/019.jpg",
+        "group": 3,
+        "group_size": 16,
+        "group_representative": false
+      },
+      {
+        "index": 20,
+        "start": 200,
+        "end": 210,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_21-35-26/020.jpg",
+        "group": 3,
+        "group_size": 16,
+        "group_representative": false
+      },
+      {
+        "index": 21,
+        "start": 210,
+        "end": 220,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_21-35-26/021.jpg",
+        "group": 3,
+        "group_size": 16,
+        "group_representative": false
+      },
+      {
+        "index": 22,
+        "start": 220,
+        "end": 230,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_21-35-26/022.jpg",
+        "group": 3,
+        "group_size": 16,
+        "group_representative": false
+      },
+      {
+        "index": 23,
+        "start": 230,
+        "end": 240,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_21-35-26/023.jpg",
+        "group": 3,
+        "group_size": 16,
+        "group_representative": true
+      },
+      {
+        "index": 24,
+        "start": 240,
+        "end": 250,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_21-35-26/024.jpg",
+        "group": 3,
+        "group_size": 16,
+        "group_representative": false
+      },
+      {
+        "index": 25,
+        "start": 250,
+        "end": 260,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_21-35-26/025.jpg",
+        "group": 3,
+        "group_size": 16,
+        "group_representative": false
+      },
+      {
+        "index": 26,
+        "start": 260,
+        "end": 270,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_21-35-26/026.jpg",
+        "group": 3,
+        "group_size": 16,
+        "group_representative": false
+      },
+      {
+        "index": 27,
+        "start": 270,
+        "end": 280,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_21-35-26/027.jpg",
+        "group": 3,
+        "group_size": 16,
+        "group_representative": false
+      },
+      {
+        "index": 28,
+        "start": 280,
+        "end": 290,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_21-35-26/028.jpg",
+        "group": 3,
+        "group_size": 16,
+        "group_representative": false
+      },
+      {
+        "index": 29,
+        "start": 290,
+        "end": 300,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_21-35-26/029.jpg",
+        "group": 3,
+        "group_size": 16,
+        "group_representative": false
+      },
+      {
+        "index": 30,
+        "start": 300,
+        "end": 310,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_21-35-26/030.jpg",
+        "group": 3,
+        "group_size": 16,
+        "group_representative": false
+      },
+      {
+        "index": 31,
+        "start": 310,
+        "end": 320,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_21-35-26/031.jpg",
+        "group": 4,
+        "group_size": 2,
+        "group_representative": false
+      },
+      {
+        "index": 32,
+        "start": 320,
+        "end": 330,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_21-35-26/032.jpg",
+        "group": 4,
+        "group_size": 2,
+        "group_representative": true
+      },
+      {
+        "index": 33,
+        "start": 330,
+        "end": 340,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_21-35-26/033.jpg",
+        "group": 5,
+        "group_size": 4,
+        "group_representative": false
+      },
+      {
+        "index": 34,
+        "start": 340,
+        "end": 350,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_21-35-26/034.jpg",
+        "group": 5,
+        "group_size": 4,
+        "group_representative": false
+      },
+      {
+        "index": 35,
+        "start": 350,
+        "end": 360,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_21-35-26/035.jpg",
+        "group": 5,
+        "group_size": 4,
+        "group_representative": true
+      },
+      {
+        "index": 36,
+        "start": 360,
+        "end": 370,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_21-35-26/036.jpg",
+        "group": 5,
+        "group_size": 4,
+        "group_representative": false
+      },
+      {
+        "index": 37,
+        "start": 370,
+        "end": 380,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_21-35-26/037.jpg",
+        "group": 6,
+        "group_size": 4,
+        "group_representative": false
+      },
+      {
+        "index": 38,
+        "start": 380,
+        "end": 390,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_21-35-26/038.jpg",
+        "group": 6,
+        "group_size": 4,
+        "group_representative": false
+      },
+      {
+        "index": 39,
+        "start": 390,
+        "end": 400,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_21-35-26/039.jpg",
+        "group": 6,
+        "group_size": 4,
+        "group_representative": true
+      },
+      {
+        "index": 40,
+        "start": 400,
+        "end": 405.2,
+        "duration": 5.2,
+        "thumbnail": "thumbnails/2026-02-09_21-35-26/040.jpg",
+        "group": 6,
+        "group_size": 4,
+        "group_representative": false
+      }
+    ]
+  },
+  {
+    "video_id": "2026-02-09_21-50-56",
+    "path": "/Volumes/Workspace/obs_recordings/2026-02-09 21-50-56.mov",
+    "duration": 19.48,
+    "segments": [
+      {
+        "index": 0,
+        "start": 0,
+        "end": 10,
+        "duration": 10,
+        "thumbnail": "thumbnails/2026-02-09_21-50-56/000.jpg",
+        "group": 0,
+        "group_size": 2,
+        "group_representative": false
+      },
+      {
+        "index": 1,
+        "start": 10,
+        "end": 19.48,
+        "duration": 9.48,
+        "thumbnail": "thumbnails/2026-02-09_21-50-56/001.jpg",
+        "group": 0,
+        "group_size": 2,
+        "group_representative": true
+      }
+    ]
+  }
+]

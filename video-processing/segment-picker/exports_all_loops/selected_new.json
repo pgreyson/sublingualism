@@ -1,0 +1,402 @@
+[
+  {
+    "video_id": "2026-02-08_21-49-46",
+    "loop_start": 125.0,
+    "loop_end": 132.33,
+    "loop_duration": 7.33,
+    "loop_score": 0.005144,
+    "visual_interest": 85.27,
+    "source_path": "/Volumes/Workspace/obs_recordings/2026-02-08 21-49-46.mov",
+    "rank": 0.00386261425329097
+  },
+  {
+    "video_id": "2026-02-08_21-49-46",
+    "loop_start": 435.0,
+    "loop_end": 442.0,
+    "loop_duration": 7.0,
+    "loop_score": 0.002258,
+    "visual_interest": 78.65,
+    "source_path": "/Volumes/Workspace/obs_recordings/2026-02-08 21-49-46.mov",
+    "rank": 0.00393401016795279
+  },
+  {
+    "video_id": "2026-02-08_21-49-46",
+    "loop_start": 260.0,
+    "loop_end": 266.67,
+    "loop_duration": 6.67,
+    "loop_score": 0.003719,
+    "visual_interest": 81.61,
+    "source_path": "/Volumes/Workspace/obs_recordings/2026-02-08 21-49-46.mov",
+    "rank": 0.0040044367680435785
+  },
+  {
+    "video_id": "2026-02-08_21-49-46",
+    "loop_start": 245.0,
+    "loop_end": 255.33,
+    "loop_duration": 10.33,
+    "loop_score": 0.005913,
+    "visual_interest": 82.12,
+    "source_path": "/Volumes/Workspace/obs_recordings/2026-02-08 21-49-46.mov",
+    "rank": 0.005181935270086245
+  },
+  {
+    "video_id": "2026-02-08_22-09-45",
+    "loop_start": 110.0,
+    "loop_end": 116.67,
+    "loop_duration": 6.67,
+    "loop_score": 0.001967,
+    "visual_interest": 68.66,
+    "source_path": "/Volumes/Workspace/obs_recordings/2026-02-08 22-09-45.mov",
+    "rank": 0.0064802453926463945
+  },
+  {
+    "video_id": "2026-02-08_21-49-46",
+    "loop_start": 275.0,
+    "loop_end": 285.0,
+    "loop_duration": 10.0,
+    "loop_score": 0.007701,
+    "visual_interest": 81.27,
+    "source_path": "/Volumes/Workspace/obs_recordings/2026-02-08 21-49-46.mov",
+    "rank": 0.0064862377666818
+  },
+  {
+    "video_id": "2026-02-08_22-09-45",
+    "loop_start": 65.0,
+    "loop_end": 71.0,
+    "loop_duration": 6.0,
+    "loop_score": 0.002087,
+    "visual_interest": 68.77,
+    "source_path": "/Volumes/Workspace/obs_recordings/2026-02-08 22-09-45.mov",
+    "rank": 0.006522286246028147
+  },
+  {
+    "video_id": "2026-02-08_22-09-45",
+    "loop_start": 35.0,
+    "loop_end": 41.67,
+    "loop_duration": 6.67,
+    "loop_score": 0.001973,
+    "visual_interest": 66.45,
+    "source_path": "/Volumes/Workspace/obs_recordings/2026-02-08 22-09-45.mov",
+    "rank": 0.007085751883794825
+  },
+  {
+    "video_id": "2026-02-08_22-09-45",
+    "loop_start": 90.0,
+    "loop_end": 96.0,
+    "loop_duration": 6.0,
+    "loop_score": 0.003188,
+    "visual_interest": 66.22,
+    "source_path": "/Volumes/Workspace/obs_recordings/2026-02-08 22-09-45.mov",
+    "rank": 0.0078773937358148
+  },
+  {
+    "video_id": "2026-02-08_22-09-45",
+    "loop_start": 145.0,
+    "loop_end": 151.67,
+    "loop_duration": 6.67,
+    "loop_score": 0.004306,
+    "visual_interest": 67.28,
+    "source_path": "/Volumes/Workspace/obs_recordings/2026-02-08 22-09-45.mov",
+    "rank": 0.008259496504766229
+  },
+  {
+    "video_id": "2026-02-08_22-09-45",
+    "loop_start": 290.0,
+    "loop_end": 298.0,
+    "loop_duration": 8.0,
+    "loop_score": 0.002912,
+    "visual_interest": 63.07,
+    "source_path": "/Volumes/Workspace/obs_recordings/2026-02-08 22-09-45.mov",
+    "rank": 0.008569714752610078
+  },
+  {
+    "video_id": "2026-02-09_21-35-26",
+    "loop_start": 0.0,
+    "loop_end": 9.67,
+    "loop_duration": 9.67,
+    "loop_score": 0.00189,
+    "visual_interest": 60.14,
+    "source_path": "/Volumes/Workspace/obs_recordings/2026-02-09 21-35-26.mov",
+    "rank": 0.008754517476168861
+  },
+  {
+    "video_id": "2026-02-08_21-49-46",
+    "loop_start": 325.0,
+    "loop_end": 334.67,
+    "loop_duration": 9.67,
+    "loop_score": 0.007849,
+    "visual_interest": 70.79,
+    "source_path": "/Volumes/Workspace/obs_recordings/2026-02-08 21-49-46.mov",
+    "rank": 0.009429327371765772
+  },
+  {
+    "video_id": "2026-02-08_22-09-45",
+    "loop_start": 0.0,
+    "loop_end": 10.0,
+    "loop_duration": 10.0,
+    "loop_score": 0.005049,
+    "visual_interest": 62.55,
+    "source_path": "/Volumes/Workspace/obs_recordings/2026-02-08 22-09-45.mov",
+    "rank": 0.009993539809350886
+  },
+  {
+    "video_id": "2026-02-09_21-30-07",
+    "loop_start": 30.0,
+    "loop_end": 38.0,
+    "loop_duration": 8.0,
+    "loop_score": 0.001648,
+    "visual_interest": 54.96,
+    "source_path": "/Volumes/Workspace/obs_recordings/2026-02-09 21-30-07.mov",
+    "rank": 0.010020120926009986
+  },
+  {
+    "video_id": "2026-02-08_21-49-46",
+    "loop_start": 195.0,
+    "loop_end": 204.67,
+    "loop_duration": 9.67,
+    "loop_score": 0.002724,
+    "visual_interest": 57.1,
+    "source_path": "/Volumes/Workspace/obs_recordings/2026-02-08 21-49-46.mov",
+    "rank": 0.010082879346345892
+  },
+  {
+    "video_id": "2026-02-08_22-28-31",
+    "loop_start": 60.0,
+    "loop_end": 66.0,
+    "loop_duration": 6.0,
+    "loop_score": 0.012825,
+    "visual_interest": 78.91,
+    "source_path": "/Volumes/Workspace/obs_recordings/2026-02-08 22-28-31.mov",
+    "rank": 0.01020339763958239
+  },
+  {
+    "video_id": "2026-02-08_22-28-31",
+    "loop_start": 40.0,
+    "loop_end": 46.33,
+    "loop_duration": 6.33,
+    "loop_score": 0.013131,
+    "visual_interest": 79.18,
+    "source_path": "/Volumes/Workspace/obs_recordings/2026-02-08 22-28-31.mov",
+    "rank": 0.010313461552428507
+  },
+  {
+    "video_id": "2026-02-08_22-09-45",
+    "loop_start": 360.0,
+    "loop_end": 366.67,
+    "loop_duration": 6.67,
+    "loop_score": 0.003128,
+    "visual_interest": 53.84,
+    "source_path": "/Volumes/Workspace/obs_recordings/2026-02-08 22-09-45.mov",
+    "rank": 0.011213159509759419
+  },
+  {
+    "video_id": "2026-02-09_21-30-07",
+    "loop_start": 5.0,
+    "loop_end": 11.0,
+    "loop_duration": 6.0,
+    "loop_score": 0.003844,
+    "visual_interest": 55.0,
+    "source_path": "/Volumes/Workspace/obs_recordings/2026-02-09 21-30-07.mov",
+    "rank": 0.011326826690876077
+  },
+  {
+    "video_id": "2026-02-09_21-35-26",
+    "loop_start": 245.0,
+    "loop_end": 251.67,
+    "loop_duration": 6.67,
+    "loop_score": 0.002123,
+    "visual_interest": 49.14,
+    "source_path": "/Volumes/Workspace/obs_recordings/2026-02-09 21-35-26.mov",
+    "rank": 0.011890232137993645
+  },
+  {
+    "video_id": "2026-02-09_21-35-26",
+    "loop_start": 270.0,
+    "loop_end": 277.0,
+    "loop_duration": 7.0,
+    "loop_score": 0.002158,
+    "visual_interest": 49.21,
+    "source_path": "/Volumes/Workspace/obs_recordings/2026-02-09 21-35-26.mov",
+    "rank": 0.011892167226509306
+  },
+  {
+    "video_id": "2026-02-08_22-09-45",
+    "loop_start": 50.0,
+    "loop_end": 63.33,
+    "loop_duration": 13.33,
+    "loop_score": 0.009168,
+    "visual_interest": 64.42,
+    "source_path": "/Volumes/Workspace/obs_recordings/2026-02-08 22-09-45.mov",
+    "rank": 0.011955634316840671
+  },
+  {
+    "video_id": "2026-02-09_21-35-26",
+    "loop_start": 160.0,
+    "loop_end": 167.0,
+    "loop_duration": 7.0,
+    "loop_score": 0.00197,
+    "visual_interest": 46.29,
+    "source_path": "/Volumes/Workspace/obs_recordings/2026-02-09 21-35-26.mov",
+    "rank": 0.012574646391284614
+  },
+  {
+    "video_id": "2026-02-08_21-49-46",
+    "loop_start": 480.0,
+    "loop_end": 487.33,
+    "loop_duration": 7.33,
+    "loop_score": 0.016085,
+    "visual_interest": 76.76,
+    "source_path": "/Volumes/Workspace/obs_recordings/2026-02-08 21-49-46.mov",
+    "rank": 0.012744962778029957
+  },
+  {
+    "video_id": "2026-02-09_21-35-26",
+    "loop_start": 290.0,
+    "loop_end": 296.33,
+    "loop_duration": 6.33,
+    "loop_score": 0.004563,
+    "visual_interest": 49.02,
+    "source_path": "/Volumes/Workspace/obs_recordings/2026-02-09 21-35-26.mov",
+    "rank": 0.01338691484339537
+  },
+  {
+    "video_id": "2026-02-09_21-35-26",
+    "loop_start": 390.0,
+    "loop_end": 396.33,
+    "loop_duration": 6.33,
+    "loop_score": 0.010647,
+    "visual_interest": 61.54,
+    "source_path": "/Volumes/Workspace/obs_recordings/2026-02-09 21-35-26.mov",
+    "rank": 0.013627419246482073
+  },
+  {
+    "video_id": "2026-02-07_19-42-19",
+    "loop_start": 325.0,
+    "loop_end": 338.67,
+    "loop_duration": 13.67,
+    "loop_score": 0.003239,
+    "visual_interest": 43.75,
+    "source_path": "/Volumes/Workspace/obs_recordings/2026-02-07 19-42-19.mov",
+    "rank": 0.014027830322287788
+  },
+  {
+    "video_id": "2026-02-09_21-50-56",
+    "loop_start": 0.0,
+    "loop_end": 13.0,
+    "loop_duration": 13.0,
+    "loop_score": 0.002091,
+    "visual_interest": 41.01,
+    "source_path": "/Volumes/Workspace/obs_recordings/2026-02-09 21-50-56.mov",
+    "rank": 0.014085285428960509
+  },
+  {
+    "video_id": "2026-02-09_19-44-56",
+    "loop_start": 490.0,
+    "loop_end": 503.67,
+    "loop_duration": 13.67,
+    "loop_score": 0.001985,
+    "visual_interest": 40.46,
+    "source_path": "/Volumes/Workspace/obs_recordings/2026-02-09 19-44-56.mov",
+    "rank": 0.014171481162051747
+  },
+  {
+    "video_id": "2026-02-09_19-44-56",
+    "loop_start": 875.0,
+    "loop_end": 882.33,
+    "loop_duration": 7.33,
+    "loop_score": 0.001936,
+    "visual_interest": 38.63,
+    "source_path": "/Volumes/Workspace/obs_recordings/2026-02-09 19-44-56.mov",
+    "rank": 0.014640492419428051
+  },
+  {
+    "video_id": "2026-02-09_19-44-56",
+    "loop_start": 475.0,
+    "loop_end": 482.33,
+    "loop_duration": 7.33,
+    "loop_score": 0.002713,
+    "visual_interest": 40.14,
+    "source_path": "/Volumes/Workspace/obs_recordings/2026-02-09 19-44-56.mov",
+    "rank": 0.014695435043123014
+  },
+  {
+    "video_id": "2026-02-09_18-49-32",
+    "loop_start": 135.0,
+    "loop_end": 143.67,
+    "loop_duration": 8.67,
+    "loop_score": 0.001756,
+    "visual_interest": 37.93,
+    "source_path": "/Volumes/Workspace/obs_recordings/2026-02-09 18-49-32.mov",
+    "rank": 0.014723141534271449
+  },
+  {
+    "video_id": "2026-02-09_19-44-56",
+    "loop_start": 855.0,
+    "loop_end": 861.67,
+    "loop_duration": 6.67,
+    "loop_score": 0.001968,
+    "visual_interest": 38.06,
+    "source_path": "/Volumes/Workspace/obs_recordings/2026-02-09 19-44-56.mov",
+    "rank": 0.014814935270086246
+  },
+  {
+    "video_id": "2026-02-09_19-44-56",
+    "loop_start": 840.0,
+    "loop_end": 853.0,
+    "loop_duration": 13.0,
+    "loop_score": 0.002492,
+    "visual_interest": 38.51,
+    "source_path": "/Volumes/Workspace/obs_recordings/2026-02-09 19-44-56.mov",
+    "rank": 0.015006775124829778
+  },
+  {
+    "video_id": "2026-02-08_21-49-46",
+    "loop_start": 210.0,
+    "loop_end": 223.0,
+    "loop_duration": 13.0,
+    "loop_score": 0.01172,
+    "visual_interest": 57.83,
+    "source_path": "/Volumes/Workspace/obs_recordings/2026-02-08 21-49-46.mov",
+    "rank": 0.015281659555152066
+  },
+  {
+    "video_id": "2026-02-07_19-42-19",
+    "loop_start": 375.0,
+    "loop_end": 382.67,
+    "loop_duration": 7.67,
+    "loop_score": 0.003175,
+    "visual_interest": 39.0,
+    "source_path": "/Volumes/Workspace/obs_recordings/2026-02-07 19-42-19.mov",
+    "rank": 0.015283120744439401
+  },
+  {
+    "video_id": "2026-02-07_19-42-19",
+    "loop_start": 115.0,
+    "loop_end": 126.33,
+    "loop_duration": 11.33,
+    "loop_score": 0.002849,
+    "visual_interest": 38.01,
+    "source_path": "/Volumes/Workspace/obs_recordings/2026-02-07 19-42-19.mov",
+    "rank": 0.015357153064003634
+  },
+  {
+    "video_id": "2026-02-09_19-44-56",
+    "loop_start": 920.0,
+    "loop_end": 926.67,
+    "loop_duration": 6.67,
+    "loop_score": 0.002561,
+    "visual_interest": 37.15,
+    "source_path": "/Volumes/Workspace/obs_recordings/2026-02-09 19-44-56.mov",
+    "rank": 0.015418579119382662
+  },
+  {
+    "video_id": "2026-02-09_21-35-26",
+    "loop_start": 230.0,
+    "loop_end": 236.33,
+    "loop_duration": 6.33,
+    "loop_score": 0.007848,
+    "visual_interest": 48.57,
+    "source_path": "/Volumes/Workspace/obs_recordings/2026-02-09 21-35-26.mov",
+    "rank": 0.015480474988651838
+  }
+]

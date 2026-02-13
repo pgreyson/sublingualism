@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Segment Picker</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: #111;
+            color: #ddd;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            padding: 1rem;
+        }
+        h1 {
+            font-weight: 300;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            letter-spacing: 0.05em;
+        }
+        .toolbar {
+            position: sticky;
+            top: 0;
+            background: #111;
+            padding: 0.5rem 0 1rem 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            border-bottom: 1px solid #333;
+            margin-bottom: 1rem;
+        }
+        .toolbar button {
+            background: #333;
+            color: #fff;
+            border: 1px solid #555;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            font-size: 0.9rem;
+            border-radius: 3px;
+        }
+        .toolbar button:hover { background: #444; }
+        .toolbar button.primary {
+            background: #2a6;
+            border-color: #3b7;
+        }
+        .toolbar button.primary:hover { background: #3b7; }
+        .toolbar .count {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+        .video-section {
+            margin-bottom: 2rem;
+        }
+        .video-header {
+            font-size: 1.1rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+            padding: 0.3rem 0;
+            color: #aaa;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .video-header .duration {
+            font-size: 0.8rem;
+            opacity: 0.5;
+        }
+        .segment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 4px;
+        }
+        .segment {
+            position: relative;
+            cursor: pointer;
+            border: 2px solid transparent;
+            border-radius: 2px;
+            overflow: hidden;
+            transition: border-color 0.15s;
+        }
+        .segment:hover {
+            border-color: #666;
+        }
+        .segment.selected {
+            border-color: #2a6;
+        }
+        .segment img {
+            width: 100%;
+            display: block;
+            aspect-ratio: 32/9;
+            object-fit: cover;
+        }
+        .segment .label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,0.7);
+            font-size: 0.75rem;
+            padding: 2px 6px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .segment .check {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            width: 20px;
+            height: 20px;
+            background: rgba(0,0,0,0.5);
+            border: 1px solid #888;
+            border-radius: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+        .segment.selected .check {
+            background: #2a6;
+            border-color: #3b7;
+        }
+        .segment .group-badge {
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            background: rgba(0,0,0,0.7);
+            border: 1px solid #666;
+            border-radius: 2px;
+            font-size: 0.7rem;
+            padding: 1px 5px;
+            cursor: pointer;
+        }
+        .segment .group-badge:hover {
+            background: rgba(80,80,80,0.9);
+        }
+        .group-expanded {
+            border-left: 2px solid #555;
+            padding-left: 4px;
+            margin-left: 4px;
+        }
+        .preview-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.9);
+            z-index: 200;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        .preview-overlay.active { display: flex; }
+        .preview-overlay video {
+            max-width: 90vw;
+            max-height: 80vh;
+        }
+        .preview-overlay .close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 2rem;
+            color: #fff;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+        .preview-overlay .info {
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+        .preview-overlay .nav-btns {
+            margin-top: 0.5rem;
+            display: flex;
+            gap: 0.5rem;
+        }
+        .preview-overlay .nav-btns button {
+            background: #333;
+            color: #fff;
+            border: 1px solid #555;
+            padding: 0.4rem 1rem;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+        .preview-overlay .nav-btns button:hover { background: #444; }
+        .preview-overlay .nav-btns button.select-btn { background: #2a6; border-color: #3b7; }
+        .preview-overlay .nav-btns button.select-btn.active { background: #555; border-color: #666; }
+        .export-status {
+            font-size: 0.9rem;
+            color: #2a6;
+        }
+    </style>
+</head>
+<body>
+    <h1>segment picker</h1>
+    <div class="toolbar">
+        <span class="count" id="selectionCount">0 selected</span>
+        <button class="primary" id="exportBtn" onclick="exportSelected()">Export selected</button>
+        <button onclick="clearSelection()">Clear</button>
+        <span class="export-status" id="exportStatus"></span>
+    </div>
+    <div id="videos"></div>
+
+    <div class="preview-overlay" id="preview">
+        <button class="close" onclick="closePreview()">&times;</button>
+        <video id="previewVideo" controls autoplay loop></video>
+        <div class="info" id="previewInfo"></div>
+        <div class="nav-btns">
+            <button onclick="prevSegment()">&#9664; prev</button>
+            <button class="select-btn" id="previewSelectBtn" onclick="toggleCurrentFromPreview()">select</button>
+            <button onclick="nextSegment()">next &#9654;</button>
+        </div>
+    </div>
+
+    <script>
+        let manifest = [];
+        let selected = new Set();
+        let currentPreview = null;
+        let allSegments = [];
+        let expandedGroups = new Set(); // "videoId:groupIdx"
+
+        async function init() {
+            const resp = await fetch("/manifest.json");
+            manifest = await resp.json();
+            buildUI();
+        }
+
+        function segKey(videoId, index) {
+            return `${videoId}:${index}`;
+        }
+
+        function groupKey(videoId, groupIdx) {
+            return `${videoId}:g${groupIdx}`;
+        }
+
+        function formatTime(s) {
+            const m = Math.floor(s / 60);
+            const sec = Math.floor(s % 60);
+            return `${m}:${sec.toString().padStart(2, "0")}`;
+        }
+
+        function getGroups(video) {
+            // Build groups from segment metadata
+            const groups = {};
+            video.segments.forEach((seg, si) => {
+                const g = seg.group ?? 0;
+                if (!groups[g]) groups[g] = [];
+                groups[g].push({seg, si});
+            });
+            return Object.entries(groups).sort((a, b) => a[0] - b[0]);
+        }
+
+        function buildUI() {
+            const container = document.getElementById("videos");
+            container.innerHTML = "";
+            allSegments = [];
+
+            manifest.forEach((video, vi) => {
+                const section = document.createElement("div");
+                section.className = "video-section";
+
+                const header = document.createElement("div");
+                header.className = "video-header";
+                header.innerHTML = `${video.video_id} <span class="duration">${formatTime(video.duration)}</span>`;
+                section.appendChild(header);
+
+                const grid = document.createElement("div");
+                grid.className = "segment-grid";
+
+                const groups = getGroups(video);
+
+                groups.forEach(([gIdx, members]) => {
+                    const gk = groupKey(video.video_id, gIdx);
+                    const isExpanded = expandedGroups.has(gk);
+
+                    if (members.length === 1 || isExpanded) {
+                        // Show all segments in this group
+                        members.forEach(({seg, si}) => {
+                            allSegments.push({videoIdx: vi, segIdx: si});
+                            grid.appendChild(makeSegmentEl(video, vi, seg, si, isExpanded && members.length > 1 ? members.length : 0, gIdx));
+                        });
+                    } else {
+                        // Show only the representative
+                        const rep = members.find(m => m.seg.group_representative) || members[0];
+                        allSegments.push({videoIdx: vi, segIdx: rep.si});
+                        grid.appendChild(makeSegmentEl(video, vi, rep.seg, rep.si, members.length, gIdx));
+                    }
+                });
+
+                section.appendChild(grid);
+                container.appendChild(section);
+            });
+        }
+
+        function makeSegmentEl(video, vi, seg, si, groupSize, groupIdx) {
+            const key = segKey(video.video_id, seg.index);
+            const div = document.createElement("div");
+            div.className = "segment" + (selected.has(key) ? " selected" : "");
+            div.id = `seg-${key}`;
+
+            let badgeHtml = "";
+            if (groupSize > 1) {
+                badgeHtml = `<div class="group-badge" data-video="${video.video_id}" data-group="${groupIdx}">${groupSize} similar</div>`;
+            }
+
+            div.innerHTML = `
+                <img src="/${seg.thumbnail}" loading="lazy" />
+                <div class="label">
+                    <span>${formatTime(seg.start)}</span>
+                    <span>${seg.duration}s</span>
+                </div>
+                <div class="check">${selected.has(key) ? "\u2713" : ""}</div>
+                ${badgeHtml}
+            `;
+
+            div.addEventListener("click", (e) => {
+                // Check if clicked on the group badge
+                const badge = e.target.closest(".group-badge");
+                if (badge) {
+                    e.stopPropagation();
+                    const gk = groupKey(badge.dataset.video, badge.dataset.group);
+                    if (expandedGroups.has(gk)) {
+                        expandedGroups.delete(gk);
+                    } else {
+                        expandedGroups.add(gk);
+                    }
+                    buildUI();
+                    return;
+                }
+                if (e.shiftKey) {
+                    toggleSelect(video.video_id, seg.index);
+                } else {
+                    openPreview(vi, si);
+                }
+            });
+            return div;
+        }
+
+        function toggleSelect(videoId, index) {
+            const key = segKey(videoId, index);
+            const el = document.getElementById(`seg-${key}`);
+            if (!el) return;
+            if (selected.has(key)) {
+                selected.delete(key);
+                el.classList.remove("selected");
+                el.querySelector(".check").textContent = "";
+            } else {
+                selected.add(key);
+                el.classList.add("selected");
+                el.querySelector(".check").textContent = "\u2713";
+            }
+            updateCount();
+        }
+
+        function updateCount() {
+            document.getElementById("selectionCount").textContent = `${selected.size} selected`;
+            if (currentPreview) {
+                const video = manifest[currentPreview.videoIdx];
+                const seg = video.segments[currentPreview.segIdx];
+                const key = segKey(video.video_id, seg.index);
+                const btn = document.getElementById("previewSelectBtn");
+                btn.textContent = selected.has(key) ? "deselect" : "select";
+                btn.classList.toggle("active", selected.has(key));
+            }
+        }
+
+        function clearSelection() {
+            selected.forEach(key => {
+                const el = document.getElementById(`seg-${key}`);
+                if (el) {
+                    el.classList.remove("selected");
+                    el.querySelector(".check").textContent = "";
+                }
+            });
+            selected.clear();
+            updateCount();
+        }
+
+        function openPreview(videoIdx, segIdx) {
+            currentPreview = {videoIdx, segIdx};
+            const video = manifest[videoIdx];
+            const seg = video.segments[segIdx];
+            const url = `/video?path=${encodeURIComponent(video.path)}&start=${seg.start}&duration=${seg.duration}`;
+            const player = document.getElementById("previewVideo");
+            player.src = url;
+            document.getElementById("previewInfo").textContent =
+                `${video.video_id} — ${formatTime(seg.start)} to ${formatTime(seg.end)}`;
+            document.getElementById("preview").classList.add("active");
+            updateCount();
+            document.addEventListener("keydown", previewKeyHandler);
+        }
+
+        function closePreview() {
+            document.getElementById("preview").classList.remove("active");
+            document.getElementById("previewVideo").src = "";
+            currentPreview = null;
+            document.removeEventListener("keydown", previewKeyHandler);
+        }
+
+        function previewKeyHandler(e) {
+            if (e.key === "Escape") closePreview();
+            else if (e.key === "ArrowLeft") prevSegment();
+            else if (e.key === "ArrowRight") nextSegment();
+            else if (e.key === " " || e.key === "Enter") {
+                e.preventDefault();
+                toggleCurrentFromPreview();
+            }
+        }
+
+        function toggleCurrentFromPreview() {
+            if (!currentPreview) return;
+            const video = manifest[currentPreview.videoIdx];
+            const seg = video.segments[currentPreview.segIdx];
+            toggleSelect(video.video_id, seg.index);
+        }
+
+        function flatIndex() {
+            if (!currentPreview) return -1;
+            return allSegments.findIndex(
+                s => s.videoIdx === currentPreview.videoIdx && s.segIdx === currentPreview.segIdx
+            );
+        }
+
+        function prevSegment() {
+            const idx = flatIndex();
+            if (idx > 0) {
+                const prev = allSegments[idx - 1];
+                openPreview(prev.videoIdx, prev.segIdx);
+            }
+        }
+
+        function nextSegment() {
+            const idx = flatIndex();
+            if (idx < allSegments.length - 1) {
+                const next = allSegments[idx + 1];
+                openPreview(next.videoIdx, next.segIdx);
+            }
+        }
+
+        async function exportSelected() {
+            if (selected.size === 0) return;
+            const status = document.getElementById("exportStatus");
+            status.textContent = "Exporting...";
+
+            const selections = [];
+            selected.forEach(key => {
+                const [videoId, indexStr] = key.split(":");
+                const index = parseInt(indexStr);
+                const video = manifest.find(v => v.video_id === videoId);
+                const seg = video.segments.find(s => s.index === index);
+                selections.push({
+                    video_id: videoId,
+                    path: video.path,
+                    start: seg.start,
+                    duration: seg.duration,
+                    index: index
+                });
+            });
+
+            const resp = await fetch("/export", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({selections})
+            });
+            const result = await resp.json();
+            status.textContent = `Exported ${result.exported.length} clips to exports/`;
+        }
+
+        init();
+    </script>
+</body>
+</html>

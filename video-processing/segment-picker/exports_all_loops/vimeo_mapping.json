@@ -1,0 +1,362 @@
+[
+  {
+    "vimeo_id": "1164634761",
+    "vimeo_uri": "/videos/1164634761",
+    "mp4_file": "2026-02-09_19-44-56_t0110_loop.mp4",
+    "video_id": "2026-02-09_19-44-56",
+    "loop_start": 110.0,
+    "loop_duration": 10.0,
+    "loop_score": 0.001316
+  },
+  {
+    "vimeo_id": "1164634770",
+    "vimeo_uri": "/videos/1164634770",
+    "mp4_file": "2026-02-09_19-44-56_t0145_loop.mp4",
+    "video_id": "2026-02-09_19-44-56",
+    "loop_start": 145.0,
+    "loop_duration": 8.67,
+    "loop_score": 0.00152
+  },
+  {
+    "vimeo_id": "1164634785",
+    "vimeo_uri": "/videos/1164634785",
+    "mp4_file": "2026-02-07_19-39-37_t0095_loop.mp4",
+    "video_id": "2026-02-07_19-39-37",
+    "loop_start": 95.0,
+    "loop_duration": 6.67,
+    "loop_score": 0.001556
+  },
+  {
+    "vimeo_id": "1164634808",
+    "vimeo_uri": "/videos/1164634808",
+    "mp4_file": "2026-02-09_19-44-56_t0075_loop.mp4",
+    "video_id": "2026-02-09_19-44-56",
+    "loop_start": 75.0,
+    "loop_duration": 6.0,
+    "loop_score": 0.001562
+  },
+  {
+    "vimeo_id": "1164634833",
+    "vimeo_uri": "/videos/1164634833",
+    "mp4_file": "2026-02-09_18-49-32_t0010_loop.mp4",
+    "video_id": "2026-02-09_18-49-32",
+    "loop_start": 10.0,
+    "loop_duration": 7.0,
+    "loop_score": 0.001564
+  },
+  {
+    "vimeo_id": "1164634856",
+    "vimeo_uri": "/videos/1164634856",
+    "mp4_file": "2026-02-09_21-30-07_t0030_loop.mp4",
+    "video_id": "2026-02-09_21-30-07",
+    "loop_start": 30.0,
+    "loop_duration": 8.0,
+    "loop_score": 0.001648
+  },
+  {
+    "vimeo_id": "1164634912",
+    "vimeo_uri": "/videos/1164634912",
+    "mp4_file": "2026-02-09_18-49-32_t0135_loop.mp4",
+    "video_id": "2026-02-09_18-49-32",
+    "loop_start": 135.0,
+    "loop_duration": 8.67,
+    "loop_score": 0.001756
+  },
+  {
+    "vimeo_id": "1164634924",
+    "vimeo_uri": "/videos/1164634924",
+    "mp4_file": "2026-02-09_19-44-56_t0835_loop.mp4",
+    "video_id": "2026-02-09_19-44-56",
+    "loop_start": 835.0,
+    "loop_duration": 13.0,
+    "loop_score": 0.001848
+  },
+  {
+    "vimeo_id": "1164634941",
+    "vimeo_uri": "/videos/1164634941",
+    "mp4_file": "2026-02-09_21-35-26_t0000_loop.mp4",
+    "video_id": "2026-02-09_21-35-26",
+    "loop_start": 0.0,
+    "loop_duration": 9.67,
+    "loop_score": 0.00189
+  },
+  {
+    "vimeo_id": "1164634955",
+    "vimeo_uri": "/videos/1164634955",
+    "mp4_file": "2026-02-09_19-44-56_t0710_loop.mp4",
+    "video_id": "2026-02-09_19-44-56",
+    "loop_start": 710.0,
+    "loop_duration": 7.33,
+    "loop_score": 0.001917
+  },
+  {
+    "vimeo_id": "1164634967",
+    "vimeo_uri": "/videos/1164634967",
+    "mp4_file": "2026-02-09_19-44-56_t0875_loop.mp4",
+    "video_id": "2026-02-09_19-44-56",
+    "loop_start": 875.0,
+    "loop_duration": 7.33,
+    "loop_score": 0.001936
+  },
+  {
+    "vimeo_id": "1164634974",
+    "vimeo_uri": "/videos/1164634974",
+    "mp4_file": "2026-02-08_22-09-45_t0110_loop.mp4",
+    "video_id": "2026-02-08_22-09-45",
+    "loop_start": 110.0,
+    "loop_duration": 6.67,
+    "loop_score": 0.001967
+  },
+  {
+    "vimeo_id": "1164634985",
+    "vimeo_uri": "/videos/1164634985",
+    "mp4_file": "2026-02-09_19-44-56_t0855_loop.mp4",
+    "video_id": "2026-02-09_19-44-56",
+    "loop_start": 855.0,
+    "loop_duration": 6.67,
+    "loop_score": 0.001968
+  },
+  {
+    "vimeo_id": "1164634995",
+    "vimeo_uri": "/videos/1164634995",
+    "mp4_file": "2026-02-09_21-35-26_t0160_loop.mp4",
+    "video_id": "2026-02-09_21-35-26",
+    "loop_start": 160.0,
+    "loop_duration": 7.0,
+    "loop_score": 0.00197
+  },
+  {
+    "vimeo_id": "1164635008",
+    "vimeo_uri": "/videos/1164635008",
+    "mp4_file": "2026-02-08_22-09-45_t0035_loop.mp4",
+    "video_id": "2026-02-08_22-09-45",
+    "loop_start": 35.0,
+    "loop_duration": 6.67,
+    "loop_score": 0.001973
+  },
+  {
+    "vimeo_id": "1164635021",
+    "vimeo_uri": "/videos/1164635021",
+    "mp4_file": "2026-02-09_18-49-32_t0025_loop.mp4",
+    "video_id": "2026-02-09_18-49-32",
+    "loop_start": 25.0,
+    "loop_duration": 8.67,
+    "loop_score": 0.001975
+  },
+  {
+    "vimeo_id": "1164635030",
+    "vimeo_uri": "/videos/1164635030",
+    "mp4_file": "2026-02-09_19-44-56_t0490_loop.mp4",
+    "video_id": "2026-02-09_19-44-56",
+    "loop_start": 490.0,
+    "loop_duration": 13.67,
+    "loop_score": 0.001985
+  },
+  {
+    "vimeo_id": "1164635041",
+    "vimeo_uri": "/videos/1164635041",
+    "mp4_file": "2026-02-08_22-09-45_t0065_loop.mp4",
+    "video_id": "2026-02-08_22-09-45",
+    "loop_start": 65.0,
+    "loop_duration": 6.0,
+    "loop_score": 0.002087
+  },
+  {
+    "vimeo_id": "1164635052",
+    "vimeo_uri": "/videos/1164635052",
+    "mp4_file": "2026-02-09_21-50-56_t0000_loop.mp4",
+    "video_id": "2026-02-09_21-50-56",
+    "loop_start": 0.0,
+    "loop_duration": 13.0,
+    "loop_score": 0.002091
+  },
+  {
+    "vimeo_id": "1164635062",
+    "vimeo_uri": "/videos/1164635062",
+    "mp4_file": "2026-02-09_21-35-26_t0245_loop.mp4",
+    "video_id": "2026-02-09_21-35-26",
+    "loop_start": 245.0,
+    "loop_duration": 6.67,
+    "loop_score": 0.002123
+  },
+  {
+    "vimeo_id": "1164635068",
+    "vimeo_uri": "/videos/1164635068",
+    "mp4_file": "2026-02-09_19-44-56_t0745_loop.mp4",
+    "video_id": "2026-02-09_19-44-56",
+    "loop_start": 745.0,
+    "loop_duration": 6.67,
+    "loop_score": 0.002157
+  },
+  {
+    "vimeo_id": "1164635083",
+    "vimeo_uri": "/videos/1164635083",
+    "mp4_file": "2026-02-09_21-35-26_t0270_loop.mp4",
+    "video_id": "2026-02-09_21-35-26",
+    "loop_start": 270.0,
+    "loop_duration": 7.0,
+    "loop_score": 0.002158
+  },
+  {
+    "vimeo_id": "1164635089",
+    "vimeo_uri": "/videos/1164635089",
+    "mp4_file": "2026-02-09_19-44-56_t0205_loop.mp4",
+    "video_id": "2026-02-09_19-44-56",
+    "loop_start": 205.0,
+    "loop_duration": 7.33,
+    "loop_score": 0.002223
+  },
+  {
+    "vimeo_id": "1164635101",
+    "vimeo_uri": "/videos/1164635101",
+    "mp4_file": "2026-02-08_21-49-46_t0435_loop.mp4",
+    "video_id": "2026-02-08_21-49-46",
+    "loop_start": 435.0,
+    "loop_duration": 7.0,
+    "loop_score": 0.002258
+  },
+  {
+    "vimeo_id": "1164635109",
+    "vimeo_uri": "/videos/1164635109",
+    "mp4_file": "2026-02-09_19-44-56_t0580_loop.mp4",
+    "video_id": "2026-02-09_19-44-56",
+    "loop_start": 580.0,
+    "loop_duration": 6.0,
+    "loop_score": 0.002377
+  },
+  {
+    "vimeo_id": "1164635121",
+    "vimeo_uri": "/videos/1164635121",
+    "mp4_file": "2026-02-09_19-44-56_t0240_loop.mp4",
+    "video_id": "2026-02-09_19-44-56",
+    "loop_start": 240.0,
+    "loop_duration": 7.33,
+    "loop_score": 0.002454
+  },
+  {
+    "vimeo_id": "1164635128",
+    "vimeo_uri": "/videos/1164635128",
+    "mp4_file": "2026-02-09_18-49-32_t0095_loop.mp4",
+    "video_id": "2026-02-09_18-49-32",
+    "loop_start": 95.0,
+    "loop_duration": 7.0,
+    "loop_score": 0.00256
+  },
+  {
+    "vimeo_id": "1164635145",
+    "vimeo_uri": "/videos/1164635145",
+    "mp4_file": "2026-02-09_19-44-56_t0920_loop.mp4",
+    "video_id": "2026-02-09_19-44-56",
+    "loop_start": 920.0,
+    "loop_duration": 6.67,
+    "loop_score": 0.002561
+  },
+  {
+    "vimeo_id": "1164635149",
+    "vimeo_uri": "/videos/1164635149",
+    "mp4_file": "2026-02-09_19-44-56_t0475_loop.mp4",
+    "video_id": "2026-02-09_19-44-56",
+    "loop_start": 475.0,
+    "loop_duration": 7.33,
+    "loop_score": 0.002713
+  },
+  {
+    "vimeo_id": "1164635159",
+    "vimeo_uri": "/videos/1164635159",
+    "mp4_file": "2026-02-08_21-49-46_t0195_loop.mp4",
+    "video_id": "2026-02-08_21-49-46",
+    "loop_start": 195.0,
+    "loop_duration": 9.67,
+    "loop_score": 0.002724
+  },
+  {
+    "vimeo_id": "1164635174",
+    "vimeo_uri": "/videos/1164635174",
+    "mp4_file": "2026-02-09_19-44-56_t0560_loop.mp4",
+    "video_id": "2026-02-09_19-44-56",
+    "loop_start": 560.0,
+    "loop_duration": 13.33,
+    "loop_score": 0.002824
+  },
+  {
+    "vimeo_id": "1164635188",
+    "vimeo_uri": "/videos/1164635188",
+    "mp4_file": "2026-02-09_19-44-56_t0975_loop.mp4",
+    "video_id": "2026-02-09_19-44-56",
+    "loop_start": 975.0,
+    "loop_duration": 6.67,
+    "loop_score": 0.002846
+  },
+  {
+    "vimeo_id": "1164635207",
+    "vimeo_uri": "/videos/1164635207",
+    "mp4_file": "2026-02-07_19-42-19_t0115_loop.mp4",
+    "video_id": "2026-02-07_19-42-19",
+    "loop_start": 115.0,
+    "loop_duration": 11.33,
+    "loop_score": 0.002849
+  },
+  {
+    "vimeo_id": "1164635216",
+    "vimeo_uri": "/videos/1164635216",
+    "mp4_file": "2026-02-07_19-39-37_t0000_loop.mp4",
+    "video_id": "2026-02-07_19-39-37",
+    "loop_start": 0.0,
+    "loop_duration": 7.67,
+    "loop_score": 0.002858
+  },
+  {
+    "vimeo_id": "1164635226",
+    "vimeo_uri": "/videos/1164635226",
+    "mp4_file": "2026-02-09_19-44-56_t0175_loop.mp4",
+    "video_id": "2026-02-09_19-44-56",
+    "loop_start": 175.0,
+    "loop_duration": 7.67,
+    "loop_score": 0.002866
+  },
+  {
+    "vimeo_id": "1164635231",
+    "vimeo_uri": "/videos/1164635231",
+    "mp4_file": "2026-02-09_19-44-56_t0015_loop.mp4",
+    "video_id": "2026-02-09_19-44-56",
+    "loop_start": 15.0,
+    "loop_duration": 7.67,
+    "loop_score": 0.002878
+  },
+  {
+    "vimeo_id": "1164635252",
+    "vimeo_uri": "/videos/1164635252",
+    "mp4_file": "2026-02-08_22-09-45_t0290_loop.mp4",
+    "video_id": "2026-02-08_22-09-45",
+    "loop_start": 290.0,
+    "loop_duration": 8.0,
+    "loop_score": 0.002912
+  },
+  {
+    "vimeo_id": "1164635262",
+    "vimeo_uri": "/videos/1164635262",
+    "mp4_file": "2026-02-09_18-49-32_t0115_loop.mp4",
+    "video_id": "2026-02-09_18-49-32",
+    "loop_start": 115.0,
+    "loop_duration": 8.67,
+    "loop_score": 0.003071
+  },
+  {
+    "vimeo_id": "1164635277",
+    "vimeo_uri": "/videos/1164635277",
+    "mp4_file": "2026-02-08_22-09-45_t0360_loop.mp4",
+    "video_id": "2026-02-08_22-09-45",
+    "loop_start": 360.0,
+    "loop_duration": 6.67,
+    "loop_score": 0.003128
+  },
+  {
+    "vimeo_id": "1164635285",
+    "vimeo_uri": "/videos/1164635285",
+    "mp4_file": "2026-02-07_19-42-19_t0375_loop.mp4",
+    "video_id": "2026-02-07_19-42-19",
+    "loop_start": 375.0,
+    "loop_duration": 7.67,
+    "loop_score": 0.003175
+  }
+]
