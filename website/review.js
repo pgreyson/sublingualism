@@ -1,31 +1,31 @@
 (function() {
     var isReview = location.search.indexOf('review') !== -1;
-    var STORAGE_KEY = 'sublingualism_selections';
+    var ADD_KEY = 'sublingualism_add';
+    var REMOVE_KEY = 'sublingualism_remove';
 
-    function getSelections() {
-        try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
+    // Detect if we're on the curated works page (works.html, not works-N.html or works-all.html)
+    var path = location.pathname;
+    var isCuratedPage = /\/works\.html/.test(path) || path === '/works';
+
+    function getList(key) {
+        try { return JSON.parse(localStorage.getItem(key)) || []; }
         catch(e) { return []; }
     }
+    function saveList(key, arr) {
+        localStorage.setItem(key, JSON.stringify(arr));
+    }
 
-    function saveSelections(arr) {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(arr));
+    function toggleInList(key, src) {
+        var list = getList(key);
+        var idx = list.indexOf(src);
+        if (idx === -1) { list.push(src); } else { list.splice(idx, 1); }
+        saveList(key, list);
+        updateCount();
+        return idx === -1;
     }
 
     function getVideoSrc(wrap) {
         return wrap.querySelector('iframe').getAttribute('src');
-    }
-
-    function isSelected(src) {
-        return getSelections().indexOf(src) !== -1;
-    }
-
-    function toggleSelection(src) {
-        var sel = getSelections();
-        var idx = sel.indexOf(src);
-        if (idx === -1) { sel.push(src); } else { sel.splice(idx, 1); }
-        saveSelections(sel);
-        updateCount();
-        return idx === -1;
     }
 
     // Floating bar
@@ -46,12 +46,19 @@
         clearBtn.style.cssText = 'background:none;border:1px solid rgba(255,255,255,0.3);color:#fff;padding:6px 14px;cursor:pointer;font-size:13px;border-radius:4px;';
         clearBtn.addEventListener('click', function() {
             if (confirm('Clear all selections?')) {
-                saveSelections([]);
+                saveList(ADD_KEY, []);
+                saveList(REMOVE_KEY, []);
                 updateCount();
                 document.querySelectorAll('.review-btn').forEach(function(btn) {
-                    btn.textContent = '+';
-                    btn.style.background = 'rgba(0,0,0,0.6)';
-                    btn.parentElement.style.outline = 'none';
+                    if (isCuratedPage) {
+                        btn.style.display = 'flex';
+                        btn.parentElement.style.outline = 'none';
+                        btn.parentElement.style.opacity = '1';
+                    } else {
+                        btn.textContent = '+';
+                        btn.style.background = 'rgba(0,0,0,0.6)';
+                        btn.parentElement.style.outline = 'none';
+                    }
                 });
             }
         });
@@ -60,9 +67,13 @@
         exportBtn.textContent = 'copy selections';
         exportBtn.style.cssText = 'background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);color:#fff;padding:6px 14px;cursor:pointer;font-size:13px;border-radius:4px;';
         exportBtn.addEventListener('click', function() {
-            var sel = getSelections();
-            if (sel.length === 0) { alert('No clips selected'); return; }
-            var text = JSON.stringify(sel, null, 2);
+            var adds = getList(ADD_KEY);
+            var removes = getList(REMOVE_KEY);
+            if (adds.length === 0 && removes.length === 0) { alert('No changes'); return; }
+            var output = [];
+            adds.forEach(function(src) { output.push({src: src, action: 'add'}); });
+            removes.forEach(function(src) { output.push({src: src, action: 'remove'}); });
+            var text = JSON.stringify(output, null, 2);
             navigator.clipboard.writeText(text).then(function() {
                 exportBtn.textContent = 'copied!';
                 setTimeout(function() { exportBtn.textContent = 'copy selections'; }, 1500);
@@ -77,10 +88,13 @@
     }
 
     function updateCount() {
-        if (countEl) {
-            var n = getSelections().length;
-            countEl.textContent = n + ' clip' + (n !== 1 ? 's' : '') + ' selected';
-        }
+        if (!countEl) return;
+        var a = getList(ADD_KEY).length;
+        var r = getList(REMOVE_KEY).length;
+        var parts = [];
+        if (a > 0) parts.push(a + ' to add');
+        if (r > 0) parts.push(r + ' to remove');
+        countEl.textContent = parts.length > 0 ? parts.join(', ') : 'no changes';
     }
 
     // Set up each video wrap
@@ -92,33 +106,57 @@
         var src = getVideoSrc(wrap);
 
         if (isReview) {
-            // Add review button
             var btn = document.createElement('button');
             btn.className = 'review-btn';
             btn.style.cssText = 'position:absolute;top:8px;right:8px;z-index:5;width:36px;height:36px;border-radius:50%;border:2px solid rgba(255,255,255,0.7);color:#fff;font-size:20px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;';
 
-            if (isSelected(src)) {
-                btn.textContent = '\u2713';
-                btn.style.background = 'rgba(0,180,80,0.8)';
-                wrap.style.outline = '2px solid rgba(0,180,80,0.6)';
-            } else {
-                btn.textContent = '+';
-                btn.style.background = 'rgba(0,0,0,0.6)';
-            }
+            if (isCuratedPage) {
+                // Remove button on curated page
+                var isRemoved = getList(REMOVE_KEY).indexOf(src) !== -1;
+                btn.innerHTML = '&times;';
+                btn.style.background = 'rgba(200,0,0,0.7)';
+                if (isRemoved) {
+                    wrap.style.opacity = '0.3';
+                    wrap.style.outline = '2px solid rgba(200,0,0,0.6)';
+                }
 
-            btn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                var nowSelected = toggleSelection(src);
-                if (nowSelected) {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    var nowRemoved = toggleInList(REMOVE_KEY, src);
+                    if (nowRemoved) {
+                        wrap.style.opacity = '0.3';
+                        wrap.style.outline = '2px solid rgba(200,0,0,0.6)';
+                    } else {
+                        wrap.style.opacity = '1';
+                        wrap.style.outline = 'none';
+                    }
+                });
+            } else {
+                // Add button on browse pages
+                var isAdded = getList(ADD_KEY).indexOf(src) !== -1;
+                if (isAdded) {
                     btn.textContent = '\u2713';
                     btn.style.background = 'rgba(0,180,80,0.8)';
                     wrap.style.outline = '2px solid rgba(0,180,80,0.6)';
                 } else {
                     btn.textContent = '+';
                     btn.style.background = 'rgba(0,0,0,0.6)';
-                    wrap.style.outline = 'none';
                 }
-            });
+
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    var nowAdded = toggleInList(ADD_KEY, src);
+                    if (nowAdded) {
+                        btn.textContent = '\u2713';
+                        btn.style.background = 'rgba(0,180,80,0.8)';
+                        wrap.style.outline = '2px solid rgba(0,180,80,0.6)';
+                    } else {
+                        btn.textContent = '+';
+                        btn.style.background = 'rgba(0,0,0,0.6)';
+                        wrap.style.outline = 'none';
+                    }
+                });
+            }
 
             wrap.appendChild(btn);
         }
@@ -151,7 +189,6 @@
                 a.setAttribute('href', href + '?review');
             }
         });
-        // Also preserve on nav links
         document.querySelectorAll('.nav a').forEach(function(a) {
             var href = a.getAttribute('href');
             if (href && href.indexOf('works') !== -1 && href.indexOf('?') === -1) {
