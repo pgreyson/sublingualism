@@ -8,6 +8,11 @@
         return match ? match[1] : null;
     }
 
+    // ?review in URL sets the cookie (bootstrap from mobile)
+    if (location.search.indexOf('review') !== -1 && getCookie(COOKIE_NAME) === null) {
+        document.cookie = COOKIE_NAME + '=0;path=/;max-age=31536000';
+    }
+
     var hasAccess = getCookie(COOKIE_NAME) !== null;
     var isActive = getCookie(COOKIE_NAME) === '1';
 
