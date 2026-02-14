@@ -1,7 +1,15 @@
 (function() {
-    var isReview = location.search.indexOf('review') !== -1;
+    var COOKIE_NAME = 'sublingualism_review';
     var ADD_KEY = 'sublingualism_add';
     var REMOVE_KEY = 'sublingualism_remove';
+
+    function getCookie(name) {
+        var match = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
+        return match ? match[1] : null;
+    }
+
+    var hasAccess = getCookie(COOKIE_NAME) !== null;
+    var isActive = getCookie(COOKIE_NAME) === '1';
 
     var path = location.pathname;
     var isCuratedPage = /\/clips\.html/.test(path) || path === '/clips';
@@ -21,6 +29,44 @@
         saveList(key, list);
         updateCount();
         return idx === -1;
+    }
+
+    // Add review controls to nav bar
+    if (hasAccess) {
+        var nav = document.querySelector('.nav');
+        if (nav) {
+            var controls = document.createElement('div');
+            controls.style.cssText = 'display:flex;gap:12px;align-items:center;';
+
+            // Archive link (browse pages only show on curated page)
+            if (isCuratedPage) {
+                var archiveLink = document.createElement('a');
+                archiveLink.href = '/clips-all.html';
+                archiveLink.textContent = 'archive';
+                archiveLink.style.cssText = 'color:#fff;text-decoration:none;opacity:0.7;font-size:0.85rem;';
+                archiveLink.onmouseover = function() { this.style.opacity = '1'; };
+                archiveLink.onmouseout = function() { this.style.opacity = '0.7'; };
+                controls.appendChild(archiveLink);
+            }
+
+            var toggleBtn = document.createElement('button');
+            toggleBtn.textContent = isActive ? 'review on' : 'review';
+            toggleBtn.style.cssText = 'background:none;border:1px solid rgba(255,255,255,0.3);color:#fff;padding:4px 10px;cursor:pointer;font-size:0.8rem;border-radius:3px;opacity:0.7;';
+            if (isActive) {
+                toggleBtn.style.borderColor = 'rgba(0,180,80,0.6)';
+                toggleBtn.style.opacity = '1';
+            }
+            toggleBtn.addEventListener('click', function() {
+                if (isActive) {
+                    document.cookie = COOKIE_NAME + '=0;path=/;max-age=31536000';
+                } else {
+                    document.cookie = COOKIE_NAME + '=1;path=/;max-age=31536000';
+                }
+                location.reload();
+            });
+            controls.appendChild(toggleBtn);
+            nav.appendChild(controls);
+        }
     }
 
     // Floating bar
@@ -113,7 +159,7 @@
         });
 
         // Review mode buttons
-        if (isReview && videoId) {
+        if (isActive && videoId) {
             clip.style.position = 'relative';
             var btn = document.createElement('button');
             btn.className = 'review-btn';
@@ -166,20 +212,7 @@
         }
     });
 
-    // Preserve ?review on pagination links
-    if (isReview) {
+    if (isActive) {
         createBar();
-        document.querySelectorAll('.page-nav a').forEach(function(a) {
-            var href = a.getAttribute('href');
-            if (href && href.indexOf('?') === -1) {
-                a.setAttribute('href', href + '?review');
-            }
-        });
-        document.querySelectorAll('.nav a').forEach(function(a) {
-            var href = a.getAttribute('href');
-            if (href && href.indexOf('clips') !== -1 && href.indexOf('?') === -1) {
-                a.setAttribute('href', href + '?review');
-            }
-        });
     }
 })();
