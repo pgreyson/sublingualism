@@ -36,44 +36,6 @@
         return idx === -1;
     }
 
-    // Add review controls to nav bar
-    if (hasAccess) {
-        var nav = document.querySelector('.nav');
-        if (nav) {
-            var controls = document.createElement('div');
-            controls.style.cssText = 'display:flex;gap:12px;align-items:center;';
-
-            // Archive link (browse pages only show on curated page)
-            if (isCuratedPage) {
-                var archiveLink = document.createElement('a');
-                archiveLink.href = '/clips-all.html';
-                archiveLink.textContent = 'archive';
-                archiveLink.style.cssText = 'color:#fff;text-decoration:none;opacity:0.7;font-size:0.85rem;';
-                archiveLink.onmouseover = function() { this.style.opacity = '1'; };
-                archiveLink.onmouseout = function() { this.style.opacity = '0.7'; };
-                controls.appendChild(archiveLink);
-            }
-
-            var toggleBtn = document.createElement('button');
-            toggleBtn.textContent = isActive ? 'review on' : 'review';
-            toggleBtn.style.cssText = 'background:none;border:1px solid rgba(255,255,255,0.3);color:#fff;padding:4px 10px;cursor:pointer;font-size:0.8rem;border-radius:3px;opacity:0.7;';
-            if (isActive) {
-                toggleBtn.style.borderColor = 'rgba(0,180,80,0.6)';
-                toggleBtn.style.opacity = '1';
-            }
-            toggleBtn.addEventListener('click', function() {
-                if (isActive) {
-                    document.cookie = COOKIE_NAME + '=0;path=/;max-age=31536000';
-                } else {
-                    document.cookie = COOKIE_NAME + '=1;path=/;max-age=31536000';
-                }
-                location.reload();
-            });
-            controls.appendChild(toggleBtn);
-            nav.appendChild(controls);
-        }
-    }
-
     // Floating bar
     var bar, countEl;
     function createBar() {
@@ -134,6 +96,15 @@
         updateCount();
     }
 
+    function removeBar() {
+        if (bar) {
+            bar.remove();
+            bar = null;
+            countEl = null;
+            document.body.style.paddingBottom = '';
+        }
+    }
+
     function updateCount() {
         if (!countEl) return;
         var a = getList(ADD_KEY).length;
@@ -144,10 +115,9 @@
         countEl.textContent = parts.length > 0 ? parts.join(', ') : 'no changes';
     }
 
-    // Click-to-fullscreen and review buttons for all clips
+    // Click-to-fullscreen for all clips
     document.querySelectorAll('.clip').forEach(function(clip) {
         var video = clip.querySelector('video');
-        var videoId = clip.getAttribute('data-id');
 
         clip.addEventListener('click', function(e) {
             if (e.target.classList.contains('review-btn')) return;
@@ -162,9 +132,14 @@
         video.addEventListener('webkitendfullscreen', function() {
             video.pause(); video.currentTime = 0; video.muted = true;
         });
+    });
 
-        // Review mode buttons
-        if (isActive && videoId) {
+    // Add/remove review overlay buttons
+    function enableReview() {
+        document.querySelectorAll('.clip').forEach(function(clip) {
+            var videoId = clip.getAttribute('data-id');
+            if (!videoId || clip.querySelector('.review-btn')) return;
+
             clip.style.position = 'relative';
             var btn = document.createElement('button');
             btn.className = 'review-btn';
@@ -214,10 +189,69 @@
                 });
             }
             clip.appendChild(btn);
-        }
-    });
-
-    if (isActive) {
+        });
         createBar();
+    }
+
+    function disableReview() {
+        document.querySelectorAll('.review-btn').forEach(function(btn) {
+            btn.remove();
+        });
+        document.querySelectorAll('.clip').forEach(function(clip) {
+            clip.style.outline = 'none';
+            clip.style.opacity = '1';
+        });
+        removeBar();
+    }
+
+    // Nav controls
+    if (hasAccess) {
+        var nav = document.querySelector('.nav');
+        if (nav) {
+            var controls = document.createElement('div');
+            controls.style.cssText = 'display:flex;gap:12px;align-items:center;';
+
+            if (isCuratedPage) {
+                var archiveLink = document.createElement('a');
+                archiveLink.href = '/clips-all.html';
+                archiveLink.textContent = 'archive';
+                archiveLink.style.cssText = 'color:#fff;text-decoration:none;opacity:0.7;font-size:0.85rem;';
+                archiveLink.onmouseover = function() { this.style.opacity = '1'; };
+                archiveLink.onmouseout = function() { this.style.opacity = '0.7'; };
+                controls.appendChild(archiveLink);
+            }
+
+            var toggleBtn = document.createElement('button');
+            toggleBtn.textContent = isActive ? 'review on' : 'review';
+            toggleBtn.style.cssText = 'background:none;border:1px solid rgba(255,255,255,0.3);color:#fff;padding:4px 10px;cursor:pointer;font-size:0.8rem;border-radius:3px;opacity:0.7;';
+            if (isActive) {
+                toggleBtn.style.borderColor = 'rgba(0,180,80,0.6)';
+                toggleBtn.style.opacity = '1';
+            }
+            toggleBtn.addEventListener('click', function() {
+                if (isActive) {
+                    document.cookie = COOKIE_NAME + '=0;path=/;max-age=31536000';
+                    isActive = false;
+                    toggleBtn.textContent = 'review';
+                    toggleBtn.style.borderColor = 'rgba(255,255,255,0.3)';
+                    toggleBtn.style.opacity = '0.7';
+                    disableReview();
+                } else {
+                    document.cookie = COOKIE_NAME + '=1;path=/;max-age=31536000';
+                    isActive = true;
+                    toggleBtn.textContent = 'review on';
+                    toggleBtn.style.borderColor = 'rgba(0,180,80,0.6)';
+                    toggleBtn.style.opacity = '1';
+                    enableReview();
+                }
+            });
+            controls.appendChild(toggleBtn);
+            nav.appendChild(controls);
+        }
+    }
+
+    // Activate on load if cookie is set
+    if (isActive) {
+        enableReview();
     }
 })();
