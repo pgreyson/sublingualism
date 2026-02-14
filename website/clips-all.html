@@ -61,18 +61,18 @@
         .page-link .thumbs {
             display: grid;
             grid-template-columns: repeat(10, 1fr);
-            gap: 3px;
+            gap: 2px;
         }
         .page-link .thumbs video {
             width: 100%;
-            aspect-ratio: 32 / 9;
+            aspect-ratio: 1;
             object-fit: cover;
             display: block;
             background: #111;
         }
         @media (max-width: 768px) {
             .page-link .thumbs {
-                grid-template-columns: repeat(5, 1fr);
+                grid-template-columns: repeat(10, 1fr);
             }
         }
     </style>
