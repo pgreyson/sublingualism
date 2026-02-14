@@ -60,19 +60,17 @@
         }
         .page-link .thumbs {
             display: grid;
-            grid-template-columns: repeat(10, 1fr);
+            grid-template-columns: repeat(5, 1fr);
             gap: 2px;
         }
         .page-link .thumbs img {
             width: 100%;
-            aspect-ratio: 1;
-            object-fit: cover;
             display: block;
             background: #111;
         }
         @media (max-width: 768px) {
             .page-link .thumbs {
-                grid-template-columns: repeat(10, 1fr);
+                grid-template-columns: repeat(4, 1fr);
             }
         }
     </style>
