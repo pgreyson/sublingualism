@@ -37,7 +37,7 @@
         .page-link {
             display: block;
             border: 1px solid rgba(255,255,255,0.2);
-            padding: 1.5rem;
+            padding: 1rem;
             text-decoration: none;
             color: #fff;
             transition: border-color 0.2s;
@@ -46,12 +46,25 @@
             border-color: rgba(255,255,255,0.6);
         }
         .page-link .label {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             margin-bottom: 0.3rem;
         }
         .page-link .count {
             opacity: 0.5;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            margin-bottom: 0.75rem;
+        }
+        .page-link .thumbs {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 4px;
+        }
+        .page-link .thumbs video {
+            width: 100%;
+            aspect-ratio: 32 / 9;
+            object-fit: cover;
+            display: block;
+            background: #111;
         }
     </style>
 </head>
@@ -65,38 +78,92 @@
             <a class="page-link" href="/clips-1.html">
                 <div class="label">page 1</div>
                 <div class="count">20 clips</div>
+                <div class="thumbs">
+                    <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164392447.mp4#t=0.001" preload="metadata" muted playsinline></video>
+                    <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164636103.mp4#t=0.001" preload="metadata" muted playsinline></video>
+                    <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164636213.mp4#t=0.001" preload="metadata" muted playsinline></video>
+                    <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164635347.mp4#t=0.001" preload="metadata" muted playsinline></video>
+                </div>
             </a>
             <a class="page-link" href="/clips-2.html">
                 <div class="label">page 2</div>
                 <div class="count">20 clips</div>
+                <div class="thumbs">
+                    <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164635856.mp4#t=0.001" preload="metadata" muted playsinline></video>
+                    <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164636188.mp4#t=0.001" preload="metadata" muted playsinline></video>
+                    <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164636104.mp4#t=0.001" preload="metadata" muted playsinline></video>
+                    <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164635008.mp4#t=0.001" preload="metadata" muted playsinline></video>
+                </div>
             </a>
             <a class="page-link" href="/clips-3.html">
                 <div class="label">page 3</div>
                 <div class="count">20 clips</div>
+                <div class="thumbs">
+                    <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164636128.mp4#t=0.001" preload="metadata" muted playsinline></video>
+                    <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164635880.mp4#t=0.001" preload="metadata" muted playsinline></video>
+                    <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164635101.mp4#t=0.001" preload="metadata" muted playsinline></video>
+                    <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164635117.mp4#t=0.001" preload="metadata" muted playsinline></video>
+                </div>
             </a>
             <a class="page-link" href="/clips-4.html">
                 <div class="label">page 4</div>
                 <div class="count">20 clips</div>
+                <div class="thumbs">
+                    <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164635143.mp4#t=0.001" preload="metadata" muted playsinline></video>
+                    <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164636034.mp4#t=0.001" preload="metadata" muted playsinline></video>
+                    <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164635282.mp4#t=0.001" preload="metadata" muted playsinline></video>
+                    <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164636094.mp4#t=0.001" preload="metadata" muted playsinline></video>
+                </div>
             </a>
             <a class="page-link" href="/clips-5.html">
                 <div class="label">page 5</div>
                 <div class="count">20 clips</div>
+                <div class="thumbs">
+                    <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164635936.mp4#t=0.001" preload="metadata" muted playsinline></video>
+                    <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164635217.mp4#t=0.001" preload="metadata" muted playsinline></video>
+                    <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164636442.mp4#t=0.001" preload="metadata" muted playsinline></video>
+                    <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164636022.mp4#t=0.001" preload="metadata" muted playsinline></video>
+                </div>
             </a>
             <a class="page-link" href="/clips-6.html">
                 <div class="label">page 6</div>
                 <div class="count">20 clips</div>
+                <div class="thumbs">
+                    <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164635334.mp4#t=0.001" preload="metadata" muted playsinline></video>
+                    <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164635360.mp4#t=0.001" preload="metadata" muted playsinline></video>
+                    <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164635149.mp4#t=0.001" preload="metadata" muted playsinline></video>
+                    <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164634912.mp4#t=0.001" preload="metadata" muted playsinline></video>
+                </div>
             </a>
             <a class="page-link" href="/clips-7.html">
                 <div class="label">page 7</div>
                 <div class="count">20 clips</div>
+                <div class="thumbs">
+                    <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164636399.mp4#t=0.001" preload="metadata" muted playsinline></video>
+                    <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164635121.mp4#t=0.001" preload="metadata" muted playsinline></video>
+                    <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164594452.mp4#t=0.001" preload="metadata" muted playsinline></video>
+                    <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164594438.mp4#t=0.001" preload="metadata" muted playsinline></video>
+                </div>
             </a>
             <a class="page-link" href="/clips-8.html">
                 <div class="label">page 8</div>
                 <div class="count">20 clips</div>
+                <div class="thumbs">
+                    <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164593955.mp4#t=0.001" preload="metadata" muted playsinline></video>
+                    <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164634985.mp4#t=0.001" preload="metadata" muted playsinline></video>
+                    <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164635430.mp4#t=0.001" preload="metadata" muted playsinline></video>
+                    <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164636295.mp4#t=0.001" preload="metadata" muted playsinline></video>
+                </div>
             </a>
             <a class="page-link" href="/clips-9.html">
                 <div class="label">page 9</div>
                 <div class="count">13 clips</div>
+                <div class="thumbs">
+                    <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164636277.mp4#t=0.001" preload="metadata" muted playsinline></video>
+                    <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164594424.mp4#t=0.001" preload="metadata" muted playsinline></video>
+                    <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164593999.mp4#t=0.001" preload="metadata" muted playsinline></video>
+                    <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164594458.mp4#t=0.001" preload="metadata" muted playsinline></video>
+                </div>
             </a>
         </div>
     </div>
