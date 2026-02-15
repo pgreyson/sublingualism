@@ -219,12 +219,12 @@
                 if ((Math.abs(dx) > threshold || swipedFast) && dx < 0 && currentIndex < allClips.length - 1) {
                     // Swipe left — go to next
                     animateToPanel(2, function() {
-                        setCurrentClip(currentIndex + 1);
+                        setCurrentClip(currentIndex + 1, 1);
                     });
                 } else if ((Math.abs(dx) > threshold || swipedFast) && dx > 0 && currentIndex > 0) {
                     // Swipe right — go to prev
                     animateToPanel(0, function() {
-                        setCurrentClip(currentIndex - 1);
+                        setCurrentClip(currentIndex - 1, -1);
                     });
                 } else {
                     // Snap back to center
@@ -242,14 +242,14 @@
                 e.preventDefault();
                 if (currentIndex < allClips.length - 1) {
                     animateToPanel(2, function() {
-                        setCurrentClip(currentIndex + 1);
+                        setCurrentClip(currentIndex + 1, 1);
                     });
                 }
             } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
                 e.preventDefault();
                 if (currentIndex > 0) {
                     animateToPanel(0, function() {
-                        setCurrentClip(currentIndex - 1);
+                        setCurrentClip(currentIndex - 1, -1);
                     });
                 }
             } else if (e.key === 'Escape') {
@@ -278,16 +278,15 @@
         }
     }
 
-    function loadPanel(panelIndex, clipIndex) {
+    function loadPanel(panelIndex, clipIndex, skipIfLoaded) {
         var vid = panelVideos[panelIndex];
         if (clipIndex < 0 || clipIndex >= allClips.length) {
             vid.removeAttribute('src');
-            vid.removeAttribute('poster');
             vid.load();
             return;
         }
         var src = getClipSrc(clipIndex);
-        // Only reload if src changed
+        if (vid.getAttribute('src') === src && skipIfLoaded) return;
         if (vid.getAttribute('src') !== src) {
             vid.src = src;
             vid.load();
@@ -297,16 +296,48 @@
         vid.muted = true;
     }
 
-    function setCurrentClip(index) {
+    // direction: 0 = initial load, 1 = swiped to next, -1 = swiped to prev
+    function setCurrentClip(index, direction) {
         currentIndex = index;
-        // Load 3 panels: prev, current, next
-        loadPanel(0, index - 1);
-        loadPanel(1, index);
-        loadPanel(2, index + 1);
 
-        // Snap track to center panel instantly
-        track.style.transition = 'none';
-        track.style.transform = 'translateX(' + (-viewW) + 'px)';
+        if (direction === 1) {
+            // Swiped to next: panel 2 has the clip we want, swap it to center
+            var tmpVid = panelVideos[0];
+            panelVideos[0] = panelVideos[1];
+            panelVideos[1] = panelVideos[2];
+            panelVideos[2] = tmpVid;
+            // Physically reorder DOM elements in the track
+            track.appendChild(panelVideos[0].parentNode);
+            track.appendChild(panelVideos[1].parentNode);
+            track.appendChild(panelVideos[2].parentNode);
+            // Snap to center instantly
+            track.style.transition = 'none';
+            track.style.transform = 'translateX(' + (-viewW) + 'px)';
+            // Panel 1 (center) already has the right video playing — don't touch it
+            // Just load the new next panel
+            loadPanel(0, index - 1, true);
+            loadPanel(2, index + 1);
+        } else if (direction === -1) {
+            // Swiped to prev: panel 0 has the clip we want, swap it to center
+            var tmpVid2 = panelVideos[2];
+            panelVideos[2] = panelVideos[1];
+            panelVideos[1] = panelVideos[0];
+            panelVideos[0] = tmpVid2;
+            track.appendChild(panelVideos[0].parentNode);
+            track.appendChild(panelVideos[1].parentNode);
+            track.appendChild(panelVideos[2].parentNode);
+            track.style.transition = 'none';
+            track.style.transform = 'translateX(' + (-viewW) + 'px)';
+            loadPanel(0, index - 1);
+            loadPanel(2, index + 1, true);
+        } else {
+            // Initial load
+            loadPanel(0, index - 1);
+            loadPanel(1, index);
+            loadPanel(2, index + 1);
+            track.style.transition = 'none';
+            track.style.transform = 'translateX(' + (-viewW) + 'px)';
+        }
 
         // Play center video
         var vid = panelVideos[1];
@@ -322,7 +353,7 @@
         document.body.style.top = -savedScrollY + 'px';
         overlay.style.display = 'block';
 
-        setCurrentClip(index);
+        setCurrentClip(index, 0);
     }
 
     function closeOverlay() {
