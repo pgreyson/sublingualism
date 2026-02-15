@@ -4,11 +4,13 @@
 import os
 import re
 from collections import defaultdict
+from datetime import datetime
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 WEBSITE_DIR = os.path.join(os.path.dirname(os.path.dirname(BASE_DIR)), "website")
 CDN = "https://d2xbllb3qhv8ay.cloudfront.net"
 CLIPS_PER_PAGE = 20
+MERGE_WINDOW_MINUTES = 30  # merge sessions starting within this window
 
 # Pattern: 2026-02-09_21-35-26_t0230
 CLIP_ID_RE = re.compile(r'^(\d{4}-\d{2}-\d{2}_\d{2}-\d{2}-\d{2})_t(\d+)$')
@@ -22,23 +24,31 @@ def parse_clip_id(clip_id):
     return None, None
 
 
+def session_key_to_datetime(session_key):
+    """Convert '2026-02-09_21-35-26' to a datetime."""
+    return datetime.strptime(session_key, '%Y-%m-%d_%H-%M-%S')
+
+
 def session_label(session_key):
     """Format a session key like '2026-02-09_21-35-26' into a readable label."""
-    # 2026-02-09_21-35-26 -> Feb 9, 2026 9:35 PM
-    parts = session_key.split('_')
-    date_parts = parts[0].split('-')
-    time_parts = parts[1].split('-')
-    year, month, day = int(date_parts[0]), int(date_parts[1]), int(date_parts[2])
-    hour, minute = int(time_parts[0]), int(time_parts[1])
-    months = ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-              'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-    ampm = 'AM' if hour < 12 else 'PM'
-    h12 = hour % 12 or 12
-    return f"{months[month]} {day}, {year} {h12}:{minute:02d} {ampm}"
+    dt = session_key_to_datetime(session_key)
+    return dt.strftime('%b %-d, %Y %-I:%M %p')
+
+
+def session_range_label(keys):
+    """Label for a merged group of sessions on the same date."""
+    dts = sorted(session_key_to_datetime(k) for k in keys)
+    first, last = dts[0], dts[-1]
+    if first.date() == last.date():
+        date_str = first.strftime('%b %-d, %Y')
+        if len(keys) == 1:
+            return f"{date_str} {first.strftime('%-I:%M %p')}"
+        return f"{date_str} {first.strftime('%-I:%M')}–{last.strftime('%-I:%M %p')}"
+    return f"{first.strftime('%b %-d')}–{last.strftime('%b %-d, %Y')}"
 
 
 def group_and_sort_clips(all_ids):
-    """Group clips by recording session, sort by timecode within, newest session first.
+    """Group clips by recording session, merge nearby sessions, newest first.
     Legacy numeric IDs go in a separate group at the end."""
     sessions = defaultdict(list)
     legacy = []
@@ -54,14 +64,35 @@ def group_and_sort_clips(all_ids):
     for key in sessions:
         sessions[key].sort(key=lambda x: x[0])
 
-    # Sort sessions newest first (session_key sorts chronologically as a string)
-    sorted_sessions = sorted(sessions.keys(), reverse=True)
+    # Sort sessions newest first
+    sorted_keys = sorted(sessions.keys(), reverse=True)
 
-    # Build ordered list of (session_key_or_label, [clip_ids])
-    result = []
-    for key in sorted_sessions:
+    # Merge sessions that start within MERGE_WINDOW_MINUTES of each other
+    merged = []  # list of (group_keys, all_clip_ids)
+    for key in sorted_keys:
         clips = [cid for _, cid in sessions[key]]
-        result.append((key, session_label(key), clips))
+        dt = session_key_to_datetime(key)
+
+        if merged:
+            # Check if this session is close to the previous group's latest session
+            prev_keys, prev_clips = merged[-1]
+            prev_dt = min(session_key_to_datetime(k) for k in prev_keys)  # earliest in group (since we go newest-first)
+            diff = abs((prev_dt - dt).total_seconds()) / 60
+            if diff <= MERGE_WINDOW_MINUTES:
+                prev_keys.append(key)
+                prev_clips.extend(clips)
+                continue
+
+        merged.append(([key], clips))
+
+    # Build result with labels
+    result = []
+    for keys, clips in merged:
+        # Sort clips within merged group by their full ID (session + timecode)
+        clips.sort(key=lambda cid: cid)
+        label = session_range_label(keys)
+        group_key = keys[0]  # use newest session key as the group key
+        result.append((group_key, label, clips))
 
     if legacy:
         result.append(('legacy', 'earlier sessions', legacy))
@@ -128,6 +159,7 @@ def generate_page_html(page_num, clips, total_pages):
             display: block;
             background: #111;
             aspect-ratio: 32 / 9;
+            object-fit: cover;
         }}
         .page-nav {{
             margin-top: 2rem;
@@ -183,6 +215,7 @@ def generate_index_html(sessions_with_pages):
     """
     rows = []
     for label, page_groups in sessions_with_pages:
+        total_clips = sum(len(clips) for _, clips in page_groups)
         # For each session, show links to its pages with thumbnail previews
         page_cards = []
         for page_num, clips in page_groups:
@@ -204,7 +237,7 @@ def generate_index_html(sessions_with_pages):
 
         cards_html = "\n".join(page_cards)
         rows.append(f'''            <div class="session">
-                <div class="session-label">{label}</div>
+                <div class="session-label">{label} <span class="session-total">{total_clips} clips</span></div>
                 <div class="session-pages">
 {cards_html}
                 </div>
@@ -252,6 +285,10 @@ def generate_index_html(sessions_with_pages):
             font-size: 1.1rem;
             opacity: 0.7;
             margin-bottom: 0.75rem;
+        }}
+        .session-total {{
+            opacity: 0.5;
+            font-size: 0.85rem;
         }}
         .session-pages {{
             display: flex;
@@ -330,29 +367,31 @@ def main():
     all_ids = list(dict.fromkeys(existing_ids + new_ids))  # dedupe preserving order
     print(f"Total unique clips: {len(all_ids)}")
 
-    # Group by recording session, sort by timecode, newest first
+    # Group by recording session, merge nearby, sort by timecode, newest first
     sessions = group_and_sort_clips(all_ids)
-    print(f"\nFound {len(sessions)} recording sessions:")
+    print(f"\nFound {len(sessions)} session groups:")
     for key, label, clips in sessions:
         print(f"  {label}: {len(clips)} clips")
 
-    # Paginate: split each session into pages of CLIPS_PER_PAGE
-    # Each page stays within one session
-    pages = []  # list of (session_key, session_label, [clip_ids])
+    # Paginate: pages can span sessions, just fill to CLIPS_PER_PAGE
+    all_clips_ordered = []
     for key, label, clips in sessions:
-        for i in range(0, len(clips), CLIPS_PER_PAGE):
-            pages.append((key, label, clips[i:i + CLIPS_PER_PAGE]))
+        all_clips_ordered.extend(clips)
+
+    pages = []
+    for i in range(0, len(all_clips_ordered), CLIPS_PER_PAGE):
+        pages.append(all_clips_ordered[i:i + CLIPS_PER_PAGE])
 
     total_pages = len(pages)
     print(f"\nGenerating {total_pages} pages...")
 
     # Generate browse pages
-    for page_num, (key, label, clips) in enumerate(pages, 1):
+    for page_num, clips in enumerate(pages, 1):
         html = generate_page_html(page_num, clips, total_pages)
         path = os.path.join(WEBSITE_DIR, f"clips-{page_num}.html")
         with open(path, "w") as f:
             f.write(html)
-        print(f"  Generated clips-{page_num}.html ({len(clips)} clips, {label})")
+        print(f"  Generated clips-{page_num}.html ({len(clips)} clips)")
 
     # Remove extra old pages
     for old_page in range(total_pages + 1, 50):
@@ -363,23 +402,30 @@ def main():
         else:
             break
 
-    # Build index: group pages by session
-    sessions_with_pages = []  # list of (label, [(page_num, clips)])
-    current_session = None
-    for page_num, (key, label, clips) in enumerate(pages, 1):
-        if current_session is None or current_session[0] != key:
-            current_session = (key, label, [])
-            sessions_with_pages.append(current_session)
-        current_session[2].append((page_num, clips))
+    # Build index: map session groups to their page ranges
+    # Figure out which pages each session group lands on
+    clip_page_map = {}  # clip_id -> page_num
+    for page_num, clips in enumerate(pages, 1):
+        for cid in clips:
+            clip_page_map[cid] = page_num
 
-    index_data = [(label, page_groups) for key, label, page_groups in sessions_with_pages]
-    index_html = generate_index_html(index_data)
+    sessions_with_pages = []
+    for key, label, clips in sessions:
+        # Find all pages this session spans
+        page_clips = defaultdict(list)
+        for cid in clips:
+            pn = clip_page_map[cid]
+            page_clips[pn].append(cid)
+        page_groups = sorted(page_clips.items())
+        sessions_with_pages.append((label, page_groups))
+
+    index_html = generate_index_html(sessions_with_pages)
     index_path = os.path.join(WEBSITE_DIR, "clips-all.html")
     with open(index_path, "w") as f:
         f.write(index_html)
     print(f"  Generated clips-all.html")
 
-    print(f"\nDone! {len(all_ids)} clips across {total_pages} pages, {len(sessions_with_pages)} sessions")
+    print(f"\nDone! {len(all_ids)} clips across {total_pages} pages, {len(sessions)} session groups")
 
 
 if __name__ == "__main__":
