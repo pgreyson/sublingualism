@@ -9,7 +9,6 @@ from datetime import datetime
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 WEBSITE_DIR = os.path.join(os.path.dirname(os.path.dirname(BASE_DIR)), "website")
 CDN = "https://d2xbllb3qhv8ay.cloudfront.net"
-CLIPS_PER_PAGE = 20
 MERGE_WINDOW_MINUTES = 30  # merge sessions starting within this window
 
 # Pattern: 2026-02-09_21-35-26_t0230
@@ -373,25 +372,16 @@ def main():
     for key, label, clips in sessions:
         print(f"  {label}: {len(clips)} clips")
 
-    # Paginate: pages can span sessions, just fill to CLIPS_PER_PAGE
-    all_clips_ordered = []
-    for key, label, clips in sessions:
-        all_clips_ordered.extend(clips)
-
-    pages = []
-    for i in range(0, len(all_clips_ordered), CLIPS_PER_PAGE):
-        pages.append(all_clips_ordered[i:i + CLIPS_PER_PAGE])
-
-    total_pages = len(pages)
+    # One page per session group
+    total_pages = len(sessions)
     print(f"\nGenerating {total_pages} pages...")
 
-    # Generate browse pages
-    for page_num, clips in enumerate(pages, 1):
+    for page_num, (key, label, clips) in enumerate(sessions, 1):
         html = generate_page_html(page_num, clips, total_pages)
         path = os.path.join(WEBSITE_DIR, f"clips-{page_num}.html")
         with open(path, "w") as f:
             f.write(html)
-        print(f"  Generated clips-{page_num}.html ({len(clips)} clips)")
+        print(f"  Generated clips-{page_num}.html ({len(clips)} clips, {label})")
 
     # Remove extra old pages
     for old_page in range(total_pages + 1, 50):
@@ -402,22 +392,10 @@ def main():
         else:
             break
 
-    # Build index: map session groups to their page ranges
-    # Figure out which pages each session group lands on
-    clip_page_map = {}  # clip_id -> page_num
-    for page_num, clips in enumerate(pages, 1):
-        for cid in clips:
-            clip_page_map[cid] = page_num
-
+    # Build index: one entry per session, linking to its page
     sessions_with_pages = []
-    for key, label, clips in sessions:
-        # Find all pages this session spans
-        page_clips = defaultdict(list)
-        for cid in clips:
-            pn = clip_page_map[cid]
-            page_clips[pn].append(cid)
-        page_groups = sorted(page_clips.items())
-        sessions_with_pages.append((label, page_groups))
+    for page_num, (key, label, clips) in enumerate(sessions, 1):
+        sessions_with_pages.append((label, [(page_num, clips)]))
 
     index_html = generate_index_html(sessions_with_pages)
     index_path = os.path.join(WEBSITE_DIR, "clips-all.html")
@@ -425,7 +403,7 @@ def main():
         f.write(index_html)
     print(f"  Generated clips-all.html")
 
-    print(f"\nDone! {len(all_ids)} clips across {total_pages} pages, {len(sessions)} session groups")
+    print(f"\nDone! {len(all_ids)} clips across {total_pages} pages")
 
 
 if __name__ == "__main__":

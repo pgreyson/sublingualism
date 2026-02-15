@@ -167,16 +167,12 @@
         });
         overlay.appendChild(closeBtn);
 
-        // SBS add buttons — one per eye, bottom-center of each half
-        var addBtnStyle = 'position:absolute;bottom:16px;z-index:10;width:44px;height:44px;border-radius:50%;border:2px solid rgba(255,255,255,0.7);color:#fff;font-size:24px;line-height:1;cursor:pointer;display:none;align-items:center;justify-content:center;padding:0;';
-        var overlayAddBtnL = document.createElement('button');
-        overlayAddBtnL.className = 'overlay-add-btn';
-        overlayAddBtnL.style.cssText = addBtnStyle + 'left:25%;transform:translateX(-50%);';
-        var overlayAddBtnR = document.createElement('button');
-        overlayAddBtnR.className = 'overlay-add-btn';
-        overlayAddBtnR.style.cssText = addBtnStyle + 'left:75%;transform:translateX(-50%);';
+        // Add button — single centered button at bottom
+        var overlayAddBtn = document.createElement('button');
+        overlayAddBtn.className = 'overlay-add-btn';
+        overlayAddBtn.style.cssText = 'position:absolute;bottom:16px;left:50%;transform:translateX(-50%);z-index:10;width:44px;height:44px;border-radius:50%;border:2px solid rgba(255,255,255,0.7);color:#fff;font-size:24px;line-height:1;cursor:pointer;display:none;align-items:center;justify-content:center;padding:0;';
 
-        function onOverlayAddClick(e) {
+        overlayAddBtn.addEventListener('click', function(e) {
             e.stopPropagation();
             if (currentIndex === -1) return;
             var videoId = allClips[currentIndex].getAttribute('data-id');
@@ -196,11 +192,8 @@
                     pageClip.style.outline = 'none';
                 }
             }
-        }
-        overlayAddBtnL.addEventListener('click', onOverlayAddClick);
-        overlayAddBtnR.addEventListener('click', onOverlayAddClick);
-        overlay.appendChild(overlayAddBtnL);
-        overlay.appendChild(overlayAddBtnR);
+        });
+        overlay.appendChild(overlayAddBtn);
 
         // Touch handling — drag the track with finger
         var touchStartX = 0;
@@ -296,19 +289,17 @@
     }
 
     function updateOverlayAddBtns() {
-        var btns = overlay ? overlay.querySelectorAll('.overlay-add-btn') : [];
-        if (btns.length === 0 || currentIndex === -1) return;
+        var btn = overlay ? overlay.querySelector('.overlay-add-btn') : null;
+        if (!btn || currentIndex === -1) return;
         var videoId = allClips[currentIndex].getAttribute('data-id');
         var isAdded = getList(ADD_KEY).indexOf(videoId) !== -1;
-        for (var i = 0; i < btns.length; i++) {
-            btns[i].style.display = isActive ? 'flex' : 'none';
-            if (isAdded) {
-                btns[i].textContent = '\u2713';
-                btns[i].style.background = 'rgba(0,180,80,0.8)';
-            } else {
-                btns[i].textContent = '+';
-                btns[i].style.background = 'rgba(0,0,0,0.6)';
-            }
+        btn.style.display = isActive ? 'flex' : 'none';
+        if (isAdded) {
+            btn.textContent = '\u2713';
+            btn.style.background = 'rgba(0,180,80,0.8)';
+        } else {
+            btn.textContent = '+';
+            btn.style.background = 'rgba(0,0,0,0.6)';
         }
     }
 
