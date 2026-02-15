@@ -139,11 +139,11 @@
 
         // Track holds 3 panels side by side; we translate it to slide
         track = document.createElement('div');
-        track.style.cssText = 'display:flex;width:300vw;height:100%;will-change:transform;';
+        track.style.cssText = 'display:flex;height:100%;will-change:transform;';
 
         for (var i = 0; i < 3; i++) {
             var panel = document.createElement('div');
-            panel.style.cssText = 'width:100vw;height:100%;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:#000;';
+            panel.style.cssText = 'height:100%;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:#000;';
             var vid = document.createElement('video');
             vid.style.cssText = 'width:100%;height:100%;object-fit:contain;';
             vid.setAttribute('loop', '');
@@ -342,14 +342,17 @@
         if (vid.getAttribute('src') !== src) {
             vid.src = src;
             vid.preload = 'auto';
-            vid.load();
         }
         vid.muted = true;
-        // Seek to start so the first frame renders as a preview
-        vid.addEventListener('loadeddata', function onLoaded() {
-            vid.removeEventListener('loadeddata', onLoaded);
-            vid.currentTime = 0;
-        });
+        vid.currentTime = 0;
+        // Force mobile Safari to fetch and decode the first frame
+        var playPromise = vid.play();
+        if (playPromise) {
+            playPromise.then(function() {
+                vid.pause();
+                vid.currentTime = 0;
+            }).catch(function() {});
+        }
     }
 
     // direction: 0 = initial load, 1 = swiped to next, -1 = swiped to prev
@@ -405,7 +408,11 @@
     }
 
     function updateViewW() {
-        viewW = panelVideos[0].parentNode.offsetWidth;
+        viewW = overlay.clientWidth;
+        track.style.width = (viewW * 3) + 'px';
+        for (var i = 0; i < panelVideos.length; i++) {
+            panelVideos[i].parentNode.style.width = viewW + 'px';
+        }
     }
 
     function openOverlay(index) {
