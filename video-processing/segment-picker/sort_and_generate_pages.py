@@ -172,6 +172,7 @@ def generate_page_html(page_num, clips, total_pages):
             display: flex;
             gap: 0.75rem;
             flex-wrap: wrap;
+            align-items: center;
         }}
         .page-nav a {{
             color: #fff;
@@ -186,6 +187,16 @@ def generate_page_html(page_num, clips, total_pages):
             opacity: 1;
             font-size: 0.9rem;
         }}
+        .page-nav .prev-next {{
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }}
+        .page-nav .prev-next:hover {{
+            opacity: 1;
+        }}
+        .page-nav .spacer {{
+            flex-grow: 1;
+        }}
     </style>
 </head>
 <body>
@@ -197,7 +208,7 @@ def generate_page_html(page_num, clips, total_pages):
 {clips_html}
         </div>
         <div class="page-nav">
-            {page_nav}
+            {f'<a class="prev-next" href="/clips-{page_num - 1}.html">&larr; prev</a>' if page_num > 1 else '<span></span>'} {page_nav} {f'<a class="prev-next" href="/clips-{page_num + 1}.html">next &rarr;</a>' if page_num < total_pages else ''}
         </div>
     </div>
     <script src="/review.js"></script>
