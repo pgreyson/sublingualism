@@ -70,6 +70,16 @@
     "file_size_mb": 10.7
   },
   {
+    "video_id": "2026-02-14_14-49-56",
+    "loop_start": 30.0,
+    "loop_end": 37.33,
+    "loop_duration": 7.33,
+    "loop_score": 0.001757,
+    "visual_interest": 33.64,
+    "output_file": "2026-02-14_14-49-56_t0030_loop.mp4",
+    "file_size_mb": 8.2
+  },
+  {
     "video_id": "2026-02-09_19-44-56",
     "loop_start": 835.0,
     "loop_end": 848.0,
@@ -250,6 +260,16 @@
     "file_size_mb": 8.3
   },
   {
+    "video_id": "2026-02-14_19-17-30",
+    "loop_start": 0.0,
+    "loop_end": 6.33,
+    "loop_duration": 6.33,
+    "loop_score": 0.002448,
+    "visual_interest": 34.13,
+    "output_file": "2026-02-14_19-17-30_t0000_loop.mp4",
+    "file_size_mb": 7.1
+  },
+  {
     "video_id": "2026-02-09_19-44-56",
     "loop_start": 240.0,
     "loop_end": 247.33,
@@ -278,6 +298,16 @@
     "visual_interest": 37.15,
     "output_file": "2026-02-09_19-44-56_t0920_loop.mp4",
     "file_size_mb": 8.9
+  },
+  {
+    "video_id": "2026-02-14_14-49-56",
+    "loop_start": 5.0,
+    "loop_end": 11.33,
+    "loop_duration": 6.33,
+    "loop_score": 0.00268,
+    "visual_interest": 73.0,
+    "output_file": "2026-02-14_14-49-56_t0005_loop.mp4",
+    "file_size_mb": 5.0
   },
   {
     "video_id": "2026-02-09_19-44-56",
@@ -530,6 +560,16 @@
     "file_size_mb": 7.0
   },
   {
+    "video_id": "2026-02-14_18-31-26",
+    "loop_start": 0.0,
+    "loop_end": 7.0,
+    "loop_duration": 7.0,
+    "loop_score": 0.004496,
+    "visual_interest": 40.49,
+    "output_file": "2026-02-14_18-31-26_t0000_loop.mp4",
+    "file_size_mb": 10.8
+  },
+  {
     "video_id": "2026-02-09_21-35-26",
     "loop_start": 290.0,
     "loop_end": 296.33,
@@ -630,6 +670,26 @@
     "file_size_mb": 8.8
   },
   {
+    "video_id": "2026-02-14_20-25-04",
+    "loop_start": 10.0,
+    "loop_end": 19.67,
+    "loop_duration": 9.67,
+    "loop_score": 0.006273,
+    "visual_interest": 63.7,
+    "output_file": "2026-02-14_20-25-04_t0010_loop.mp4",
+    "file_size_mb": 11.5
+  },
+  {
+    "video_id": "2026-02-14_14-53-39",
+    "loop_start": 15.0,
+    "loop_end": 29.0,
+    "loop_duration": 14.0,
+    "loop_score": 0.006375,
+    "visual_interest": 31.65,
+    "output_file": "2026-02-14_14-53-39_t0015_loop.mp4",
+    "file_size_mb": 20.6
+  },
+  {
     "video_id": "2026-02-09_19-44-56",
     "loop_start": 395.0,
     "loop_end": 403.67,
@@ -638,6 +698,26 @@
     "visual_interest": 39.9,
     "output_file": "2026-02-09_19-44-56_t0395_loop.mp4",
     "file_size_mb": 10.9
+  },
+  {
+    "video_id": "2026-02-14_18-28-45",
+    "loop_start": 75.0,
+    "loop_end": 86.0,
+    "loop_duration": 11.0,
+    "loop_score": 0.006638,
+    "visual_interest": 81.59,
+    "output_file": "2026-02-14_18-28-45_t0075_loop.mp4",
+    "file_size_mb": 21.6
+  },
+  {
+    "video_id": "2026-02-14_16-55-40",
+    "loop_start": 0.0,
+    "loop_end": 9.0,
+    "loop_duration": 9.0,
+    "loop_score": 0.006653,
+    "visual_interest": 91.88,
+    "output_file": "2026-02-14_16-55-40_t0000_loop.mp4",
+    "file_size_mb": 15.0
   },
   {
     "video_id": "2026-02-09_19-44-56",
@@ -760,6 +840,36 @@
     "file_size_mb": 8.4
   },
   {
+    "video_id": "2026-02-14_18-23-41",
+    "loop_start": 0.0,
+    "loop_end": 6.33,
+    "loop_duration": 6.33,
+    "loop_score": 0.008374,
+    "visual_interest": 77.3,
+    "output_file": "2026-02-14_18-23-41_t0000_loop.mp4",
+    "file_size_mb": 10.2
+  },
+  {
+    "video_id": "2026-02-14_18-28-45",
+    "loop_start": 120.0,
+    "loop_end": 127.33,
+    "loop_duration": 7.33,
+    "loop_score": 0.008412,
+    "visual_interest": 53.52,
+    "output_file": "2026-02-14_18-28-45_t0120_loop.mp4",
+    "file_size_mb": 12.4
+  },
+  {
+    "video_id": "2026-02-14_20-25-04",
+    "loop_start": 140.0,
+    "loop_end": 153.67,
+    "loop_duration": 13.67,
+    "loop_score": 0.008419,
+    "visual_interest": 49.03,
+    "output_file": "2026-02-14_20-25-04_t0140_loop.mp4",
+    "file_size_mb": 24.9
+  },
+  {
     "video_id": "2026-02-09_21-30-07",
     "loop_start": 45.0,
     "loop_end": 55.67,
@@ -778,6 +888,26 @@
     "visual_interest": 30.48,
     "output_file": "2026-02-09_18-49-32_t0040_loop.mp4",
     "file_size_mb": 8.2
+  },
+  {
+    "video_id": "2026-02-14_19-17-30",
+    "loop_start": 20.0,
+    "loop_end": 32.0,
+    "loop_duration": 12.0,
+    "loop_score": 0.008925,
+    "visual_interest": 45.14,
+    "output_file": "2026-02-14_19-17-30_t0020_loop.mp4",
+    "file_size_mb": 15.5
+  },
+  {
+    "video_id": "2026-02-14_20-25-04",
+    "loop_start": 25.0,
+    "loop_end": 31.33,
+    "loop_duration": 6.33,
+    "loop_score": 0.008937,
+    "visual_interest": 62.34,
+    "output_file": "2026-02-14_20-25-04_t0025_loop.mp4",
+    "file_size_mb": 7.4
   },
   {
     "video_id": "2026-02-09_21-35-26",
@@ -820,6 +950,16 @@
     "file_size_mb": 5.9
   },
   {
+    "video_id": "2026-02-14_18-25-45",
+    "loop_start": 5.0,
+    "loop_end": 13.67,
+    "loop_duration": 8.67,
+    "loop_score": 0.009619,
+    "visual_interest": 81.3,
+    "output_file": "2026-02-14_18-25-45_t0005_loop.mp4",
+    "file_size_mb": 15.0
+  },
+  {
     "video_id": "2026-02-07_19-42-19",
     "loop_start": 20.0,
     "loop_end": 26.0,
@@ -848,6 +988,16 @@
     "visual_interest": 42.73,
     "output_file": "2026-02-09_21-35-26_t0060_loop.mp4",
     "file_size_mb": 7.8
+  },
+  {
+    "video_id": "2026-02-14_16-52-41",
+    "loop_start": 0.0,
+    "loop_end": 6.67,
+    "loop_duration": 6.67,
+    "loop_score": 0.010029,
+    "visual_interest": 86.87,
+    "output_file": "2026-02-14_16-52-41_t0000_loop.mp4",
+    "file_size_mb": 16.0
   },
   {
     "video_id": "2026-02-09_19-44-56",
@@ -900,6 +1050,16 @@
     "file_size_mb": 14.4
   },
   {
+    "video_id": "2026-02-14_18-23-56",
+    "loop_start": 0.0,
+    "loop_end": 9.0,
+    "loop_duration": 9.0,
+    "loop_score": 0.0111,
+    "visual_interest": 77.44,
+    "output_file": "2026-02-14_18-23-56_t0000_loop.mp4",
+    "file_size_mb": 14.4
+  },
+  {
     "video_id": "2026-02-08_21-49-46",
     "loop_start": 220.0,
     "loop_end": 226.67,
@@ -938,6 +1098,16 @@
     "visual_interest": 14.86,
     "output_file": "2026-02-09_19-44-56_t0290_loop.mp4",
     "file_size_mb": 7.3
+  },
+  {
+    "video_id": "2026-02-14_18-31-26",
+    "loop_start": 60.0,
+    "loop_end": 67.0,
+    "loop_duration": 7.0,
+    "loop_score": 0.012687,
+    "visual_interest": 30.65,
+    "output_file": "2026-02-14_18-31-26_t0060_loop.mp4",
+    "file_size_mb": 17.6
   },
   {
     "video_id": "2026-02-07_19-42-19",
@@ -1060,6 +1230,16 @@
     "file_size_mb": 6.6
   },
   {
+    "video_id": "2026-02-14_18-27-27",
+    "loop_start": 10.0,
+    "loop_end": 24.0,
+    "loop_duration": 14.0,
+    "loop_score": 0.014421,
+    "visual_interest": 90.19,
+    "output_file": "2026-02-14_18-27-27_t0010_loop.mp4",
+    "file_size_mb": 25.7
+  },
+  {
     "video_id": "2026-02-09_19-44-56",
     "loop_start": 35.0,
     "loop_end": 45.0,
@@ -1068,6 +1248,16 @@
     "visual_interest": 17.0,
     "output_file": "2026-02-09_19-44-56_t0035_loop.mp4",
     "file_size_mb": 13.4
+  },
+  {
+    "video_id": "2026-02-14_16-52-41",
+    "loop_start": 45.0,
+    "loop_end": 54.0,
+    "loop_duration": 9.0,
+    "loop_score": 0.014803,
+    "visual_interest": 97.37,
+    "output_file": "2026-02-14_16-52-41_t0045_loop.mp4",
+    "file_size_mb": 15.9
   },
   {
     "video_id": "2026-02-09_19-44-56",
@@ -1108,6 +1298,16 @@
     "visual_interest": 20.35,
     "output_file": "2026-02-09_18-49-32_t0065_loop.mp4",
     "file_size_mb": 8.5
+  },
+  {
+    "video_id": "2026-02-14_20-25-04",
+    "loop_start": 90.0,
+    "loop_end": 102.67,
+    "loop_duration": 12.67,
+    "loop_score": 0.015208,
+    "visual_interest": 70.71,
+    "output_file": "2026-02-14_20-25-04_t0090_loop.mp4",
+    "file_size_mb": 23.7
   },
   {
     "video_id": "2026-02-09_21-35-26",
@@ -1170,6 +1370,16 @@
     "file_size_mb": 5.1
   },
   {
+    "video_id": "2026-02-14_18-31-26",
+    "loop_start": 35.0,
+    "loop_end": 41.33,
+    "loop_duration": 6.33,
+    "loop_score": 0.016841,
+    "visual_interest": 40.69,
+    "output_file": "2026-02-14_18-31-26_t0035_loop.mp4",
+    "file_size_mb": 9.8
+  },
+  {
     "video_id": "2026-02-09_19-44-56",
     "loop_start": 0.0,
     "loop_end": 14.0,
@@ -1190,6 +1400,16 @@
     "file_size_mb": 8.5
   },
   {
+    "video_id": "2026-02-14_20-09-42",
+    "loop_start": 30.0,
+    "loop_end": 42.67,
+    "loop_duration": 12.67,
+    "loop_score": 0.017435,
+    "visual_interest": 66.01,
+    "output_file": "2026-02-14_20-09-42_t0030_loop.mp4",
+    "file_size_mb": 24.6
+  },
+  {
     "video_id": "2026-02-08_22-09-45",
     "loop_start": 275.0,
     "loop_end": 286.33,
@@ -1198,6 +1418,26 @@
     "visual_interest": 63.83,
     "output_file": "2026-02-08_22-09-45_t0275_loop.mp4",
     "file_size_mb": 27.4
+  },
+  {
+    "video_id": "2026-02-14_18-28-45",
+    "loop_start": 100.0,
+    "loop_end": 106.33,
+    "loop_duration": 6.33,
+    "loop_score": 0.018106,
+    "visual_interest": 83.66,
+    "output_file": "2026-02-14_18-28-45_t0100_loop.mp4",
+    "file_size_mb": 11.1
+  },
+  {
+    "video_id": "2026-02-14_14-53-39",
+    "loop_start": 0.0,
+    "loop_end": 6.0,
+    "loop_duration": 6.0,
+    "loop_score": 0.018556,
+    "visual_interest": 78.46,
+    "output_file": "2026-02-14_14-53-39_t0000_loop.mp4",
+    "file_size_mb": 10.7
   },
   {
     "video_id": "2026-02-07_19-42-19",
@@ -1240,6 +1480,16 @@
     "file_size_mb": 4.7
   },
   {
+    "video_id": "2026-02-14_18-31-26",
+    "loop_start": 95.0,
+    "loop_end": 103.33,
+    "loop_duration": 8.33,
+    "loop_score": 0.019763,
+    "visual_interest": 22.05,
+    "output_file": "2026-02-14_18-31-26_t0095_loop.mp4",
+    "file_size_mb": 19.3
+  },
+  {
     "video_id": "2026-02-07_19-39-37",
     "loop_start": 60.0,
     "loop_end": 67.33,
@@ -1260,6 +1510,16 @@
     "file_size_mb": 10.7
   },
   {
+    "video_id": "2026-02-14_18-31-26",
+    "loop_start": 80.0,
+    "loop_end": 86.33,
+    "loop_duration": 6.33,
+    "loop_score": 0.020932,
+    "visual_interest": 33.03,
+    "output_file": "2026-02-14_18-31-26_t0080_loop.mp4",
+    "file_size_mb": 15.2
+  },
+  {
     "video_id": "2026-02-09_21-35-26",
     "loop_start": 340.0,
     "loop_end": 348.0,
@@ -1268,6 +1528,26 @@
     "visual_interest": 39.25,
     "output_file": "2026-02-09_21-35-26_t0340_loop.mp4",
     "file_size_mb": 11.1
+  },
+  {
+    "video_id": "2026-02-14_18-28-08",
+    "loop_start": 0.0,
+    "loop_end": 8.33,
+    "loop_duration": 8.33,
+    "loop_score": 0.021188,
+    "visual_interest": 79.99,
+    "output_file": "2026-02-14_18-28-08_t0000_loop.mp4",
+    "file_size_mb": 18.1
+  },
+  {
+    "video_id": "2026-02-14_16-52-41",
+    "loop_start": 25.0,
+    "loop_end": 32.0,
+    "loop_duration": 7.0,
+    "loop_score": 0.0213,
+    "visual_interest": 90.23,
+    "output_file": "2026-02-14_16-52-41_t0025_loop.mp4",
+    "file_size_mb": 14.5
   },
   {
     "video_id": "2026-02-08_22-09-45",
@@ -1340,6 +1620,26 @@
     "file_size_mb": 23.5
   },
   {
+    "video_id": "2026-02-14_20-25-04",
+    "loop_start": 155.0,
+    "loop_end": 161.67,
+    "loop_duration": 6.67,
+    "loop_score": 0.023848,
+    "visual_interest": 46.04,
+    "output_file": "2026-02-14_20-25-04_t0155_loop.mp4",
+    "file_size_mb": 10.8
+  },
+  {
+    "video_id": "2026-02-14_20-25-04",
+    "loop_start": 65.0,
+    "loop_end": 73.33,
+    "loop_duration": 8.33,
+    "loop_score": 0.024064,
+    "visual_interest": 70.46,
+    "output_file": "2026-02-14_20-25-04_t0065_loop.mp4",
+    "file_size_mb": 14.6
+  },
+  {
     "video_id": "2026-02-09_21-30-07",
     "loop_start": 65.0,
     "loop_end": 71.0,
@@ -1348,6 +1648,26 @@
     "visual_interest": 62.72,
     "output_file": "2026-02-09_21-30-07_t0065_loop.mp4",
     "file_size_mb": 4.2
+  },
+  {
+    "video_id": "2026-02-14_20-25-04",
+    "loop_start": 185.0,
+    "loop_end": 191.33,
+    "loop_duration": 6.33,
+    "loop_score": 0.024989,
+    "visual_interest": 48.02,
+    "output_file": "2026-02-14_20-25-04_t0185_loop.mp4",
+    "file_size_mb": 10.1
+  },
+  {
+    "video_id": "2026-02-14_18-28-45",
+    "loop_start": 45.0,
+    "loop_end": 53.33,
+    "loop_duration": 8.33,
+    "loop_score": 0.025177,
+    "visual_interest": 80.69,
+    "output_file": "2026-02-14_18-28-45_t0045_loop.mp4",
+    "file_size_mb": 17.1
   },
   {
     "video_id": "2026-02-08_21-49-46",
@@ -1400,6 +1720,16 @@
     "file_size_mb": 10.3
   },
   {
+    "video_id": "2026-02-14_20-25-04",
+    "loop_start": 40.0,
+    "loop_end": 46.33,
+    "loop_duration": 6.33,
+    "loop_score": 0.026804,
+    "visual_interest": 60.88,
+    "output_file": "2026-02-14_20-25-04_t0040_loop.mp4",
+    "file_size_mb": 5.3
+  },
+  {
     "video_id": "2026-02-09_19-44-56",
     "loop_start": 795.0,
     "loop_end": 801.0,
@@ -1450,6 +1780,36 @@
     "file_size_mb": 6.4
   },
   {
+    "video_id": "2026-02-14_18-31-26",
+    "loop_start": 120.0,
+    "loop_end": 129.0,
+    "loop_duration": 9.0,
+    "loop_score": 0.02883,
+    "visual_interest": 41.2,
+    "output_file": "2026-02-14_18-31-26_t0120_loop.mp4",
+    "file_size_mb": 23.8
+  },
+  {
+    "video_id": "2026-02-14_20-25-04",
+    "loop_start": 170.0,
+    "loop_end": 176.0,
+    "loop_duration": 6.0,
+    "loop_score": 0.029026,
+    "visual_interest": 45.45,
+    "output_file": "2026-02-14_20-25-04_t0170_loop.mp4",
+    "file_size_mb": 10.7
+  },
+  {
+    "video_id": "2026-02-14_18-28-45",
+    "loop_start": 30.0,
+    "loop_end": 37.0,
+    "loop_duration": 7.0,
+    "loop_score": 0.029834,
+    "visual_interest": 85.37,
+    "output_file": "2026-02-14_18-28-45_t0030_loop.mp4",
+    "file_size_mb": 12.6
+  },
+  {
     "video_id": "2026-02-08_21-49-46",
     "loop_start": 85.0,
     "loop_end": 94.0,
@@ -1470,6 +1830,16 @@
     "file_size_mb": 13.6
   },
   {
+    "video_id": "2026-02-14_20-25-04",
+    "loop_start": 125.0,
+    "loop_end": 131.0,
+    "loop_duration": 6.0,
+    "loop_score": 0.031376,
+    "visual_interest": 51.58,
+    "output_file": "2026-02-14_20-25-04_t0125_loop.mp4",
+    "file_size_mb": 10.7
+  },
+  {
     "video_id": "2026-02-09_19-44-56",
     "loop_start": 1050.0,
     "loop_end": 1056.67,
@@ -1478,6 +1848,16 @@
     "visual_interest": 52.79,
     "output_file": "2026-02-09_19-44-56_t1050_loop.mp4",
     "file_size_mb": 18.7
+  },
+  {
+    "video_id": "2026-02-14_20-09-42",
+    "loop_start": 0.0,
+    "loop_end": 6.0,
+    "loop_duration": 6.0,
+    "loop_score": 0.032304,
+    "visual_interest": 86.36,
+    "output_file": "2026-02-14_20-09-42_t0000_loop.mp4",
+    "file_size_mb": 7.7
   },
   {
     "video_id": "2026-02-08_21-49-46",
@@ -1508,6 +1888,16 @@
     "visual_interest": 79.3,
     "output_file": "2026-02-08_22-28-31_t0130_loop.mp4",
     "file_size_mb": 16.9
+  },
+  {
+    "video_id": "2026-02-14_20-25-04",
+    "loop_start": 110.0,
+    "loop_end": 116.0,
+    "loop_duration": 6.0,
+    "loop_score": 0.03364,
+    "visual_interest": 66.63,
+    "output_file": "2026-02-14_20-25-04_t0110_loop.mp4",
+    "file_size_mb": 9.7
   },
   {
     "video_id": "2026-02-08_21-49-46",
@@ -1588,6 +1978,16 @@
     "visual_interest": 63.97,
     "output_file": "2026-02-08_22-09-45_t0180_loop.mp4",
     "file_size_mb": 10.7
+  },
+  {
+    "video_id": "2026-02-14_18-31-26",
+    "loop_start": 20.0,
+    "loop_end": 32.33,
+    "loop_duration": 12.33,
+    "loop_score": 0.039613,
+    "visual_interest": 34.15,
+    "output_file": "2026-02-14_18-31-26_t0020_loop.mp4",
+    "file_size_mb": 19.4
   },
   {
     "video_id": "2026-02-08_18-37-52",
@@ -1738,6 +2138,16 @@
     "visual_interest": 77.04,
     "output_file": "2026-02-08_22-28-31_t0195_loop.mp4",
     "file_size_mb": 16.6
+  },
+  {
+    "video_id": "2026-02-14_18-28-45",
+    "loop_start": 60.0,
+    "loop_end": 71.0,
+    "loop_duration": 11.0,
+    "loop_score": 0.055775,
+    "visual_interest": 83.07,
+    "output_file": "2026-02-14_18-28-45_t0060_loop.mp4",
+    "file_size_mb": 23.5
   },
   {
     "video_id": "2026-02-08_21-49-46",

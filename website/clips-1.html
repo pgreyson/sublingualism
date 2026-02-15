@@ -20,8 +20,7 @@
         .nav {
             margin-bottom: 2rem;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            gap: 1.5rem;
         }
         .nav a {
             color: #fff;
@@ -32,42 +31,41 @@
             opacity: 1;
         }
         .clips-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            display: flex;
+            flex-direction: column;
             gap: 1rem;
-        }
-        .clip {
-            cursor: pointer;
         }
         .clip video {
             width: 100%;
             display: block;
             background: #111;
+            aspect-ratio: 32 / 9;
         }
         .page-nav {
             margin-top: 2rem;
-            text-align: center;
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
         }
         .page-nav a {
             color: #fff;
             text-decoration: none;
-            opacity: 0.7;
-            margin: 0 0.5rem;
+            opacity: 0.5;
+            font-size: 0.9rem;
         }
         .page-nav a:hover {
             opacity: 1;
         }
-        @media (max-width: 768px) {
-            .clips-grid {
-                grid-template-columns: 1fr;
-            }
+        .page-nav .current {
+            opacity: 1;
+            font-size: 0.9rem;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="nav">
-            <a href="/clips-all.html">← all clips</a>
+            <a href="/clips-all.html">&larr; all clips</a>
         </div>
         <div class="clips-grid">
             <div class="clip" data-id="1164392447">
@@ -97,51 +95,42 @@
             <div class="clip" data-id="1164636439">
                 <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164636439.mp4#t=0.001" preload="metadata" loop muted playsinline></video>
             </div>
-            <div class="clip" data-id="1164635530">
-                <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164635530.mp4#t=0.001" preload="metadata" loop muted playsinline></video>
+            <div class="clip" data-id="1164635083">
+                <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164635083.mp4#t=0.001" preload="metadata" loop muted playsinline></video>
             </div>
-            <div class="clip" data-id="1164636213">
-                <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164636213.mp4#t=0.001" preload="metadata" loop muted playsinline></video>
+            <div class="clip" data-id="1164635334">
+                <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164635334.mp4#t=0.001" preload="metadata" loop muted playsinline></video>
             </div>
-            <div class="clip" data-id="1164635159">
-                <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164635159.mp4#t=0.001" preload="metadata" loop muted playsinline></video>
+            <div class="clip" data-id="1164636036">
+                <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164636036.mp4#t=0.001" preload="metadata" loop muted playsinline></video>
             </div>
-            <div class="clip" data-id="1164635268">
-                <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164635268.mp4#t=0.001" preload="metadata" loop muted playsinline></video>
+            <div class="clip" data-id="1164636408">
+                <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164636408.mp4#t=0.001" preload="metadata" loop muted playsinline></video>
             </div>
-            <div class="clip" data-id="1164635951">
-                <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164635951.mp4#t=0.001" preload="metadata" loop muted playsinline></video>
+            <div class="clip" data-id="1164635575">
+                <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164635575.mp4#t=0.001" preload="metadata" loop muted playsinline></video>
             </div>
-            <div class="clip" data-id="1164636298">
-                <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164636298.mp4#t=0.001" preload="metadata" loop muted playsinline></video>
+            <div class="clip" data-id="1164636254">
+                <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164636254.mp4#t=0.001" preload="metadata" loop muted playsinline></video>
             </div>
-            <div class="clip" data-id="1164635347">
-                <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164635347.mp4#t=0.001" preload="metadata" loop muted playsinline></video>
+            <div class="clip" data-id="1164636487">
+                <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164636487.mp4#t=0.001" preload="metadata" loop muted playsinline></video>
             </div>
-            <div class="clip" data-id="1164635997">
-                <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164635997.mp4#t=0.001" preload="metadata" loop muted playsinline></video>
+            <div class="clip" data-id="1164635385">
+                <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164635385.mp4#t=0.001" preload="metadata" loop muted playsinline></video>
             </div>
-            <div class="clip" data-id="1164636314">
-                <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164636314.mp4#t=0.001" preload="metadata" loop muted playsinline></video>
+            <div class="clip" data-id="1164636081">
+                <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164636081.mp4#t=0.001" preload="metadata" loop muted playsinline></video>
             </div>
-            <div class="clip" data-id="1164635252">
-                <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164635252.mp4#t=0.001" preload="metadata" loop muted playsinline></video>
+            <div class="clip" data-id="1164636442">
+                <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164636442.mp4#t=0.001" preload="metadata" loop muted playsinline></video>
             </div>
-            <div class="clip" data-id="1164635209">
-                <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164635209.mp4#t=0.001" preload="metadata" loop muted playsinline></video>
+            <div class="clip" data-id="1164635062">
+                <video src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164635062.mp4#t=0.001" preload="metadata" loop muted playsinline></video>
             </div>
         </div>
         <div class="page-nav">
-<span style="opacity:1">1</span>
-            <a href="/clips-2.html">2</a>
-            <a href="/clips-3.html">3</a>
-            <a href="/clips-4.html">4</a>
-            <a href="/clips-5.html">5</a>
-            <a href="/clips-6.html">6</a>
-            <a href="/clips-7.html">7</a>
-            <a href="/clips-8.html">8</a>
-            <a href="/clips-9.html">9</a>
-            <a href="/clips-2.html">next →</a>
+            <span class="current">1</span> <a href="/clips-2.html">2</a> <a href="/clips-3.html">3</a> <a href="/clips-4.html">4</a> <a href="/clips-5.html">5</a> <a href="/clips-6.html">6</a> <a href="/clips-7.html">7</a> <a href="/clips-8.html">8</a> <a href="/clips-9.html">9</a> <a href="/clips-10.html">10</a> <a href="/clips-11.html">11</a> <a href="/clips-12.html">12</a> <a href="/clips-13.html">13</a> <a href="/clips-14.html">14</a>
         </div>
     </div>
     <script src="/review.js"></script>
