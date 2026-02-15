@@ -121,6 +121,7 @@ def generate_page_html(page_num, clips, total_pages):
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="{CDN}">
     <title>Sublingualism</title>
     <style>
         body {{
@@ -225,7 +226,7 @@ def generate_index_html(sessions_with_pages):
         # Use first clip's poster as the session thumbnail
         thumb_id = clips[0]
         rows.append(f'''            <a class="session" href="/clips-{page_num}.html">
-                <img src="{CDN}/posters/{thumb_id}.jpg" alt="" loading="lazy">
+                <img src="{CDN}/posters/{thumb_id}.jpg" alt="" loading="lazy" decoding="async">
                 <div class="session-info">
                     <div class="session-label">{label}</div>
                     <div class="session-count">{total_clips} clips</div>
@@ -239,6 +240,7 @@ def generate_index_html(sessions_with_pages):
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="{CDN}">
     <title>Sublingualism</title>
     <style>
         body {{
