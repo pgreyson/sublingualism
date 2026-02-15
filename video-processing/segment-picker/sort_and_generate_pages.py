@@ -156,10 +156,15 @@ def generate_page_html(page_num, clips, total_pages):
             flex-direction: column;
             gap: 0.5rem;
         }}
+        @keyframes pulse {{
+            0%, 100% {{ background: #111; }}
+            50% {{ background: #1a1a1a; }}
+        }}
         .clip video {{
             width: 100%;
             display: block;
             background: #111;
+            animation: pulse 2s ease-in-out infinite;
         }}
         .page-nav {{
             margin-top: 1.5rem;
@@ -273,9 +278,15 @@ def generate_index_html(sessions_with_pages):
             color: #fff;
             position: relative;
         }}
+        @keyframes pulse {{
+            0%, 100% {{ background: #111; }}
+            50% {{ background: #1a1a1a; }}
+        }}
         .session img {{
             width: 100%;
             display: block;
+            background: #111;
+            animation: pulse 2s ease-in-out infinite;
         }}
         .session-info {{
             padding: 0.5rem 0;

@@ -42,10 +42,15 @@
         .clip {
             cursor: pointer;
         }
+        @keyframes pulse {
+            0%, 100% { background: #111; }
+            50% { background: #1a1a1a; }
+        }
         .clip video {
             width: 100%;
             display: block;
             background: #111;
+            animation: pulse 2s ease-in-out infinite;
         }
     </style>
 </head>
