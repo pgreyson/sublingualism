@@ -216,32 +216,16 @@ def generate_index_html(sessions_with_pages):
     rows = []
     for label, page_groups in sessions_with_pages:
         total_clips = sum(len(clips) for _, clips in page_groups)
-        # For each session, show links to its pages with thumbnail previews
-        page_cards = []
-        for page_num, clips in page_groups:
-            count = len(clips)
-            # Sample up to 6 thumbnails
-            indices = list(range(min(count, 6))) if count <= 6 else [int(i * count / 6) for i in range(6)]
-            thumbs = "\n".join(
-                f'                        <img src="{CDN}/posters/{clips[i]}.jpg" alt="" loading="lazy">'
-                for i in indices
-            )
-            page_cards.append(f'''                <a class="page-link" href="/clips-{page_num}.html">
-                    <div class="header">
-                        <div class="count">{count} clips</div>
-                    </div>
-                    <div class="thumbs">
-{thumbs}
-                    </div>
-                </a>''')
-
-        cards_html = "\n".join(page_cards)
-        rows.append(f'''            <div class="session">
-                <div class="session-label">{label} <span class="session-total">{total_clips} clips</span></div>
-                <div class="session-pages">
-{cards_html}
+        page_num, clips = page_groups[0]
+        # Use first clip's poster as the session thumbnail
+        thumb_id = clips[0]
+        rows.append(f'''            <a class="session" href="/clips-{page_num}.html">
+                <img src="{CDN}/posters/{thumb_id}.jpg" alt="" loading="lazy">
+                <div class="session-info">
+                    <div class="session-label">{label}</div>
+                    <div class="session-count">{total_clips} clips</div>
                 </div>
-            </div>''')
+            </a>''')
 
     rows_html = "\n".join(rows)
 
@@ -262,10 +246,13 @@ def generate_index_html(sessions_with_pages):
         .container {{
             max-width: 1200px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 1rem;
+        }}
+        @media (min-width: 600px) {{
+            .container {{ padding: 2rem; }}
         }}
         .nav {{
-            margin-bottom: 2rem;
+            margin-bottom: 1rem;
         }}
         .nav a {{
             color: #fff;
@@ -278,51 +265,31 @@ def generate_index_html(sessions_with_pages):
         .sessions {{
             display: flex;
             flex-direction: column;
-            gap: 2rem;
-            margin-top: 1rem;
+            gap: 0.5rem;
         }}
-        .session-label {{
-            font-size: 1.1rem;
-            opacity: 0.7;
-            margin-bottom: 0.75rem;
-        }}
-        .session-total {{
-            opacity: 0.5;
-            font-size: 0.85rem;
-        }}
-        .session-pages {{
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }}
-        .page-link {{
+        .session {{
             display: block;
-            border: 1px solid rgba(255,255,255,0.2);
-            padding: 0.75rem;
             text-decoration: none;
             color: #fff;
-            transition: border-color 0.2s;
-            width: 300px;
+            position: relative;
         }}
-        .page-link:hover {{
-            border-color: rgba(255,255,255,0.6);
-        }}
-        .page-link .header {{
-            margin-bottom: 0.5rem;
-        }}
-        .page-link .count {{
-            opacity: 0.5;
-            font-size: 0.85rem;
-        }}
-        .page-link .thumbs {{
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2px;
-        }}
-        .page-link .thumbs img {{
+        .session img {{
             width: 100%;
             display: block;
-            background: #111;
+        }}
+        .session-info {{
+            padding: 0.5rem 0;
+            display: flex;
+            gap: 1rem;
+            align-items: baseline;
+        }}
+        .session-label {{
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }}
+        .session-count {{
+            font-size: 0.8rem;
+            opacity: 0.4;
         }}
     </style>
 </head>
@@ -331,7 +298,6 @@ def generate_index_html(sessions_with_pages):
         <div class="nav">
             <a href="/clips.html">&larr; clips</a>
         </div>
-        <h2 style="opacity:0.8; font-weight:normal; margin-bottom:1.5rem;">all clips</h2>
         <div class="sessions">
 {rows_html}
         </div>

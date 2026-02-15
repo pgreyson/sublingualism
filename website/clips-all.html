@@ -15,10 +15,13 @@
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 1rem;
+        }
+        @media (min-width: 600px) {
+            .container { padding: 2rem; }
         }
         .nav {
-            margin-bottom: 2rem;
+            margin-bottom: 1rem;
         }
         .nav a {
             color: #fff;
@@ -31,51 +34,31 @@
         .sessions {
             display: flex;
             flex-direction: column;
-            gap: 2rem;
-            margin-top: 1rem;
+            gap: 0.5rem;
         }
-        .session-label {
-            font-size: 1.1rem;
-            opacity: 0.7;
-            margin-bottom: 0.75rem;
-        }
-        .session-total {
-            opacity: 0.5;
-            font-size: 0.85rem;
-        }
-        .session-pages {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-        .page-link {
+        .session {
             display: block;
-            border: 1px solid rgba(255,255,255,0.2);
-            padding: 0.75rem;
             text-decoration: none;
             color: #fff;
-            transition: border-color 0.2s;
-            width: 300px;
+            position: relative;
         }
-        .page-link:hover {
-            border-color: rgba(255,255,255,0.6);
-        }
-        .page-link .header {
-            margin-bottom: 0.5rem;
-        }
-        .page-link .count {
-            opacity: 0.5;
-            font-size: 0.85rem;
-        }
-        .page-link .thumbs {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2px;
-        }
-        .page-link .thumbs img {
+        .session img {
             width: 100%;
             display: block;
-            background: #111;
+        }
+        .session-info {
+            padding: 0.5rem 0;
+            display: flex;
+            gap: 1rem;
+            align-items: baseline;
+        }
+        .session-label {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+        .session-count {
+            font-size: 0.8rem;
+            opacity: 0.4;
         }
     </style>
 </head>
@@ -84,224 +67,91 @@
         <div class="nav">
             <a href="/clips.html">&larr; clips</a>
         </div>
-        <h2 style="opacity:0.8; font-weight:normal; margin-bottom:1.5rem;">all clips</h2>
         <div class="sessions">
-            <div class="session">
-                <div class="session-label">Feb 14, 2026 8:09–8:25 PM <span class="session-total">34 clips</span></div>
-                <div class="session-pages">
-                <a class="page-link" href="/clips-1.html">
-                    <div class="header">
-                        <div class="count">34 clips</div>
-                    </div>
-                    <div class="thumbs">
-                        <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-14_20-09-42_t0000.jpg" alt="" loading="lazy">
-                        <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-14_20-25-04_t0010.jpg" alt="" loading="lazy">
-                        <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-14_20-25-04_t0040.jpg" alt="" loading="lazy">
-                        <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-14_20-25-04_t0090.jpg" alt="" loading="lazy">
-                        <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-14_20-25-04_t0130.jpg" alt="" loading="lazy">
-                        <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-14_20-25-04_t0165.jpg" alt="" loading="lazy">
-                    </div>
-                </a>
+            <a class="session" href="/clips-1.html">
+                <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-14_20-09-42_t0000.jpg" alt="" loading="lazy">
+                <div class="session-info">
+                    <div class="session-label">Feb 14, 2026 8:09–8:25 PM</div>
+                    <div class="session-count">34 clips</div>
                 </div>
-            </div>
-            <div class="session">
-                <div class="session-label">Feb 14, 2026 7:17 PM <span class="session-total">6 clips</span></div>
-                <div class="session-pages">
-                <a class="page-link" href="/clips-2.html">
-                    <div class="header">
-                        <div class="count">6 clips</div>
-                    </div>
-                    <div class="thumbs">
-                        <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-14_19-17-30_t0000.jpg" alt="" loading="lazy">
-                        <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-14_19-17-30_t0010.jpg" alt="" loading="lazy">
-                        <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-14_19-17-30_t0015.jpg" alt="" loading="lazy">
-                        <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-14_19-17-30_t0020.jpg" alt="" loading="lazy">
-                        <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-14_19-17-30_t0025.jpg" alt="" loading="lazy">
-                        <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-14_19-17-30_t0030.jpg" alt="" loading="lazy">
-                    </div>
-                </a>
+            </a>
+            <a class="session" href="/clips-2.html">
+                <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-14_19-17-30_t0000.jpg" alt="" loading="lazy">
+                <div class="session-info">
+                    <div class="session-label">Feb 14, 2026 7:17 PM</div>
+                    <div class="session-count">6 clips</div>
                 </div>
-            </div>
-            <div class="session">
-                <div class="session-label">Feb 14, 2026 6:23–6:31 PM <span class="session-total">42 clips</span></div>
-                <div class="session-pages">
-                <a class="page-link" href="/clips-3.html">
-                    <div class="header">
-                        <div class="count">42 clips</div>
-                    </div>
-                    <div class="thumbs">
-                        <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-14_18-23-41_t0000.jpg" alt="" loading="lazy">
-                        <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-14_18-28-08_t0005.jpg" alt="" loading="lazy">
-                        <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-14_18-28-45_t0075.jpg" alt="" loading="lazy">
-                        <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-14_18-28-45_t0125.jpg" alt="" loading="lazy">
-                        <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-14_18-31-26_t0035.jpg" alt="" loading="lazy">
-                        <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-14_18-31-26_t0075.jpg" alt="" loading="lazy">
-                    </div>
-                </a>
+            </a>
+            <a class="session" href="/clips-3.html">
+                <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-14_18-23-41_t0000.jpg" alt="" loading="lazy">
+                <div class="session-info">
+                    <div class="session-label">Feb 14, 2026 6:23–6:31 PM</div>
+                    <div class="session-count">42 clips</div>
                 </div>
-            </div>
-            <div class="session">
-                <div class="session-label">Feb 14, 2026 4:52–4:55 PM <span class="session-total">7 clips</span></div>
-                <div class="session-pages">
-                <a class="page-link" href="/clips-4.html">
-                    <div class="header">
-                        <div class="count">7 clips</div>
-                    </div>
-                    <div class="thumbs">
-                        <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-14_16-52-41_t0000.jpg" alt="" loading="lazy">
-                        <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-14_16-52-41_t0015.jpg" alt="" loading="lazy">
-                        <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-14_16-52-41_t0025.jpg" alt="" loading="lazy">
-                        <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-14_16-52-41_t0045.jpg" alt="" loading="lazy">
-                        <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-14_16-52-41_t0050.jpg" alt="" loading="lazy">
-                        <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-14_16-52-41_t0055.jpg" alt="" loading="lazy">
-                    </div>
-                </a>
+            </a>
+            <a class="session" href="/clips-4.html">
+                <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-14_16-52-41_t0000.jpg" alt="" loading="lazy">
+                <div class="session-info">
+                    <div class="session-label">Feb 14, 2026 4:52–4:55 PM</div>
+                    <div class="session-count">7 clips</div>
                 </div>
-            </div>
-            <div class="session">
-                <div class="session-label">Feb 14, 2026 2:49–2:53 PM <span class="session-total">9 clips</span></div>
-                <div class="session-pages">
-                <a class="page-link" href="/clips-5.html">
-                    <div class="header">
-                        <div class="count">9 clips</div>
-                    </div>
-                    <div class="thumbs">
-                        <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-14_14-49-56_t0000.jpg" alt="" loading="lazy">
-                        <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-14_14-49-56_t0005.jpg" alt="" loading="lazy">
-                        <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-14_14-49-56_t0025.jpg" alt="" loading="lazy">
-                        <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-14_14-49-56_t0030.jpg" alt="" loading="lazy">
-                        <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-14_14-53-39_t0000.jpg" alt="" loading="lazy">
-                        <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-14_14-53-39_t0015.jpg" alt="" loading="lazy">
-                    </div>
-                </a>
+            </a>
+            <a class="session" href="/clips-5.html">
+                <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-14_14-49-56_t0000.jpg" alt="" loading="lazy">
+                <div class="session-info">
+                    <div class="session-label">Feb 14, 2026 2:49–2:53 PM</div>
+                    <div class="session-count">9 clips</div>
                 </div>
-            </div>
-            <div class="session">
-                <div class="session-label">Feb 9, 2026 9:30–9:50 PM <span class="session-total">26 clips</span></div>
-                <div class="session-pages">
-                <a class="page-link" href="/clips-6.html">
-                    <div class="header">
-                        <div class="count">26 clips</div>
-                    </div>
-                    <div class="thumbs">
-                        <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-09_21-30-07_t0005.jpg" alt="" loading="lazy">
-                        <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-09_21-35-26_t0000.jpg" alt="" loading="lazy">
-                        <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-09_21-35-26_t0075.jpg" alt="" loading="lazy">
-                        <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-09_21-35-26_t0185.jpg" alt="" loading="lazy">
-                        <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-09_21-35-26_t0270.jpg" alt="" loading="lazy">
-                        <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-09_21-35-26_t0340.jpg" alt="" loading="lazy">
-                    </div>
-                </a>
+            </a>
+            <a class="session" href="/clips-6.html">
+                <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-09_21-30-07_t0005.jpg" alt="" loading="lazy">
+                <div class="session-info">
+                    <div class="session-label">Feb 9, 2026 9:30–9:50 PM</div>
+                    <div class="session-count">26 clips</div>
                 </div>
-            </div>
-            <div class="session">
-                <div class="session-label">Feb 9, 2026 7:44 PM <span class="session-total">58 clips</span></div>
-                <div class="session-pages">
-                <a class="page-link" href="/clips-7.html">
-                    <div class="header">
-                        <div class="count">58 clips</div>
-                    </div>
-                    <div class="thumbs">
-                        <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-09_19-44-56_t0000.jpg" alt="" loading="lazy">
-                        <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-09_19-44-56_t0175.jpg" alt="" loading="lazy">
-                        <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-09_19-44-56_t0345.jpg" alt="" loading="lazy">
-                        <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-09_19-44-56_t0510.jpg" alt="" loading="lazy">
-                        <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-09_19-44-56_t0710.jpg" alt="" loading="lazy">
-                        <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-09_19-44-56_t0905.jpg" alt="" loading="lazy">
-                    </div>
-                </a>
+            </a>
+            <a class="session" href="/clips-7.html">
+                <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-09_19-44-56_t0000.jpg" alt="" loading="lazy">
+                <div class="session-info">
+                    <div class="session-label">Feb 9, 2026 7:44 PM</div>
+                    <div class="session-count">58 clips</div>
                 </div>
-            </div>
-            <div class="session">
-                <div class="session-label">Feb 9, 2026 6:49 PM <span class="session-total">8 clips</span></div>
-                <div class="session-pages">
-                <a class="page-link" href="/clips-8.html">
-                    <div class="header">
-                        <div class="count">8 clips</div>
-                    </div>
-                    <div class="thumbs">
-                        <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-09_18-49-32_t0010.jpg" alt="" loading="lazy">
-                        <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-09_18-49-32_t0025.jpg" alt="" loading="lazy">
-                        <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-09_18-49-32_t0040.jpg" alt="" loading="lazy">
-                        <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-09_18-49-32_t0080.jpg" alt="" loading="lazy">
-                        <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-09_18-49-32_t0095.jpg" alt="" loading="lazy">
-                        <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-09_18-49-32_t0115.jpg" alt="" loading="lazy">
-                    </div>
-                </a>
+            </a>
+            <a class="session" href="/clips-8.html">
+                <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-09_18-49-32_t0010.jpg" alt="" loading="lazy">
+                <div class="session-info">
+                    <div class="session-label">Feb 9, 2026 6:49 PM</div>
+                    <div class="session-count">8 clips</div>
                 </div>
-            </div>
-            <div class="session">
-                <div class="session-label">Feb 8, 2026 9:49–10:33 PM <span class="session-total">56 clips</span></div>
-                <div class="session-pages">
-                <a class="page-link" href="/clips-9.html">
-                    <div class="header">
-                        <div class="count">56 clips</div>
-                    </div>
-                    <div class="thumbs">
-                        <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-08_21-49-46_t0040.jpg" alt="" loading="lazy">
-                        <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-08_21-49-46_t0245.jpg" alt="" loading="lazy">
-                        <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-08_21-49-46_t0465.jpg" alt="" loading="lazy">
-                        <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-08_22-09-45_t0165.jpg" alt="" loading="lazy">
-                        <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-08_22-09-45_t0340.jpg" alt="" loading="lazy">
-                        <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-08_22-28-31_t0145.jpg" alt="" loading="lazy">
-                    </div>
-                </a>
+            </a>
+            <a class="session" href="/clips-9.html">
+                <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-08_21-49-46_t0040.jpg" alt="" loading="lazy">
+                <div class="session-info">
+                    <div class="session-label">Feb 8, 2026 9:49–10:33 PM</div>
+                    <div class="session-count">56 clips</div>
                 </div>
-            </div>
-            <div class="session">
-                <div class="session-label">Feb 8, 2026 6:37 PM <span class="session-total">6 clips</span></div>
-                <div class="session-pages">
-                <a class="page-link" href="/clips-10.html">
-                    <div class="header">
-                        <div class="count">6 clips</div>
-                    </div>
-                    <div class="thumbs">
-                        <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-08_18-37-52_t0000.jpg" alt="" loading="lazy">
-                        <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-08_18-37-52_t0015.jpg" alt="" loading="lazy">
-                        <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-08_18-37-52_t0035.jpg" alt="" loading="lazy">
-                        <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-08_18-37-52_t0050.jpg" alt="" loading="lazy">
-                        <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-08_18-37-52_t0100.jpg" alt="" loading="lazy">
-                        <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-08_18-37-52_t0120.jpg" alt="" loading="lazy">
-                    </div>
-                </a>
+            </a>
+            <a class="session" href="/clips-10.html">
+                <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-08_18-37-52_t0000.jpg" alt="" loading="lazy">
+                <div class="session-info">
+                    <div class="session-label">Feb 8, 2026 6:37 PM</div>
+                    <div class="session-count">6 clips</div>
                 </div>
-            </div>
-            <div class="session">
-                <div class="session-label">Feb 7, 2026 7:39–7:42 PM <span class="session-total">21 clips</span></div>
-                <div class="session-pages">
-                <a class="page-link" href="/clips-11.html">
-                    <div class="header">
-                        <div class="count">21 clips</div>
-                    </div>
-                    <div class="thumbs">
-                        <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-07_19-39-37_t0000.jpg" alt="" loading="lazy">
-                        <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-07_19-39-37_t0095.jpg" alt="" loading="lazy">
-                        <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-07_19-42-19_t0130.jpg" alt="" loading="lazy">
-                        <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-07_19-42-19_t0205.jpg" alt="" loading="lazy">
-                        <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-07_19-42-19_t0290.jpg" alt="" loading="lazy">
-                        <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-07_19-42-19_t0340.jpg" alt="" loading="lazy">
-                    </div>
-                </a>
+            </a>
+            <a class="session" href="/clips-11.html">
+                <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-07_19-39-37_t0000.jpg" alt="" loading="lazy">
+                <div class="session-info">
+                    <div class="session-label">Feb 7, 2026 7:39–7:42 PM</div>
+                    <div class="session-count">21 clips</div>
                 </div>
-            </div>
-            <div class="session">
-                <div class="session-label">earlier sessions <span class="session-total">174 clips</span></div>
-                <div class="session-pages">
-                <a class="page-link" href="/clips-12.html">
-                    <div class="header">
-                        <div class="count">174 clips</div>
-                    </div>
-                    <div class="thumbs">
-                        <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/1164636254.jpg" alt="" loading="lazy">
-                        <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/1164635127.jpg" alt="" loading="lazy">
-                        <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/1164635530.jpg" alt="" loading="lazy">
-                        <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/1164635712.jpg" alt="" loading="lazy">
-                        <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/1164636308.jpg" alt="" loading="lazy">
-                        <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/1163517831.jpg" alt="" loading="lazy">
-                    </div>
-                </a>
+            </a>
+            <a class="session" href="/clips-12.html">
+                <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/1164636254.jpg" alt="" loading="lazy">
+                <div class="session-info">
+                    <div class="session-label">earlier sessions</div>
+                    <div class="session-count">174 clips</div>
                 </div>
-            </div>
+            </a>
         </div>
     </div>
 </body>
