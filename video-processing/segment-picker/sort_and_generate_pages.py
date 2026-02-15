@@ -323,6 +323,8 @@ def generate_index_html(sessions_with_pages):
         }}
         .page-link .thumbs img {{
             width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
             display: block;
             background: #111;
         }}
