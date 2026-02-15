@@ -118,17 +118,55 @@
     // Fullscreen playback with swipe navigation
     var allClips = Array.prototype.slice.call(document.querySelectorAll('.clip'));
     var overlay = null;
-    var overlayVideo = null;
+    var videoA = null;
+    var videoB = null;
+    var activeVideo = null;
     var currentIndex = -1;
+    var savedScrollY = 0;
+
+    function getClipSrc(index) {
+        return allClips[index].querySelector('video').getAttribute('src');
+    }
+
+    function getClipPoster(index) {
+        return allClips[index].querySelector('video').getAttribute('poster') || '';
+    }
 
     function createOverlay() {
+        // Inject style tag for overlay
+        var style = document.createElement('style');
+        style.textContent = '.overlay-open{position:fixed!important;width:100%!important;overflow:hidden!important;}';
+        document.head.appendChild(style);
+
         overlay = document.createElement('div');
-        overlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:#000;z-index:9999;display:flex;align-items:center;justify-content:center;';
-        overlayVideo = document.createElement('video');
-        overlayVideo.style.cssText = 'width:100%;height:100%;object-fit:contain;';
-        overlayVideo.setAttribute('loop', '');
-        overlayVideo.setAttribute('playsinline', '');
-        overlay.appendChild(overlayVideo);
+        overlay.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:#000;z-index:9999;display:none;align-items:center;justify-content:center;touch-action:none;overflow:hidden;';
+
+        var vidStyle = 'position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain;';
+        videoA = document.createElement('video');
+        videoA.style.cssText = vidStyle;
+        videoA.setAttribute('loop', '');
+        videoA.setAttribute('playsinline', '');
+        videoA.setAttribute('preload', 'auto');
+
+        videoB = document.createElement('video');
+        videoB.style.cssText = vidStyle + 'opacity:0;';
+        videoB.setAttribute('loop', '');
+        videoB.setAttribute('playsinline', '');
+        videoB.setAttribute('preload', 'auto');
+
+        overlay.appendChild(videoA);
+        overlay.appendChild(videoB);
+        activeVideo = videoA;
+
+        // Close button
+        var closeBtn = document.createElement('div');
+        closeBtn.style.cssText = 'position:absolute;top:12px;right:16px;z-index:10;color:#fff;font-size:28px;opacity:0.6;cursor:pointer;padding:8px;line-height:1;';
+        closeBtn.innerHTML = '&times;';
+        closeBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            closeOverlay();
+        });
+        overlay.appendChild(closeBtn);
 
         // Touch swipe handling
         var touchStartX = 0;
@@ -148,8 +186,9 @@
             var dy = e.touches[0].clientY - touchStartY;
             if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 20) {
                 swiping = true;
+                e.preventDefault();
             }
-        }, {passive: true});
+        }, {passive: false});
 
         overlay.addEventListener('touchend', function(e) {
             var dx = e.changedTouches[0].clientX - touchStartX;
@@ -164,15 +203,11 @@
                 }
                 return;
             }
-
-            // Tap to close (if not a swipe)
-            if (!swiping && Math.abs(dx) < 10 && Math.abs(dy) < 10 && dt < 300) {
-                closeOverlay();
-            }
         });
 
         // Keyboard navigation
-        overlay.addEventListener('keydown', function(e) {
+        document.addEventListener('keydown', function(e) {
+            if (currentIndex === -1) return;
             if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
                 e.preventDefault();
                 if (currentIndex < allClips.length - 1) showClip(currentIndex + 1);
@@ -183,66 +218,102 @@
                 closeOverlay();
             }
         });
-        overlay.setAttribute('tabindex', '0');
 
         document.body.appendChild(overlay);
     }
 
     function showClip(index) {
         currentIndex = index;
-        var clip = allClips[index];
-        var src = clip.querySelector('video').getAttribute('src');
-        overlayVideo.pause();
-        overlayVideo.src = src;
-        overlayVideo.muted = false;
-        overlayVideo.play();
+        var src = getClipSrc(index);
+        var poster = getClipPoster(index);
+        var nextVideo = (activeVideo === videoA) ? videoB : videoA;
+
+        // Set poster on next video so there's an image immediately
+        nextVideo.poster = poster;
+        nextVideo.src = src;
+        nextVideo.muted = false;
+
+        var playWhenReady = function() {
+            // Swap: show next, hide current
+            nextVideo.style.opacity = '1';
+            activeVideo.style.opacity = '0';
+            activeVideo.pause();
+            activeVideo = nextVideo;
+            nextVideo.removeEventListener('canplay', playWhenReady);
+        };
+
+        // If it can play immediately, swap now; otherwise wait
+        if (nextVideo.readyState >= 3) {
+            nextVideo.play();
+            playWhenReady();
+        } else {
+            // Show poster immediately via opacity swap, start playing when ready
+            nextVideo.style.opacity = '1';
+            activeVideo.style.opacity = '0';
+            activeVideo.pause();
+            activeVideo = nextVideo;
+            nextVideo.addEventListener('canplay', function onCanPlay() {
+                nextVideo.play();
+                nextVideo.removeEventListener('canplay', onCanPlay);
+            });
+            nextVideo.load();
+        }
+
+        // Preload adjacent clips
+        preloadClip(index - 1);
+        preloadClip(index + 1);
+    }
+
+    var preloadCache = {};
+    function preloadClip(index) {
+        if (index < 0 || index >= allClips.length || preloadCache[index]) return;
+        var link = document.createElement('link');
+        link.rel = 'prefetch';
+        link.href = getClipSrc(index).replace('#t=0.001', '');
+        document.head.appendChild(link);
+        preloadCache[index] = true;
     }
 
     function openOverlay(index) {
         if (!overlay) createOverlay();
+        savedScrollY = window.scrollY;
+        document.body.classList.add('overlay-open');
+        document.body.style.top = -savedScrollY + 'px';
         overlay.style.display = 'flex';
-        showClip(index);
-        // Try fullscreen on the overlay container
-        if (overlay.requestFullscreen) {
-            overlay.requestFullscreen();
-        } else if (overlay.webkitRequestFullscreen) {
-            overlay.webkitRequestFullscreen();
-        }
-        overlay.focus();
+
+        // Reset both videos
+        videoA.style.opacity = '1';
+        videoB.style.opacity = '0';
+        activeVideo = videoA;
+
+        var src = getClipSrc(index);
+        var poster = getClipPoster(index);
+        currentIndex = index;
+        videoA.poster = poster;
+        videoA.src = src;
+        videoA.muted = false;
+        videoA.play();
+
+        preloadClip(index - 1);
+        preloadClip(index + 1);
     }
 
     function closeOverlay() {
-        if (!overlay) return;
-        overlayVideo.pause();
-        overlayVideo.removeAttribute('src');
+        if (!overlay || currentIndex === -1) return;
+        videoA.pause();
+        videoB.pause();
+        videoA.removeAttribute('src');
+        videoB.removeAttribute('src');
+        videoA.load();
+        videoB.load();
         overlay.style.display = 'none';
-        if (document.fullscreenElement) {
-            document.exitFullscreen();
-        } else if (document.webkitFullscreenElement) {
-            document.webkitExitFullscreen();
-        }
+        document.body.classList.remove('overlay-open');
+        document.body.style.top = '';
+        window.scrollTo(0, savedScrollY);
         currentIndex = -1;
     }
 
-    // Exit overlay when leaving fullscreen (e.g. via browser chrome)
-    document.addEventListener('fullscreenchange', function() {
-        if (!document.fullscreenElement && overlay && overlay.style.display !== 'none') {
-            overlayVideo.pause();
-            overlayVideo.removeAttribute('src');
-            overlay.style.display = 'none';
-            currentIndex = -1;
-        }
-    });
-    document.addEventListener('webkitfullscreenchange', function() {
-        if (!document.webkitFullscreenElement && overlay && overlay.style.display !== 'none') {
-            overlayVideo.pause();
-            overlayVideo.removeAttribute('src');
-            overlay.style.display = 'none';
-            currentIndex = -1;
-        }
-    });
-
-    // Click-to-fullscreen for all clips
+    // Click-to-play for all clips
     allClips.forEach(function(clip, index) {
         clip.addEventListener('click', function(e) {
             if (e.target.classList.contains('review-btn')) return;
