@@ -1,110 +1,72 @@
 #!/usr/bin/env python3
-"""Sort all clips by visual similarity and generate browse pages."""
+"""Group clips by recording session, ordered by capture time, and generate browse pages."""
 
-import json
 import os
-import subprocess
-import sys
-import numpy as np
-from PIL import Image
+import re
+from collections import defaultdict
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 WEBSITE_DIR = os.path.join(os.path.dirname(os.path.dirname(BASE_DIR)), "website")
-POSTER_DIRS = ["/tmp/new_posters", "/tmp/existing_posters"]
 CDN = "https://d2xbllb3qhv8ay.cloudfront.net"
 CLIPS_PER_PAGE = 20
 
-
-def get_poster_path(clip_id):
-    """Find poster image for a clip, checking multiple locations."""
-    for d in POSTER_DIRS:
-        p = os.path.join(d, f"{clip_id}.jpg")
-        if os.path.exists(p):
-            return p
-    return None
+# Pattern: 2026-02-09_21-35-26_t0230
+CLIP_ID_RE = re.compile(r'^(\d{4}-\d{2}-\d{2}_\d{2}-\d{2}-\d{2})_t(\d+)$')
 
 
-def extract_frame(clip_id):
-    """Extract a frame from the video and crop to left eye."""
-    mp4_path = os.path.join(BASE_DIR, "exports_all_loops", "mp4", f"{clip_id}_loop.mp4")
-    if not os.path.exists(mp4_path):
-        # Try without _loop suffix for Vimeo-era clips
-        mp4_path = os.path.join(BASE_DIR, "exports_all_loops", "mp4", f"{clip_id}.mp4")
-    if not os.path.exists(mp4_path):
-        return None
-
-    out = f"/tmp/frame_{clip_id}.jpg"
-    if os.path.exists(out):
-        return out
-    subprocess.run(
-        ["ffmpeg", "-y", "-i", mp4_path, "-vf", "crop=iw/2:ih:0:0,scale=64:-1",
-         "-frames:v", "1", "-q:v", "5", out],
-        capture_output=True
-    )
-    return out if os.path.exists(out) else None
+def parse_clip_id(clip_id):
+    """Parse a clip ID into (session_key, timecode) or None for legacy IDs."""
+    m = CLIP_ID_RE.match(clip_id)
+    if m:
+        return m.group(1), int(m.group(2))
+    return None, None
 
 
-def image_features(path):
-    """Extract color histogram + spatial features from an image."""
-    img = Image.open(path).convert("RGB").resize((64, 36))
-    arr = np.array(img, dtype=np.float32)
-
-    # Color histogram features (per channel)
-    hist_features = []
-    for c in range(3):
-        hist, _ = np.histogram(arr[:, :, c], bins=32, range=(0, 256))
-        hist_features.extend(hist / hist.sum())
-
-    # Spatial color layout (4x4 grid average colors)
-    h, w = arr.shape[:2]
-    spatial = []
-    for gy in range(4):
-        for gx in range(4):
-            block = arr[gy*h//4:(gy+1)*h//4, gx*w//4:(gx+1)*w//4]
-            spatial.extend(block.mean(axis=(0, 1)) / 255.0)
-
-    features = np.array(hist_features + spatial, dtype=np.float32)
-    norm = np.linalg.norm(features)
-    if norm > 0:
-        features /= norm
-    return features
+def session_label(session_key):
+    """Format a session key like '2026-02-09_21-35-26' into a readable label."""
+    # 2026-02-09_21-35-26 -> Feb 9, 2026 9:35 PM
+    parts = session_key.split('_')
+    date_parts = parts[0].split('-')
+    time_parts = parts[1].split('-')
+    year, month, day = int(date_parts[0]), int(date_parts[1]), int(date_parts[2])
+    hour, minute = int(time_parts[0]), int(time_parts[1])
+    months = ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+              'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    ampm = 'AM' if hour < 12 else 'PM'
+    h12 = hour % 12 or 12
+    return f"{months[month]} {day}, {year} {h12}:{minute:02d} {ampm}"
 
 
-def greedy_nearest_neighbor(features_dict):
-    """Sort clips using greedy nearest-neighbor traversal."""
-    ids = list(features_dict.keys())
-    if not ids:
-        return []
+def group_and_sort_clips(all_ids):
+    """Group clips by recording session, sort by timecode within, newest session first.
+    Legacy numeric IDs go in a separate group at the end."""
+    sessions = defaultdict(list)
+    legacy = []
 
-    features = {k: v for k, v in features_dict.items() if v is not None}
-    no_features = [k for k in ids if k not in features]
+    for cid in all_ids:
+        session_key, timecode = parse_clip_id(cid)
+        if session_key:
+            sessions[session_key].append((timecode, cid))
+        else:
+            legacy.append(cid)
 
-    if not features:
-        return ids
+    # Sort clips within each session by timecode
+    for key in sessions:
+        sessions[key].sort(key=lambda x: x[0])
 
-    # Start with first clip
-    remaining = set(features.keys())
-    start = list(remaining)[0]
-    order = [start]
-    remaining.remove(start)
+    # Sort sessions newest first (session_key sorts chronologically as a string)
+    sorted_sessions = sorted(sessions.keys(), reverse=True)
 
-    while remaining:
-        current = order[-1]
-        best_sim = -1
-        best_id = None
-        for candidate in remaining:
-            sim = float(np.dot(features[current], features[candidate]))
-            if sim > best_sim:
-                best_sim = sim
-                best_id = candidate
-        order.append(best_id)
-        remaining.remove(best_id)
-        if len(order) % 50 == 0:
-            print(f"  Sorted {len(order)}/{len(features)} clips...")
+    # Build ordered list of (session_key_or_label, [clip_ids])
+    result = []
+    for key in sorted_sessions:
+        clips = [cid for _, cid in sessions[key]]
+        result.append((key, session_label(key), clips))
 
-    # Append clips with no features at end
-    order.extend(no_features)
-    return order
+    if legacy:
+        result.append(('legacy', 'earlier sessions', legacy))
+
+    return result
 
 
 def generate_page_html(page_num, clips, total_pages):
@@ -194,9 +156,6 @@ def generate_page_html(page_num, clips, total_pages):
         .page-nav .prev-next:hover {{
             opacity: 1;
         }}
-        .page-nav .spacer {{
-            flex-grow: 1;
-        }}
     </style>
 </head>
 <body>
@@ -217,35 +176,41 @@ def generate_page_html(page_num, clips, total_pages):
 '''
 
 
-def generate_index_html(pages, total_pages):
-    """Generate clips-all.html with page cards."""
-    cards = []
-    for page_num, clips in enumerate(pages, 1):
-        count = len(clips)
-        # Sample 6 representative thumbnails
-        indices = []
-        if count <= 6:
-            indices = list(range(count))
-        else:
-            step = count / 6
-            indices = [int(i * step) for i in range(6)]
+def generate_index_html(sessions_with_pages):
+    """Generate clips-all.html with one row per recording session.
 
-        thumbs = "\n".join(
-            f'                    <img src="{CDN}/posters/{clips[i]}.jpg" alt="" loading="lazy">'
-            for i in indices
-        )
-
-        cards.append(f'''            <a class="page-link" href="/clips-{page_num}.html">
-                <div class="header">
-                    <div class="label">page {page_num}</div>
-                    <div class="count">{count} clips</div>
-                </div>
-                <div class="thumbs">
+    sessions_with_pages: list of (label, [(page_num, clips)])
+    """
+    rows = []
+    for label, page_groups in sessions_with_pages:
+        # For each session, show links to its pages with thumbnail previews
+        page_cards = []
+        for page_num, clips in page_groups:
+            count = len(clips)
+            # Sample up to 6 thumbnails
+            indices = list(range(min(count, 6))) if count <= 6 else [int(i * count / 6) for i in range(6)]
+            thumbs = "\n".join(
+                f'                        <img src="{CDN}/posters/{clips[i]}.jpg" alt="" loading="lazy">'
+                for i in indices
+            )
+            page_cards.append(f'''                <a class="page-link" href="/clips-{page_num}.html">
+                    <div class="header">
+                        <div class="count">{count} clips</div>
+                    </div>
+                    <div class="thumbs">
 {thumbs}
-                </div>
-            </a>''')
+                    </div>
+                </a>''')
 
-    cards_html = "\n".join(cards)
+        cards_html = "\n".join(page_cards)
+        rows.append(f'''            <div class="session">
+                <div class="session-label">{label}</div>
+                <div class="session-pages">
+{cards_html}
+                </div>
+            </div>''')
+
+    rows_html = "\n".join(rows)
 
     return f'''<!DOCTYPE html>
 <html lang="en">
@@ -277,31 +242,36 @@ def generate_index_html(pages, total_pages):
         .nav a:hover {{
             opacity: 1;
         }}
-        .page-links {{
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
+        .sessions {{
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
             margin-top: 1rem;
+        }}
+        .session-label {{
+            font-size: 1.1rem;
+            opacity: 0.7;
+            margin-bottom: 0.75rem;
+        }}
+        .session-pages {{
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
         }}
         .page-link {{
             display: block;
             border: 1px solid rgba(255,255,255,0.2);
-            padding: 1rem;
+            padding: 0.75rem;
             text-decoration: none;
             color: #fff;
             transition: border-color 0.2s;
+            width: 300px;
         }}
         .page-link:hover {{
             border-color: rgba(255,255,255,0.6);
         }}
         .page-link .header {{
-            display: flex;
-            align-items: baseline;
-            gap: 0.75rem;
-            margin-bottom: 0.75rem;
-        }}
-        .page-link .label {{
-            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
         }}
         .page-link .count {{
             opacity: 0.5;
@@ -325,8 +295,8 @@ def generate_index_html(pages, total_pages):
             <a href="/clips.html">&larr; clips</a>
         </div>
         <h2 style="opacity:0.8; font-weight:normal; margin-bottom:1.5rem;">all clips</h2>
-        <div class="page-links">
-{cards_html}
+        <div class="sessions">
+{rows_html}
         </div>
     </div>
 </body>
@@ -335,7 +305,7 @@ def generate_index_html(pages, total_pages):
 
 
 def main():
-    # Collect all clip IDs: existing pages + new from scan
+    # Collect all clip IDs from existing pages + new from scan
     existing_ids = []
     for page_num in range(1, 100):
         page_file = os.path.join(WEBSITE_DIR, f"clips-{page_num}.html")
@@ -343,7 +313,6 @@ def main():
             break
         with open(page_file) as f:
             content = f.read()
-        import re
         ids = re.findall(r'data-id="([^"]+)"', content)
         existing_ids.extend(ids)
 
@@ -361,71 +330,29 @@ def main():
     all_ids = list(dict.fromkeys(existing_ids + new_ids))  # dedupe preserving order
     print(f"Total unique clips: {len(all_ids)}")
 
-    # For clips that use the _loop video naming, check both naming conventions
-    # On S3, videos are stored as {id}.mp4 where id may or may not have _loop
-    # Check which IDs need _loop suffix for their video URL
+    # Group by recording session, sort by timecode, newest first
+    sessions = group_and_sort_clips(all_ids)
+    print(f"\nFound {len(sessions)} recording sessions:")
+    for key, label, clips in sessions:
+        print(f"  {label}: {len(clips)} clips")
 
-    # Compute features for similarity sorting
-    print("\nComputing visual features...")
-    features = {}
-    for i, cid in enumerate(all_ids):
-        poster = get_poster_path(cid)
-        if poster:
-            try:
-                features[cid] = image_features(poster)
-            except Exception as e:
-                print(f"  Warning: failed to process poster for {cid}: {e}")
-                features[cid] = None
-        else:
-            # Try extracting a frame
-            frame = extract_frame(cid)
-            if frame:
-                try:
-                    features[cid] = image_features(frame)
-                except Exception:
-                    features[cid] = None
-            else:
-                features[cid] = None
-
-        if (i + 1) % 50 == 0:
-            print(f"  Processed {i+1}/{len(all_ids)} clips")
-
-    valid = sum(1 for v in features.values() if v is not None)
-    print(f"Got features for {valid}/{len(all_ids)} clips")
-
-    # Sort by similarity
-    print("\nSorting by visual similarity...")
-    sorted_ids = greedy_nearest_neighbor(features)
-    print(f"Sorted {len(sorted_ids)} clips")
-
-    # Split into pages
-    pages = []
-    for i in range(0, len(sorted_ids), CLIPS_PER_PAGE):
-        pages.append(sorted_ids[i:i + CLIPS_PER_PAGE])
+    # Paginate: split each session into pages of CLIPS_PER_PAGE
+    # Each page stays within one session
+    pages = []  # list of (session_key, session_label, [clip_ids])
+    for key, label, clips in sessions:
+        for i in range(0, len(clips), CLIPS_PER_PAGE):
+            pages.append((key, label, clips[i:i + CLIPS_PER_PAGE]))
 
     total_pages = len(pages)
     print(f"\nGenerating {total_pages} pages...")
 
-    # Figure out which IDs need _loop suffix in their video URL
-    # Check S3 existing file to determine naming
-    s3_existing = set()
-    s3_file = "/tmp/s3_existing.txt"
-    if os.path.exists(s3_file):
-        with open(s3_file) as f:
-            for line in f:
-                line = line.strip()
-                if "→" in line:
-                    line = line.split("→", 1)[1].strip()
-                if line:
-                    s3_existing.add(line)
-
     # Generate browse pages
-    for page_num, clips in enumerate(pages, 1):
+    for page_num, (key, label, clips) in enumerate(pages, 1):
         html = generate_page_html(page_num, clips, total_pages)
         path = os.path.join(WEBSITE_DIR, f"clips-{page_num}.html")
         with open(path, "w") as f:
             f.write(html)
-        print(f"  Generated clips-{page_num}.html ({len(clips)} clips)")
+        print(f"  Generated clips-{page_num}.html ({len(clips)} clips, {label})")
 
     # Remove extra old pages
     for old_page in range(total_pages + 1, 50):
@@ -436,14 +363,23 @@ def main():
         else:
             break
 
-    # Generate index page
-    index_html = generate_index_html(pages, total_pages)
+    # Build index: group pages by session
+    sessions_with_pages = []  # list of (label, [(page_num, clips)])
+    current_session = None
+    for page_num, (key, label, clips) in enumerate(pages, 1):
+        if current_session is None or current_session[0] != key:
+            current_session = (key, label, [])
+            sessions_with_pages.append(current_session)
+        current_session[2].append((page_num, clips))
+
+    index_data = [(label, page_groups) for key, label, page_groups in sessions_with_pages]
+    index_html = generate_index_html(index_data)
     index_path = os.path.join(WEBSITE_DIR, "clips-all.html")
     with open(index_path, "w") as f:
         f.write(index_html)
     print(f"  Generated clips-all.html")
 
-    print(f"\nDone! {len(sorted_ids)} clips across {total_pages} pages")
+    print(f"\nDone! {len(all_ids)} clips across {total_pages} pages, {len(sessions_with_pages)} sessions")
 
 
 if __name__ == "__main__":
