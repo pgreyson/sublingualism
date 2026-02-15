@@ -477,13 +477,10 @@
                 });
                 clip.appendChild(btn);
             } else {
-                // Archive pages: button beside the clip in a row
-                clip.style.display = 'flex';
-                clip.style.alignItems = 'center';
-                clip.style.gap = '0';
-                clip.querySelector('video').style.flex = '1';
-                clip.querySelector('video').style.minWidth = '0';
-                btn.style.cssText = 'flex-shrink:0;width:44px;height:44px;border:none;color:#fff;font-size:20px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;background:none;opacity:0.5;';
+                // Archive pages: button beside the clip, outside the image
+                clip.style.position = 'relative';
+                clip.style.paddingRight = '44px';
+                btn.style.cssText = 'position:absolute;right:0;top:50%;transform:translateY(-50%);width:44px;height:44px;border:none;color:#fff;font-size:20px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;background:none;opacity:0.5;';
                 var isAdded = getList(ADD_KEY).indexOf(videoId) !== -1;
                 if (isAdded) {
                     btn.textContent = '\u2713';
@@ -518,11 +515,8 @@
         document.querySelectorAll('.clip').forEach(function(clip) {
             clip.style.outline = 'none';
             clip.style.opacity = '1';
-            clip.style.display = '';
-            clip.style.alignItems = '';
-            clip.style.gap = '';
-            var vid = clip.querySelector('video');
-            if (vid) { vid.style.flex = ''; vid.style.minWidth = ''; }
+            clip.style.position = '';
+            clip.style.paddingRight = '';
         });
         removeBar();
     }
