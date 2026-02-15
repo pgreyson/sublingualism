@@ -133,10 +133,13 @@ def generate_page_html(page_num, clips, total_pages):
         .container {{
             max-width: 1200px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 1rem;
+        }}
+        @media (min-width: 600px) {{
+            .container {{ padding: 2rem; }}
         }}
         .nav {{
-            margin-bottom: 2rem;
+            margin-bottom: 1rem;
             display: flex;
             gap: 1.5rem;
         }}
@@ -151,17 +154,17 @@ def generate_page_html(page_num, clips, total_pages):
         .clips-grid {{
             display: flex;
             flex-direction: column;
-            gap: 1rem;
+            gap: 0.5rem;
         }}
         .clip video {{
             width: 100%;
             display: block;
             background: #111;
-            aspect-ratio: 32 / 9;
+            aspect-ratio: 16 / 9;
             object-fit: cover;
         }}
         .page-nav {{
-            margin-top: 2rem;
+            margin-top: 1.5rem;
             display: flex;
             gap: 0.75rem;
             flex-wrap: wrap;

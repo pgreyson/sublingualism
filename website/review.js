@@ -64,8 +64,8 @@
                         clip.style.opacity = '1';
                     } else {
                         btn.textContent = '+';
-                        btn.style.background = 'rgba(0,0,0,0.6)';
-                        clip.style.outline = 'none';
+                        btn.style.opacity = '0.5';
+                        btn.style.color = '#fff';
                     }
                 });
             }
@@ -450,12 +450,13 @@
             var videoId = clip.getAttribute('data-id');
             if (!videoId || clip.querySelector('.review-btn')) return;
 
-            clip.style.position = 'relative';
             var btn = document.createElement('button');
             btn.className = 'review-btn';
-            btn.style.cssText = 'position:absolute;top:8px;right:8px;z-index:5;width:36px;height:36px;border-radius:50%;border:2px solid rgba(255,255,255,0.7);color:#fff;font-size:20px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;';
 
             if (isCuratedPage) {
+                // Curated page: overlay button on top of clip
+                clip.style.position = 'relative';
+                btn.style.cssText = 'position:absolute;top:8px;right:8px;z-index:5;width:36px;height:36px;border-radius:50%;border:2px solid rgba(255,255,255,0.7);color:#fff;font-size:20px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;';
                 var isRemoved = getList(REMOVE_KEY).indexOf(videoId) !== -1;
                 btn.innerHTML = '&times;';
                 btn.style.background = 'rgba(200,0,0,0.7)';
@@ -474,31 +475,38 @@
                         clip.style.outline = 'none';
                     }
                 });
+                clip.appendChild(btn);
             } else {
+                // Archive pages: button beside the clip in a row
+                clip.style.display = 'flex';
+                clip.style.alignItems = 'center';
+                clip.style.gap = '0';
+                clip.querySelector('video').style.flex = '1';
+                clip.querySelector('video').style.minWidth = '0';
+                btn.style.cssText = 'flex-shrink:0;width:44px;height:44px;border:none;color:#fff;font-size:20px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;background:none;opacity:0.5;';
                 var isAdded = getList(ADD_KEY).indexOf(videoId) !== -1;
                 if (isAdded) {
                     btn.textContent = '\u2713';
-                    btn.style.background = 'rgba(0,180,80,0.8)';
-                    clip.style.outline = '2px solid rgba(0,180,80,0.6)';
+                    btn.style.opacity = '1';
+                    btn.style.color = 'rgba(0,180,80,1)';
                 } else {
                     btn.textContent = '+';
-                    btn.style.background = 'rgba(0,0,0,0.6)';
                 }
                 btn.addEventListener('click', function(e) {
                     e.stopPropagation();
                     var nowAdded = toggleInList(ADD_KEY, videoId);
                     if (nowAdded) {
                         btn.textContent = '\u2713';
-                        btn.style.background = 'rgba(0,180,80,0.8)';
-                        clip.style.outline = '2px solid rgba(0,180,80,0.6)';
+                        btn.style.opacity = '1';
+                        btn.style.color = 'rgba(0,180,80,1)';
                     } else {
                         btn.textContent = '+';
-                        btn.style.background = 'rgba(0,0,0,0.6)';
-                        clip.style.outline = 'none';
+                        btn.style.opacity = '0.5';
+                        btn.style.color = '#fff';
                     }
                 });
+                clip.appendChild(btn);
             }
-            clip.appendChild(btn);
         });
         createBar();
     }
@@ -510,6 +518,11 @@
         document.querySelectorAll('.clip').forEach(function(clip) {
             clip.style.outline = 'none';
             clip.style.opacity = '1';
+            clip.style.display = '';
+            clip.style.alignItems = '';
+            clip.style.gap = '';
+            var vid = clip.querySelector('video');
+            if (vid) { vid.style.flex = ''; vid.style.minWidth = ''; }
         });
         removeBar();
     }
