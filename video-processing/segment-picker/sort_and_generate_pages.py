@@ -160,8 +160,6 @@ def generate_page_html(page_num, clips, total_pages):
             width: 100%;
             display: block;
             background: #111;
-            aspect-ratio: 16 / 9;
-            object-fit: cover;
         }}
         .page-nav {{
             margin-top: 1.5rem;
@@ -323,8 +321,6 @@ def generate_index_html(sessions_with_pages):
         }}
         .page-link .thumbs img {{
             width: 100%;
-            aspect-ratio: 1;
-            object-fit: cover;
             display: block;
             background: #111;
         }}
