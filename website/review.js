@@ -139,11 +139,11 @@
 
         // Track holds 3 panels side by side; we translate it to slide
         track = document.createElement('div');
-        track.style.cssText = 'display:flex;width:300%;height:100%;will-change:transform;';
+        track.style.cssText = 'display:flex;width:300vw;height:100%;will-change:transform;';
 
         for (var i = 0; i < 3; i++) {
             var panel = document.createElement('div');
-            panel.style.cssText = 'width:33.333%;height:100%;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:#000;';
+            panel.style.cssText = 'width:100vw;height:100%;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:#000;';
             var vid = document.createElement('video');
             vid.style.cssText = 'width:100%;height:100%;object-fit:contain;';
             vid.setAttribute('loop', '');
@@ -404,13 +404,17 @@
         updateOverlayAddBtns();
     }
 
+    function updateViewW() {
+        viewW = panelVideos[0].parentNode.offsetWidth;
+    }
+
     function openOverlay(index) {
         if (!overlay) createOverlay();
-        viewW = window.innerWidth;
         savedScrollY = window.scrollY;
         document.body.classList.add('overlay-open');
         document.body.style.top = -savedScrollY + 'px';
         overlay.style.display = 'block';
+        updateViewW();
 
         setCurrentClip(index, 0);
     }
@@ -424,6 +428,15 @@
         window.scrollTo(0, savedScrollY);
         currentIndex = -1;
     }
+
+    // Handle orientation/resize changes while overlay is open
+    window.addEventListener('resize', function() {
+        if (currentIndex !== -1) {
+            updateViewW();
+            track.style.transition = 'none';
+            track.style.transform = 'translateX(' + (-viewW) + 'px)';
+        }
+    });
 
     // Click-to-play for all clips
     allClips.forEach(function(clip, index) {
