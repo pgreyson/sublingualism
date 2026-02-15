@@ -115,22 +115,138 @@
         countEl.textContent = parts.length > 0 ? parts.join(', ') : 'no changes';
     }
 
-    // Click-to-fullscreen for all clips
-    document.querySelectorAll('.clip').forEach(function(clip) {
-        var video = clip.querySelector('video');
+    // Fullscreen playback with swipe navigation
+    var allClips = Array.prototype.slice.call(document.querySelectorAll('.clip'));
+    var overlay = null;
+    var overlayVideo = null;
+    var currentIndex = -1;
 
+    function createOverlay() {
+        overlay = document.createElement('div');
+        overlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:#000;z-index:9999;display:flex;align-items:center;justify-content:center;';
+        overlayVideo = document.createElement('video');
+        overlayVideo.style.cssText = 'width:100%;height:100%;object-fit:contain;';
+        overlayVideo.setAttribute('loop', '');
+        overlayVideo.setAttribute('playsinline', '');
+        overlay.appendChild(overlayVideo);
+
+        // Touch swipe handling
+        var touchStartX = 0;
+        var touchStartY = 0;
+        var touchStartTime = 0;
+        var swiping = false;
+
+        overlay.addEventListener('touchstart', function(e) {
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+            touchStartTime = Date.now();
+            swiping = false;
+        }, {passive: true});
+
+        overlay.addEventListener('touchmove', function(e) {
+            var dx = e.touches[0].clientX - touchStartX;
+            var dy = e.touches[0].clientY - touchStartY;
+            if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 20) {
+                swiping = true;
+            }
+        }, {passive: true});
+
+        overlay.addEventListener('touchend', function(e) {
+            var dx = e.changedTouches[0].clientX - touchStartX;
+            var dy = e.changedTouches[0].clientY - touchStartY;
+            var dt = Date.now() - touchStartTime;
+
+            if (swiping && Math.abs(dx) > 50 && dt < 500) {
+                if (dx < 0 && currentIndex < allClips.length - 1) {
+                    showClip(currentIndex + 1);
+                } else if (dx > 0 && currentIndex > 0) {
+                    showClip(currentIndex - 1);
+                }
+                return;
+            }
+
+            // Tap to close (if not a swipe)
+            if (!swiping && Math.abs(dx) < 10 && Math.abs(dy) < 10 && dt < 300) {
+                closeOverlay();
+            }
+        });
+
+        // Keyboard navigation
+        overlay.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                e.preventDefault();
+                if (currentIndex < allClips.length - 1) showClip(currentIndex + 1);
+            } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                e.preventDefault();
+                if (currentIndex > 0) showClip(currentIndex - 1);
+            } else if (e.key === 'Escape') {
+                closeOverlay();
+            }
+        });
+        overlay.setAttribute('tabindex', '0');
+
+        document.body.appendChild(overlay);
+    }
+
+    function showClip(index) {
+        currentIndex = index;
+        var clip = allClips[index];
+        var src = clip.querySelector('video').getAttribute('src');
+        overlayVideo.pause();
+        overlayVideo.src = src;
+        overlayVideo.muted = false;
+        overlayVideo.play();
+    }
+
+    function openOverlay(index) {
+        if (!overlay) createOverlay();
+        overlay.style.display = 'flex';
+        showClip(index);
+        // Try fullscreen on the overlay container
+        if (overlay.requestFullscreen) {
+            overlay.requestFullscreen();
+        } else if (overlay.webkitRequestFullscreen) {
+            overlay.webkitRequestFullscreen();
+        }
+        overlay.focus();
+    }
+
+    function closeOverlay() {
+        if (!overlay) return;
+        overlayVideo.pause();
+        overlayVideo.removeAttribute('src');
+        overlay.style.display = 'none';
+        if (document.fullscreenElement) {
+            document.exitFullscreen();
+        } else if (document.webkitFullscreenElement) {
+            document.webkitExitFullscreen();
+        }
+        currentIndex = -1;
+    }
+
+    // Exit overlay when leaving fullscreen (e.g. via browser chrome)
+    document.addEventListener('fullscreenchange', function() {
+        if (!document.fullscreenElement && overlay && overlay.style.display !== 'none') {
+            overlayVideo.pause();
+            overlayVideo.removeAttribute('src');
+            overlay.style.display = 'none';
+            currentIndex = -1;
+        }
+    });
+    document.addEventListener('webkitfullscreenchange', function() {
+        if (!document.webkitFullscreenElement && overlay && overlay.style.display !== 'none') {
+            overlayVideo.pause();
+            overlayVideo.removeAttribute('src');
+            overlay.style.display = 'none';
+            currentIndex = -1;
+        }
+    });
+
+    // Click-to-fullscreen for all clips
+    allClips.forEach(function(clip, index) {
         clip.addEventListener('click', function(e) {
             if (e.target.classList.contains('review-btn')) return;
-            if (video.requestFullscreen) { video.requestFullscreen(); }
-            else if (video.webkitEnterFullscreen) { video.webkitEnterFullscreen(); }
-            video.muted = false;
-            video.play();
-        });
-        video.addEventListener('fullscreenchange', function() {
-            if (!document.fullscreenElement) { video.pause(); video.currentTime = 0; video.muted = true; }
-        });
-        video.addEventListener('webkitendfullscreen', function() {
-            video.pause(); video.currentTime = 0; video.muted = true;
+            openOverlay(index);
         });
     });
 
