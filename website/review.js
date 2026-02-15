@@ -167,6 +167,41 @@
         });
         overlay.appendChild(closeBtn);
 
+        // SBS add buttons — one per eye, bottom-center of each half
+        var addBtnStyle = 'position:absolute;bottom:16px;z-index:10;width:44px;height:44px;border-radius:50%;border:2px solid rgba(255,255,255,0.7);color:#fff;font-size:24px;line-height:1;cursor:pointer;display:none;align-items:center;justify-content:center;padding:0;';
+        var overlayAddBtnL = document.createElement('button');
+        overlayAddBtnL.className = 'overlay-add-btn';
+        overlayAddBtnL.style.cssText = addBtnStyle + 'left:25%;transform:translateX(-50%);';
+        var overlayAddBtnR = document.createElement('button');
+        overlayAddBtnR.className = 'overlay-add-btn';
+        overlayAddBtnR.style.cssText = addBtnStyle + 'left:75%;transform:translateX(-50%);';
+
+        function onOverlayAddClick(e) {
+            e.stopPropagation();
+            if (currentIndex === -1) return;
+            var videoId = allClips[currentIndex].getAttribute('data-id');
+            var nowAdded = toggleInList(ADD_KEY, videoId);
+            updateOverlayAddBtns();
+            // Also sync the page-level review button if it exists
+            var pageClip = allClips[currentIndex];
+            var pageBtn = pageClip.querySelector('.review-btn');
+            if (pageBtn) {
+                if (nowAdded) {
+                    pageBtn.textContent = '\u2713';
+                    pageBtn.style.background = 'rgba(0,180,80,0.8)';
+                    pageClip.style.outline = '2px solid rgba(0,180,80,0.6)';
+                } else {
+                    pageBtn.textContent = '+';
+                    pageBtn.style.background = 'rgba(0,0,0,0.6)';
+                    pageClip.style.outline = 'none';
+                }
+            }
+        }
+        overlayAddBtnL.addEventListener('click', onOverlayAddClick);
+        overlayAddBtnR.addEventListener('click', onOverlayAddClick);
+        overlay.appendChild(overlayAddBtnL);
+        overlay.appendChild(overlayAddBtnR);
+
         // Touch handling — drag the track with finger
         var touchStartX = 0;
         var touchStartY = 0;
@@ -260,6 +295,23 @@
         document.body.appendChild(overlay);
     }
 
+    function updateOverlayAddBtns() {
+        var btns = overlay ? overlay.querySelectorAll('.overlay-add-btn') : [];
+        if (btns.length === 0 || currentIndex === -1) return;
+        var videoId = allClips[currentIndex].getAttribute('data-id');
+        var isAdded = getList(ADD_KEY).indexOf(videoId) !== -1;
+        for (var i = 0; i < btns.length; i++) {
+            btns[i].style.display = isActive ? 'flex' : 'none';
+            if (isAdded) {
+                btns[i].textContent = '\u2713';
+                btns[i].style.background = 'rgba(0,180,80,0.8)';
+            } else {
+                btns[i].textContent = '+';
+                btns[i].style.background = 'rgba(0,0,0,0.6)';
+            }
+        }
+    }
+
     function animateToPanel(panelIndex, callback) {
         var targetX = -panelIndex * viewW;
         track.style.transition = 'transform 0.25s ease-out';
@@ -289,11 +341,15 @@
         if (vid.getAttribute('src') === src && skipIfLoaded) return;
         if (vid.getAttribute('src') !== src) {
             vid.src = src;
+            vid.preload = 'auto';
             vid.load();
         }
-        vid.pause();
-        vid.currentTime = 0;
         vid.muted = true;
+        // Seek to start so the first frame renders as a preview
+        vid.addEventListener('loadeddata', function onLoaded() {
+            vid.removeEventListener('loadeddata', onLoaded);
+            vid.currentTime = 0;
+        });
     }
 
     // direction: 0 = initial load, 1 = swiped to next, -1 = swiped to prev
@@ -343,6 +399,9 @@
         var vid = panelVideos[1];
         vid.muted = false;
         vid.play();
+
+        // Update overlay add buttons for current clip
+        updateOverlayAddBtns();
     }
 
     function openOverlay(index) {
