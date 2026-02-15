@@ -111,7 +111,7 @@ def generate_page_html(page_num, clips, total_pages):
     """Generate HTML for a browse page."""
     clips_html = "\n".join(
         f'            <div class="clip" data-id="{cid}">\n'
-        f'                <video src="{CDN}/video/{cid}.mp4#t=0.001" preload="metadata" loop muted playsinline></video>\n'
+        f'                <video src="{CDN}/video/{cid}.mp4#t=0.001" poster="{CDN}/posters/{cid}.jpg" preload="none" loop muted playsinline></video>\n'
         f'            </div>'
         for cid in clips
     )
