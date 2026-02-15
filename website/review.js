@@ -60,8 +60,9 @@
                 document.querySelectorAll('.review-btn').forEach(function(btn) {
                     var clip = btn.closest('.clip');
                     if (isCuratedPage) {
-                        clip.style.outline = 'none';
                         clip.style.opacity = '1';
+                        btn.style.opacity = '0.5';
+                        btn.style.color = '#fff';
                     } else {
                         btn.textContent = '+';
                         btn.style.opacity = '0.5';
@@ -454,25 +455,28 @@
             btn.className = 'review-btn';
 
             if (isCuratedPage) {
-                // Curated page: overlay button on top of clip
+                // Curated page: remove button beside the clip
                 clip.style.position = 'relative';
-                btn.style.cssText = 'position:absolute;top:8px;right:8px;z-index:5;width:36px;height:36px;border-radius:50%;border:2px solid rgba(255,255,255,0.7);color:#fff;font-size:20px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;';
+                clip.style.paddingRight = '44px';
+                btn.style.cssText = 'position:absolute;right:0;top:50%;transform:translateY(-50%);width:44px;height:44px;border:none;color:#fff;font-size:20px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;background:none;opacity:0.5;';
                 var isRemoved = getList(REMOVE_KEY).indexOf(videoId) !== -1;
                 btn.innerHTML = '&times;';
-                btn.style.background = 'rgba(200,0,0,0.7)';
                 if (isRemoved) {
                     clip.style.opacity = '0.3';
-                    clip.style.outline = '2px solid rgba(200,0,0,0.6)';
+                    btn.style.opacity = '1';
+                    btn.style.color = 'rgba(200,0,0,1)';
                 }
                 btn.addEventListener('click', function(e) {
                     e.stopPropagation();
                     var nowRemoved = toggleInList(REMOVE_KEY, videoId);
                     if (nowRemoved) {
                         clip.style.opacity = '0.3';
-                        clip.style.outline = '2px solid rgba(200,0,0,0.6)';
+                        btn.style.opacity = '1';
+                        btn.style.color = 'rgba(200,0,0,1)';
                     } else {
                         clip.style.opacity = '1';
-                        clip.style.outline = 'none';
+                        btn.style.opacity = '0.5';
+                        btn.style.color = '#fff';
                     }
                 });
                 clip.appendChild(btn);
