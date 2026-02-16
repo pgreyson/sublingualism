@@ -176,6 +176,7 @@ def generate_page_html(page_num, clips, total_pages):
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
             transform: translate(-50%,-50%);
+            z-index: 1;
         }}
         .clip.loaded::before {{
             display: none;
@@ -183,6 +184,7 @@ def generate_page_html(page_num, clips, total_pages):
         .clip img {{
             width: 100%;
             display: block;
+            position: relative;
         }}
         .page-nav {{
             margin-top: 1.5rem;
@@ -317,6 +319,7 @@ def generate_index_html(sessions_with_pages):
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
             transform: translate(-50%,-50%);
+            z-index: 1;
         }}
         .session-thumb.loaded::before {{
             display: none;
@@ -324,6 +327,7 @@ def generate_index_html(sessions_with_pages):
         .session-thumb img {{
             width: 100%;
             display: block;
+            position: relative;
         }}
         .session-info {{
             padding: 0.5rem 0;
