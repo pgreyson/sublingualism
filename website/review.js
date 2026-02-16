@@ -322,7 +322,7 @@
         }
     }
 
-    function loadPanel(panelIndex, clipIndex, skipIfLoaded) {
+    function loadPanel(panelIndex, clipIndex, skipPlayPause) {
         var vid = panelVideos[panelIndex];
         if (clipIndex < 0 || clipIndex >= allClips.length) {
             vid.removeAttribute('src');
@@ -330,20 +330,20 @@
             return;
         }
         var src = getClipSrc(clipIndex);
-        if (vid.getAttribute('src') === src && skipIfLoaded) return;
-        if (vid.getAttribute('src') !== src) {
-            vid.src = src;
-            vid.preload = 'auto';
-        }
+        if (vid.getAttribute('src') === src) return;
+        vid.src = src;
+        vid.preload = 'auto';
         vid.muted = true;
         vid.currentTime = 0;
-        // Force mobile Safari to fetch and decode the first frame
-        var playPromise = vid.play();
-        if (playPromise) {
-            playPromise.then(function() {
-                vid.pause();
-                vid.currentTime = 0;
-            }).catch(function() {});
+        if (!skipPlayPause) {
+            // Force mobile Safari to fetch and decode the first frame
+            var playPromise = vid.play();
+            if (playPromise) {
+                playPromise.then(function() {
+                    vid.pause();
+                    vid.currentTime = 0;
+                }).catch(function() {});
+            }
         }
     }
 
@@ -382,9 +382,9 @@
             loadPanel(0, index - 1);
             loadPanel(2, index + 1, true);
         } else {
-            // Initial load
+            // Initial load — skip play/pause on center panel (we play it below)
             loadPanel(0, index - 1);
-            loadPanel(1, index);
+            loadPanel(1, index, true);
             loadPanel(2, index + 1);
             track.style.transition = 'none';
             track.style.transform = 'translateX(' + (-viewW) + 'px)';
