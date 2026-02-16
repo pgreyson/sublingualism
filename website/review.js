@@ -127,7 +127,7 @@
     var viewW = 0;
 
     function getClipSrc(index) {
-        return allClips[index].querySelector('video').getAttribute('src');
+        return allClips[index].getAttribute('data-src');
     }
 
     function createOverlay() {

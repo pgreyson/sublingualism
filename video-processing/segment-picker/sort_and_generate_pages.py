@@ -102,8 +102,8 @@ def group_and_sort_clips(all_ids):
 def generate_page_html(page_num, clips, total_pages):
     """Generate HTML for a browse page."""
     clips_html = "\n".join(
-        f'            <div class="clip" data-id="{cid}">\n'
-        f'                <video src="{CDN}/video/{cid}.mp4#t=0.001" poster="{CDN}/posters/{cid}.jpg" preload="none" loop muted playsinline></video>\n'
+        f'            <div class="clip" data-id="{cid}" data-src="{CDN}/video/{cid}.mp4#t=0.001">\n'
+        f'                <img src="{CDN}/posters/{cid}.jpg" alt="">\n'
         f'            </div>'
         for cid in clips
     )
@@ -157,15 +157,10 @@ def generate_page_html(page_num, clips, total_pages):
             flex-direction: column;
             gap: 0.5rem;
         }}
-        @keyframes pulse {{
-            0%, 100% {{ background: #111; }}
-            50% {{ background: #1a1a1a; }}
-        }}
         .clip {{
-            aspect-ratio: 16 / 9;
-            animation: pulse 2s ease-in-out infinite;
+            border: 1px solid rgba(255,255,255,0.15);
         }}
-        .clip video {{
+        .clip img {{
             width: 100%;
             display: block;
         }}
@@ -280,17 +275,11 @@ def generate_index_html(sessions_with_pages):
             display: block;
             text-decoration: none;
             color: #fff;
-            position: relative;
-        }}
-        @keyframes pulse {{
-            0%, 100% {{ background: #111; }}
-            50% {{ background: #1a1a1a; }}
+            border: 1px solid rgba(255,255,255,0.15);
         }}
         .session img {{
             width: 100%;
             display: block;
-            background: #111;
-            animation: pulse 2s ease-in-out infinite;
         }}
         .session-info {{
             padding: 0.5rem 0;
