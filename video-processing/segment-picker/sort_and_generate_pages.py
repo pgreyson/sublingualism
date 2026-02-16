@@ -157,12 +157,30 @@ def generate_page_html(page_num, clips, total_pages):
             flex-direction: column;
             gap: 0.5rem;
         }}
+        @keyframes spin {{
+            to {{ transform: translate(-50%,-50%) rotate(360deg); }}
+        }}
         .clip {{
-            border: 1px solid rgba(255,255,255,0.15);
+            position: relative;
+            aspect-ratio: 16 / 9;
+        }}
+        .clip::before {{
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255,255,255,0.15);
+            border-top-color: rgba(255,255,255,0.6);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            transform: translate(-50%,-50%);
         }}
         .clip img {{
             width: 100%;
             display: block;
+            position: relative;
         }}
         .page-nav {{
             margin-top: 1.5rem;
@@ -223,7 +241,9 @@ def generate_index_html(sessions_with_pages):
         # Use first clip's poster as the session thumbnail
         thumb_id = clips[0]
         rows.append(f'''            <a class="session" href="/clips-{page_num}.html">
-                <img src="{CDN}/posters/{thumb_id}.jpg" alt="" loading="lazy" decoding="async">
+                <div class="session-thumb">
+                    <img src="{CDN}/posters/{thumb_id}.jpg" alt="" loading="lazy" decoding="async">
+                </div>
                 <div class="session-info">
                     <div class="session-label">{label}</div>
                     <div class="session-count">{total_clips} clips</div>
@@ -271,15 +291,35 @@ def generate_index_html(sessions_with_pages):
             flex-direction: column;
             gap: 0.5rem;
         }}
+        @keyframes spin {{
+            to {{ transform: translate(-50%,-50%) rotate(360deg); }}
+        }}
         .session {{
             display: block;
             text-decoration: none;
             color: #fff;
-            border: 1px solid rgba(255,255,255,0.15);
         }}
-        .session img {{
+        .session-thumb {{
+            position: relative;
+            aspect-ratio: 16 / 9;
+        }}
+        .session-thumb::before {{
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255,255,255,0.15);
+            border-top-color: rgba(255,255,255,0.6);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            transform: translate(-50%,-50%);
+        }}
+        .session-thumb img {{
             width: 100%;
             display: block;
+            position: relative;
         }}
         .session-info {{
             padding: 0.5rem 0;
