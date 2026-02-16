@@ -390,10 +390,15 @@
             track.style.transform = 'translateX(' + (-viewW) + 'px)';
         }
 
-        // Play center video
+        // Play center video — start muted then unmute (iOS autoplay policy)
         var vid = panelVideos[1];
-        vid.muted = false;
-        vid.play();
+        vid.muted = true;
+        var p = vid.play();
+        if (p) {
+            p.then(function() {
+                vid.muted = false;
+            }).catch(function() {});
+        }
 
         // Update overlay add buttons for current clip
         updateOverlayAddBtns();
