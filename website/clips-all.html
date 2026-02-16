@@ -62,13 +62,12 @@
             animation: spin 0.8s linear infinite;
             transform: translate(-50%,-50%);
         }
+        .session-thumb.loaded::before {
+            display: none;
+        }
         .session-thumb img {
             width: 100%;
             display: block;
-            position: relative;
-            z-index: 2;
-            opacity: 0;
-            transition: opacity 0.3s;
         }
         .session-info {
             padding: 0.5rem 0;
@@ -94,7 +93,7 @@
         <div class="sessions">
             <a class="session" href="/clips-1.html">
                 <div class="session-thumb">
-                    <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-14_20-09-42_t0000.jpg" alt="" loading="lazy" decoding="async" onload="this.style.opacity=1">
+                    <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-14_20-09-42_t0000.jpg" alt="" loading="lazy" decoding="async" onload="this.parentNode.classList.add('loaded')">
                 </div>
                 <div class="session-info">
                     <div class="session-label">Feb 14, 2026 8:09–8:25 PM</div>
@@ -103,7 +102,7 @@
             </a>
             <a class="session" href="/clips-2.html">
                 <div class="session-thumb">
-                    <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-14_19-17-30_t0000.jpg" alt="" loading="lazy" decoding="async" onload="this.style.opacity=1">
+                    <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-14_19-17-30_t0000.jpg" alt="" loading="lazy" decoding="async" onload="this.parentNode.classList.add('loaded')">
                 </div>
                 <div class="session-info">
                     <div class="session-label">Feb 14, 2026 7:17 PM</div>
@@ -112,7 +111,7 @@
             </a>
             <a class="session" href="/clips-3.html">
                 <div class="session-thumb">
-                    <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-14_18-23-41_t0000.jpg" alt="" loading="lazy" decoding="async" onload="this.style.opacity=1">
+                    <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-14_18-23-41_t0000.jpg" alt="" loading="lazy" decoding="async" onload="this.parentNode.classList.add('loaded')">
                 </div>
                 <div class="session-info">
                     <div class="session-label">Feb 14, 2026 6:23–6:31 PM</div>
@@ -121,7 +120,7 @@
             </a>
             <a class="session" href="/clips-4.html">
                 <div class="session-thumb">
-                    <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-14_16-52-41_t0000.jpg" alt="" loading="lazy" decoding="async" onload="this.style.opacity=1">
+                    <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-14_16-52-41_t0000.jpg" alt="" loading="lazy" decoding="async" onload="this.parentNode.classList.add('loaded')">
                 </div>
                 <div class="session-info">
                     <div class="session-label">Feb 14, 2026 4:52–4:55 PM</div>
@@ -130,7 +129,7 @@
             </a>
             <a class="session" href="/clips-5.html">
                 <div class="session-thumb">
-                    <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-14_14-49-56_t0000.jpg" alt="" loading="lazy" decoding="async" onload="this.style.opacity=1">
+                    <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-14_14-49-56_t0000.jpg" alt="" loading="lazy" decoding="async" onload="this.parentNode.classList.add('loaded')">
                 </div>
                 <div class="session-info">
                     <div class="session-label">Feb 14, 2026 2:49–2:53 PM</div>
@@ -139,7 +138,7 @@
             </a>
             <a class="session" href="/clips-6.html">
                 <div class="session-thumb">
-                    <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-09_21-30-07_t0005.jpg" alt="" loading="lazy" decoding="async" onload="this.style.opacity=1">
+                    <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-09_21-30-07_t0005.jpg" alt="" loading="lazy" decoding="async" onload="this.parentNode.classList.add('loaded')">
                 </div>
                 <div class="session-info">
                     <div class="session-label">Feb 9, 2026 9:30–9:50 PM</div>
@@ -148,7 +147,7 @@
             </a>
             <a class="session" href="/clips-7.html">
                 <div class="session-thumb">
-                    <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-09_19-44-56_t0000.jpg" alt="" loading="lazy" decoding="async" onload="this.style.opacity=1">
+                    <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-09_19-44-56_t0000.jpg" alt="" loading="lazy" decoding="async" onload="this.parentNode.classList.add('loaded')">
                 </div>
                 <div class="session-info">
                     <div class="session-label">Feb 9, 2026 7:44 PM</div>
@@ -157,7 +156,7 @@
             </a>
             <a class="session" href="/clips-8.html">
                 <div class="session-thumb">
-                    <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-09_18-49-32_t0010.jpg" alt="" loading="lazy" decoding="async" onload="this.style.opacity=1">
+                    <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-09_18-49-32_t0010.jpg" alt="" loading="lazy" decoding="async" onload="this.parentNode.classList.add('loaded')">
                 </div>
                 <div class="session-info">
                     <div class="session-label">Feb 9, 2026 6:49 PM</div>
@@ -166,7 +165,7 @@
             </a>
             <a class="session" href="/clips-9.html">
                 <div class="session-thumb">
-                    <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-08_21-49-46_t0040.jpg" alt="" loading="lazy" decoding="async" onload="this.style.opacity=1">
+                    <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-08_21-49-46_t0040.jpg" alt="" loading="lazy" decoding="async" onload="this.parentNode.classList.add('loaded')">
                 </div>
                 <div class="session-info">
                     <div class="session-label">Feb 8, 2026 9:49–10:33 PM</div>
@@ -175,7 +174,7 @@
             </a>
             <a class="session" href="/clips-10.html">
                 <div class="session-thumb">
-                    <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-08_18-37-52_t0000.jpg" alt="" loading="lazy" decoding="async" onload="this.style.opacity=1">
+                    <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-08_18-37-52_t0000.jpg" alt="" loading="lazy" decoding="async" onload="this.parentNode.classList.add('loaded')">
                 </div>
                 <div class="session-info">
                     <div class="session-label">Feb 8, 2026 6:37 PM</div>
@@ -184,7 +183,7 @@
             </a>
             <a class="session" href="/clips-11.html">
                 <div class="session-thumb">
-                    <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-07_19-39-37_t0000.jpg" alt="" loading="lazy" decoding="async" onload="this.style.opacity=1">
+                    <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-07_19-39-37_t0000.jpg" alt="" loading="lazy" decoding="async" onload="this.parentNode.classList.add('loaded')">
                 </div>
                 <div class="session-info">
                     <div class="session-label">Feb 7, 2026 7:39–7:42 PM</div>
@@ -193,7 +192,7 @@
             </a>
             <a class="session" href="/clips-12.html">
                 <div class="session-thumb">
-                    <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/1164636254.jpg" alt="" loading="lazy" decoding="async" onload="this.style.opacity=1">
+                    <img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/1164636254.jpg" alt="" loading="lazy" decoding="async" onload="this.parentNode.classList.add('loaded')">
                 </div>
                 <div class="session-info">
                     <div class="session-label">earlier sessions</div>

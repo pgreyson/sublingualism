@@ -103,7 +103,7 @@ def generate_page_html(page_num, clips, total_pages):
     """Generate HTML for a browse page."""
     clips_html = "\n".join(
         f'            <div class="clip" data-id="{cid}" data-src="{CDN}/video/{cid}.mp4#t=0.001">\n'
-        f'                <img src="{CDN}/posters/{cid}.jpg" alt="" onload="this.style.opacity=1">\n'
+        f'                <img src="{CDN}/posters/{cid}.jpg" alt="" onload="this.parentNode.classList.add(\'loaded\')">\n'
         f'            </div>'
         for cid in clips
     )
@@ -177,13 +177,12 @@ def generate_page_html(page_num, clips, total_pages):
             animation: spin 0.8s linear infinite;
             transform: translate(-50%,-50%);
         }}
+        .clip.loaded::before {{
+            display: none;
+        }}
         .clip img {{
             width: 100%;
             display: block;
-            position: relative;
-            z-index: 2;
-            opacity: 0;
-            transition: opacity 0.3s;
         }}
         .page-nav {{
             margin-top: 1.5rem;
@@ -245,7 +244,7 @@ def generate_index_html(sessions_with_pages):
         thumb_id = clips[0]
         rows.append(f'''            <a class="session" href="/clips-{page_num}.html">
                 <div class="session-thumb">
-                    <img src="{CDN}/posters/{thumb_id}.jpg" alt="" loading="lazy" decoding="async" onload="this.style.opacity=1">
+                    <img src="{CDN}/posters/{thumb_id}.jpg" alt="" loading="lazy" decoding="async" onload="this.parentNode.classList.add('loaded')">
                 </div>
                 <div class="session-info">
                     <div class="session-label">{label}</div>
@@ -319,13 +318,12 @@ def generate_index_html(sessions_with_pages):
             animation: spin 0.8s linear infinite;
             transform: translate(-50%,-50%);
         }}
+        .session-thumb.loaded::before {{
+            display: none;
+        }}
         .session-thumb img {{
             width: 100%;
             display: block;
-            position: relative;
-            z-index: 2;
-            opacity: 0;
-            transition: opacity 0.3s;
         }}
         .session-info {{
             padding: 0.5rem 0;
