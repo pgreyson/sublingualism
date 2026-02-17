@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sublingualism — recommendations</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #000; color: #fff; font-family: monospace; }
+        .header {
+            padding: 20px;
+            text-align: center;
+        }
+        .header h1 { font-size: 14px; font-weight: normal; letter-spacing: 0.2em; }
+        .header p { font-size: 11px; color: #666; margin-top: 8px; }
+        .nav {
+            text-align: center;
+            padding: 0 20px 20px;
+            font-size: 12px;
+        }
+        .nav a {
+            color: #666;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        .nav a:hover { color: #fff; }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2px;
+            padding: 0 2px;
+        }
+        @keyframes spin {
+            to { transform: translate(-50%,-50%) rotate(360deg); }
+        }
+        .clip {
+            cursor: pointer;
+            position: relative;
+            aspect-ratio: 16 / 9;
+        }
+        .clip::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255,255,255,0.15);
+            border-top-color: rgba(255,255,255,0.6);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            transform: translate(-50%,-50%);
+        }
+        .clip.loaded::before {
+            display: none;
+        }
+        .clip img {
+            width: 100%;
+            display: block;
+        }
+        .clip .score-badge {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            background: rgba(0,0,0,0.7);
+            color: #aaa;
+            font-size: 9px;
+            padding: 2px 5px;
+            border-radius: 3px;
+            pointer-events: none;
+            font-family: monospace;
+        }
+        .section-label {
+            padding: 20px 10px 8px;
+            font-size: 11px;
+            color: #555;
+            letter-spacing: 0.1em;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>RECOMMENDATIONS</h1>
+        <p>scored by visual interest + similarity to curated picks</p>
+    </div>
+    <div class="nav">
+        <a href="clips.html">curated</a>
+        <a href="clips-all.html">archive</a>
+    </div>
+    <div class="section-label">top picks</div>
+    <div class="grid">
+            <div class="clip" data-id="2026-02-08_21-49-46_t0065" data-src="https://d2xbllb3qhv8ay.cloudfront.net/video/2026-02-08_21-49-46_t0065.mp4#t=0.001"><img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-08_21-49-46_t0065.jpg" alt="" onload="this.parentNode.classList.add('loaded')"><span class="score-badge">0.79</span></div>
+            <div class="clip" data-id="2026-02-08_21-49-46_t0275" data-src="https://d2xbllb3qhv8ay.cloudfront.net/video/2026-02-08_21-49-46_t0275.mp4#t=0.001"><img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-08_21-49-46_t0275.jpg" alt="" onload="this.parentNode.classList.add('loaded')"><span class="score-badge">0.78</span></div>
+            <div class="clip" data-id="1164635768" data-src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164635768.mp4#t=0.001"><img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/1164635768.jpg" alt="" onload="this.parentNode.classList.add('loaded')"><span class="score-badge">0.78</span></div>
+            <div class="clip" data-id="1164636091" data-src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164636091.mp4#t=0.001"><img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/1164636091.jpg" alt="" onload="this.parentNode.classList.add('loaded')"><span class="score-badge">0.78</span></div>
+            <div class="clip" data-id="2026-02-08_21-49-46_t0245" data-src="https://d2xbllb3qhv8ay.cloudfront.net/video/2026-02-08_21-49-46_t0245.mp4#t=0.001"><img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-08_21-49-46_t0245.jpg" alt="" onload="this.parentNode.classList.add('loaded')"><span class="score-badge">0.78</span></div>
+            <div class="clip" data-id="1164635754" data-src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164635754.mp4#t=0.001"><img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/1164635754.jpg" alt="" onload="this.parentNode.classList.add('loaded')"><span class="score-badge">0.78</span></div>
+            <div class="clip" data-id="1164636080" data-src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164636080.mp4#t=0.001"><img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/1164636080.jpg" alt="" onload="this.parentNode.classList.add('loaded')"><span class="score-badge">0.78</span></div>
+            <div class="clip" data-id="1164635117" data-src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164635117.mp4#t=0.001"><img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/1164635117.jpg" alt="" onload="this.parentNode.classList.add('loaded')"><span class="score-badge">0.78</span></div>
+            <div class="clip" data-id="2026-02-14_18-23-56_t0000" data-src="https://d2xbllb3qhv8ay.cloudfront.net/video/2026-02-14_18-23-56_t0000.mp4#t=0.001"><img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-14_18-23-56_t0000.jpg" alt="" onload="this.parentNode.classList.add('loaded')"><span class="score-badge">0.78</span></div>
+            <div class="clip" data-id="2026-02-08_21-49-46_t0325" data-src="https://d2xbllb3qhv8ay.cloudfront.net/video/2026-02-08_21-49-46_t0325.mp4#t=0.001"><img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-08_21-49-46_t0325.jpg" alt="" onload="this.parentNode.classList.add('loaded')"><span class="score-badge">0.77</span></div>
+            <div class="clip" data-id="1164635230" data-src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164635230.mp4#t=0.001"><img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/1164635230.jpg" alt="" onload="this.parentNode.classList.add('loaded')"><span class="score-badge">0.77</span></div>
+            <div class="clip" data-id="1164636209" data-src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164636209.mp4#t=0.001"><img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/1164636209.jpg" alt="" onload="this.parentNode.classList.add('loaded')"><span class="score-badge">0.77</span></div>
+            <div class="clip" data-id="2026-02-14_18-28-08_t0005" data-src="https://d2xbllb3qhv8ay.cloudfront.net/video/2026-02-14_18-28-08_t0005.mp4#t=0.001"><img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-14_18-28-08_t0005.jpg" alt="" onload="this.parentNode.classList.add('loaded')"><span class="score-badge">0.77</span></div>
+            <div class="clip" data-id="1164636263" data-src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164636263.mp4#t=0.001"><img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/1164636263.jpg" alt="" onload="this.parentNode.classList.add('loaded')"><span class="score-badge">0.77</span></div>
+            <div class="clip" data-id="1164636047" data-src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164636047.mp4#t=0.001"><img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/1164636047.jpg" alt="" onload="this.parentNode.classList.add('loaded')"><span class="score-badge">0.77</span></div>
+            <div class="clip" data-id="2026-02-08_21-49-46_t0480" data-src="https://d2xbllb3qhv8ay.cloudfront.net/video/2026-02-08_21-49-46_t0480.mp4#t=0.001"><img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-08_21-49-46_t0480.jpg" alt="" onload="this.parentNode.classList.add('loaded')"><span class="score-badge">0.77</span></div>
+            <div class="clip" data-id="2026-02-14_18-28-08_t0000" data-src="https://d2xbllb3qhv8ay.cloudfront.net/video/2026-02-14_18-28-08_t0000.mp4#t=0.001"><img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-14_18-28-08_t0000.jpg" alt="" onload="this.parentNode.classList.add('loaded')"><span class="score-badge">0.77</span></div>
+            <div class="clip" data-id="2026-02-14_18-23-41_t0005" data-src="https://d2xbllb3qhv8ay.cloudfront.net/video/2026-02-14_18-23-41_t0005.mp4#t=0.001"><img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-14_18-23-41_t0005.jpg" alt="" onload="this.parentNode.classList.add('loaded')"><span class="score-badge">0.76</span></div>
+            <div class="clip" data-id="2026-02-14_18-23-41_t0000" data-src="https://d2xbllb3qhv8ay.cloudfront.net/video/2026-02-14_18-23-41_t0000.mp4#t=0.001"><img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-14_18-23-41_t0000.jpg" alt="" onload="this.parentNode.classList.add('loaded')"><span class="score-badge">0.76</span></div>
+            <div class="clip" data-id="2026-02-08_21-49-46_t0260" data-src="https://d2xbllb3qhv8ay.cloudfront.net/video/2026-02-08_21-49-46_t0260.mp4#t=0.001"><img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-08_21-49-46_t0260.jpg" alt="" onload="this.parentNode.classList.add('loaded')"><span class="score-badge">0.76</span></div>
+    </div>
+    <div class="section-label">more to consider</div>
+    <div class="grid">
+            <div class="clip" data-id="1164635740" data-src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164635740.mp4#t=0.001"><img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/1164635740.jpg" alt="" onload="this.parentNode.classList.add('loaded')"><span class="score-badge">0.76</span></div>
+            <div class="clip" data-id="1164636045" data-src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164636045.mp4#t=0.001"><img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/1164636045.jpg" alt="" onload="this.parentNode.classList.add('loaded')"><span class="score-badge">0.76</span></div>
+            <div class="clip" data-id="1164635106" data-src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164635106.mp4#t=0.001"><img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/1164635106.jpg" alt="" onload="this.parentNode.classList.add('loaded')"><span class="score-badge">0.76</span></div>
+            <div class="clip" data-id="2026-02-08_22-09-45_t0145" data-src="https://d2xbllb3qhv8ay.cloudfront.net/video/2026-02-08_22-09-45_t0145.mp4#t=0.001"><img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-08_22-09-45_t0145.jpg" alt="" onload="this.parentNode.classList.add('loaded')"><span class="score-badge">0.75</span></div>
+            <div class="clip" data-id="1164636188" data-src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164636188.mp4#t=0.001"><img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/1164636188.jpg" alt="" onload="this.parentNode.classList.add('loaded')"><span class="score-badge">0.75</span></div>
+            <div class="clip" data-id="1164635190" data-src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164635190.mp4#t=0.001"><img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/1164635190.jpg" alt="" onload="this.parentNode.classList.add('loaded')"><span class="score-badge">0.75</span></div>
+            <div class="clip" data-id="2026-02-08_22-09-45_t0035" data-src="https://d2xbllb3qhv8ay.cloudfront.net/video/2026-02-08_22-09-45_t0035.mp4#t=0.001"><img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-08_22-09-45_t0035.jpg" alt="" onload="this.parentNode.classList.add('loaded')"><span class="score-badge">0.75</span></div>
+            <div class="clip" data-id="1164636128" data-src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164636128.mp4#t=0.001"><img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/1164636128.jpg" alt="" onload="this.parentNode.classList.add('loaded')"><span class="score-badge">0.75</span></div>
+            <div class="clip" data-id="1164635814" data-src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164635814.mp4#t=0.001"><img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/1164635814.jpg" alt="" onload="this.parentNode.classList.add('loaded')"><span class="score-badge">0.75</span></div>
+            <div class="clip" data-id="1164635165" data-src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164635165.mp4#t=0.001"><img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/1164635165.jpg" alt="" onload="this.parentNode.classList.add('loaded')"><span class="score-badge">0.75</span></div>
+            <div class="clip" data-id="1164634974" data-src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164634974.mp4#t=0.001"><img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/1164634974.jpg" alt="" onload="this.parentNode.classList.add('loaded')"><span class="score-badge">0.75</span></div>
+            <div class="clip" data-id="1164636104" data-src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164636104.mp4#t=0.001"><img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/1164636104.jpg" alt="" onload="this.parentNode.classList.add('loaded')"><span class="score-badge">0.75</span></div>
+            <div class="clip" data-id="1164635776" data-src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164635776.mp4#t=0.001"><img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/1164635776.jpg" alt="" onload="this.parentNode.classList.add('loaded')"><span class="score-badge">0.75</span></div>
+            <div class="clip" data-id="1164635127" data-src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164635127.mp4#t=0.001"><img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/1164635127.jpg" alt="" onload="this.parentNode.classList.add('loaded')"><span class="score-badge">0.75</span></div>
+            <div class="clip" data-id="2026-02-08_22-09-45_t0110" data-src="https://d2xbllb3qhv8ay.cloudfront.net/video/2026-02-08_22-09-45_t0110.mp4#t=0.001"><img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-08_22-09-45_t0110.jpg" alt="" onload="this.parentNode.classList.add('loaded')"><span class="score-badge">0.75</span></div>
+            <div class="clip" data-id="1164635041" data-src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164635041.mp4#t=0.001"><img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/1164635041.jpg" alt="" onload="this.parentNode.classList.add('loaded')"><span class="score-badge">0.75</span></div>
+            <div class="clip" data-id="1164635148" data-src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164635148.mp4#t=0.001"><img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/1164635148.jpg" alt="" onload="this.parentNode.classList.add('loaded')"><span class="score-badge">0.75</span></div>
+            <div class="clip" data-id="1164636116" data-src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164636116.mp4#t=0.001"><img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/1164636116.jpg" alt="" onload="this.parentNode.classList.add('loaded')"><span class="score-badge">0.75</span></div>
+            <div class="clip" data-id="1164635793" data-src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164635793.mp4#t=0.001"><img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/1164635793.jpg" alt="" onload="this.parentNode.classList.add('loaded')"><span class="score-badge">0.75</span></div>
+            <div class="clip" data-id="2026-02-08_22-09-45_t0065" data-src="https://d2xbllb3qhv8ay.cloudfront.net/video/2026-02-08_22-09-45_t0065.mp4#t=0.001"><img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-08_22-09-45_t0065.jpg" alt="" onload="this.parentNode.classList.add('loaded')"><span class="score-badge">0.75</span></div>
+            <div class="clip" data-id="2026-02-08_21-49-46_t0465" data-src="https://d2xbllb3qhv8ay.cloudfront.net/video/2026-02-08_21-49-46_t0465.mp4#t=0.001"><img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-08_21-49-46_t0465.jpg" alt="" onload="this.parentNode.classList.add('loaded')"><span class="score-badge">0.75</span></div>
+            <div class="clip" data-id="2026-02-08_21-49-46_t0435" data-src="https://d2xbllb3qhv8ay.cloudfront.net/video/2026-02-08_21-49-46_t0435.mp4#t=0.001"><img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-08_21-49-46_t0435.jpg" alt="" onload="this.parentNode.classList.add('loaded')"><span class="score-badge">0.74</span></div>
+            <div class="clip" data-id="1164636051" data-src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164636051.mp4#t=0.001"><img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/1164636051.jpg" alt="" onload="this.parentNode.classList.add('loaded')"><span class="score-badge">0.74</span></div>
+            <div class="clip" data-id="1164635722" data-src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164635722.mp4#t=0.001"><img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/1164635722.jpg" alt="" onload="this.parentNode.classList.add('loaded')"><span class="score-badge">0.74</span></div>
+            <div class="clip" data-id="1164635101" data-src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164635101.mp4#t=0.001"><img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/1164635101.jpg" alt="" onload="this.parentNode.classList.add('loaded')"><span class="score-badge">0.74</span></div>
+            <div class="clip" data-id="1164635092" data-src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164635092.mp4#t=0.001"><img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/1164635092.jpg" alt="" onload="this.parentNode.classList.add('loaded')"><span class="score-badge">0.74</span></div>
+            <div class="clip" data-id="2026-02-14_16-55-40_t0000" data-src="https://d2xbllb3qhv8ay.cloudfront.net/video/2026-02-14_16-55-40_t0000.mp4#t=0.001"><img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-14_16-55-40_t0000.jpg" alt="" onload="this.parentNode.classList.add('loaded')"><span class="score-badge">0.72</span></div>
+            <div class="clip" data-id="2026-02-14_16-52-41_t0015" data-src="https://d2xbllb3qhv8ay.cloudfront.net/video/2026-02-14_16-52-41_t0015.mp4#t=0.001"><img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-14_16-52-41_t0015.jpg" alt="" onload="this.parentNode.classList.add('loaded')"><span class="score-badge">0.72</span></div>
+            <div class="clip" data-id="2026-02-14_16-52-41_t0000" data-src="https://d2xbllb3qhv8ay.cloudfront.net/video/2026-02-14_16-52-41_t0000.mp4#t=0.001"><img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-14_16-52-41_t0000.jpg" alt="" onload="this.parentNode.classList.add('loaded')"><span class="score-badge">0.72</span></div>
+            <div class="clip" data-id="2026-02-08_21-49-46_t0195" data-src="https://d2xbllb3qhv8ay.cloudfront.net/video/2026-02-08_21-49-46_t0195.mp4#t=0.001"><img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-08_21-49-46_t0195.jpg" alt="" onload="this.parentNode.classList.add('loaded')"><span class="score-badge">0.72</span></div>
+            <div class="clip" data-id="2026-02-08_21-49-46_t0040" data-src="https://d2xbllb3qhv8ay.cloudfront.net/video/2026-02-08_21-49-46_t0040.mp4#t=0.001"><img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-08_21-49-46_t0040.jpg" alt="" onload="this.parentNode.classList.add('loaded')"><span class="score-badge">0.72</span></div>
+            <div class="clip" data-id="1164635159" data-src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164635159.mp4#t=0.001"><img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/1164635159.jpg" alt="" onload="this.parentNode.classList.add('loaded')"><span class="score-badge">0.72</span></div>
+            <div class="clip" data-id="1164635268" data-src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164635268.mp4#t=0.001"><img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/1164635268.jpg" alt="" onload="this.parentNode.classList.add('loaded')"><span class="score-badge">0.72</span></div>
+            <div class="clip" data-id="1164635951" data-src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164635951.mp4#t=0.001"><img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/1164635951.jpg" alt="" onload="this.parentNode.classList.add('loaded')"><span class="score-badge">0.72</span></div>
+            <div class="clip" data-id="2026-02-09_21-30-07_t0030" data-src="https://d2xbllb3qhv8ay.cloudfront.net/video/2026-02-09_21-30-07_t0030.mp4#t=0.001"><img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-09_21-30-07_t0030.jpg" alt="" onload="this.parentNode.classList.add('loaded')"><span class="score-badge">0.72</span></div>
+            <div class="clip" data-id="1164635936" data-src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164635936.mp4#t=0.001"><img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/1164635936.jpg" alt="" onload="this.parentNode.classList.add('loaded')"><span class="score-badge">0.72</span></div>
+            <div class="clip" data-id="1164636333" data-src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164636333.mp4#t=0.001"><img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/1164636333.jpg" alt="" onload="this.parentNode.classList.add('loaded')"><span class="score-badge">0.72</span></div>
+            <div class="clip" data-id="1164635259" data-src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164635259.mp4#t=0.001"><img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/1164635259.jpg" alt="" onload="this.parentNode.classList.add('loaded')"><span class="score-badge">0.72</span></div>
+            <div class="clip" data-id="2026-02-09_21-30-07_t0045" data-src="https://d2xbllb3qhv8ay.cloudfront.net/video/2026-02-09_21-30-07_t0045.mp4#t=0.001"><img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-09_21-30-07_t0045.jpg" alt="" onload="this.parentNode.classList.add('loaded')"><span class="score-badge">0.72</span></div>
+            <div class="clip" data-id="1164635312" data-src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164635312.mp4#t=0.001"><img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/1164635312.jpg" alt="" onload="this.parentNode.classList.add('loaded')"><span class="score-badge">0.72</span></div>
+    </div>
+
+    <script src="review.js"></script>
+</body>
+</html>
