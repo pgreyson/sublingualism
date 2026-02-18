@@ -3,32 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>sublingualism — recommendations</title>
+    <link rel="preconnect" href="https://d2xbllb3qhv8ay.cloudfront.net">
+    <title>Sublingualism — recommendations</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background: #000; color: #fff; font-family: monospace; }
-        .header {
-            padding: 20px;
-            text-align: center;
+        body {
+            margin: 0;
+            padding: 0;
+            background: #000;
+            color: #fff;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
-        .header h1 { font-size: 14px; font-weight: normal; letter-spacing: 0.2em; }
-        .header p { font-size: 11px; color: #666; margin-top: 8px; }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+        @media (min-width: 600px) {
+            .container { padding: 2rem; }
+        }
         .nav {
-            text-align: center;
-            padding: 0 20px 20px;
-            font-size: 12px;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         .nav a {
-            color: #666;
+            color: #fff;
             text-decoration: none;
-            margin: 0 10px;
+            opacity: 0.7;
         }
-        .nav a:hover { color: #fff; }
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 2px;
-            padding: 0 2px;
+        .nav a:hover {
+            opacity: 1;
+        }
+        .clips-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
         }
         @keyframes spin {
             to { transform: translate(-50%,-50%) rotate(360deg); }
@@ -70,25 +80,14 @@
             pointer-events: none;
             font-family: monospace;
         }
-        .section-label {
-            padding: 20px 10px 8px;
-            font-size: 11px;
-            color: #555;
-            letter-spacing: 0.1em;
-        }
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>RECOMMENDATIONS</h1>
-        <p>scored by visual interest + similarity to curated picks</p>
-    </div>
-    <div class="nav">
-        <a href="clips.html">curated</a>
-        <a href="clips-all.html">archive</a>
-    </div>
-    <div class="section-label">top picks</div>
-    <div class="grid">
+    <div class="container">
+        <div class="nav">
+            <a href="/clips.html">← curated</a>
+        </div>
+        <div class="clips-grid">
             <div class="clip" data-id="2026-02-08_21-49-46_t0065" data-src="https://d2xbllb3qhv8ay.cloudfront.net/video/2026-02-08_21-49-46_t0065.mp4#t=0.001"><img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-08_21-49-46_t0065.jpg" alt="" onload="this.parentNode.classList.add('loaded')"><span class="score-badge">0.79</span></div>
             <div class="clip" data-id="2026-02-08_21-49-46_t0275" data-src="https://d2xbllb3qhv8ay.cloudfront.net/video/2026-02-08_21-49-46_t0275.mp4#t=0.001"><img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-08_21-49-46_t0275.jpg" alt="" onload="this.parentNode.classList.add('loaded')"><span class="score-badge">0.78</span></div>
             <div class="clip" data-id="1164635768" data-src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164635768.mp4#t=0.001"><img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/1164635768.jpg" alt="" onload="this.parentNode.classList.add('loaded')"><span class="score-badge">0.78</span></div>
@@ -109,9 +108,6 @@
             <div class="clip" data-id="2026-02-14_18-23-41_t0005" data-src="https://d2xbllb3qhv8ay.cloudfront.net/video/2026-02-14_18-23-41_t0005.mp4#t=0.001"><img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-14_18-23-41_t0005.jpg" alt="" onload="this.parentNode.classList.add('loaded')"><span class="score-badge">0.76</span></div>
             <div class="clip" data-id="2026-02-14_18-23-41_t0000" data-src="https://d2xbllb3qhv8ay.cloudfront.net/video/2026-02-14_18-23-41_t0000.mp4#t=0.001"><img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-14_18-23-41_t0000.jpg" alt="" onload="this.parentNode.classList.add('loaded')"><span class="score-badge">0.76</span></div>
             <div class="clip" data-id="2026-02-08_21-49-46_t0260" data-src="https://d2xbllb3qhv8ay.cloudfront.net/video/2026-02-08_21-49-46_t0260.mp4#t=0.001"><img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-08_21-49-46_t0260.jpg" alt="" onload="this.parentNode.classList.add('loaded')"><span class="score-badge">0.76</span></div>
-    </div>
-    <div class="section-label">more to consider</div>
-    <div class="grid">
             <div class="clip" data-id="1164635740" data-src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164635740.mp4#t=0.001"><img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/1164635740.jpg" alt="" onload="this.parentNode.classList.add('loaded')"><span class="score-badge">0.76</span></div>
             <div class="clip" data-id="1164636045" data-src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164636045.mp4#t=0.001"><img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/1164636045.jpg" alt="" onload="this.parentNode.classList.add('loaded')"><span class="score-badge">0.76</span></div>
             <div class="clip" data-id="1164635106" data-src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164635106.mp4#t=0.001"><img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/1164635106.jpg" alt="" onload="this.parentNode.classList.add('loaded')"><span class="score-badge">0.76</span></div>
@@ -152,8 +148,8 @@
             <div class="clip" data-id="1164635259" data-src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164635259.mp4#t=0.001"><img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/1164635259.jpg" alt="" onload="this.parentNode.classList.add('loaded')"><span class="score-badge">0.72</span></div>
             <div class="clip" data-id="2026-02-09_21-30-07_t0045" data-src="https://d2xbllb3qhv8ay.cloudfront.net/video/2026-02-09_21-30-07_t0045.mp4#t=0.001"><img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/2026-02-09_21-30-07_t0045.jpg" alt="" onload="this.parentNode.classList.add('loaded')"><span class="score-badge">0.72</span></div>
             <div class="clip" data-id="1164635312" data-src="https://d2xbllb3qhv8ay.cloudfront.net/video/1164635312.mp4#t=0.001"><img src="https://d2xbllb3qhv8ay.cloudfront.net/posters/1164635312.jpg" alt="" onload="this.parentNode.classList.add('loaded')"><span class="score-badge">0.72</span></div>
+        </div>
     </div>
-
     <script src="review.js"></script>
 </body>
 </html>

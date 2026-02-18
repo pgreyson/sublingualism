@@ -540,6 +540,14 @@
             controls.style.cssText = 'display:flex;gap:12px;align-items:center;';
 
             if (isCuratedPage) {
+                var recsLink = document.createElement('a');
+                recsLink.href = '/recommendations.html';
+                recsLink.textContent = 'recs';
+                recsLink.style.cssText = 'color:#fff;text-decoration:none;opacity:0.7;font-size:0.85rem;';
+                recsLink.onmouseover = function() { this.style.opacity = '1'; };
+                recsLink.onmouseout = function() { this.style.opacity = '0.7'; };
+                controls.appendChild(recsLink);
+
                 var archiveLink = document.createElement('a');
                 archiveLink.href = '/clips-all.html';
                 archiveLink.textContent = 'archive';
