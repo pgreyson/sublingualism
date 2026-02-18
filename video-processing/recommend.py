@@ -1,53 +1,45 @@
 #!/usr/bin/env python3
 """
 Analyze poster images and generate a recommendations page.
-Scores non-curated clips on visual interest metrics and similarity to curated picks.
+Uses diversified selection: picks the best clip, then penalizes similar clips
+before picking the next, so the final set covers a range of visual styles.
 """
 
 import os
 import sys
 import json
+import re
 import urllib.request
 import numpy as np
 from PIL import Image
 from io import BytesIO
-from collections import OrderedDict
 
 CDN = "https://d2xbllb3qhv8ay.cloudfront.net"
 
-# Current curated clip IDs
-CURATED = {
-    "1164634955", "1164636125", "1164635021", "1164634924",
-    "2026-02-14_19-17-30_t0015", "1164634856", "1164634995",
-    "1164635062", "1164636298", "2026-02-14_20-09-42_t0035",
-    "1164635880", "1164635143", "2026-02-14_18-28-08_t0010",
-    "2026-02-14_20-09-42_t0000", "1164635371", "1164635843",
-    "1164635008", "2026-02-14_18-23-56_t0005", "1164636340",
-    "2026-02-14_18-28-45_t0045", "2026-02-14_20-25-04_t0130",
-    "2026-02-14_18-31-26_t0000",
-}
 
-# All archive clip IDs (from browse pages)
-ALL_CLIPS = []
-
-def load_all_clips():
-    """Parse clip IDs from the browse pages."""
-    import re
+def load_curated_ids():
+    """Parse curated clip IDs from clips.html."""
     website_dir = os.path.join(os.path.dirname(__file__), '..', 'website')
-    for i in range(1, 13):
+    path = os.path.join(website_dir, 'clips.html')
+    with open(path) as f:
+        content = f.read()
+    return set(re.findall(r'data-id="([^"]+)"', content))
+
+
+def load_all_clip_ids():
+    """Parse clip IDs from the browse pages."""
+    website_dir = os.path.join(os.path.dirname(__file__), '..', 'website')
+    all_ids = []
+    for i in range(1, 20):
         path = os.path.join(website_dir, f'clips-{i}.html')
-        if os.path.exists(path):
-            with open(path) as f:
-                content = f.read()
-            ids = re.findall(r'data-id="([^"]+)"', content)
-            for cid in ids:
-                if cid not in ALL_CLIPS:
-                    ALL_CLIPS.append(cid)
-    print(f"Total archive clips: {len(ALL_CLIPS)}")
-    print(f"Already curated: {len(CURATED)}")
-    candidates = [c for c in ALL_CLIPS if c not in CURATED]
-    print(f"Candidates to analyze: {len(candidates)}")
-    return candidates
+        if not os.path.exists(path):
+            continue
+        with open(path) as f:
+            content = f.read()
+        for cid in re.findall(r'data-id="([^"]+)"', content):
+            if cid not in all_ids:
+                all_ids.append(cid)
+    return all_ids
 
 
 def download_poster(clip_id):
@@ -63,61 +55,87 @@ def download_poster(clip_id):
         return None
 
 
-def analyze_image(img):
-    """Compute visual interest metrics for an image."""
-    arr = np.array(img, dtype=np.float32)
+def extract_features(img):
+    """
+    Extract a rich feature vector for an image.
+    Returns a dict with scalar metrics and a feature vector for similarity.
+    """
+    img_resized = img.resize((384, 216), Image.LANCZOS)
+    arr = np.array(img_resized, dtype=np.float32)
     h, w, _ = arr.shape
 
-    # Resize to standard size for consistent analysis
-    if w > 384:
-        img_resized = img.resize((384, 216), Image.LANCZOS)
-        arr = np.array(img_resized, dtype=np.float32)
+    # --- Scalar metrics for interest scoring ---
 
-    # 1. Color richness: standard deviation across color channels
-    color_std = np.mean([arr[:,:,c].std() for c in range(3)])
+    # Color richness
+    color_std = np.mean([arr[:, :, c].std() for c in range(3)])
 
-    # 2. Overall brightness
+    # Brightness
     brightness = arr.mean() / 255.0
 
-    # 3. Contrast: difference between bright and dark regions
+    # Contrast
     gray = arr.mean(axis=2)
     p5, p95 = np.percentile(gray, 5), np.percentile(gray, 95)
     contrast = (p95 - p5) / 255.0
 
-    # 4. Color saturation (in HSV-like space)
+    # Saturation
     maxc = arr.max(axis=2)
     minc = arr.min(axis=2)
     delta = maxc - minc
-    # Avoid division by zero
-    sat_map = np.where(maxc > 0, delta / maxc, 0)
+    with np.errstate(divide='ignore', invalid='ignore'):
+        sat_map = np.where(maxc > 0, delta / maxc, 0)
     saturation = sat_map.mean()
 
-    # 5. Spatial complexity: edge density via gradient magnitude
+    # Spatial complexity via gradient magnitude
     gx = np.diff(gray, axis=1)
     gy = np.diff(gray, axis=0)
-    # Trim to same shape
-    min_h = min(gx.shape[0], gy.shape[0])
-    min_w = min(gx.shape[1], gy.shape[1])
-    grad_mag = np.sqrt(gx[:min_h, :min_w]**2 + gy[:min_h, :min_w]**2)
+    mh = min(gx.shape[0], gy.shape[0])
+    mw = min(gx.shape[1], gy.shape[1])
+    grad_mag = np.sqrt(gx[:mh, :mw] ** 2 + gy[:mh, :mw] ** 2)
     complexity = grad_mag.mean() / 255.0
 
-    # 6. Color diversity: number of distinct hue clusters
-    # Quantize to 12 hue bins
-    r, g, b = arr[:,:,0], arr[:,:,1], arr[:,:,2]
-    hue_approx = np.arctan2(np.sqrt(3) * (g - b), 2 * r - g - b)
-    hue_bins = np.histogram(hue_approx[sat_map > 0.1].flatten(), bins=12)[0]
-    hue_bins_norm = hue_bins / (hue_bins.sum() + 1e-8)
-    color_diversity = -np.sum(hue_bins_norm * np.log(hue_bins_norm + 1e-8))  # entropy
+    # Color diversity (hue entropy)
+    r, g, b = arr[:, :, 0], arr[:, :, 1], arr[:, :, 2]
+    hue = np.arctan2(np.sqrt(3) * (g - b), 2 * r - g - b)
+    saturated_mask = sat_map > 0.1
+    if saturated_mask.sum() > 100:
+        hue_bins = np.histogram(hue[saturated_mask].flatten(), bins=12)[0]
+        hue_norm = hue_bins / (hue_bins.sum() + 1e-8)
+        color_diversity = -np.sum(hue_norm * np.log(hue_norm + 1e-8))
+    else:
+        color_diversity = 0.0
 
-    # 7. Quadrant color features (for similarity matching)
-    mid_h, mid_w = h // 2, w // 2
-    quadrants = [
-        arr[:mid_h, :mid_w],
-        arr[:mid_h, mid_w:],
-        arr[mid_h:, :mid_w],
-        arr[mid_h:, mid_w:],
-    ]
-    quad_features = np.array([q.mean(axis=(0,1)) / 255.0 for q in quadrants]).flatten()  # 12 values
+    # --- Feature vector for similarity comparison ---
+    # Use a 4x4 grid of mean RGB values (48 dimensions)
+    # Plus a color histogram (36 dimensions: 12 hue bins x 3 saturation levels)
+    # Total: 84 dimensions
+
+    # 4x4 spatial grid
+    grid_h, grid_w = 4, 4
+    grid_features = []
+    for gy_i in range(grid_h):
+        for gx_i in range(grid_w):
+            y0 = gy_i * h // grid_h
+            y1 = (gy_i + 1) * h // grid_h
+            x0 = gx_i * w // grid_w
+            x1 = (gx_i + 1) * w // grid_w
+            cell = arr[y0:y1, x0:x1]
+            grid_features.extend(cell.mean(axis=(0, 1)) / 255.0)
+
+    # Color histogram: hue (12 bins) x saturation level (3 levels)
+    color_hist = np.zeros(36)
+    hue_flat = hue.flatten()
+    sat_flat = sat_map.flatten()
+    # Bin hue into 12 bins
+    hue_binned = ((hue_flat + np.pi) / (2 * np.pi) * 12).astype(int).clip(0, 11)
+    # Bin saturation into 3 levels: low (<0.2), mid (0.2-0.5), high (>0.5)
+    sat_binned = np.where(sat_flat < 0.2, 0, np.where(sat_flat < 0.5, 1, 2))
+    for hi in range(12):
+        for si in range(3):
+            mask = (hue_binned == hi) & (sat_binned == si)
+            color_hist[hi * 3 + si] = mask.sum()
+    color_hist = color_hist / (color_hist.sum() + 1e-8)
+
+    feature_vec = np.array(grid_features + list(color_hist))
 
     return {
         'color_std': float(color_std),
@@ -126,79 +144,124 @@ def analyze_image(img):
         'saturation': float(saturation),
         'complexity': float(complexity),
         'color_diversity': float(color_diversity),
-        'quad_features': quad_features,  # numpy array, 12 floats
+        'features': feature_vec,
     }
 
 
-def compute_composite_score(metrics, curated_features):
-    """
-    Compute a composite interest score.
-    Higher = more visually interesting and/or similar to curated picks.
-    """
-    # Visual interest component (0-1 range each, weighted)
-    interest = (
-        metrics['contrast'] * 0.20 +
-        metrics['saturation'] * 0.20 +
-        metrics['complexity'] * 0.15 +
-        metrics['color_diversity'] / 2.5 * 0.15 +  # normalize entropy to ~0-1
-        # Penalize very dark or very bright (prefer mid-range)
-        (1.0 - abs(metrics['brightness'] - 0.4) * 2) * 0.10 +
-        metrics['color_std'] / 80.0 * 0.20  # normalize to ~0-1
+def interest_score(metrics):
+    """Pure visual interest score (0-1ish)."""
+    return (
+        metrics['contrast'] * 0.20
+        + metrics['saturation'] * 0.20
+        + metrics['complexity'] * 0.15
+        + metrics['color_diversity'] / 2.5 * 0.15
+        + (1.0 - abs(metrics['brightness'] - 0.4) * 2) * 0.10
+        + metrics['color_std'] / 80.0 * 0.20
     )
 
-    # Similarity to curated picks component
-    if len(curated_features) > 0:
-        qf = metrics['quad_features']
-        distances = [np.linalg.norm(qf - cf) for cf in curated_features]
-        min_dist = min(distances)
-        # Convert distance to similarity (closer = higher score)
-        # Typical distances range 0-2, so similarity = 1 / (1 + dist)
-        similarity = 1.0 / (1.0 + min_dist * 2)
-    else:
-        similarity = 0.5
 
-    # Composite: 60% visual interest, 40% similarity to curated taste
-    composite = interest * 0.6 + similarity * 0.4
+def diversified_select(candidates, curated_features, n=30):
+    """
+    Greedy diversified selection.
 
-    return float(composite), float(interest), float(similarity)
+    1. Score all candidates by interest + taste similarity.
+    2. Pick the top scorer.
+    3. For remaining candidates, penalize those too similar to any already-selected clip.
+    4. Repeat until we have n clips.
+
+    This ensures visual variety in the final set.
+    """
+    # Compute base scores
+    scored = []
+    for cid, metrics in candidates:
+        base = interest_score(metrics)
+
+        # Taste similarity: distance to nearest curated clip
+        if curated_features:
+            dists = [np.linalg.norm(metrics['features'] - cf) for cf in curated_features]
+            min_dist = min(dists)
+            taste_sim = 1.0 / (1.0 + min_dist * 3)
+        else:
+            taste_sim = 0.5
+
+        # 70% interest, 30% taste match
+        score = base * 0.7 + taste_sim * 0.3
+        scored.append({
+            'id': cid,
+            'metrics': metrics,
+            'base_score': score,
+            'effective_score': score,
+            'interest': base,
+            'taste_sim': taste_sim,
+        })
+
+    selected = []
+    remaining = list(scored)
+
+    for pick_num in range(min(n, len(remaining))):
+        # Sort by effective score
+        remaining.sort(key=lambda x: x['effective_score'], reverse=True)
+
+        # Pick the top
+        chosen = remaining.pop(0)
+        selected.append(chosen)
+
+        # Penalize remaining clips that are too similar to the chosen one
+        chosen_feat = chosen['metrics']['features']
+        for item in remaining:
+            dist = np.linalg.norm(item['metrics']['features'] - chosen_feat)
+            # Strong penalty for very similar clips (dist < 0.3),
+            # tapering off for more distinct ones
+            if dist < 0.8:
+                penalty = (0.8 - dist) / 0.8 * 0.15  # up to 15% penalty per similar pick
+                item['effective_score'] -= penalty
+
+    return selected
 
 
-def generate_recommendations_page(ranked_clips, top_n=60):
-    """Generate an HTML page with recommended clips."""
-    clips = ranked_clips[:top_n]
-
-    html_parts = []
-    html_parts.append("""<!DOCTYPE html>
+def generate_page(selected_clips):
+    """Generate recommendations.html matching curated page style."""
+    parts = ['''<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>sublingualism — recommendations</title>
+    <link rel="preconnect" href="https://d2xbllb3qhv8ay.cloudfront.net">
+    <title>Sublingualism — recommendations</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background: #000; color: #fff; font-family: monospace; }
-        .header {
-            padding: 20px;
-            text-align: center;
+        body {
+            margin: 0;
+            padding: 0;
+            background: #000;
+            color: #fff;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
-        .header h1 { font-size: 14px; font-weight: normal; letter-spacing: 0.2em; }
-        .header p { font-size: 11px; color: #666; margin-top: 8px; }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+        @media (min-width: 600px) {
+            .container { padding: 2rem; }
+        }
         .nav {
-            text-align: center;
-            padding: 0 20px 20px;
-            font-size: 12px;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         .nav a {
-            color: #666;
+            color: #fff;
             text-decoration: none;
-            margin: 0 10px;
+            opacity: 0.7;
         }
-        .nav a:hover { color: #fff; }
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 2px;
-            padding: 0 2px;
+        .nav a:hover {
+            opacity: 1;
+        }
+        .clips-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
         }
         @keyframes spin {
             to { transform: translate(-50%,-50%) rotate(360deg); }
@@ -228,116 +291,95 @@ def generate_recommendations_page(ranked_clips, top_n=60):
             width: 100%;
             display: block;
         }
-        .clip .score-badge {
-            position: absolute;
-            top: 4px;
-            right: 4px;
-            background: rgba(0,0,0,0.7);
-            color: #aaa;
-            font-size: 9px;
-            padding: 2px 5px;
-            border-radius: 3px;
-            pointer-events: none;
-            font-family: monospace;
-        }
-        .section-label {
-            padding: 20px 10px 8px;
-            font-size: 11px;
-            color: #555;
-            letter-spacing: 0.1em;
-        }
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>RECOMMENDATIONS</h1>
-        <p>scored by visual interest + similarity to curated picks</p>
+    <div class="container">
+        <div class="nav">
+            <a href="/clips.html">\u2190 curated</a>
+        </div>
+        <div class="clips-grid">
+''']
+
+    for item in selected_clips:
+        cid = item['id']
+        parts.append(
+            f'            <div class="clip" data-id="{cid}" '
+            f'data-src="{CDN}/video/{cid}.mp4#t=0.001">'
+            f'<img src="{CDN}/posters/{cid}.jpg" alt="" '
+            f'onload="this.parentNode.classList.add(\'loaded\')">'
+            f'</div>\n'
+        )
+
+    parts.append('''        </div>
     </div>
-    <div class="nav">
-        <a href="clips.html">curated</a>
-        <a href="clips-all.html">archive</a>
-    </div>
-""")
-
-    # Top tier
-    html_parts.append('    <div class="section-label">top picks</div>\n')
-    html_parts.append('    <div class="grid">\n')
-    for i, (cid, score, interest, similarity) in enumerate(clips[:20]):
-        html_parts.append(f'            <div class="clip" data-id="{cid}" data-src="{CDN}/video/{cid}.mp4#t=0.001">')
-        html_parts.append(f'<img src="{CDN}/posters/{cid}.jpg" alt="" onload="this.parentNode.classList.add(\'loaded\')">')
-        html_parts.append(f'<span class="score-badge">{score:.2f}</span>')
-        html_parts.append('</div>\n')
-    html_parts.append('    </div>\n')
-
-    # More to consider
-    if len(clips) > 20:
-        html_parts.append('    <div class="section-label">more to consider</div>\n')
-        html_parts.append('    <div class="grid">\n')
-        for i, (cid, score, interest, similarity) in enumerate(clips[20:]):
-            html_parts.append(f'            <div class="clip" data-id="{cid}" data-src="{CDN}/video/{cid}.mp4#t=0.001">')
-            html_parts.append(f'<img src="{CDN}/posters/{cid}.jpg" alt="" onload="this.parentNode.classList.add(\'loaded\')">')
-            html_parts.append(f'<span class="score-badge">{score:.2f}</span>')
-            html_parts.append('</div>\n')
-        html_parts.append('    </div>\n')
-
-    html_parts.append("""
     <script src="review.js"></script>
 </body>
 </html>
-""")
-
-    return ''.join(html_parts)
+''')
+    return ''.join(parts)
 
 
 def main():
-    candidates = load_all_clips()
+    curated_ids = load_curated_ids()
+    all_ids = load_all_clip_ids()
+    candidate_ids = [c for c in all_ids if c not in curated_ids]
 
-    # First, analyze curated clips to build taste profile
-    print("\nAnalyzing curated clips for taste profile...")
+    print(f"Total archive: {len(all_ids)}")
+    print(f"Already curated: {len(curated_ids)}")
+    print(f"Candidates: {len(candidate_ids)}")
+
+    # Analyze curated clips for taste profile
+    print("\nBuilding taste profile from curated clips...")
     curated_features = []
-    for cid in CURATED:
+    for cid in curated_ids:
         img = download_poster(cid)
         if img:
-            metrics = analyze_image(img)
-            curated_features.append(metrics['quad_features'])
+            feat = extract_features(img)
+            curated_features.append(feat['features'])
             sys.stdout.write('.')
             sys.stdout.flush()
-    print(f"\nGot features for {len(curated_features)} curated clips")
+    print(f"\nTaste profile from {len(curated_features)} clips")
 
     # Analyze all candidates
-    print(f"\nAnalyzing {len(candidates)} candidate clips...")
-    results = []
-    for i, cid in enumerate(candidates):
+    print(f"\nAnalyzing {len(candidate_ids)} candidates...")
+    candidates = []
+    for i, cid in enumerate(candidate_ids):
         if (i + 1) % 50 == 0:
-            print(f"  {i+1}/{len(candidates)}...")
+            print(f"  {i + 1}/{len(candidate_ids)}...")
         img = download_poster(cid)
         if img is None:
             continue
-        metrics = analyze_image(img)
-        composite, interest, similarity = compute_composite_score(metrics, curated_features)
-        results.append((cid, composite, interest, similarity))
+        metrics = extract_features(img)
+        candidates.append((cid, metrics))
 
-    # Sort by composite score, descending
-    results.sort(key=lambda x: x[1], reverse=True)
+    print(f"\nSuccessfully analyzed {len(candidates)} clips")
 
-    print(f"\nTop 20 recommendations:")
-    for i, (cid, score, interest, sim) in enumerate(results[:20]):
-        print(f"  {i+1}. {cid}  score={score:.3f}  interest={interest:.3f}  similarity={sim:.3f}")
+    # Diversified selection
+    selected = diversified_select(candidates, curated_features, n=30)
 
-    # Generate the page
-    html = generate_recommendations_page(results, top_n=60)
-    output_path = os.path.join(os.path.dirname(__file__), '..', 'website', 'recommendations.html')
-    with open(output_path, 'w') as f:
+    print(f"\nTop 30 diversified recommendations:")
+    for i, item in enumerate(selected):
+        print(f"  {i + 1:2d}. {item['id']:40s}  "
+              f"score={item['effective_score']:.3f}  "
+              f"interest={item['interest']:.3f}  "
+              f"taste={item['taste_sim']:.3f}")
+
+    # Generate page
+    html = generate_page(selected)
+    out = os.path.join(os.path.dirname(__file__), '..', 'website', 'recommendations.html')
+    with open(out, 'w') as f:
         f.write(html)
-    print(f"\nWrote {output_path}")
+    print(f"\nWrote {out}")
 
-    # Also save raw scores for reference
+    # Save scores
+    scores = [{'id': s['id'], 'score': s['effective_score'],
+               'interest': s['interest'], 'taste': s['taste_sim']}
+              for s in selected]
     scores_path = os.path.join(os.path.dirname(__file__), 'recommendation_scores.json')
-    scores_data = [{'id': cid, 'score': s, 'interest': i, 'similarity': sim}
-                   for cid, s, i, sim in results]
     with open(scores_path, 'w') as f:
-        json.dump(scores_data, f, indent=2)
-    print(f"Wrote scores to {scores_path}")
+        json.dump(scores, f, indent=2)
+    print(f"Wrote {scores_path}")
 
 
 if __name__ == '__main__':
