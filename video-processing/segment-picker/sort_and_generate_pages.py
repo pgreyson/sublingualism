@@ -235,6 +235,8 @@ def generate_page_html(page_num, clips, total_pages):
         </div>
     </div>
     <script src="/review.js"></script>
+    <script data-goatcounter="https://sublingualism.goatcounter.com/count"
+            async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
 '''
@@ -367,6 +369,8 @@ def generate_index_html(sessions_with_pages):
 {rows_html}
         </div>
     </div>
+    <script data-goatcounter="https://sublingualism.goatcounter.com/count"
+            async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
 '''
