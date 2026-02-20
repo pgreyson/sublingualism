@@ -116,13 +116,22 @@ def generate_page_html(page_num, clips, total_pages):
             nav_parts.append(f'<a href="/clips-{p}.html">{p}</a>')
     page_nav = " ".join(nav_parts)
 
+    first_clip = clips[0] if clips else '1164634955'
     return f'''<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="{CDN}">
-    <title>Sublingualism</title>
+    <title>Sublingualism — Archive {page_num}</title>
+    <meta name="description" content="Stereoscopic video art archive — page {page_num} of {total_pages}.">
+    <link rel="canonical" href="https://sublingualism.com/clips-{page_num}.html">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://sublingualism.com/clips-{page_num}.html">
+    <meta property="og:title" content="Sublingualism — Archive {page_num}">
+    <meta property="og:description" content="Stereoscopic video art archive — page {page_num} of {total_pages}.">
+    <meta property="og:image" content="{CDN}/posters/{first_clip}.jpg">
+    <meta name="twitter:card" content="summary_large_image">
     <style>
         body {{
             margin: 0;
@@ -260,7 +269,15 @@ def generate_index_html(sessions_with_pages):
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="{CDN}">
-    <title>Sublingualism</title>
+    <title>Sublingualism — Archive</title>
+    <meta name="description" content="Full archive of stereoscopic video art sessions from modular synthesis.">
+    <link rel="canonical" href="https://sublingualism.com/clips-all.html">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://sublingualism.com/clips-all.html">
+    <meta property="og:title" content="Sublingualism — Archive">
+    <meta property="og:description" content="Full archive of stereoscopic video art sessions from modular synthesis.">
+    <meta property="og:image" content="{CDN}/posters/1164634955.jpg">
+    <meta name="twitter:card" content="summary_large_image">
     <style>
         body {{
             margin: 0;
