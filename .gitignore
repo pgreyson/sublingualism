@@ -4,6 +4,7 @@
 *.pem
 *.key
 credentials/
+.secrets/
 
 # Dependencies
 node_modules/

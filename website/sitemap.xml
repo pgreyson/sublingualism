@@ -17,6 +17,14 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://sublingualism.com/work/gobos.html</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://sublingualism.com/work/events.html</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://sublingualism.com/clips-all.html</loc>
     <priority>0.7</priority>
   </url>
