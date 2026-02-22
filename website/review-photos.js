@@ -339,6 +339,12 @@
             if (!photoId || clip.querySelector('.photo-review-btn')) return;
 
             clip.style.position = 'relative';
+            var idx = allClips.indexOf(clip);
+            var badge = document.createElement('span');
+            badge.className = 'photo-number-badge';
+            badge.textContent = idx + 1;
+            badge.style.cssText = 'position:absolute;top:8px;left:8px;background:rgba(0,0,0,0.7);color:#fff;font-size:11px;padding:2px 6px;border-radius:3px;z-index:5;font-variant-numeric:tabular-nums;';
+            clip.appendChild(badge);
             var btn = document.createElement('button');
             btn.className = 'photo-review-btn';
             btn.style.cssText = 'position:absolute;top:8px;right:8px;width:36px;height:36px;border:none;color:#fff;font-size:18px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;background:rgba(0,0,0,0.5);border-radius:50%;opacity:0.5;z-index:5;';
@@ -371,6 +377,7 @@
 
     function disableReview() {
         document.querySelectorAll('.photo-review-btn').forEach(function(btn) { btn.remove(); });
+        document.querySelectorAll('.photo-number-badge').forEach(function(b) { b.remove(); });
         document.querySelectorAll('.clip').forEach(function(clip) {
             clip.style.opacity = '1';
             clip.style.position = '';
