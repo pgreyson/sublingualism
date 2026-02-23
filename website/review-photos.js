@@ -97,389 +97,82 @@
         countEl.textContent = r > 0 ? r + ' to remove' : 'no changes';
     }
 
-    // Fullscreen image overlay with swipe navigation
+    // ---- PhotoSwipe gallery ----
     var allClips = Array.prototype.slice.call(document.querySelectorAll('.clip'));
-    var overlay = null;
-    var track = null;
-    var panels = [];
-    var panelImgs = [];
-    var currentIndex = -1;
-    var savedScrollY = 0;
-    var viewW = 0;
 
-    function getClipSrc(index) {
-        return allClips[index].getAttribute('data-src');
-    }
+    // Load PhotoSwipe CSS
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = 'https://unpkg.com/photoswipe@5.4.4/dist/photoswipe.css';
+    document.head.appendChild(link);
 
-    function getClipCaption(index) {
-        if (index < 0 || index >= allClips.length) return '';
-        return allClips[index].getAttribute('data-caption') || '';
-    }
+    // Override PhotoSwipe styles for pure black aesthetic
+    var style = document.createElement('style');
+    style.textContent = '.pswp{--pswp-bg:#000;} .pswp__counter{display:none;}';
+    document.head.appendChild(style);
 
-    var captionEl = null;
-    // Zoom state
-    var zoomScale = 1;
-    var zoomX = 0;
-    var zoomY = 0;
-    var isZoomed = false;
+    // Load PhotoSwipe UMD and init gallery
+    var script = document.createElement('script');
+    script.src = 'https://unpkg.com/photoswipe@5.4.4/dist/umd/photoswipe.umd.min.js';
+    script.onload = function() { initGallery(); };
+    document.head.appendChild(script);
 
-    function resetZoom() {
-        zoomScale = 1;
-        zoomX = 0;
-        zoomY = 0;
-        isZoomed = false;
-        if (panelImgs[1]) {
-            panelImgs[1].style.transform = '';
-            panelImgs[1].style.transformOrigin = '';
-        }
-    }
+    function initGallery() {
+        allClips.forEach(function(clip, index) {
+            clip.addEventListener('click', function(e) {
+                if (e.target.classList.contains('photo-review-btn')) return;
 
-    function applyZoom(img) {
-        if (zoomScale <= 1) {
-            img.style.transform = '';
-            img.style.transformOrigin = '';
-            isZoomed = false;
-        } else {
-            img.style.transformOrigin = '0 0';
-            img.style.transform = 'translate(' + zoomX + 'px,' + zoomY + 'px) scale(' + zoomScale + ')';
-            isZoomed = true;
-        }
-    }
+                var slides = allClips.map(function(c) {
+                    var img = c.querySelector('img');
+                    return {
+                        src: c.getAttribute('data-src'),
+                        width: img && img.naturalWidth ? img.naturalWidth : 1600,
+                        height: img && img.naturalHeight ? img.naturalHeight : 1200
+                    };
+                });
 
-    function createOverlay() {
-        var style = document.createElement('style');
-        style.textContent = '.overlay-open{position:fixed!important;width:100%!important;overflow:hidden!important;}';
-        document.head.appendChild(style);
+                var options = {
+                    dataSource: slides,
+                    index: index,
+                    bgOpacity: 1,
+                    showHideAnimationType: 'fade',
+                    closeOnVerticalDrag: true,
+                    pinchToClose: true,
+                    padding: { top: 0, bottom: 0, left: 0, right: 0 }
+                };
 
-        overlay = document.createElement('div');
-        overlay.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:#000;z-index:9999;display:none;touch-action:none;overflow:hidden;';
+                var pswp = new window.PhotoSwipe(options);
 
-        track = document.createElement('div');
-        track.style.cssText = 'display:flex;height:100%;will-change:transform;';
+                // Caption support
+                pswp.on('uiRegister', function() {
+                    pswp.ui.registerElement({
+                        name: 'custom-caption',
+                        order: 9,
+                        isButton: false,
+                        appendTo: 'root',
+                        onInit: function(el) {
+                            el.style.cssText = 'position:absolute;bottom:0;left:0;right:0;z-index:10;padding:16px 20px;background:linear-gradient(transparent,rgba(0,0,0,0.8));color:#fff;font-size:0.9rem;font-weight:300;line-height:1.6;opacity:0.8;pointer-events:none;';
+                            function updateCaption() {
+                                var caption = allClips[pswp.currIndex] ? allClips[pswp.currIndex].getAttribute('data-caption') || '' : '';
+                                if (caption) {
+                                    el.textContent = caption;
+                                    el.style.display = 'block';
+                                } else {
+                                    el.style.display = 'none';
+                                }
+                            }
+                            pswp.on('change', updateCaption);
+                            updateCaption();
+                        }
+                    });
+                });
 
-        for (var i = 0; i < 3; i++) {
-            var panel = document.createElement('div');
-            panel.style.cssText = 'height:100%;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:#000;overflow:hidden;';
-            var img = document.createElement('img');
-            img.style.cssText = 'max-width:100%;max-height:100%;object-fit:contain;will-change:transform;';
-            panel.appendChild(img);
-            track.appendChild(panel);
-            panels.push(panel);
-            panelImgs.push(img);
-        }
-
-        overlay.appendChild(track);
-
-        // Caption bar
-        captionEl = document.createElement('div');
-        captionEl.style.cssText = 'position:absolute;bottom:0;left:0;right:0;z-index:10;padding:16px 20px;background:linear-gradient(transparent,rgba(0,0,0,0.8));color:#fff;font-size:0.9rem;font-weight:300;line-height:1.6;opacity:0.8;pointer-events:none;display:none;';
-        overlay.appendChild(captionEl);
-
-        var closeBtn = document.createElement('div');
-        closeBtn.style.cssText = 'position:absolute;top:12px;right:16px;z-index:10;color:#fff;font-size:28px;opacity:0.6;cursor:pointer;padding:8px;line-height:1;';
-        closeBtn.innerHTML = '&times;';
-        closeBtn.addEventListener('click', function(e) {
-            e.stopPropagation();
-            closeOverlay();
+                pswp.init();
+            });
         });
-        overlay.appendChild(closeBtn);
-
-        // Touch handling
-        var touchStartX = 0;
-        var touchStartY = 0;
-        var touchStartTime = 0;
-        var dragging = false;
-        var dragOffset = 0;
-        var directionLocked = false;
-        // Pinch state
-        var pinching = false;
-        var pinchStartDist = 0;
-        var pinchStartScale = 1;
-        var pinchStartZoomX = 0;
-        var pinchStartZoomY = 0;
-        var pinchMidX = 0;
-        var pinchMidY = 0;
-        var panStartX = 0;
-        var panStartY = 0;
-        var panStartZoomX = 0;
-        var panStartZoomY = 0;
-
-        function getTouchDist(e) {
-            var dx = e.touches[0].clientX - e.touches[1].clientX;
-            var dy = e.touches[0].clientY - e.touches[1].clientY;
-            return Math.sqrt(dx * dx + dy * dy);
-        }
-
-        overlay.addEventListener('touchstart', function(e) {
-            if (e.touches.length === 2) {
-                pinching = true;
-                dragging = false;
-                pinchStartDist = getTouchDist(e);
-                pinchStartScale = zoomScale;
-                pinchStartZoomX = zoomX;
-                pinchStartZoomY = zoomY;
-                pinchMidX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
-                pinchMidY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
-                return;
-            }
-            if (isZoomed && e.touches.length === 1) {
-                panStartX = e.touches[0].clientX;
-                panStartY = e.touches[0].clientY;
-                panStartZoomX = zoomX;
-                panStartZoomY = zoomY;
-                dragging = false;
-                directionLocked = false;
-                return;
-            }
-            touchStartX = e.touches[0].clientX;
-            touchStartY = e.touches[0].clientY;
-            touchStartTime = Date.now();
-            dragging = false;
-            directionLocked = false;
-            dragOffset = 0;
-            track.style.transition = 'none';
-        }, {passive: true});
-
-        overlay.addEventListener('touchmove', function(e) {
-            if (pinching && e.touches.length === 2) {
-                e.preventDefault();
-                var dist = getTouchDist(e);
-                var newScale = Math.max(1, Math.min(5, pinchStartScale * (dist / pinchStartDist)));
-                var midX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
-                var midY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
-                // Keep the point under the original pinch center stationary
-                var imgX = (pinchMidX - pinchStartZoomX) / pinchStartScale;
-                var imgY = (pinchMidY - pinchStartZoomY) / pinchStartScale;
-                zoomScale = newScale;
-                zoomX = midX - imgX * newScale;
-                zoomY = midY - imgY * newScale;
-                if (zoomScale <= 1) { zoomX = 0; zoomY = 0; }
-                applyZoom(panelImgs[1]);
-                return;
-            }
-            if (isZoomed && e.touches.length === 1) {
-                e.preventDefault();
-                var dx = e.touches[0].clientX - panStartX;
-                var dy = e.touches[0].clientY - panStartY;
-                zoomX = panStartZoomX + dx;
-                zoomY = panStartZoomY + dy;
-                applyZoom(panelImgs[1]);
-                return;
-            }
-
-            var dx = e.touches[0].clientX - touchStartX;
-            var dy = e.touches[0].clientY - touchStartY;
-
-            if (!directionLocked) {
-                if (Math.abs(dx) > 10 || Math.abs(dy) > 10) {
-                    directionLocked = true;
-                    dragging = Math.abs(dx) > Math.abs(dy);
-                }
-            }
-
-            if (dragging) {
-                e.preventDefault();
-                dragOffset = dx;
-                if (currentIndex === 0 && dx > 0) dx = dx * 0.3;
-                if (currentIndex === allClips.length - 1 && dx < 0) dx = dx * 0.3;
-                var baseOffset = -viewW;
-                track.style.transform = 'translateX(' + (baseOffset + dx) + 'px)';
-            }
-        }, {passive: false});
-
-        overlay.addEventListener('touchend', function(e) {
-            if (pinching) {
-                if (e.touches.length === 0) {
-                    pinching = false;
-                    if (zoomScale <= 1.05) resetZoom();
-                }
-                return;
-            }
-            if (isZoomed) return;
-
-            var dx = e.changedTouches[0].clientX - touchStartX;
-            var dt = Date.now() - touchStartTime;
-            var velocity = Math.abs(dx) / dt;
-
-            if (dragging) {
-                var threshold = viewW * 0.25;
-                var swipedFast = velocity > 0.3 && Math.abs(dx) > 30;
-
-                if ((Math.abs(dx) > threshold || swipedFast) && dx < 0 && currentIndex < allClips.length - 1) {
-                    animateToPanel(2, function() { setCurrentClip(currentIndex + 1, 1); });
-                } else if ((Math.abs(dx) > threshold || swipedFast) && dx > 0 && currentIndex > 0) {
-                    animateToPanel(0, function() { setCurrentClip(currentIndex - 1, -1); });
-                } else {
-                    animateToPanel(1);
-                }
-            }
-
-            dragging = false;
-        });
-
-        // Double-tap to zoom
-        var lastTap = 0;
-        overlay.addEventListener('touchend', function(e) {
-            if (e.touches.length > 0 || pinching) return;
-            var now = Date.now();
-            if (now - lastTap < 300) {
-                if (isZoomed) {
-                    resetZoom();
-                } else {
-                    zoomScale = 2.5;
-                    var rect = panelImgs[1].getBoundingClientRect();
-                    var tapX = e.changedTouches[0].clientX;
-                    var tapY = e.changedTouches[0].clientY;
-                    zoomX = -(tapX - rect.left) * (zoomScale - 1);
-                    zoomY = -(tapY - rect.top) * (zoomScale - 1);
-                    applyZoom(panelImgs[1]);
-                }
-            }
-            lastTap = now;
-        });
-
-        document.addEventListener('keydown', function(e) {
-            if (currentIndex === -1) return;
-            if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
-                e.preventDefault();
-                if (currentIndex < allClips.length - 1) {
-                    animateToPanel(2, function() { setCurrentClip(currentIndex + 1, 1); });
-                }
-            } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
-                e.preventDefault();
-                if (currentIndex > 0) {
-                    animateToPanel(0, function() { setCurrentClip(currentIndex - 1, -1); });
-                }
-            } else if (e.key === 'Escape') {
-                closeOverlay();
-            }
-        });
-
-        document.body.appendChild(overlay);
     }
 
-    function animateToPanel(panelIndex, callback) {
-        var targetX = -panelIndex * viewW;
-        track.style.transition = 'transform 0.25s ease-out';
-        track.style.transform = 'translateX(' + targetX + 'px)';
-        if (callback) {
-            var done = false;
-            var finish = function() {
-                if (done) return;
-                done = true;
-                track.removeEventListener('transitionend', finish);
-                callback();
-            };
-            track.addEventListener('transitionend', finish);
-            setTimeout(finish, 300);
-        }
-    }
-
-    function loadPanel(panelIndex, clipIndex) {
-        var img = panelImgs[panelIndex];
-        if (clipIndex < 0 || clipIndex >= allClips.length) {
-            img.removeAttribute('src');
-            return;
-        }
-        var src = getClipSrc(clipIndex);
-        if (img.getAttribute('src') === src) return;
-        img.src = src;
-    }
-
-    function updateCaption(index) {
-        if (!captionEl) return;
-        var text = getClipCaption(index);
-        if (text) {
-            captionEl.textContent = text;
-            captionEl.style.display = 'block';
-        } else {
-            captionEl.style.display = 'none';
-        }
-    }
-
-    function setCurrentClip(index, direction) {
-        currentIndex = index;
-        resetZoom();
-        updateCaption(index);
-
-        if (direction === 1) {
-            var tmpImg = panelImgs[0];
-            panelImgs[0] = panelImgs[1];
-            panelImgs[1] = panelImgs[2];
-            panelImgs[2] = tmpImg;
-            track.appendChild(panelImgs[0].parentNode);
-            track.appendChild(panelImgs[1].parentNode);
-            track.appendChild(panelImgs[2].parentNode);
-            track.style.transition = 'none';
-            track.style.transform = 'translateX(' + (-viewW) + 'px)';
-            loadPanel(0, index - 1);
-            loadPanel(2, index + 1);
-        } else if (direction === -1) {
-            var tmpImg2 = panelImgs[2];
-            panelImgs[2] = panelImgs[1];
-            panelImgs[1] = panelImgs[0];
-            panelImgs[0] = tmpImg2;
-            track.appendChild(panelImgs[0].parentNode);
-            track.appendChild(panelImgs[1].parentNode);
-            track.appendChild(panelImgs[2].parentNode);
-            track.style.transition = 'none';
-            track.style.transform = 'translateX(' + (-viewW) + 'px)';
-            loadPanel(0, index - 1);
-            loadPanel(2, index + 1);
-        } else {
-            loadPanel(0, index - 1);
-            loadPanel(1, index);
-            loadPanel(2, index + 1);
-            track.style.transition = 'none';
-            track.style.transform = 'translateX(' + (-viewW) + 'px)';
-        }
-    }
-
-    function updateViewW() {
-        viewW = overlay.clientWidth;
-        track.style.width = (viewW * 3) + 'px';
-        for (var i = 0; i < panelImgs.length; i++) {
-            panelImgs[i].parentNode.style.width = viewW + 'px';
-        }
-    }
-
-    function openOverlay(index) {
-        if (!overlay) createOverlay();
-        savedScrollY = window.scrollY;
-        document.body.classList.add('overlay-open');
-        document.body.style.top = -savedScrollY + 'px';
-        overlay.style.display = 'block';
-        updateViewW();
-        setCurrentClip(index, 0);
-    }
-
-    function closeOverlay() {
-        if (!overlay || currentIndex === -1) return;
-        panelImgs.forEach(function(img) { img.removeAttribute('src'); });
-        overlay.style.display = 'none';
-        document.body.classList.remove('overlay-open');
-        document.body.style.top = '';
-        window.scrollTo(0, savedScrollY);
-        currentIndex = -1;
-    }
-
-    window.addEventListener('resize', function() {
-        if (currentIndex !== -1) {
-            updateViewW();
-            track.style.transition = 'none';
-            track.style.transform = 'translateX(' + (-viewW) + 'px)';
-        }
-    });
-
-    // Click-to-fullscreen for all clips
-    allClips.forEach(function(clip, index) {
-        clip.addEventListener('click', function(e) {
-            if (e.target.classList.contains('photo-review-btn')) return;
-            openOverlay(index);
-        });
-    });
-
-    // Review mode
+    // ---- Review mode ----
     function enableReview() {
         document.querySelectorAll('.clip').forEach(function(clip) {
             var photoId = clip.getAttribute('data-id');
