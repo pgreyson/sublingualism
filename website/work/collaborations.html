@@ -87,6 +87,19 @@
             opacity: 1;
             border-bottom-color: rgba(255,255,255,0.8);
         }
+        .photos {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin: 0.75rem 0;
+        }
+        .clip {
+            cursor: pointer;
+        }
+        .clip img {
+            width: 100%;
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -109,7 +122,24 @@
 
         <div class="collab-section">
             <div class="collab-label">sarah gray research headquarters, krowswork gallery, oakland, 2012</div>
-            <div class="collab-note">A fictional science lab where collaborators performed as scientists-in-residence conducting experiments while gallery visitors observed and participated. I performed as Hans Jenny and built a cymatics demonstration.</div>
+            <div class="collab-note">A fictional science lab where collaborators performed as scientists-in-residence conducting experiments while gallery visitors observed and participated. I performed as Hans Jenny and built a cymatics demonstration — pairs of visitors each controlled the frequency of an audio tone, and the combined vibrations formed patterns in lycopodium powder on a vibrating plate.</div>
+            <div class="photos">
+                <div class="clip" data-id="hj-diagram" data-src="https://d2xbllb3qhv8ay.cloudfront.net/images/process/hj-diagram.png">
+                    <img src="https://d2xbllb3qhv8ay.cloudfront.net/images/process/hj-diagram.png" alt="" loading="lazy" decoding="async">
+                </div>
+                <div class="clip" data-id="hj-plate-result-1" data-src="https://d2xbllb3qhv8ay.cloudfront.net/images/process/hj-plate-result-1.jpg">
+                    <img src="https://d2xbllb3qhv8ay.cloudfront.net/images/process/hj-plate-result-1.jpg" alt="" loading="lazy" decoding="async">
+                </div>
+                <div class="clip" data-id="hj-plate-result-2" data-src="https://d2xbllb3qhv8ay.cloudfront.net/images/process/hj-plate-result-2.jpg">
+                    <img src="https://d2xbllb3qhv8ay.cloudfront.net/images/process/hj-plate-result-2.jpg" alt="" loading="lazy" decoding="async">
+                </div>
+                <div class="clip" data-id="hj-annotated-result" data-src="https://d2xbllb3qhv8ay.cloudfront.net/images/process/hj-annotated-result.png">
+                    <img src="https://d2xbllb3qhv8ay.cloudfront.net/images/process/hj-annotated-result.png" alt="" loading="lazy" decoding="async">
+                </div>
+                <div class="clip" data-id="hj-initial-results" data-src="https://d2xbllb3qhv8ay.cloudfront.net/images/process/hj-initial-results.png">
+                    <img src="https://d2xbllb3qhv8ay.cloudfront.net/images/process/hj-initial-results.png" alt="" loading="lazy" decoding="async">
+                </div>
+            </div>
             <a class="app-link" href="https://vimeo.com/55077756">video →</a>
             <br>
             <a class="app-link" href="https://meravtzur.com/sarah-gray-research/">merav's documentation →</a>
@@ -148,6 +178,7 @@
         </div>
 
     </div>
+    <script src="/review-photos.js"></script>
     <script data-goatcounter="https://sublingualism.goatcounter.com/count"
             async src="//gc.zgo.at/count.js"></script>
 </body>
