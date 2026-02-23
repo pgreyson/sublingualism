@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://d2xbllb3qhv8ay.cloudfront.net">
+    <title>Sublingualism — BYOB Gray Area</title>
+    <meta name="description" content="Video clips from BYOB (Bring Your Own Beamer), Gray Area, San Francisco, October 2024.">
+    <link rel="canonical" href="https://sublingualism.com/work/byob-gray-area.html">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://sublingualism.com/work/byob-gray-area.html">
+    <meta property="og:title" content="Sublingualism — BYOB Gray Area">
+    <meta property="og:description" content="Video clips from BYOB (Bring Your Own Beamer), Gray Area, San Francisco, October 2024.">
+    <meta property="og:image" content="https://d2xbllb3qhv8ay.cloudfront.net/posters/events/byob-gray-area/byob-gray-area-060.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #000;
+            color: #fff;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+        @media (min-width: 600px) {
+            .container { padding: 2rem; }
+        }
+        .nav {
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav a {
+            color: #fff;
+            text-decoration: none;
+            opacity: 0.7;
+        }
+        .nav a:hover {
+            opacity: 1;
+        }
+        .clips-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        @keyframes spin {
+            to { transform: translate(-50%,-50%) rotate(360deg); }
+        }
+        .clip {
+            cursor: pointer;
+            position: relative;
+            aspect-ratio: 16 / 9;
+        }
+        .clip::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255,255,255,0.15);
+            border-top-color: rgba(255,255,255,0.6);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            transform: translate(-50%,-50%);
+        }
+        .clip.loaded::before {
+            display: none;
+        }
+        .clip img {
+            width: 100%;
+            display: block;
+        }
+        .empty {
+            font-size: 0.9rem;
+            line-height: 1.7;
+            font-weight: 300;
+            opacity: 0.4;
+            padding: 2rem 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav">
+            <a href="/work/events.html">&larr; live</a>
+            <a href="/work/archive/byob-gray-area.html">archive &rarr;</a>
+        </div>
+        <div class="clips-grid">
+            <div class="empty">no clips selected yet — browse the <a href="/work/archive/byob-gray-area.html" style="color:#fff;opacity:0.7;">archive</a> to select clips</div>
+        </div>
+    </div>
+    <script src="/review.js"></script>
+    <script data-goatcounter="https://sublingualism.goatcounter.com/count"
+            async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
