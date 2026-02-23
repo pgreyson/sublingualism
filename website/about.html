@@ -93,12 +93,7 @@
             <a href="/">← home</a>
         </div>
 
-        <div class="section">
-            <p>Stereoscopic video art from modular synthesis — patterns generated in hardware, processed through custom shaders, output as side-by-side 3D.</p>
-            <p>The name is a double meaning. Sublingual — work that is sub-linguistic, not intended to be described or labeled. In the Buddhist tradition of direct perception, there is experience before the mind names it. I am a vipassana practitioner and I consider this work to be related to that practice.</p>
-            <p>The other meaning is a wink. I've shown this work many times at events where various substances are consumed with much the same intent as the meditative process — to bypass normal perception and have direct experience. Absorbed under the tongue.</p>
-            <p>Any phone-based VR viewer works. A <a href="https://a.co/d/09W8LgKW" style="color:#fff;opacity:0.85;border-bottom:1px solid rgba(255,255,255,0.3);text-decoration:none;transition:all 0.3s ease;" onmouseover="this.style.opacity='1';this.style.borderBottomColor='rgba(255,255,255,0.8)'" onmouseout="this.style.opacity='0.85';this.style.borderBottomColor='rgba(255,255,255,0.3)'">$15 cardboard viewer</a> and a phone is all you need.</p>
-        </div>
+        <div class="section" id="about-text"></div>
 
         <div class="section gear-photo">
             <img src="https://d2xbllb3qhv8ay.cloudfront.net/images/gear.jpg" alt="" loading="lazy" decoding="async">
@@ -121,6 +116,16 @@
             <a href="mailto:someone.named.paul@gmail.com">someone.named.paul@gmail.com</a>
         </div>
     </div>
+    <script>
+        fetch('/about.txt').then(r => r.text()).then(function(text) {
+            var el = document.getElementById('about-text');
+            text.trim().split(/\n\n+/).forEach(function(para) {
+                var p = document.createElement('p');
+                p.innerHTML = para.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
+                el.appendChild(p);
+            });
+        });
+    </script>
     <script data-goatcounter="https://sublingualism.goatcounter.com/count"
             async src="//gc.zgo.at/count.js"></script>
 </body>
