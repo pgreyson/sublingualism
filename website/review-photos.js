@@ -195,6 +195,10 @@
         var pinching = false;
         var pinchStartDist = 0;
         var pinchStartScale = 1;
+        var pinchStartZoomX = 0;
+        var pinchStartZoomY = 0;
+        var pinchMidX = 0;
+        var pinchMidY = 0;
         var panStartX = 0;
         var panStartY = 0;
         var panStartZoomX = 0;
@@ -212,6 +216,10 @@
                 dragging = false;
                 pinchStartDist = getTouchDist(e);
                 pinchStartScale = zoomScale;
+                pinchStartZoomX = zoomX;
+                pinchStartZoomY = zoomY;
+                pinchMidX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+                pinchMidY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
                 return;
             }
             if (isZoomed && e.touches.length === 1) {
@@ -236,12 +244,16 @@
             if (pinching && e.touches.length === 2) {
                 e.preventDefault();
                 var dist = getTouchDist(e);
-                var newScale = pinchStartScale * (dist / pinchStartDist);
-                zoomScale = Math.max(1, Math.min(5, newScale));
-                if (zoomScale <= 1) {
-                    zoomX = 0;
-                    zoomY = 0;
-                }
+                var newScale = Math.max(1, Math.min(5, pinchStartScale * (dist / pinchStartDist)));
+                var midX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+                var midY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+                // Keep the point under the original pinch center stationary
+                var imgX = (pinchMidX - pinchStartZoomX) / pinchStartScale;
+                var imgY = (pinchMidY - pinchStartZoomY) / pinchStartScale;
+                zoomScale = newScale;
+                zoomX = midX - imgX * newScale;
+                zoomY = midY - imgY * newScale;
+                if (zoomScale <= 1) { zoomX = 0; zoomY = 0; }
                 applyZoom(panelImgs[1]);
                 return;
             }
