@@ -80,6 +80,24 @@
             width: 100%;
             display: block;
         }
+        .videos {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .videos video {
+            width: 100%;
+            display: block;
+        }
+        .videos-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+        }
+        .videos-grid video {
+            width: 100%;
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -109,13 +127,9 @@
 
         <div class="process-section">
             <div class="process-label">mmmixer output</div>
-            <div class="photos">
-                <div class="clip" data-id="kalidahell-frame" data-src="https://d2xbllb3qhv8ay.cloudfront.net/images/process/kalidahell-frame.jpg">
-                    <img src="https://d2xbllb3qhv8ay.cloudfront.net/images/process/kalidahell-frame.jpg" alt="" loading="lazy" decoding="async">
-                </div>
-                <div class="clip" data-id="another-frame" data-src="https://d2xbllb3qhv8ay.cloudfront.net/images/process/another-frame.jpg">
-                    <img src="https://d2xbllb3qhv8ay.cloudfront.net/images/process/another-frame.jpg" alt="" loading="lazy" decoding="async">
-                </div>
+            <div class="videos">
+                <video src="https://d2xbllb3qhv8ay.cloudfront.net/videos/process/kalidahell.mp4" playsinline loop muted preload="metadata"></video>
+                <video src="https://d2xbllb3qhv8ay.cloudfront.net/videos/process/another.mp4" playsinline loop muted preload="metadata"></video>
             </div>
         </div>
 
@@ -163,27 +177,36 @@
 
         <div class="process-section">
             <div class="process-label">early video feedback experiments</div>
-            <div class="photos-grid">
-                <div class="clip" data-id="feedbacker-1" data-src="https://d2xbllb3qhv8ay.cloudfront.net/images/process/feedbacker-1.jpg">
-                    <img src="https://d2xbllb3qhv8ay.cloudfront.net/images/process/feedbacker-1.jpg" alt="" loading="lazy" decoding="async">
-                </div>
-                <div class="clip" data-id="feedbacker-3" data-src="https://d2xbllb3qhv8ay.cloudfront.net/images/process/feedbacker-3.jpg">
-                    <img src="https://d2xbllb3qhv8ay.cloudfront.net/images/process/feedbacker-3.jpg" alt="" loading="lazy" decoding="async">
-                </div>
-                <div class="clip" data-id="feedbacker-5" data-src="https://d2xbllb3qhv8ay.cloudfront.net/images/process/feedbacker-5.jpg">
-                    <img src="https://d2xbllb3qhv8ay.cloudfront.net/images/process/feedbacker-5.jpg" alt="" loading="lazy" decoding="async">
-                </div>
-                <div class="clip" data-id="feedbacker-11" data-src="https://d2xbllb3qhv8ay.cloudfront.net/images/process/feedbacker-11.jpg">
-                    <img src="https://d2xbllb3qhv8ay.cloudfront.net/images/process/feedbacker-11.jpg" alt="" loading="lazy" decoding="async">
-                </div>
-                <div class="clip" data-id="feedbacker-14" data-src="https://d2xbllb3qhv8ay.cloudfront.net/images/process/feedbacker-14.jpg">
-                    <img src="https://d2xbllb3qhv8ay.cloudfront.net/images/process/feedbacker-14.jpg" alt="" loading="lazy" decoding="async">
-                </div>
+            <div class="videos-grid">
+                <video src="https://d2xbllb3qhv8ay.cloudfront.net/videos/process/feedbacker-1.mp4" playsinline loop muted preload="metadata"></video>
+                <video src="https://d2xbllb3qhv8ay.cloudfront.net/videos/process/feedbacker-2.mp4" playsinline loop muted preload="metadata"></video>
+                <video src="https://d2xbllb3qhv8ay.cloudfront.net/videos/process/feedbacker-3.mp4" playsinline loop muted preload="metadata"></video>
+                <video src="https://d2xbllb3qhv8ay.cloudfront.net/videos/process/feedbacker-4.mp4" playsinline loop muted preload="metadata"></video>
+                <video src="https://d2xbllb3qhv8ay.cloudfront.net/videos/process/feedbacker-5.mp4" playsinline loop muted preload="metadata"></video>
+                <video src="https://d2xbllb3qhv8ay.cloudfront.net/videos/process/feedbacker-6.mp4" playsinline loop muted preload="metadata"></video>
+                <video src="https://d2xbllb3qhv8ay.cloudfront.net/videos/process/feedbacker-7.mp4" playsinline loop muted preload="metadata"></video>
+                <video src="https://d2xbllb3qhv8ay.cloudfront.net/videos/process/feedbacker-8.mp4" playsinline loop muted preload="metadata"></video>
+                <video src="https://d2xbllb3qhv8ay.cloudfront.net/videos/process/feedbacker-9.mp4" playsinline loop muted preload="metadata"></video>
+                <video src="https://d2xbllb3qhv8ay.cloudfront.net/videos/process/feedbacker-11.mp4" playsinline loop muted preload="metadata"></video>
+                <video src="https://d2xbllb3qhv8ay.cloudfront.net/videos/process/feedbacker-12.mp4" playsinline loop muted preload="metadata"></video>
+                <video src="https://d2xbllb3qhv8ay.cloudfront.net/videos/process/feedbacker-13.mp4" playsinline loop muted preload="metadata"></video>
+                <video src="https://d2xbllb3qhv8ay.cloudfront.net/videos/process/feedbacker-14.mp4" playsinline loop muted preload="metadata"></video>
+                <video src="https://d2xbllb3qhv8ay.cloudfront.net/videos/process/feedbacker-15.mp4" playsinline loop muted preload="metadata"></video>
+                <video src="https://d2xbllb3qhv8ay.cloudfront.net/videos/process/feedbacker-16.mp4" playsinline loop muted preload="metadata"></video>
+                <video src="https://d2xbllb3qhv8ay.cloudfront.net/videos/process/feedbacker-17.mp4" playsinline loop muted preload="metadata"></video>
             </div>
         </div>
 
     </div>
     <script src="/review-photos.js"></script>
+    <script>
+        document.querySelectorAll('video').forEach(function(v) {
+            v.addEventListener('click', function() {
+                if (v.paused) v.play();
+                else v.pause();
+            });
+        });
+    </script>
     <script data-goatcounter="https://sublingualism.goatcounter.com/count"
             async src="//gc.zgo.at/count.js"></script>
 </body>
