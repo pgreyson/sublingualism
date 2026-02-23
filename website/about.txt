@@ -1,4 +1,4 @@
-Stereoscopic video art from modular synthesis — patterns generated in hardware, processed through custom shaders, output as side-by-side 3D.
+I am currently working on stereoscopic video art from modular synthesis — patterns generated in hardware, processed through custom shaders, output as side-by-side 3D.
 
 The name is a double meaning. Sublingual — work that is sub-linguistic, not intended to be described or labeled. In the Buddhist tradition of direct perception, there is experience before the mind names it. I am a vipassana practitioner and I consider this work to be related to that practice.
 
