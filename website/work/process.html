@@ -30,6 +30,9 @@
         }
         .nav {
             margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         .nav a {
             color: #fff;
@@ -61,7 +64,10 @@
             flex-direction: column;
             gap: 0.5rem;
         }
-        .photos img {
+        .clip {
+            cursor: pointer;
+        }
+        .clip img {
             width: 100%;
             display: block;
         }
@@ -70,7 +76,7 @@
             grid-template-columns: 1fr 1fr;
             gap: 0.5rem;
         }
-        .photos-grid img {
+        .photos-grid .clip img {
             width: 100%;
             display: block;
         }
@@ -89,47 +95,74 @@
         <div class="process-section">
             <div class="process-label">mmmixer — max/msp video mixer</div>
             <div class="photos">
-                <img src="https://d2xbllb3qhv8ay.cloudfront.net/images/process/mmmixer-mix-feedback.jpg" alt="" loading="lazy" decoding="async">
-                <img src="https://d2xbllb3qhv8ay.cloudfront.net/images/process/mmmixer-radial-feedback.jpg" alt="" loading="lazy" decoding="async">
-                <img src="https://d2xbllb3qhv8ay.cloudfront.net/images/process/mmmixer-radial-symmetry.jpg" alt="" loading="lazy" decoding="async">
+                <div class="clip" data-id="mmmixer-mix-feedback" data-src="https://d2xbllb3qhv8ay.cloudfront.net/images/process/mmmixer-mix-feedback.jpg">
+                    <img src="https://d2xbllb3qhv8ay.cloudfront.net/images/process/mmmixer-mix-feedback.jpg" alt="" loading="lazy" decoding="async">
+                </div>
+                <div class="clip" data-id="mmmixer-radial-feedback" data-src="https://d2xbllb3qhv8ay.cloudfront.net/images/process/mmmixer-radial-feedback.jpg">
+                    <img src="https://d2xbllb3qhv8ay.cloudfront.net/images/process/mmmixer-radial-feedback.jpg" alt="" loading="lazy" decoding="async">
+                </div>
+                <div class="clip" data-id="mmmixer-radial-symmetry" data-src="https://d2xbllb3qhv8ay.cloudfront.net/images/process/mmmixer-radial-symmetry.jpg">
+                    <img src="https://d2xbllb3qhv8ay.cloudfront.net/images/process/mmmixer-radial-symmetry.jpg" alt="" loading="lazy" decoding="async">
+                </div>
             </div>
         </div>
 
         <div class="process-section">
             <div class="process-label">mmmixer output</div>
             <div class="photos">
-                <img src="https://d2xbllb3qhv8ay.cloudfront.net/images/process/kalidahell-frame.jpg" alt="" loading="lazy" decoding="async">
-                <img src="https://d2xbllb3qhv8ay.cloudfront.net/images/process/another-frame.jpg" alt="" loading="lazy" decoding="async">
+                <div class="clip" data-id="kalidahell-frame" data-src="https://d2xbllb3qhv8ay.cloudfront.net/images/process/kalidahell-frame.jpg">
+                    <img src="https://d2xbllb3qhv8ay.cloudfront.net/images/process/kalidahell-frame.jpg" alt="" loading="lazy" decoding="async">
+                </div>
+                <div class="clip" data-id="another-frame" data-src="https://d2xbllb3qhv8ay.cloudfront.net/images/process/another-frame.jpg">
+                    <img src="https://d2xbllb3qhv8ay.cloudfront.net/images/process/another-frame.jpg" alt="" loading="lazy" decoding="async">
+                </div>
             </div>
         </div>
 
         <div class="process-section">
             <div class="process-label">venus of willendorf — halftone gobo source</div>
             <div class="photos-grid">
-                <img src="https://d2xbllb3qhv8ay.cloudfront.net/images/process/venus-halftone-1.jpg" alt="" loading="lazy" decoding="async">
-                <img src="https://d2xbllb3qhv8ay.cloudfront.net/images/process/venus-halftone-2.jpg" alt="" loading="lazy" decoding="async">
-                <img src="https://d2xbllb3qhv8ay.cloudfront.net/images/process/venus-halftone-3.jpg" alt="" loading="lazy" decoding="async">
-                <img src="https://d2xbllb3qhv8ay.cloudfront.net/images/process/venus-halftone-4.jpg" alt="" loading="lazy" decoding="async">
+                <div class="clip" data-id="venus-halftone-1" data-src="https://d2xbllb3qhv8ay.cloudfront.net/images/process/venus-halftone-1.jpg">
+                    <img src="https://d2xbllb3qhv8ay.cloudfront.net/images/process/venus-halftone-1.jpg" alt="" loading="lazy" decoding="async">
+                </div>
+                <div class="clip" data-id="venus-halftone-2" data-src="https://d2xbllb3qhv8ay.cloudfront.net/images/process/venus-halftone-2.jpg">
+                    <img src="https://d2xbllb3qhv8ay.cloudfront.net/images/process/venus-halftone-2.jpg" alt="" loading="lazy" decoding="async">
+                </div>
+                <div class="clip" data-id="venus-halftone-3" data-src="https://d2xbllb3qhv8ay.cloudfront.net/images/process/venus-halftone-3.jpg">
+                    <img src="https://d2xbllb3qhv8ay.cloudfront.net/images/process/venus-halftone-3.jpg" alt="" loading="lazy" decoding="async">
+                </div>
+                <div class="clip" data-id="venus-halftone-4" data-src="https://d2xbllb3qhv8ay.cloudfront.net/images/process/venus-halftone-4.jpg">
+                    <img src="https://d2xbllb3qhv8ay.cloudfront.net/images/process/venus-halftone-4.jpg" alt="" loading="lazy" decoding="async">
+                </div>
             </div>
         </div>
 
         <div class="process-section">
             <div class="process-label">venus of willendorf — edge detection</div>
             <div class="photos-grid">
-                <img src="https://d2xbllb3qhv8ay.cloudfront.net/images/process/venus-glowingedges-1.jpg" alt="" loading="lazy" decoding="async">
-                <img src="https://d2xbllb3qhv8ay.cloudfront.net/images/process/venus-glowingedges-2.jpg" alt="" loading="lazy" decoding="async">
-                <img src="https://d2xbllb3qhv8ay.cloudfront.net/images/process/venus-glowingedges-3.jpg" alt="" loading="lazy" decoding="async">
+                <div class="clip" data-id="venus-glowingedges-1" data-src="https://d2xbllb3qhv8ay.cloudfront.net/images/process/venus-glowingedges-1.jpg">
+                    <img src="https://d2xbllb3qhv8ay.cloudfront.net/images/process/venus-glowingedges-1.jpg" alt="" loading="lazy" decoding="async">
+                </div>
+                <div class="clip" data-id="venus-glowingedges-2" data-src="https://d2xbllb3qhv8ay.cloudfront.net/images/process/venus-glowingedges-2.jpg">
+                    <img src="https://d2xbllb3qhv8ay.cloudfront.net/images/process/venus-glowingedges-2.jpg" alt="" loading="lazy" decoding="async">
+                </div>
+                <div class="clip" data-id="venus-glowingedges-3" data-src="https://d2xbllb3qhv8ay.cloudfront.net/images/process/venus-glowingedges-3.jpg">
+                    <img src="https://d2xbllb3qhv8ay.cloudfront.net/images/process/venus-glowingedges-3.jpg" alt="" loading="lazy" decoding="async">
+                </div>
             </div>
         </div>
 
         <div class="process-section">
             <div class="process-label">ace of cups — gobo source</div>
             <div class="photos">
-                <img src="https://d2xbllb3qhv8ay.cloudfront.net/images/process/cups-tarot.jpg" alt="" loading="lazy" decoding="async">
+                <div class="clip" data-id="cups-tarot" data-src="https://d2xbllb3qhv8ay.cloudfront.net/images/process/cups-tarot.jpg">
+                    <img src="https://d2xbllb3qhv8ay.cloudfront.net/images/process/cups-tarot.jpg" alt="" loading="lazy" decoding="async">
+                </div>
             </div>
         </div>
 
     </div>
+    <script src="/review-photos.js"></script>
     <script data-goatcounter="https://sublingualism.goatcounter.com/count"
             async src="//gc.zgo.at/count.js"></script>
 </body>
