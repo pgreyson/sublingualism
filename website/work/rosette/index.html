@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Rosette</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.min.js"></script>
+  <style>
+    body { margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; background: #222; }
+  </style>
+</head>
+<body>
+<script>
+// --- Configuration ---
+let doAnimation = true;
+let drawPatches = true;
+let drawIntersections = true;
+let doCrop = false;
+
+// these values determine the fundamental geometry of the figure
+// base values for animation
+let dodecagonRadius_base = 115;
+let decagonRadius_base = 95;
+let decagonCenterOffset_base = 245;
+let pentagramAngle_base;
+
+let dodecagonRadius = 115;
+let decagonRadius = 95;
+let decagonCenterOffset = 245;
+let pentagramAngle;
+let animFrame = 0;
+
+// --- Global geometry state ---
+let dodecagon, leftDecagon, bottomDecagon;
+let enneagon;
+let pentagons_g, insetPentagons_g;
+let insetDodecagon0, insetDodecagon1;
+let bottomInsetDecagon0, bottomInsetDecagon1;
+let leftInsetDecagon0, leftInsetDecagon1;
+let insetEnneagon0, insetEnneagon1;
+
+let madeMistake = false;
+let mistake = null;
+
+// --- Helper: create point ---
+function pt(x, y) { return { x: x, y: y }; }
+
+// --- Math helpers ---
+function Avg(x, y) { return (x + y) / 2; }
+
+function Distance(p1, p2) {
+  return sqrt(sq(p1.x - p2.x) + sq(p1.y - p2.y));
+}
+
+function PointFromVectorAndDistance(p0, p1, d) {
+  let l = Distance(p0, p1);
+  return pt(p0.x + (p1.x - p0.x) * d / l, p0.y + (p1.y - p0.y) * d / l);
+}
+
+function Midpoint(p1, p2) {
+  return pt(p1.x + (p2.x - p1.x) / 2, p1.y + (p2.y - p1.y) / 2);
+}
+
+// --- Drawing helpers ---
+function ThickLine(p1, p2) {
+  stroke(0);
+  strokeWeight(11);
+  line(p1.x, p1.y, p2.x, p2.y);
+}
+
+function ThinLine(p1, p2) {
+  stroke(255);
+  strokeWeight(2.5);
+  line(p1.x, p1.y, p2.x, p2.y);
+}
+
+function Line(p1, p2) {
+  strokeCap(ROUND);
+  ThickLine(p1, p2);
+  ThinLine(p1, p2);
+}
+
+function SquareLine(p1, p2) {
+  strokeCap(SQUARE);
+  ThickLine(p1, p2);
+  strokeCap(ROUND);
+  ThinLine(p1, p2);
+}
+
+// --- Pure math (no transform side-effects) ---
+function VectorAngle(iVertex, iVector0, iVector1) {
+  let theta1 = atan2(iVector0.y - iVertex.y, iVector0.x - iVertex.x);
+  let theta2 = atan2(iVector1.y - iVertex.y, iVector1.x - iVertex.x);
+  while (theta2 < theta1) theta2 += TWO_PI;
+  return theta2 - theta1;
+}
+
+function VectorFromAngle(iAnchor, iVector, iAngle) {
+  let a = atan2(iVector.y - iAnchor.y, iVector.x - iAnchor.x) + iAngle;
+  return pt(iAnchor.x + 20 * cos(a), iAnchor.y + 20 * sin(a));
+}
+
+// --- Linear algebra ---
+function FindLinearCoefficientsForNormal(p1, p2) {
+  let slope = -1 / ((p2.y - p1.y) / (p2.x - p1.x));
+  let cx = p1.x + (p2.x - p1.x) / 2;
+  let cy = p1.y + (p2.y - p1.y) / 2;
+  let offset = cy - cx * slope;
+  return pt(slope, offset);
+}
+
+function FindLinearCoefficientsForLine(p1, p2) {
+  let slope = (p2.y - p1.y) / (p2.x - p1.x);
+  let cx = p1.x + (p2.x - p1.x) / 2;
+  let cy = p1.y + (p2.y - p1.y) / 2;
+  let offset = cy - cx * slope;
+  return pt(slope, offset);
+}
+
+function FindIntersectionFromCoefficients(c0, c1) {
+  let x = (c1.y - c0.y) / (c0.x - c1.x);
+  let y = x * c0.x + c0.y;
+  return pt(x, y);
+}
+
+function FindIntersectionOfLines(p00, p01, p10, p11) {
+  if (p00.x === p01.x) {
+    let c = FindLinearCoefficientsForLine(p10, p11);
+    return pt(p00.x, p00.x * c.x + c.y);
+  } else if (p10.x === p11.x) {
+    let c = FindLinearCoefficientsForLine(p00, p01);
+    return pt(p10.x, p10.x * c.x + c.y);
+  } else {
+    let c0 = FindLinearCoefficientsForLine(p00, p01);
+    let c1 = FindLinearCoefficientsForLine(p10, p11);
+    return FindIntersectionFromCoefficients(c0, c1);
+  }
+}
+
+function FindIntersectionOfNormals(p00, p01, p10, p11) {
+  let c0 = FindLinearCoefficientsForNormal(p00, p01);
+  let c1 = FindLinearCoefficientsForNormal(p10, p11);
+  return FindIntersectionFromCoefficients(c0, c1);
+}
+
+// --- Polygon approximation from partial vertices ---
+function ApproximatePentagonFrom3Vertices(v, center, radius) {
+  let arcStart = -atan2(v[2].y - center.y, v[2].x - center.x) + PI / 2;
+  while (arcStart < 0) arcStart += TWO_PI;
+  let arcStop = -atan2(v[0].y - center.y, v[0].x - center.x) + PI / 2;
+  while (arcStop < arcStart) arcStop += TWO_PI;
+
+  let midPoint0 = arcStart + (arcStop - arcStart) / 3;
+  let midPoint1 = arcStart + 2 * (arcStop - arcStart) / 3;
+
+  let vertices = new Array(5);
+  for (let i = 0; i < v.length; i++) vertices[i] = v[i];
+  vertices[v.length] = pt(center.x + radius * sin(midPoint0), center.y + radius * cos(midPoint0));
+  vertices[v.length + 1] = pt(center.x + radius * sin(midPoint1), center.y + radius * cos(midPoint1));
+
+  return new Polygon(vertices, center, radius);
+}
+
+function ApproximateEnneagonFrom6Vertices(v) {
+  let center = FindIntersectionOfNormals(v[0], v[1], v[4], v[5]);
+  let radius = Distance(v[1], center);
+
+  let arcStart = -atan2(v[5].y - center.y, v[5].x - center.x) + PI / 2;
+  while (arcStart < 0) arcStart += TWO_PI;
+  let arcStop = -atan2(v[0].y - center.y, v[0].x - center.x) + PI / 2;
+  while (arcStop < arcStart) arcStop += TWO_PI;
+
+  let midPoint0 = arcStart + (arcStop - arcStart) / 4;
+  let midPoint1 = arcStart + 2 * (arcStop - arcStart) / 4;
+  let midPoint2 = arcStart + 3 * (arcStop - arcStart) / 4;
+
+  let vertices = new Array(v.length + 3);
+  for (let i = 0; i < v.length; i++) vertices[i] = v[i];
+  vertices[v.length] = pt(center.x + radius * sin(midPoint0), center.y + radius * cos(midPoint0));
+  vertices[v.length + 1] = pt(center.x + radius * sin(midPoint1), center.y + radius * cos(midPoint1));
+  vertices[v.length + 2] = pt(center.x + radius * sin(midPoint2), center.y + radius * cos(midPoint2));
+
+  return new Polygon(vertices, center, radius);
+}
+
+// --- Polygon class ---
+class Polygon {
+  constructor(...args) {
+    if (typeof args[0] === 'number') {
+      let [numSides, iRadius, iAngle, iCenter] = args;
+      this.mCenter = iCenter;
+      this.mRadius = iRadius;
+      this.mVertices = new Array(numSides);
+      for (let i = 0; i < numSides; i++) {
+        let theta = i * TWO_PI / numSides + iAngle;
+        this.mVertices[i] = pt(iRadius * sin(theta) + iCenter.x, iRadius * cos(theta) + iCenter.y);
+      }
+    } else {
+      let [iVertices, iCenter, iRadius] = args;
+      this.mCenter = iCenter;
+      this.mVertices = iVertices;
+      this.mRadius = iRadius;
+    }
+  }
+
+  Sides() { return this.mVertices.length; }
+  Center() { return this.mCenter; }
+  Radius() { return this.mRadius; }
+  Length(iVertex) { return Distance(this.V(iVertex), this.V(iVertex + 1)); }
+
+  V(iVertex) {
+    let n = this.mVertices.length;
+    return this.mVertices[((iVertex % n) + n) % n];
+  }
+
+  E(iVertex) {
+    return Midpoint(this.V(iVertex), this.V(iVertex + 1));
+  }
+
+  Circumscribe() {
+    noFill();
+    ellipse(this.mCenter.x, this.mCenter.y, this.mRadius * 2, this.mRadius * 2);
+  }
+
+  DrawEdges() {
+    for (let i = 0; i < this.mVertices.length; i++) {
+      Line(this.V(i), this.V(i + 1));
+    }
+  }
+
+  DrawVertex(iVertex) {
+    noFill();
+    ellipse(this.V(iVertex).x, this.V(iVertex).y, 10, 10);
+  }
+
+  DrawCenter() {
+    noFill();
+    ellipse(this.mCenter.x, this.mCenter.y, 1, 1);
+  }
+
+  Fill() {
+    beginShape();
+    for (let i = 0; i < this.mVertices.length; i++) {
+      vertex(this.V(i).x, this.V(i).y);
+    }
+    endShape(CLOSE);
+  }
+
+  IntersectionWithBottom(iEdge) {
+    return FindIntersectionOfLines(this.V(iEdge), this.V(iEdge + 1),
+      pt(-decagonCenterOffset, decagonCenterOffset), pt(decagonCenterOffset, decagonCenterOffset));
+  }
+}
+
+// --- Strapwork classes ---
+class Segment {
+  constructor(p1, p2) {
+    this.p1 = p1;
+    this.p2 = p2;
+    this.p1Mark = 0;
+    this.p2Mark = 0;
+  }
+
+  Other(p) {
+    return (this.p1 === p) ? this.p2 : this.p1;
+  }
+
+  GetMark(p) {
+    return (p === this.p1) ? this.p1Mark : this.p2Mark;
+  }
+
+  Mark(p, mark) {
+    if (p === this.p1) this.p1Mark = mark;
+    else this.p2Mark = mark;
+  }
+}
+
+class PointSelector {
+  constructor(s, p) {
+    this.s = s;
+    this.p = p;
+  }
+}
+
+class PointCombination {
+  constructor(p1, p2) {
+    this.p1 = p1;
+    this.p2 = p2;
+  }
+}
+
+// --- Point comparison (matches Java's (int) truncation) ---
+function pointCompare(p1, p2) {
+  let x1 = Math.trunc(p1.x), x2 = Math.trunc(p2.x);
+  let y1 = Math.trunc(p1.y), y2 = Math.trunc(p2.y);
+  if (x1 < x2) return -1;
+  if (x1 > x2) return 1;
+  if (y1 < y2) return -1;
+  if (y1 > y2) return 1;
+  return 0;
+}
+
+function pointKey(p) {
+  return Math.trunc(p.x) + ',' + Math.trunc(p.y);
+}
+
+// --- Path class (strapwork weaving) ---
+class StrapworkPath {
+  constructor() {
+    this.mSegments = [];
+    this.mMap = new Map(); // string key -> { point, segments: [] }
+  }
+
+  _getOrCreate(p) {
+    let k = pointKey(p);
+    let entry = this.mMap.get(k);
+    if (!entry) {
+      entry = { point: p, segments: [] };
+      this.mMap.set(k, entry);
+    }
+    return entry;
+  }
+
+  _get(p) {
+    return this.mMap.get(pointKey(p));
+  }
+
+  AddSegment(p1, p2) {
+    let idx = this.mSegments.length;
+    this._getOrCreate(p1).segments.push(idx);
+    this._getOrCreate(p2).segments.push(idx);
+    this.mSegments.push(new Segment(p1, p2));
+  }
+
+  DoReflections() {
+    let numElements = this.mSegments.length;
+    for (let i = 0; i < 3; i++) {
+      for (let j = 0; j < numElements; j++) {
+        let e = this.mSegments[j];
+        switch (i) {
+          case 0:
+            this.AddSegment(pt(e.p1.y, -e.p1.x), pt(e.p2.y, -e.p2.x));
+            break;
+          case 1:
+            this.AddSegment(pt(-e.p1.x, -e.p1.y), pt(-e.p2.x, -e.p2.y));
+            break;
+          case 2:
+            this.AddSegment(pt(-e.p1.y, e.p1.x), pt(-e.p2.y, e.p2.x));
+            break;
+        }
+      }
+    }
+  }
+
+  GetComplement(inPC, combinations) {
+    for (let i = 0; i < combinations.length; i++) {
+      let s1 = combinations[i].p1.s;
+      let s2 = combinations[i].p2.s;
+      if (s1 !== inPC.p1.s && s1 !== inPC.p2.s && s2 !== inPC.p1.s && s2 !== inPC.p2.s) {
+        return combinations[i];
+      }
+    }
+    return null;
+  }
+
+  IsMarked(selector, mark, depth) {
+    if (depth === undefined) depth = 0;
+    if (depth > 100) return false;
+
+    let entry = this._get(selector.p);
+    let v = entry ? entry.segments : null;
+
+    if (v != null && v.length === 2) {
+      let s1 = this.mSegments[v[0]];
+      let s2 = this.mSegments[v[1]];
+      let s = (selector.s === s1) ? s2 : s1;
+
+      let next;
+      if (pointCompare(s.p1, selector.p) === 0)
+        next = new PointSelector(s, s.p2);
+      else
+        next = new PointSelector(s, s.p1);
+
+      return this.IsMarked(next, mark, depth + 1);
+    }
+
+    return selector.s.GetMark(selector.p) === mark;
+  }
+
+  Draw() {
+    // Draw all segments
+    for (let i = 0; i < this.mSegments.length; i++) {
+      Line(this.mSegments[i].p1, this.mSegments[i].p2);
+    }
+
+    // Sort entries for ordered traversal (matches Java TreeMap with PointComparator)
+    let sortedEntries = [...this.mMap.entries()].sort((a, b) => {
+      return pointCompare(a[1].point, b[1].point);
+    });
+
+    // Track remaining keys
+    let remaining = new Set(sortedEntries.map(e => e[0]));
+
+    let startingKey = sortedEntries[0][0];
+    let startingPoint = this.mMap.get(startingKey).point;
+
+    let key = startingKey;
+    let keyPoint = startingPoint;
+    let previousKeyPoint = null;
+
+    while (key != null) {
+      let entry = this.mMap.get(key);
+      let v = entry.segments;
+
+      // Build selectors
+      let selectors = new Array(v.length);
+      for (let i = 0; i < v.length; i++) {
+        let s = this.mSegments[v[i]];
+        if (Distance(keyPoint, s.p1) < 1)
+          selectors[i] = new PointSelector(s, s.p2);
+        else
+          selectors[i] = new PointSelector(s, s.p1);
+      }
+
+      // Build combinations
+      let numCombinations = v.length * (v.length - 1) / 2;
+      let combinations = new Array(numCombinations);
+      let idx = 0;
+      for (let i = 0; i < v.length - 1; i++)
+        for (let j = i + 1; j < v.length; j++)
+          combinations[idx++] = new PointCombination(selectors[i], selectors[j]);
+
+      // Find most obtuse pair
+      let bestAngle = 0;
+      let best = -1;
+      for (let i = 0; i < numCombinations; i++) {
+        let testAngle = VectorAngle(keyPoint, combinations[i].p1.p, combinations[i].p2.p);
+        while (testAngle < 0) testAngle += PI;
+        if (testAngle > PI) testAngle = TWO_PI - testAngle;
+        if (testAngle > bestAngle) {
+          best = i;
+          bestAngle = testAngle;
+        }
+      }
+
+      let patchLength = 10;
+      if (v.length === 2) patchLength = 5;
+
+      let c1 = combinations[best];
+      let c2 = this.GetComplement(c1, combinations);
+
+      if (drawPatches) {
+        let pp1 = PointFromVectorAndDistance(keyPoint, c1.p1.p, patchLength);
+        let pp2 = PointFromVectorAndDistance(keyPoint, c1.p2.p, patchLength);
+        SquareLine(keyPoint, pp1);
+        SquareLine(keyPoint, pp2);
+
+        if (c2 != null) {
+          let c2Top = this.IsMarked(c2.p1, -1) || this.IsMarked(c2.p2, -1) ||
+                      this.IsMarked(c1.p1, 1) || this.IsMarked(c1.p2, 1);
+
+          let c1Mark, c2Mark;
+          if (c2Top) { c1Mark = -1; c2Mark = 1; }
+          else { c1Mark = 1; c2Mark = -1; }
+
+          if (c2Top) {
+            SquareLine(keyPoint, PointFromVectorAndDistance(keyPoint, c2.p1.p, patchLength));
+            SquareLine(keyPoint, PointFromVectorAndDistance(keyPoint, c2.p2.p, patchLength));
+          }
+
+          c2.p1.s.Mark(c2.p1.s.Other(c2.p1.p), c2Mark);
+          c2.p2.s.Mark(c2.p2.s.Other(c2.p2.p), c2Mark);
+          c1.p1.s.Mark(c1.p1.s.Other(c1.p1.p), c1Mark);
+          c1.p2.s.Mark(c1.p2.s.Other(c1.p2.p), c1Mark);
+        }
+      }
+
+      // Navigate to next point
+      let newKeyPoint = null;
+      remaining.delete(key);
+
+      if (previousKeyPoint != null) {
+        if (pointCompare(c1.p1.p, previousKeyPoint) === 0)
+          newKeyPoint = c1.p2.p;
+        else if (pointCompare(c1.p2.p, previousKeyPoint) === 0)
+          newKeyPoint = c1.p1.p;
+        else if (c2 != null) {
+          if (pointCompare(c2.p1.p, previousKeyPoint) === 0)
+            newKeyPoint = c2.p2.p;
+          else if (pointCompare(c2.p2.p, previousKeyPoint) === 0)
+            newKeyPoint = c2.p1.p;
+        }
+      } else {
+        newKeyPoint = c1.p1.p;
+      }
+
+      previousKeyPoint = keyPoint;
+
+      if (newKeyPoint && pointCompare(newKeyPoint, startingPoint) !== 0) {
+        key = pointKey(newKeyPoint);
+        keyPoint = newKeyPoint;
+      } else {
+        key = null;
+        keyPoint = null;
+      }
+
+      // Pick a new starting point if cycle completed
+      if (remaining.size > 0 && key == null) {
+        for (let se of sortedEntries) {
+          if (remaining.has(se[0])) {
+            key = se[0];
+            keyPoint = se[1].point;
+            startingPoint = keyPoint;
+            previousKeyPoint = null;
+            break;
+          }
+        }
+      }
+    }
+
+    // Draw intersection dots
+    if (drawIntersections) {
+      for (let [k, entry] of this.mMap) {
+        fill(255);
+        strokeWeight(1.25);
+        ellipse(entry.point.x, entry.point.y, 3, 3);
+      }
+    }
+  }
+}
+
+// --- Pentagon construction helpers ---
+function DrawEasyPentagonVertices(e, iVertex, iVertices) {
+  iVertices[0] = e.E(iVertex);
+  iVertices[1] = PointFromVectorAndDistance(e.V(iVertex), e.Center(), Avg(e.Length(iVertex), e.Length(iVertex - 1)) / 2);
+  iVertices[2] = e.E(iVertex - 1);
+}
+
+function MakeInsetPentagon(p) {
+  let vertices = new Array(5);
+  for (let i = 0; i < p.Sides(); i++) {
+    let interior0 = VectorAngle(p.V(i), p.V(i - 1), p.V(i + 1));
+    let angle0 = (interior0 - pentagramAngle) / 2;
+
+    let interior1 = VectorAngle(p.V(i + 1), p.V(i), p.V(i + 2));
+    let angle1 = (interior1 - pentagramAngle) / 2;
+
+    vertices[i] = FindIntersectionOfLines(
+      p.V(i), VectorFromAngle(p.V(i), p.V(i + 1), -angle0),
+      p.V(i + 1), VectorFromAngle(p.V(i + 1), p.V(i), angle1)
+    );
+  }
+  return new Polygon(vertices, p.Center(), Distance(p.Center(), vertices[0]));
+}
+
+function MakeInsetPolygon(iInset0, iAngle) {
+  let inset1 = iInset0;
+  let radius = iInset0.Radius();
+  let multiple = 0.99;
+  let lastWasLarger = true;
+
+  for (let iter = 0; iter < 10000; iter++) {
+    inset1 = new Polygon(iInset0.Sides(), radius, iAngle, iInset0.Center());
+
+    let adjacent = Distance(iInset0.V(0), FindIntersectionOfLines(inset1.V(-1), inset1.V(1), iInset0.Center(), iInset0.V(0)));
+    let opposite = Distance(inset1.V(-1), inset1.V(1)) / 2;
+    let angle = atan(opposite / adjacent);
+
+    if (abs(angle - pentagramAngle / 2) < 0.005) {
+      break;
+    } else if (angle > pentagramAngle / 2) {
+      radius *= multiple;
+      if (!lastWasLarger) { lastWasLarger = true; multiple *= 0.99; }
+    } else {
+      radius *= 1 / multiple;
+      if (lastWasLarger) { lastWasLarger = false; multiple *= 0.99; }
+    }
+  }
+  return inset1;
+}
+
+// --- Moon decorations ---
+function MakeMoon(center, radius, angle, invert, percentage) {
+  noStroke();
+
+  if (invert) fill(0); else fill(255);
+  ellipse(center.x, center.y, radius * 2, radius * 2);
+
+  if (percentage === 0) return;
+
+  if (invert) fill(255); else fill(0);
+
+  if (invert)
+    arc(center.x, center.y, radius * 2, radius * 2, angle + 3 * PI / 2, angle + 5 * PI / 2);
+  else
+    arc(center.x, center.y, radius * 2, radius * 2, angle + 3 * PI / 2, angle + 5 * PI / 2);
+
+  beginShape();
+  let increments = 20;
+  for (let i = -increments / 2; i <= increments + increments / 2; i++) {
+    let x = center.x + radius * sin(i * PI / increments + PI + angle) * percentage;
+    let y = center.y + radius * cos(i * PI / increments + PI + angle);
+    curveVertex(x, y);
+  }
+  endShape();
+}
+
+function MakeLargeMoons() {
+  let radius = 14;
+  let p = pt(0, 0);
+  let center = bottomDecagon.Center();
+
+  p.x = center.x; p.y = center.y;
+  MakeMoon(p, radius, 0, false, 0);
+
+  p = pt(-center.y, center.x);
+  MakeMoon(p, radius, PI, false, 0.2);
+
+  p = pt(-center.x, -center.y);
+  MakeMoon(p, radius, 0, false, 1);
+
+  p = pt(center.y, -center.x);
+  MakeMoon(p, radius, PI, true, 0.3);
+}
+
+function MakeSmallMoons() {
+  let radius = 14;
+  let center = enneagon.Center();
+
+  let p = pt(center.x, center.y);
+  MakeMoon(p, radius, 0, true, 0.6);
+
+  p = pt(-center.y, center.x);
+  MakeMoon(p, radius + 1, PI, false, 0.7);
+
+  p = pt(center.y, -center.x);
+  MakeMoon(p, radius, PI, true, 0.85);
+
+  p = pt(-center.x, -center.y);
+  MakeMoon(p, radius + 1, 0, false, 0.5);
+}
+
+function MakeMoons() {
+  let p = pt(0, 0);
+
+  let center = bottomInsetDecagon1.Center();
+  let radius = bottomInsetDecagon1.Radius();
+
+  noStroke();
+  fill(0);
+
+  p = pt(center.x, center.y);
+  ellipse(p.x, p.y, radius * 2, radius * 2);
+  p = pt(-center.x, -center.y);
+  ellipse(p.x, p.y, radius * 2, radius * 2);
+  p = pt(-center.y, center.x);
+  ellipse(p.x, p.y, radius * 2, radius * 2);
+  p = pt(center.y, -center.x);
+  ellipse(p.x, p.y, radius * 2, radius * 2);
+
+  center = insetEnneagon1.Center();
+  radius = insetEnneagon1.Radius();
+
+  p = pt(center.x, center.y);
+  ellipse(p.x, p.y, radius * 2, radius * 2);
+  p = pt(-center.x, -center.y);
+  ellipse(p.x, p.y, radius * 2, radius * 2);
+  p = pt(-center.y, center.x);
+  ellipse(p.x, p.y, radius * 2, radius * 2);
+  p = pt(center.y, -center.x);
+  ellipse(p.x, p.y, radius * 2, radius * 2);
+
+  MakeLargeMoons();
+  MakeSmallMoons();
+}
+
+// --- Center burst star ---
+function MakeCenterBurst() {
+  noStroke();
+  fill(0);
+
+  let centerPoly0 = new Polygon(12, 42, -TWO_PI / 24, pt(0, 0));
+  let centerPoly1 = new Polygon(12, 26, 0, pt(0, 0));
+  let vertices = new Array(24);
+  for (let i = 0; i < 12; i++) {
+    vertices[i * 2] = centerPoly0.V(i);
+    vertices[i * 2 + 1] = centerPoly1.V(i);
+  }
+  let centerStar = new Polygon(vertices, pt(0, 0), 30);
+
+  fill(0);
+  centerStar.Fill();
+
+  let centerPoly2 = new Polygon(12, 27, -TWO_PI / 24, pt(0, 0));
+  let centerPoly3 = new Polygon(12, 13, 0, pt(0, 0));
+  vertices = new Array(24);
+  for (let i = 0; i < 12; i++) {
+    vertices[i * 2] = centerPoly2.V(i);
+    vertices[i * 2 + 1] = centerPoly3.V(i);
+  }
+  let centerStar2 = new Polygon(vertices, pt(0, 0), 30);
+
+  fill(255);
+  centerStar2.Fill();
+}
+
+// --- Radial lines ---
+function DrawRadii() {
+  let p = bottomDecagon.Center();
+  let centers = new Array(8);
+  centers[0] = p;
+  centers[2] = pt(p.y, -p.x);
+  centers[4] = pt(-p.x, -p.y);
+  centers[6] = pt(-p.y, p.x);
+
+  p = enneagon.Center();
+  centers[1] = p;
+  centers[3] = pt(p.y, -p.x);
+  centers[5] = pt(-p.x, -p.y);
+  centers[7] = pt(-p.y, p.x);
+
+  let increments = 6;
+  for (let i = 0; i < centers.length * increments; i++) {
+    let outerRadius = Distance(pt(0, 0), centers[Math.trunc(i / increments)]);
+    let angle = atan2(centers[Math.trunc(i / increments)].y, centers[Math.trunc(i / increments)].x) + (i % increments) * TWO_PI / (centers.length * increments);
+    let innerRadius = 0;
+
+    if (i % increments !== 0) {
+      angle += TWO_PI / 8;
+      outerRadius = Distance(pt(0, 0), centers[Math.trunc(((i + increments / 2) % increments) / increments)]);
+    }
+
+    stroke(255);
+    strokeWeight(1.5);
+    fill(255);
+
+    let x0 = innerRadius * sin(angle);
+    let y0 = innerRadius * cos(angle);
+    let x1 = outerRadius * sin(angle);
+    let y1 = outerRadius * cos(angle);
+
+    line(x0, y0, x1, y1);
+  }
+}
+
+// --- Build all geometry ---
+function BuildGeometry() {
+  dodecagon = new Polygon(12, dodecagonRadius, 0, pt(0, 0));
+
+  leftDecagon = new Polygon(10, decagonRadius, TWO_PI / (2 * 10), pt(-decagonCenterOffset, 0));
+  bottomDecagon = new Polygon(10, decagonRadius, TWO_PI / (1 * 10), pt(0, decagonCenterOffset));
+
+  let vertices = new Array(6);
+  vertices[0] = bottomDecagon.V(6);
+  vertices[1] = bottomDecagon.V(5);
+  vertices[2] = dodecagon.V(11);
+  vertices[3] = dodecagon.V(10);
+  vertices[4] = leftDecagon.V(1);
+  vertices[5] = leftDecagon.V(0);
+  enneagon = ApproximateEnneagonFrom6Vertices(vertices);
+
+  pentagons_g = new Array(9);
+  let e = enneagon;
+
+  // pentagons[0]
+  vertices = new Array(5);
+  DrawEasyPentagonVertices(e, 0, vertices);
+  vertices[3] = bottomDecagon.IntersectionWithBottom(6);
+  vertices[4] = PointFromVectorAndDistance(e.V(0), bottomDecagon.Center(), bottomDecagon.Length(0) / 2);
+  pentagons_g[0] = new Polygon(vertices, e.V(0), Avg(e.Length(0), e.Length(-1)) / 2);
+
+  // pentagons[1]
+  vertices = new Array(5);
+  DrawEasyPentagonVertices(e, 1, vertices);
+  vertices[3] = PointFromVectorAndDistance(e.V(1), bottomDecagon.Center(), bottomDecagon.Length(0) / 2);
+  vertices[4] = Midpoint(bottomDecagon.V(4), bottomDecagon.V(5));
+  pentagons_g[1] = new Polygon(vertices, e.V(1), Avg(e.Length(1), e.Length(0)) / 2);
+
+  // pentagons[2]
+  vertices = new Array(5);
+  DrawEasyPentagonVertices(e, 2, vertices);
+  vertices[3] = dodecagon.E(11);
+  vertices[4] = PointFromVectorAndDistance(e.V(2), dodecagon.Center(), dodecagon.Length(0) / 2);
+  pentagons_g[2] = new Polygon(vertices, e.V(2), Avg(e.Length(2), e.Length(1)) / 2);
+
+  // pentagons[3]
+  vertices = new Array(5);
+  DrawEasyPentagonVertices(e, 3, vertices);
+  vertices[3] = PointFromVectorAndDistance(e.V(3), dodecagon.Center(), dodecagon.Length(0) / 2);
+  vertices[4] = dodecagon.E(9);
+  pentagons_g[3] = new Polygon(vertices, e.V(3), Avg(e.Length(3), e.Length(2)) / 2);
+
+  // pentagons[4]
+  vertices = new Array(5);
+  DrawEasyPentagonVertices(e, 4, vertices);
+  vertices[3] = leftDecagon.E(1);
+  vertices[4] = PointFromVectorAndDistance(e.V(4), leftDecagon.Center(), leftDecagon.Length(0) / 2);
+  pentagons_g[4] = new Polygon(vertices, e.V(4), Avg(e.Length(4), e.Length(3)) / 2);
+
+  // pentagons[5]
+  vertices = new Array(5);
+  DrawEasyPentagonVertices(e, 5, vertices);
+  vertices[3] = PointFromVectorAndDistance(e.V(5), leftDecagon.Center(), leftDecagon.Length(0) / 2);
+  vertices[4] = leftDecagon.E(9);
+  pentagons_g[5] = new Polygon(vertices, e.V(5), Avg(e.Length(5), e.Length(4)) / 2);
+
+  // pentagons[6] - border adapted
+  vertices = new Array(3);
+  DrawEasyPentagonVertices(e, 6, vertices);
+  pentagons_g[6] = ApproximatePentagonFrom3Vertices(vertices, e.V(6), e.Length(6) / 2);
+
+  // pentagons[7] - border adapted
+  vertices = new Array(3);
+  DrawEasyPentagonVertices(e, 7, vertices);
+  pentagons_g[7] = ApproximatePentagonFrom3Vertices(vertices, e.V(7), e.Length(7) / 2);
+
+  // pentagons[8] - border adapted
+  vertices = new Array(3);
+  DrawEasyPentagonVertices(e, 8, vertices);
+  pentagons_g[8] = ApproximatePentagonFrom3Vertices(vertices, e.V(8), e.Length(8) / 2);
+
+  // Inset pentagons
+  insetPentagons_g = new Array(9);
+  for (let i = 0; i < 9; i++) {
+    insetPentagons_g[i] = MakeInsetPentagon(pentagons_g[i]);
+  }
+
+  // Inset polygons for strapwork
+  insetDodecagon0 = new Polygon(12, dodecagonRadius - dodecagon.Length(0) / 2, 0, pt(0, 0));
+  insetDodecagon1 = MakeInsetPolygon(insetDodecagon0, 0);
+
+  bottomInsetDecagon0 = new Polygon(10, decagonRadius - bottomDecagon.Length(0) / 2, 0, bottomDecagon.Center());
+  bottomInsetDecagon1 = MakeInsetPolygon(bottomInsetDecagon0, 0);
+
+  leftInsetDecagon0 = new Polygon(10, decagonRadius - leftDecagon.Length(0) / 2, TWO_PI / (2 * 10), leftDecagon.Center());
+  leftInsetDecagon1 = MakeInsetPolygon(leftInsetDecagon0, TWO_PI / (2 * 10));
+
+  insetEnneagon0 = new Polygon(9, enneagon.Radius() - enneagon.Length(0) / 2, 0, enneagon.Center());
+  let angle = VectorAngle(enneagon.Center(), enneagon.E(2), insetEnneagon0.E(3));
+  insetEnneagon1 = MakeInsetPolygon(insetEnneagon0, angle);
+}
+
+// --- Create the strapwork path ---
+function CreatePath() {
+  let path = new StrapworkPath();
+  let p;
+
+  // Dodecagon strapwork (edges 9-11)
+  for (let j = 9; j < 12; j++) {
+    p = FindIntersectionOfLines(insetDodecagon0.V(j), insetDodecagon1.V(j + 1), insetDodecagon0.V(j + 1), insetDodecagon1.V(j));
+    path.AddSegment(p, insetDodecagon0.V(j));
+    path.AddSegment(p, insetDodecagon0.V(j + 1));
+    path.AddSegment(p, insetDodecagon1.V(j));
+    path.AddSegment(p, insetDodecagon1.V(j + 1));
+  }
+
+  // Bottom decagon strapwork
+  for (let j = 0; j < 10; j++) {
+    p = FindIntersectionOfLines(bottomInsetDecagon0.V(j), bottomInsetDecagon1.V(j + 1), bottomInsetDecagon0.V(j + 1), bottomInsetDecagon1.V(j));
+    path.AddSegment(p, bottomInsetDecagon0.V(j));
+    path.AddSegment(p, bottomInsetDecagon0.V(j + 1));
+    path.AddSegment(p, bottomInsetDecagon1.V(j));
+    path.AddSegment(p, bottomInsetDecagon1.V(j + 1));
+  }
+
+  // Enneagon strapwork
+  for (let j = 0; j < 9; j++) {
+    p = FindIntersectionOfLines(pentagons_g[(j + 9) % 9].V(1), insetEnneagon1.V(j), pentagons_g[(j + 9 - 1) % 9].V(1), insetEnneagon1.V(j + 1));
+    path.AddSegment(p, pentagons_g[(j + 9) % 9].V(1));
+    path.AddSegment(p, insetEnneagon1.V(j));
+    path.AddSegment(p, pentagons_g[(j + 9 - 1) % 9].V(1));
+    path.AddSegment(p, insetEnneagon1.V(j + 1));
+  }
+
+  // Pentagon strapwork (first 6)
+  for (let j = 0; j < 6; j++) {
+    for (let k = 0; k < 5; k++) {
+      path.AddSegment(insetPentagons_g[j].V(k), pentagons_g[j].V(k));
+      path.AddSegment(insetPentagons_g[j].V(k), pentagons_g[j].V(k + 1));
+    }
+  }
+
+  // Connection points between pentagon and decagon/dodecagon strapwork
+  p = FindIntersectionOfLines(insetPentagons_g[1].V(4), pentagons_g[1].V(4), bottomInsetDecagon1.V(4), bottomInsetDecagon0.V(5));
+  path.AddSegment(pentagons_g[1].V(4), p);
+  path.AddSegment(bottomInsetDecagon0.V(5), p);
+
+  p = FindIntersectionOfLines(insetPentagons_g[2].V(2), pentagons_g[2].V(3), insetDodecagon1.V(1), insetDodecagon0.V(0));
+  path.AddSegment(pentagons_g[2].V(3), p);
+  path.AddSegment(insetDodecagon0.V(0), p);
+
+  p = FindIntersectionOfLines(insetPentagons_g[4].V(2), pentagons_g[4].V(3), leftInsetDecagon1.V(3), leftInsetDecagon0.V(2));
+  path.AddSegment(pentagons_g[4].V(3), p);
+  path.AddSegment(leftInsetDecagon0.V(2), p);
+
+  p = FindIntersectionOfLines(insetPentagons_g[3].V(4), pentagons_g[3].V(4), insetDodecagon1.V(8), insetDodecagon0.V(9));
+  path.AddSegment(pentagons_g[3].V(4), p);
+  path.AddSegment(insetDodecagon0.V(9), p);
+
+  // TWEAKS - axis alignment corrections
+
+  // Vertical midpoint
+  p = FindIntersectionOfLines(insetPentagons_g[1].V(3), pentagons_g[1].V(4), insetPentagons_g[2].V(3), pentagons_g[2].V(3));
+  p.x = 0; // tweak to vertical axis
+  path.AddSegment(pentagons_g[1].V(4), p);
+  path.AddSegment(pentagons_g[2].V(3), p);
+
+  // Horizontal midpoint
+  p = FindIntersectionOfLines(insetPentagons_g[3].V(3), pentagons_g[3].V(4), insetPentagons_g[4].V(3), pentagons_g[4].V(3));
+  p.y = 0; // tweak to horizontal axis
+  path.AddSegment(pentagons_g[3].V(4), p);
+  path.AddSegment(pentagons_g[4].V(3), p);
+
+  // Tweaked corner pentagon
+  let vertices = new Array(5);
+  vertices[0] = pentagons_g[7].V(0);
+  vertices[1] = pentagons_g[7].V(1);
+  vertices[2] = pentagons_g[7].V(2);
+  vertices[3] = FindIntersectionOfLines(pentagons_g[7].Center(), pentagons_g[7].V(3), pt(-decagonCenterOffset, -decagonCenterOffset), pt(-decagonCenterOffset, decagonCenterOffset));
+  vertices[4] = FindIntersectionOfLines(pentagons_g[7].Center(), pentagons_g[7].V(4), pt(-decagonCenterOffset, decagonCenterOffset), pt(decagonCenterOffset, decagonCenterOffset));
+  let tweakedPentagon = new Polygon(vertices, pentagons_g[7].Center(), pentagons_g[7].Radius());
+  for (let k = 0; k < 5; k++) {
+    path.AddSegment(insetPentagons_g[7].V(k), tweakedPentagon.V(k));
+    path.AddSegment(insetPentagons_g[7].V(k), tweakedPentagon.V(k + 1));
+  }
+
+  // Tweaked pentagons along edges
+  for (let k = 0; k < 2; k++) {
+    path.AddSegment(insetPentagons_g[6].V(k), pentagons_g[6].V(k));
+    path.AddSegment(insetPentagons_g[6].V(k), pentagons_g[6].V(k + 1));
+
+    path.AddSegment(insetPentagons_g[8].V(k), pentagons_g[8].V(k));
+    path.AddSegment(insetPentagons_g[8].V(k), pentagons_g[8].V(k + 1));
+  }
+
+  p = FindIntersectionOfLines(enneagon.Center(), pentagons_g[6].V(1), pt(-decagonCenterOffset, -decagonCenterOffset), pt(-decagonCenterOffset, decagonCenterOffset));
+  path.AddSegment(pentagons_g[6].V(0), p);
+  path.AddSegment(pentagons_g[6].V(2), p);
+
+  p = FindIntersectionOfLines(enneagon.Center(), pentagons_g[8].V(1), pt(-decagonCenterOffset, decagonCenterOffset), pt(decagonCenterOffset, decagonCenterOffset));
+  path.AddSegment(pentagons_g[8].V(0), p);
+  path.AddSegment(pentagons_g[8].V(2), p);
+
+  // Reflect to create full 4-fold symmetric figure
+  path.DoReflections();
+
+  return path;
+}
+
+// --- p5.js setup and draw ---
+function setup() {
+  pentagramAngle_base = 1.32 * TWO_PI / 10;
+  pentagramAngle = pentagramAngle_base;
+  if (doCrop)
+    createCanvas(int(decagonCenterOffset) * 2, int(decagonCenterOffset) * 2);
+  else
+    createCanvas(750, 750);
+
+  if (!doAnimation) noLoop();
+  randomSeed(1);
+}
+
+function draw() {
+  if (doAnimation) {
+    animFrame++;
+    let t = animFrame * 0.02;
+    dodecagonRadius = dodecagonRadius_base + 30 * sin(t);
+    decagonCenterOffset = decagonCenterOffset_base + 30 * sin(t * 0.7);
+    pentagramAngle = pentagramAngle_base + 0.15 * sin(t * 0.5);
+  }
+
+  try {
+    translate(width / 2, height / 2);
+
+    // Clear
+    fill(0);
+    stroke(0);
+    rect(-width / 2, -width / 2, width, width);
+    fill(255);
+
+    BuildGeometry();
+    let path = CreatePath();
+
+    DrawRadii();
+    MakeMoons();
+    MakeCenterBurst();
+    path.Draw();
+  } catch (e) {
+    // skip bad frames during animation
+  }
+}
+
+function keyPressed() {
+  if (key === 's' || key === 'S') {
+    saveCanvas('rosette', 'png');
+  }
+}
+</script>
+</body>
+</html>
