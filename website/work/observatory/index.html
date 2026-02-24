@@ -199,8 +199,17 @@ const sbsVideo = document.createElement('video');
 sbsVideo.playsInline = true;
 sbsVideo.loop = true;
 sbsVideo.muted = true;
-sbsVideo.src = 'https://d2xbllb3qhv8ay.cloudfront.net/videos/process/timessquare_clip.mp4';
-sbsVideo.play();
+sbsVideo.src = 'timessquare_clip.mp4';
+sbsVideo.play().catch(() => {
+  // Autoplay blocked — start on first touch/click
+  const startVideo = () => {
+    sbsVideo.play();
+    document.removeEventListener('click', startVideo);
+    document.removeEventListener('touchstart', startVideo);
+  };
+  document.addEventListener('click', startVideo);
+  document.addEventListener('touchstart', startVideo);
+});
 
 const sbsCanvas = document.createElement('canvas');
 const sbsCtx = sbsCanvas.getContext('2d');
