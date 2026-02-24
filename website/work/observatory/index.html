@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Observatory</title>
+<style>
+  * { margin: 0; padding: 0; }
+  body { background: #000; overflow: hidden; }
+  canvas { display: block; }
+  #status {
+    position: fixed; top: 10px; left: 10px; color: #fff;
+    font: 14px monospace; z-index: 10; opacity: 0.7;
+    pointer-events: none; transition: opacity 1s;
+  }
+</style>
+</head>
+<body>
+<div id="status"></div>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+  }
+}
+</script>
+<script type="module">
+import * as THREE from 'three';
+import { OBJLoader } from 'three/addons/loaders/OBJLoader.js';
+import { MTLLoader } from 'three/addons/loaders/MTLLoader.js';
+import { VRButton } from 'three/addons/webxr/VRButton.js';
+
+const TICK_MS = 15;
+const DEG2RAD = Math.PI / 180;
+const statusEl = document.getElementById('status');
+
+function showStatus(msg, duration = 3000) {
+  statusEl.textContent = msg;
+  statusEl.style.opacity = '0.7';
+  if (duration) setTimeout(() => { statusEl.style.opacity = '0'; }, duration);
+}
+
+// =====================================================
+// Viture HID — direct WebHID, no extension needed
+// =====================================================
+const VITURE_VENDOR = 0x35ca;
+const VITURE_PIDS = [
+  0x1011, 0x1013, 0x1017,
+  0x1015, 0x101b,
+  0x1019, 0x101d,
+  0x1121, 0x1141,
+  0x1131
+];
+
+let vitureConnected = false;
+let vitureQuaternion = { w: 1, x: 0, y: 0, z: 0 };
+let vitureCalibration = { w: 1, x: 0, y: 0, z: 0 };
+
+function floatFromSwapped(bytes, offset) {
+  const buf = new ArrayBuffer(4);
+  const v = new DataView(buf);
+  v.setUint8(0, bytes[offset + 3]);
+  v.setUint8(1, bytes[offset + 2]);
+  v.setUint8(2, bytes[offset + 1]);
+  v.setUint8(3, bytes[offset]);
+  return v.getFloat32(0, true);
+}
+
+function floatFromBE(bytes, offset) {
+  const buf = new ArrayBuffer(4);
+  const v = new DataView(buf);
+  v.setUint8(0, bytes[offset]);
+  v.setUint8(1, bytes[offset + 1]);
+  v.setUint8(2, bytes[offset + 2]);
+  v.setUint8(3, bytes[offset + 3]);
+  return v.getFloat32(0, false);
+}
+
+function eulerToQuat(roll, pitch, yaw) {
+  const r = roll * DEG2RAD, p = pitch * DEG2RAD, y = yaw * DEG2RAD;
+  const cy = Math.cos(y * 0.5), sy = Math.sin(y * 0.5);
+  const cp = Math.cos(p * 0.5), sp = Math.sin(p * 0.5);
+  const cr = Math.cos(r * 0.5), sr = Math.sin(r * 0.5);
+  return {
+    w: cr * cp * cy + sr * sp * sy,
+    x: sr * cp * cy - cr * sp * sy,
+    y: cr * sp * cy + sr * cp * sy,
+    z: cr * cp * sy - sr * sp * cy
+  };
+}
+
+function qMul(a, b) {
+  return {
+    w: a.w*b.w - a.x*b.x - a.y*b.y - a.z*b.z,
+    x: a.w*b.x + a.x*b.w + a.y*b.z - a.z*b.y,
+    y: a.w*b.y - a.x*b.z + a.y*b.w + a.z*b.x,
+    z: a.w*b.z + a.x*b.y - a.y*b.x + a.z*b.w
+  };
+}
+
+function qConj(q) { return { w: q.w, x: -q.x, y: -q.y, z: -q.z }; }
+
+function handleIMUReport(event) {
+  const dv = event.data;
+  const bytes = new Uint8Array(dv.buffer, dv.byteOffset, dv.byteLength);
+  let q = null;
+
+  if (bytes.length >= 30 && bytes[0] === 0xFF && bytes[1] === 0xFC) {
+    const raw0 = floatFromSwapped(bytes, 18);
+    const raw1 = floatFromSwapped(bytes, 22);
+    const raw2 = floatFromSwapped(bytes, 26);
+    const yaw = -raw0, roll = -raw1, pitch = raw2;
+    if (!isNaN(roll) && !isNaN(pitch) && !isNaN(yaw) &&
+        Math.abs(roll) <= 180 && Math.abs(pitch) <= 180 && Math.abs(yaw) <= 180) {
+      q = eulerToQuat(roll, pitch, yaw);
+    }
+  } else if (bytes.length >= 36) {
+    const w = floatFromBE(bytes, 20), x = floatFromBE(bytes, 24);
+    const y = floatFromBE(bytes, 28), z = floatFromBE(bytes, 32);
+    const mag = Math.sqrt(w*w + x*x + y*y + z*z);
+    if (mag > 0.5 && mag < 1.5) q = { w, x, y, z };
+  } else if (bytes.length >= 12) {
+    const roll = floatFromBE(bytes, 0), pitch = floatFromBE(bytes, 4), yaw = floatFromBE(bytes, 8);
+    q = eulerToQuat(roll, pitch, yaw);
+  }
+
+  if (q) {
+    vitureQuaternion = qMul(qConj(vitureCalibration), q);
+  }
+}
+
+function buildIMUEnableCmd() {
+  const packet = new Uint8Array(20);
+  packet[0] = 0xFF; packet[1] = 0xFE;
+  const payloadLen = 8 + 2 + 2 + 1 + 1;
+  packet[4] = payloadLen & 0xFF; packet[5] = (payloadLen >> 8) & 0xFF;
+  packet[14] = 0x15; packet[15] = 0x00;
+  packet[16] = 0x01; packet[17] = 0x00;
+  packet[18] = 0x01;
+  packet[19] = 0x03;
+  let crc = 0xFFFF;
+  for (let i = 4; i < 20; i++) {
+    crc = ((crc << 8) ^ crcLookup(crc, packet[i])) & 0xFFFF;
+  }
+  packet[2] = (crc >> 8) & 0xFF; packet[3] = crc & 0xFF;
+  return packet;
+}
+
+function crcLookup(crc, byte) {
+  let v = ((crc >> 8) ^ byte) & 0xFF;
+  let r = v << 8;
+  for (let j = 0; j < 8; j++) r = (r & 0x8000) ? (r << 1) ^ 0x1021 : r << 1;
+  return (r & 0xFFFF);
+}
+
+async function connectViture() {
+  if (!('hid' in navigator)) {
+    showStatus('WebHID not supported in this browser');
+    return;
+  }
+  showStatus('Select your Viture glasses in the dialog...');
+
+  try {
+    const filters = VITURE_PIDS.map(pid => ({ vendorId: VITURE_VENDOR, productId: pid }));
+    const selected = await navigator.hid.requestDevice({ filters });
+    if (selected.length === 0) { showStatus('No device selected'); return; }
+
+    const all = await navigator.hid.getDevices();
+    const devices = all.filter(d =>
+      d.vendorId === VITURE_VENDOR && VITURE_PIDS.includes(d.productId)
+    );
+
+    for (const device of devices) {
+      if (!device.opened) await device.open();
+      device.addEventListener('inputreport', handleIMUReport);
+      try { await device.sendReport(0x00, buildIMUEnableCmd()); } catch (e) {}
+      try { await device.sendReport(0x00, new Uint8Array([0x15, 0x01])); } catch (e) {}
+    }
+
+    vitureConnected = true;
+    showStatus(`Viture connected (${devices.length} interface${devices.length > 1 ? 's' : ''})`, 5000);
+  } catch (e) {
+    showStatus('Connect failed: ' + e.message);
+  }
+}
+
+function recenterViture() {
+  if (!vitureConnected) { showStatus('Not connected — press c first'); return; }
+  vitureCalibration = { ...vitureQuaternion };
+  vitureQuaternion = { w: 1, x: 0, y: 0, z: 0 };
+  showStatus('Recentered');
+}
+
+// =====================================================
+// SBS stereo video input
+// =====================================================
+let videoActive = true;
+const sbsVideo = document.createElement('video');
+sbsVideo.playsInline = true;
+sbsVideo.loop = true;
+sbsVideo.muted = true;
+sbsVideo.src = 'https://d2xbllb3qhv8ay.cloudfront.net/videos/process/timessquare_clip.mp4';
+sbsVideo.play();
+
+const sbsCanvas = document.createElement('canvas');
+const sbsCtx = sbsCanvas.getContext('2d');
+const cropCanvasL = document.createElement('canvas');
+const cropCtxL = cropCanvasL.getContext('2d');
+const cropCanvasR = document.createElement('canvas');
+const cropCtxR = cropCanvasR.getContext('2d');
+
+let textureLeft = null;
+let textureRight = null;
+
+function toggleVideo() {
+  if (videoActive) {
+    sbsVideo.pause();
+    videoActive = false;
+    showStatus('Video paused');
+  } else {
+    sbsVideo.play();
+    videoActive = true;
+    showStatus('Video playing');
+  }
+}
+
+function updateVideoTextures() {
+  if (!videoActive || sbsVideo.readyState < 2) return;
+
+  const vw = sbsVideo.videoWidth;
+  const vh = sbsVideo.videoHeight;
+  if (vw === 0 || vh === 0) return;
+
+  sbsCanvas.width = vw;
+  sbsCanvas.height = vh;
+  sbsCtx.drawImage(sbsVideo, 0, 0);
+
+  const halfW = Math.floor(vw / 2);
+  cropCanvasL.width = halfW;
+  cropCanvasL.height = vh;
+  cropCtxL.drawImage(sbsCanvas, 0, 0, halfW, vh, 0, 0, halfW, vh);
+
+  cropCanvasR.width = halfW;
+  cropCanvasR.height = vh;
+  cropCtxR.drawImage(sbsCanvas, halfW, 0, halfW, vh, 0, 0, halfW, vh);
+
+  if (textureLeft) textureLeft.needsUpdate = true;
+  if (textureRight) textureRight.needsUpdate = true;
+}
+
+// =====================================================
+// Procedural textures
+// =====================================================
+function makeNoiseTexture(size) {
+  const canvas = document.createElement('canvas');
+  canvas.width = size;
+  canvas.height = size;
+  const ctx = canvas.getContext('2d');
+  const img = ctx.createImageData(size, size);
+  for (let i = 0; i < img.data.length; i += 4) {
+    const v = Math.random() * 255;
+    img.data[i] = v;
+    img.data[i + 1] = v;
+    img.data[i + 2] = v;
+    img.data[i + 3] = 255;
+  }
+  ctx.putImageData(img, 0, 0);
+  return new THREE.CanvasTexture(canvas);
+}
+
+// Value noise with smooth interpolation
+const _perm = new Uint8Array(512);
+{ const p = new Uint8Array(256);
+  for (let i = 0; i < 256; i++) p[i] = i;
+  for (let i = 255; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [p[i], p[j]] = [p[j], p[i]]; }
+  for (let i = 0; i < 512; i++) _perm[i] = p[i & 255];
+}
+
+function hash(x, y) { return _perm[(_perm[x & 255] + y) & 255] / 255; }
+
+function smoothNoise(x, y) {
+  const ix = Math.floor(x), iy = Math.floor(y);
+  const fx = x - ix, fy = y - iy;
+  const sx = fx * fx * (3 - 2 * fx), sy = fy * fy * (3 - 2 * fy);
+  const n00 = hash(ix, iy), n10 = hash(ix + 1, iy);
+  const n01 = hash(ix, iy + 1), n11 = hash(ix + 1, iy + 1);
+  return n00 + (n10 - n00) * sx + (n01 - n00) * sy + (n00 - n10 - n01 + n11) * sx * sy;
+}
+
+function fbm(x, y, octaves) {
+  let v = 0, amp = 0.5, freq = 1;
+  for (let i = 0; i < octaves; i++) {
+    v += amp * smoothNoise(x * freq, y * freq);
+    amp *= 0.5; freq *= 2;
+  }
+  return v;
+}
+
+function makePlanetTexture(size) {
+  const canvas = document.createElement('canvas');
+  canvas.width = size;
+  canvas.height = size;
+  const ctx = canvas.getContext('2d');
+  const img = ctx.createImageData(size, size);
+
+  for (let py = 0; py < size; py++) {
+    for (let px = 0; px < size; px++) {
+      const u = px / size, v = py / size;
+      // Bands driven by latitude + turbulence
+      const turb = fbm(u * 8 + 3.7, v * 8 + 1.2, 6);
+      const band = Math.sin((v * 12 + turb * 3) * Math.PI);
+      const detail = fbm(u * 16 + 50, v * 16 + 50, 5);
+
+      // Color palette — deep blue/purple atmosphere with warm storm bands
+      const t = band * 0.5 + 0.5;
+      const d = detail * 0.3;
+      const r = Math.min(1, 0.08 + t * 0.55 + d * 0.6);
+      const g = Math.min(1, 0.06 + t * 0.25 + d * 0.3);
+      const b = Math.min(1, 0.25 + (1 - t) * 0.45 + d * 0.2);
+
+      const idx = (py * size + px) * 4;
+      img.data[idx]     = r * 255;
+      img.data[idx + 1] = g * 255;
+      img.data[idx + 2] = b * 255;
+      img.data[idx + 3] = 255;
+    }
+  }
+
+  ctx.putImageData(img, 0, 0);
+  const tex = new THREE.CanvasTexture(canvas);
+  tex.wrapS = THREE.RepeatWrapping;
+  tex.wrapT = THREE.RepeatWrapping;
+  return tex;
+}
+
+// =====================================================
+// Three.js scene
+// =====================================================
+let webxrMode = false;
+let xrSupported = false;
+if (navigator.xr) {
+  xrSupported = await navigator.xr.isSessionSupported('immersive-vr').catch(() => false);
+}
+
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.autoClear = false;
+renderer.setClearColor(0x000000);
+renderer.setPixelRatio(1);
+document.body.appendChild(renderer.domElement);
+
+const scene = new THREE.Scene();
+
+// Lighting
+const pointLight = new THREE.PointLight(0xffffff, 2, 0, 0);
+pointLight.position.set(0, 0, 0);
+scene.add(pointLight);
+scene.add(new THREE.AmbientLight(0xffffff, 0.15));
+
+// SBS stereo cameras
+const SBS_W = 3840, SBS_H = 1080, HALF_W = 1920;
+const near = 0.5, far = 200;
+
+const cameraRig = new THREE.Object3D();
+cameraRig.position.set(0, 2.2, 0);
+scene.add(cameraRig);
+
+const cameraLeft = new THREE.PerspectiveCamera();
+cameraLeft.position.set(-0.032, 0, 0);
+cameraLeft.layers.enable(1);
+cameraRig.add(cameraLeft);
+
+const cameraRight = new THREE.PerspectiveCamera();
+cameraRight.position.set(0.032, 0, 0);
+cameraRight.layers.enable(2);
+cameraRig.add(cameraRight);
+
+function updateCameraProjections() {
+  const eyeAspect = (window.innerWidth / 2) / window.innerHeight;
+  cameraLeft.fov = 70;
+  cameraLeft.aspect = eyeAspect;
+  cameraLeft.near = near;
+  cameraLeft.far = far;
+  cameraLeft.updateProjectionMatrix();
+  cameraRight.fov = 70;
+  cameraRight.aspect = eyeAspect;
+  cameraRight.near = near;
+  cameraRight.far = far;
+  cameraRight.updateProjectionMatrix();
+}
+updateCameraProjections();
+
+// WebXR camera
+const xrCamera = new THREE.PerspectiveCamera(70, 16 / 9, near, far);
+scene.add(xrCamera);
+
+if (xrSupported) {
+  document.body.appendChild(VRButton.createButton(renderer));
+  renderer.xr.enabled = true;
+  renderer.xr.addEventListener('sessionstart', () => { webxrMode = true; });
+  renderer.xr.addEventListener('sessionend', () => { webxrMode = false; });
+}
+function resizeSBS() {
+  renderer.setSize(window.innerWidth, window.innerHeight);
+}
+resizeSBS();
+
+window.addEventListener('resize', () => {
+  if (!webxrMode) {
+    resizeSBS();
+    updateCameraProjections();
+  }
+});
+
+// =====================================================
+// Stars — ~100 random stars at r=100
+// =====================================================
+const starGeo = new THREE.SphereGeometry(1, 5, 5);
+for (let i = 0; i < 100; i++) {
+  const theta = Math.random() * Math.PI * 2;
+  const phi = Math.acos(2 * Math.random() - 1);
+  const r = 100;
+  const x = r * Math.sin(phi) * Math.cos(theta);
+  const y = r * Math.sin(phi) * Math.sin(theta);
+  const z = r * Math.cos(phi);
+
+  const colorScalar = Math.random();
+  const colorWeight = 0.75;
+  const cr = 1 - colorScalar * colorWeight;
+  const cg = 1 - Math.random() * colorWeight;
+  const cb = 1 - Math.random() * colorWeight;
+
+  const scale = 0.25 + Math.random() * 0.75;
+
+  const star = new THREE.Mesh(
+    starGeo,
+    new THREE.MeshStandardMaterial({ color: new THREE.Color(cr, cg, cb) })
+  );
+  star.position.set(x, y, z);
+  star.scale.setScalar(scale);
+  scene.add(star);
+}
+
+// =====================================================
+// Planet — two overlapping spheres with per-eye textures
+// =====================================================
+const planetGeo = new THREE.SphereGeometry(17.1, 100, 100);
+
+// Create textures
+textureLeft = new THREE.CanvasTexture(cropCanvasL);
+textureRight = new THREE.CanvasTexture(cropCanvasR);
+
+// Same texture on both eyes — stereo depth comes from camera separation
+const planetTex = new THREE.TextureLoader().load('ganymede.jpg');
+planetTex.colorSpace = THREE.SRGBColorSpace;
+
+const planetMatL = new THREE.MeshStandardMaterial({ map: planetTex });
+const planetMatR = new THREE.MeshStandardMaterial({ map: planetTex });
+
+const planetLeft = new THREE.Mesh(planetGeo, planetMatL);
+planetLeft.position.set(0, 0, -75);
+planetLeft.rotation.set(70 * DEG2RAD, 0, 90 * DEG2RAD);
+planetLeft.layers.set(1);
+scene.add(planetLeft);
+
+const planetRight = new THREE.Mesh(planetGeo, planetMatR);
+planetRight.position.set(0, 0, -75);
+planetRight.rotation.set(70 * DEG2RAD, 0, 90 * DEG2RAD);
+planetRight.layers.set(2);
+scene.add(planetRight);
+
+// =====================================================
+// Load OBJ models
+// =====================================================
+const objLoader = new OBJLoader();
+const mtlLoader = new MTLLoader();
+
+let modelsLoaded = 0;
+const TOTAL_MODELS = 3;
+
+let portalMatL = null;
+let portalMatR = null;
+
+function checkAllLoaded() {
+  modelsLoaded++;
+  if (modelsLoaded >= TOTAL_MODELS) {
+    renderer.setAnimationLoop(animate);
+    showStatus('c=connect  r=recenter  f=fullscreen  v=video', 5000);
+  }
+}
+
+// Voyager probes (not rotating)
+objLoader.load('Voyager_17.obj', (obj) => {
+  obj.traverse((child) => {
+    if (child.isMesh) {
+      child.material = new THREE.MeshStandardMaterial({ color: 0xffffff });
+      child.geometry.computeVertexNormals();
+    }
+  });
+
+  // Normalize
+  const box = new THREE.Box3().setFromObject(obj);
+  const center = new THREE.Vector3();
+  box.getCenter(center);
+  const size = new THREE.Vector3();
+  box.getSize(size);
+  const maxDim = Math.max(size.x, size.y, size.z);
+  obj.position.sub(center);
+
+  const v1 = new THREE.Group();
+  v1.add(obj.clone());
+  v1.scale.setScalar(8 / maxDim);
+  v1.position.set(7, 4, -18);
+  scene.add(v1);
+
+  checkAllLoaded();
+});
+
+// Bridge (not rotating)
+objLoader.load('bridge.obj', (obj) => {
+  obj.traverse((child) => {
+    if (child.isMesh) {
+      child.material = new THREE.MeshStandardMaterial({
+        color: new THREE.Color(0.5, 0.5, 0.5),
+        transparent: true,
+        opacity: 0.75
+      });
+      child.geometry.computeVertexNormals();
+    }
+  });
+
+  const box = new THREE.Box3().setFromObject(obj);
+  const center = new THREE.Vector3();
+  box.getCenter(center);
+  const size = new THREE.Vector3();
+  box.getSize(size);
+  const maxDim = Math.max(size.x, size.y, size.z);
+  obj.position.sub(center);
+
+  const bridge = new THREE.Group();
+  bridge.add(obj);
+  // X=length, Y=width (narrower), Z=arch height
+  bridge.scale.set(24 / maxDim, 12 / maxDim, 24 / maxDim);
+  bridge.position.set(0, 0, 0);
+  // Roll -90° around model X (long axis) so floor faces down, then Ry 90° to orient forward
+  const qRoll = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(1, 0, 0), -90 * DEG2RAD);
+  const qYaw = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0, 1, 0), 90 * DEG2RAD);
+  bridge.quaternion.multiplyQuaternions(qYaw, qRoll);
+  scene.add(bridge);
+
+  checkAllLoaded();
+});
+
+// Bezel (semi-transparent)
+mtlLoader.load('bezel.mtl', (materials) => {
+  materials.preload();
+  const bezelLoader = new OBJLoader();
+  bezelLoader.setMaterials(materials);
+  bezelLoader.load('bezel.obj', (obj) => {
+    obj.traverse((child) => {
+      if (child.isMesh) {
+        child.material = new THREE.MeshStandardMaterial({
+          color: 0xffffff,
+          transparent: true,
+          opacity: 0.5
+        });
+        child.geometry.computeVertexNormals();
+      }
+    });
+
+    const box = new THREE.Box3().setFromObject(obj);
+    const center = new THREE.Vector3();
+    box.getCenter(center);
+    const size = new THREE.Vector3();
+    box.getSize(size);
+    const maxDim = Math.max(size.x, size.y, size.z);
+    obj.position.sub(center);
+
+    const bezel = new THREE.Group();
+    bezel.add(obj);
+    bezel.scale.setScalar(6 / maxDim);
+    bezel.position.set(0, 1.5, 12);
+    bezel.rotation.set(90 * DEG2RAD, 0, 0);
+    scene.add(bezel);
+
+    // Portal screen — SBS video circle filling the bezel opening
+    // Bezel inner radius is 0.836 in model space; use that for clean masking
+    const portalRadius = 0.85 * (6 / maxDim); // slightly larger than inner radius for full coverage
+    const portalGeo = new THREE.CircleGeometry(portalRadius, 64);
+    const portalNoiseTex = makeNoiseTexture(256);
+
+    portalMatL = new THREE.MeshBasicMaterial({ map: portalNoiseTex.clone(), side: THREE.DoubleSide });
+    const portalScreenL = new THREE.Mesh(portalGeo, portalMatL);
+    portalScreenL.position.set(bezel.position.x, bezel.position.y, bezel.position.z - 0.1);
+    portalScreenL.rotation.y = Math.PI;
+    portalScreenL.layers.set(1);
+    scene.add(portalScreenL);
+
+    portalMatR = new THREE.MeshBasicMaterial({ map: portalNoiseTex.clone(), side: THREE.DoubleSide });
+    const portalScreenR = new THREE.Mesh(portalGeo, portalMatR);
+    portalScreenR.position.set(bezel.position.x, bezel.position.y, bezel.position.z - 0.1);
+    portalScreenR.rotation.y = Math.PI;
+    portalScreenR.layers.set(2);
+    scene.add(portalScreenR);
+
+    checkAllLoaded();
+  });
+});
+
+
+// =====================================================
+// Input
+// =====================================================
+const keysDown = {};
+renderer.domElement.addEventListener('click', () => {
+  if (!webxrMode) document.documentElement.requestFullscreen().catch(() => {});
+});
+document.addEventListener('keydown', (e) => {
+  keysDown[e.key] = true;
+  if (e.key === 'f' && !webxrMode) document.documentElement.requestFullscreen().catch(() => {});
+  if (e.key === 'c') connectViture();
+  if (e.key === 'r') recenterViture();
+  if (e.key === 'v') toggleVideo();
+});
+document.addEventListener('keyup', (e) => { keysDown[e.key] = false; });
+
+// =====================================================
+// Animation
+// =====================================================
+let lastTime = null;
+let accumulator = 0;
+let satelliteRotation = 0;
+let lookYaw = 0;
+let lookPitch = -10;
+const _qYaw = new THREE.Quaternion();
+const _qPitch = new THREE.Quaternion();
+const _axisY = new THREE.Vector3(0, 1, 0);
+const _axisX = new THREE.Vector3(1, 0, 0);
+
+function animate(time, frame) {
+  if (lastTime === null) lastTime = time;
+  const dt = time - lastTime;
+  lastTime = time;
+  accumulator += dt;
+
+  while (accumulator >= TICK_MS) {
+    accumulator -= TICK_MS;
+    satelliteRotation += 0.5;
+  }
+
+  // Arrow key look (yaw/pitch) — only when Viture not connected
+  if (!vitureConnected) {
+    const rotSpeed = 0.5;
+    if (keysDown['ArrowUp']) lookPitch += rotSpeed;
+    if (keysDown['ArrowDown']) lookPitch -= rotSpeed;
+    if (keysDown['ArrowLeft']) lookYaw += rotSpeed;
+    if (keysDown['ArrowRight']) lookYaw -= rotSpeed;
+    lookPitch = Math.max(-85, Math.min(85, lookPitch));
+    _qYaw.setFromAxisAngle(_axisY, lookYaw * DEG2RAD);
+    _qPitch.setFromAxisAngle(_axisX, lookPitch * DEG2RAD);
+    cameraRig.quaternion.copy(_qYaw).multiply(_qPitch);
+  }
+
+  // Update SBS video textures
+  updateVideoTextures();
+
+  // Swap portal textures when video is active
+  if (videoActive && sbsVideo.readyState >= 2) {
+    if (portalMatL && portalMatL.map !== textureLeft) {
+      portalMatL.map = textureLeft;
+      portalMatL.needsUpdate = true;
+    }
+    if (portalMatR && portalMatR.map !== textureRight) {
+      portalMatR.map = textureRight;
+      portalMatR.needsUpdate = true;
+    }
+  }
+
+  if (webxrMode) {
+    renderer.render(scene, xrCamera);
+  } else {
+    // Apply Viture head tracking
+    if (vitureConnected) {
+      cameraRig.quaternion.set(
+        vitureQuaternion.x, vitureQuaternion.y,
+        vitureQuaternion.z, vitureQuaternion.w
+      );
+    }
+    const w = renderer.domElement.width;
+    const h = renderer.domElement.height;
+    const halfW = Math.floor(w / 2);
+    renderer.clear();
+    renderer.setViewport(0, 0, halfW, h);
+    renderer.setScissor(0, 0, halfW, h);
+    renderer.setScissorTest(true);
+    renderer.render(scene, cameraLeft);
+    renderer.setViewport(halfW, 0, halfW, h);
+    renderer.setScissor(halfW, 0, halfW, h);
+    renderer.render(scene, cameraRight);
+  }
+}
+</script>
+</body>
+</html>
