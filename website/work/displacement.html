@@ -141,13 +141,13 @@ async function startStream() {
     hlsInstance = new Hls({
       liveSyncDurationCount: 3,
       xhrSetup: (xhr, url) => {
-        // Route all HLS requests through CORS proxy
-        if (url.includes('.ttvnw.net') || url.includes('.live-video.net')) {
+        // Route all HLS requests through CORS proxy unless already proxied
+        if (!url.startsWith(CORS_PROXY)) {
           xhr.open('GET', proxyUrl(url), true);
         }
       }
     });
-    hlsInstance.loadSource(proxyUrl(hlsUrl));
+    hlsInstance.loadSource(hlsUrl);
     hlsInstance.attachMedia(video);
     hlsInstance.on(Hls.Events.MANIFEST_PARSED, () => {
       video.play();
