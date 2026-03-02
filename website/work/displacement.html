@@ -89,6 +89,22 @@ function stopCurrent() {
 async function startStream() {
   useStream = true;
   showStatus('connecting to live stream...', 0);
+
+  // Try native HLS first (Quest browser, Safari)
+  if (video.canPlayType('application/vnd.apple.mpegurl')) {
+    showStatus('trying native HLS...', 0);
+    video.crossOrigin = 'anonymous';
+    video.src = IVS_STREAM;
+    try {
+      await video.play();
+      showStatus('live stream connected (native)', 5000);
+      updateControls();
+      return;
+    } catch (e) {
+      showStatus('native HLS failed: ' + e.message + ', trying hls.js...', 0);
+    }
+  }
+
   try {
     const Hls = await loadHls();
     if (!Hls.isSupported()) {
@@ -114,7 +130,7 @@ async function startStream() {
     });
     hlsInstance.on(Hls.Events.ERROR, (event, errData) => {
       if (errData.fatal) {
-        showStatus('stream offline, using clip', 3000);
+        showStatus('stream error: ' + errData.type + '/' + errData.details, 5000);
         stopCurrent();
         startClip();
       }
