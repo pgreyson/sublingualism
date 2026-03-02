@@ -59,7 +59,8 @@ const video = document.createElement('video');
 video.playsInline = true;
 video.loop = true;
 video.muted = true;
-video.src = 'observatory/synth_clip.mp4';
+video.crossOrigin = 'anonymous';
+video.src = 'https://d2xbllb3qhv8ay.cloudfront.net/video/synth_clip.mp4';
 video.play().catch(() => {
   const start = () => {
     video.play();
