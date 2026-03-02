@@ -53,9 +53,9 @@ let wireframeMode = false;
 let textureOn = true;
 
 // =====================================================
-// Video source — Twitch HLS stream or fallback clip
+// Video source — AWS IVS live stream or fallback clip
 // =====================================================
-const TWITCH_CHANNEL = 'sublinguist';
+const IVS_STREAM = 'https://2a1de12483d1.us-west-2.playback.live-video.net/api/video/v1/us-west-2.105278123416.channel.xRWrzFIDZ9dC.m3u8';
 const FALLBACK_VIDEO = 'https://d2xbllb3qhv8ay.cloudfront.net/video/synth_clip.mp4';
 
 const video = document.createElement('video');
@@ -69,66 +69,11 @@ let hlsInstance = null;
 let HlsLib = null;
 let useStream = true;
 
-const CORS_PROXY = 'https://6pfnp4h4h4.execute-api.us-east-1.amazonaws.com/';
-
 async function loadHls() {
   if (HlsLib) return HlsLib;
   const mod = await import('https://cdn.jsdelivr.net/npm/hls.js@latest/dist/hls.mjs');
   HlsLib = mod.default;
   return HlsLib;
-}
-
-function proxyUrl(url) {
-  return CORS_PROXY + '?url=' + encodeURIComponent(url);
-}
-
-async function getTwitchStreamUrl(channel) {
-  const resp = await fetch('https://gql.twitch.tv/gql', {
-    method: 'POST',
-    headers: {
-      'Client-Id': 'kimne78kx3ncx6brgo4mv6wki5h1ko',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      operationName: 'PlaybackAccessToken',
-      variables: {
-        isLive: true,
-        login: channel,
-        isVod: false,
-        vodID: '',
-        playerType: 'site'
-      },
-      extensions: {
-        persistedQuery: {
-          version: 1,
-          sha256Hash: '0828119ded1c13477966434e15800ff57ddacf13ba1911c129dc2200705b0712'
-        }
-      }
-    })
-  });
-  const data = await resp.json();
-  const token = data.data.streamPlaybackAccessToken;
-  if (!token) return null;
-
-  // Fetch master playlist to extract the variant playlist URL
-  const usherUrl = `https://usher.ttvnw.net/api/channel/hls/${channel}.m3u8?token=${encodeURIComponent(token.value)}&sig=${token.signature}&allow_audio_only=true&type=any`;
-  const masterResp = await fetch(proxyUrl(usherUrl));
-  const masterText = await masterResp.text();
-
-  // Extract the variant playlist URL (last URL in the master playlist)
-  const lines = masterText.split('\n').filter(l => l.trim() && !l.startsWith('#'));
-  if (lines.length === 0) return null;
-  const variantUrl = lines[lines.length - 1].trim();
-
-  // Build synthetic master with correct codecs — Twitch reports audio-only
-  // for non-partner streams but segments contain both audio and video
-  const synthetic = [
-    '#EXTM3U',
-    '#EXT-X-STREAM-INF:BANDWIDTH=6000000,CODECS="avc1.4d001f,mp4a.40.2",RESOLUTION=1920x1080',
-    variantUrl
-  ].join('\n');
-  const blob = new Blob([synthetic], { type: 'application/vnd.apple.mpegurl' });
-  return URL.createObjectURL(blob);
 }
 
 function stopCurrent() {
@@ -143,45 +88,28 @@ function stopCurrent() {
 
 async function startStream() {
   useStream = true;
-  showStatus(`connecting to twitch.tv/${TWITCH_CHANNEL}...`, 0);
+  showStatus('connecting to live stream...', 0);
   try {
     const Hls = await loadHls();
-    const hlsUrl = await getTwitchStreamUrl(TWITCH_CHANNEL);
-    if (!hlsUrl) {
-      showStatus('stream offline, using clip', 3000);
-      startClip();
-      return;
-    }
     if (!Hls.isSupported()) {
       showStatus('HLS not supported, using clip', 3000);
       startClip();
       return;
     }
-    hlsInstance = new Hls({
-      liveSyncDurationCount: 3,
-      xhrSetup: (xhr, url) => {
-        // Route Twitch CDN requests through CORS proxy
-        if (url.includes('.ttvnw.net') || url.includes('.live-video.net')) {
-          xhr.open('GET', proxyUrl(url), true);
-        }
-      }
-    });
-    hlsInstance.loadSource(hlsUrl);
+    hlsInstance = new Hls({ liveSyncDurationCount: 3 });
+    hlsInstance.loadSource(IVS_STREAM);
     hlsInstance.attachMedia(video);
     hlsInstance.on(Hls.Events.MANIFEST_PARSED, () => {
       video.play().then(() => {
-        showStatus(`live: twitch.tv/${TWITCH_CHANNEL}`, 5000);
+        showStatus('live stream connected', 5000);
       }).catch(e => {
         showStatus('play blocked: ' + e.message, 5000);
       });
       updateControls();
     });
-    hlsInstance.on(Hls.Events.FRAG_LOADED, () => {
-      showStatus(`buffering... ${video.readyState}/4 ${video.videoWidth}x${video.videoHeight}`, 0);
-    });
     hlsInstance.on(Hls.Events.ERROR, (event, errData) => {
       if (errData.fatal) {
-        showStatus('stream error, using clip', 3000);
+        showStatus('stream offline, using clip', 3000);
         stopCurrent();
         startClip();
       }
@@ -440,7 +368,7 @@ renderer.domElement.addEventListener('touchend', () => { touching = false; });
 renderer.domElement.addEventListener('touchcancel', () => { touching = false; });
 
 function updateControls() {
-  const src = useStream ? 'twitch' : 'clip';
+  const src = useStream ? 'live' : 'clip';
   controlsEl.textContent = `src: ${src} (s) | depth: ${depthScale} (+/-) | mode: ${depthMode} (m) | res: ${meshRes} ([/]) | wire: ${wireframeMode ? 'on' : 'off'} (w) | tex: ${textureOn ? 'on' : 'off'} (t) | f=fullscreen`;
 }
 updateControls();
