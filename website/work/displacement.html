@@ -66,6 +66,15 @@ const vidCanvas = document.createElement('canvas');
 const vidCtx = vidCanvas.getContext('2d', { willReadFrequently: true });
 
 let hlsInstance = null;
+let HlsLib = null;
+let useStream = true;
+
+async function loadHls() {
+  if (HlsLib) return HlsLib;
+  const mod = await import('https://cdn.jsdelivr.net/npm/hls.js@latest/dist/hls.mjs');
+  HlsLib = mod.default;
+  return HlsLib;
+}
 
 async function getTwitchStreamUrl(channel) {
   const resp = await fetch('https://gql.twitch.tv/gql', {
@@ -97,37 +106,56 @@ async function getTwitchStreamUrl(channel) {
   return `https://usher.ttvnw.net/api/channel/hls/${channel}.m3u8?token=${encodeURIComponent(token.value)}&sig=${token.signature}&allow_source=true&fast_bread=true`;
 }
 
-async function initVideo() {
-  // Try loading hls.js and connecting to Twitch
-  try {
-    const { default: Hls } = await import('https://cdn.jsdelivr.net/npm/hls.js@latest/dist/hls.mjs');
-    const hlsUrl = await getTwitchStreamUrl(TWITCH_CHANNEL);
-    if (hlsUrl && Hls.isSupported()) {
-      showStatus(`connecting to twitch.tv/${TWITCH_CHANNEL}...`, 0);
-      hlsInstance = new Hls({ liveSyncDurationCount: 3 });
-      hlsInstance.loadSource(hlsUrl);
-      hlsInstance.attachMedia(video);
-      hlsInstance.on(Hls.Events.MANIFEST_PARSED, () => {
-        video.play();
-        showStatus(`live: twitch.tv/${TWITCH_CHANNEL}`, 5000);
-      });
-      hlsInstance.on(Hls.Events.ERROR, (event, data) => {
-        if (data.fatal) {
-          showStatus('stream error, falling back to clip...', 3000);
-          hlsInstance.destroy();
-          hlsInstance = null;
-          loadFallback();
-        }
-      });
-      return;
-    }
-  } catch (e) {
-    // GQL or import failed
+function stopCurrent() {
+  video.pause();
+  if (hlsInstance) {
+    hlsInstance.destroy();
+    hlsInstance = null;
   }
-  loadFallback();
+  video.removeAttribute('src');
+  video.load();
 }
 
-function loadFallback() {
+async function startStream() {
+  useStream = true;
+  showStatus(`connecting to twitch.tv/${TWITCH_CHANNEL}...`, 0);
+  try {
+    const Hls = await loadHls();
+    const hlsUrl = await getTwitchStreamUrl(TWITCH_CHANNEL);
+    if (!hlsUrl) {
+      showStatus('stream offline, using clip', 3000);
+      startClip();
+      return;
+    }
+    if (!Hls.isSupported()) {
+      showStatus('HLS not supported, using clip', 3000);
+      startClip();
+      return;
+    }
+    hlsInstance = new Hls({ liveSyncDurationCount: 3 });
+    hlsInstance.loadSource(hlsUrl);
+    hlsInstance.attachMedia(video);
+    hlsInstance.on(Hls.Events.MANIFEST_PARSED, () => {
+      video.play();
+      showStatus(`live: twitch.tv/${TWITCH_CHANNEL}`, 5000);
+      updateControls();
+    });
+    hlsInstance.on(Hls.Events.ERROR, (event, errData) => {
+      if (errData.fatal) {
+        showStatus('stream error, using clip', 3000);
+        stopCurrent();
+        startClip();
+      }
+    });
+  } catch (e) {
+    showStatus('stream failed: ' + e.message, 3000);
+    startClip();
+  }
+}
+
+function startClip() {
+  useStream = false;
+  hlsInstance = null;
   showStatus('loading clip...', 2000);
   video.crossOrigin = 'anonymous';
   video.loop = true;
@@ -141,9 +169,19 @@ function loadFallback() {
     document.addEventListener('click', start);
     document.addEventListener('touchstart', start);
   });
+  updateControls();
 }
 
-initVideo();
+function toggleSource() {
+  stopCurrent();
+  if (useStream) {
+    startClip();
+  } else {
+    startStream();
+  }
+}
+
+startStream();
 
 // =====================================================
 // Three.js setup
@@ -329,17 +367,7 @@ document.addEventListener('keydown', (e) => {
   if (e.key === '-') { depthScale = Math.max(0, depthScale - 1); updateControls(); }
   if (e.key === ']') { meshRes = Math.min(512, meshRes * 2); rebuildMesh(); }
   if (e.key === '[') { meshRes = Math.max(16, meshRes / 2); rebuildMesh(); }
-  if (e.key === 's') {
-    if (hlsInstance) {
-      hlsInstance.destroy();
-      hlsInstance = null;
-      loadFallback();
-    } else {
-      video.pause();
-      video.removeAttribute('src');
-      initVideo();
-    }
-  }
+  if (e.key === 's') { toggleSource(); }
 });
 document.addEventListener('keyup', (e) => { keysDown[e.key] = false; });
 
@@ -373,7 +401,7 @@ renderer.domElement.addEventListener('touchend', () => { touching = false; });
 renderer.domElement.addEventListener('touchcancel', () => { touching = false; });
 
 function updateControls() {
-  const src = hlsInstance ? 'twitch' : 'clip';
+  const src = useStream ? 'twitch' : 'clip';
   controlsEl.textContent = `src: ${src} (s) | depth: ${depthScale} (+/-) | mode: ${depthMode} (m) | res: ${meshRes} ([/]) | wire: ${wireframeMode ? 'on' : 'off'} (w) | tex: ${textureOn ? 'on' : 'off'} (t) | f=fullscreen`;
 }
 updateControls();
