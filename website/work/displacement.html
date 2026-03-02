@@ -118,7 +118,17 @@ async function getTwitchStreamUrl(channel) {
   // Extract the variant playlist URL (last URL in the master playlist)
   const lines = masterText.split('\n').filter(l => l.trim() && !l.startsWith('#'));
   if (lines.length === 0) return null;
-  return lines[lines.length - 1].trim();
+  const variantUrl = lines[lines.length - 1].trim();
+
+  // Build synthetic master with correct codecs — Twitch reports audio-only
+  // for non-partner streams but segments contain both audio and video
+  const synthetic = [
+    '#EXTM3U',
+    '#EXT-X-STREAM-INF:BANDWIDTH=6000000,CODECS="avc1.4d001f,mp4a.40.2",RESOLUTION=1920x1080',
+    variantUrl
+  ].join('\n');
+  const blob = new Blob([synthetic], { type: 'application/vnd.apple.mpegurl' });
+  return URL.createObjectURL(blob);
 }
 
 function stopCurrent() {
@@ -150,8 +160,8 @@ async function startStream() {
     hlsInstance = new Hls({
       liveSyncDurationCount: 3,
       xhrSetup: (xhr, url) => {
-        // Route all HLS requests through CORS proxy unless already proxied
-        if (!url.startsWith(CORS_PROXY)) {
+        // Route Twitch CDN requests through CORS proxy
+        if (url.includes('.ttvnw.net') || url.includes('.live-video.net')) {
           xhr.open('GET', proxyUrl(url), true);
         }
       }
