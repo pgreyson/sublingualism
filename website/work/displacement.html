@@ -90,21 +90,6 @@ async function startStream() {
   useStream = true;
   showStatus('connecting to live stream...', 0);
 
-  // Try native HLS first (Quest browser, Safari)
-  if (video.canPlayType('application/vnd.apple.mpegurl')) {
-    showStatus('trying native HLS...', 0);
-    video.crossOrigin = 'anonymous';
-    video.src = IVS_STREAM;
-    try {
-      await video.play();
-      showStatus('live stream connected (native)', 5000);
-      updateControls();
-      return;
-    } catch (e) {
-      showStatus('native HLS failed: ' + e.message + ', trying hls.js...', 0);
-    }
-  }
-
   try {
     const Hls = await loadHls();
     if (!Hls.isSupported()) {
