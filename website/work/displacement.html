@@ -61,6 +61,13 @@ const FALLBACK_VIDEO = 'https://d2xbllb3qhv8ay.cloudfront.net/video/synth_clip.m
 const video = document.createElement('video');
 video.playsInline = true;
 video.muted = true;
+video.crossOrigin = 'anonymous';
+
+video.addEventListener('stalled', () => showStatus('video stalled', 3000));
+video.addEventListener('waiting', () => showStatus('video buffering...', 0));
+video.addEventListener('playing', () => showStatus('video playing', 2000));
+video.addEventListener('pause', () => showStatus('video paused', 3000));
+video.addEventListener('error', () => showStatus('video error: ' + (video.error?.message || video.error?.code), 5000));
 
 const vidCanvas = document.createElement('canvas');
 const vidCtx = vidCanvas.getContext('2d', { willReadFrequently: true });
