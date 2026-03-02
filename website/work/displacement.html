@@ -103,7 +103,7 @@ async function getTwitchStreamUrl(channel) {
   const data = await resp.json();
   const token = data.data.streamPlaybackAccessToken;
   if (!token) return null;
-  return `https://usher.ttvnw.net/api/channel/hls/${channel}.m3u8?token=${encodeURIComponent(token.value)}&sig=${token.signature}&allow_source=true&fast_bread=true`;
+  return `https://usher.ttvnw.net/api/channel/hls/${channel}.m3u8?token=${encodeURIComponent(token.value)}&sig=${token.signature}&allow_audio_only=true&type=any`;
 }
 
 function stopCurrent() {
