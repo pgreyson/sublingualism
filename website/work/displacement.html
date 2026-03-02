@@ -109,7 +109,16 @@ async function getTwitchStreamUrl(channel) {
   const data = await resp.json();
   const token = data.data.streamPlaybackAccessToken;
   if (!token) return null;
-  return `https://usher.ttvnw.net/api/channel/hls/${channel}.m3u8?token=${encodeURIComponent(token.value)}&sig=${token.signature}&allow_audio_only=true&type=any`;
+
+  // Fetch master playlist to extract the variant playlist URL
+  const usherUrl = `https://usher.ttvnw.net/api/channel/hls/${channel}.m3u8?token=${encodeURIComponent(token.value)}&sig=${token.signature}&allow_audio_only=true&type=any`;
+  const masterResp = await fetch(proxyUrl(usherUrl));
+  const masterText = await masterResp.text();
+
+  // Extract the variant playlist URL (last URL in the master playlist)
+  const lines = masterText.split('\n').filter(l => l.trim() && !l.startsWith('#'));
+  if (lines.length === 0) return null;
+  return lines[lines.length - 1].trim();
 }
 
 function stopCurrent() {
