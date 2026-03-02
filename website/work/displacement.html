@@ -295,7 +295,7 @@ function updateDisplacement() {
       const baseIdx = vertIdx * 3;
       positions[baseIdx] = basePositions[baseIdx];         // x
       positions[baseIdx + 1] = basePositions[baseIdx + 1]; // y
-      positions[baseIdx + 2] = basePositions[baseIdx + 2] + depth * depthScale; // z
+      positions[baseIdx + 2] = basePositions[baseIdx + 2] - depth * depthScale; // z
     }
   }
 
