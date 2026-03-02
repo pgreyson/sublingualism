@@ -69,11 +69,17 @@ let hlsInstance = null;
 let HlsLib = null;
 let useStream = true;
 
+const CORS_PROXY = 'https://6pfnp4h4h4.execute-api.us-east-1.amazonaws.com/';
+
 async function loadHls() {
   if (HlsLib) return HlsLib;
   const mod = await import('https://cdn.jsdelivr.net/npm/hls.js@latest/dist/hls.mjs');
   HlsLib = mod.default;
   return HlsLib;
+}
+
+function proxyUrl(url) {
+  return CORS_PROXY + '?url=' + encodeURIComponent(url);
 }
 
 async function getTwitchStreamUrl(channel) {
@@ -90,7 +96,7 @@ async function getTwitchStreamUrl(channel) {
         login: channel,
         isVod: false,
         vodID: '',
-        playerType: 'embed'
+        playerType: 'site'
       },
       extensions: {
         persistedQuery: {
@@ -132,8 +138,16 @@ async function startStream() {
       startClip();
       return;
     }
-    hlsInstance = new Hls({ liveSyncDurationCount: 3 });
-    hlsInstance.loadSource(hlsUrl);
+    hlsInstance = new Hls({
+      liveSyncDurationCount: 3,
+      xhrSetup: (xhr, url) => {
+        // Route all HLS requests through CORS proxy
+        if (url.includes('.ttvnw.net') || url.includes('.live-video.net')) {
+          xhr.open('GET', proxyUrl(url), true);
+        }
+      }
+    });
+    hlsInstance.loadSource(proxyUrl(hlsUrl));
     hlsInstance.attachMedia(video);
     hlsInstance.on(Hls.Events.MANIFEST_PARSED, () => {
       video.play();
