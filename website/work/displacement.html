@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Displacement</title>
+<style>
+  * { margin: 0; padding: 0; }
+  body { background: #000; overflow: hidden; }
+  canvas { display: block; }
+  #status {
+    position: fixed; top: 10px; left: 10px; color: #fff;
+    font: 14px monospace; z-index: 10; opacity: 0.7;
+    pointer-events: none; transition: opacity 1s;
+  }
+  #controls {
+    position: fixed; bottom: 10px; left: 10px; color: #fff;
+    font: 12px monospace; z-index: 10; opacity: 0.5;
+    pointer-events: none;
+  }
+</style>
+</head>
+<body>
+<div id="status"></div>
+<div id="controls"></div>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+  }
+}
+</script>
+<script type="module">
+import * as THREE from 'three';
+import { VRButton } from 'three/addons/webxr/VRButton.js';
+
+const statusEl = document.getElementById('status');
+const controlsEl = document.getElementById('controls');
+
+function showStatus(msg, duration = 3000) {
+  statusEl.textContent = msg;
+  statusEl.style.opacity = '0.7';
+  if (duration) setTimeout(() => { statusEl.style.opacity = '0'; }, duration);
+}
+
+// =====================================================
+// Parameters
+// =====================================================
+let depthScale = 8.0;       // max Z displacement
+let depthMode = 'luma';     // 'luma', 'r', 'g', 'b', 'chroma'
+let meshRes = 256;           // grid resolution (vertices per side)
+let wireframeMode = false;
+let textureOn = true;
+
+// =====================================================
+// Video source
+// =====================================================
+const video = document.createElement('video');
+video.playsInline = true;
+video.loop = true;
+video.muted = true;
+video.src = 'observatory/synth_clip.mp4';
+video.play().catch(() => {
+  const start = () => {
+    video.play();
+    document.removeEventListener('click', start);
+    document.removeEventListener('touchstart', start);
+  };
+  document.addEventListener('click', start);
+  document.addEventListener('touchstart', start);
+});
+
+const vidCanvas = document.createElement('canvas');
+const vidCtx = vidCanvas.getContext('2d', { willReadFrequently: true });
+
+// =====================================================
+// Three.js setup
+// =====================================================
+let webxrMode = false;
+let xrSupported = false;
+if (navigator.xr) {
+  xrSupported = await navigator.xr.isSessionSupported('immersive-vr').catch(() => false);
+}
+
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setClearColor(0x000000);
+renderer.setPixelRatio(window.devicePixelRatio);
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.body.appendChild(renderer.domElement);
+
+const scene = new THREE.Scene();
+
+// Camera
+const camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.1, 200);
+camera.position.set(0, 6, 10);
+camera.lookAt(0, 0, 0);
+scene.add(camera);
+
+// Lighting
+scene.add(new THREE.AmbientLight(0xffffff, 0.4));
+const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
+dirLight.position.set(5, 10, 5);
+scene.add(dirLight);
+
+// WebXR
+if (xrSupported) {
+  document.body.appendChild(VRButton.createButton(renderer));
+  renderer.xr.enabled = true;
+  renderer.xr.addEventListener('sessionstart', () => { webxrMode = true; });
+  renderer.xr.addEventListener('sessionend', () => { webxrMode = false; });
+}
+
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+// =====================================================
+// Displacement plane
+// =====================================================
+const planeWidth = 16;
+const planeHeight = 9; // 16:9 aspect
+let geometry = new THREE.PlaneGeometry(planeWidth, planeHeight, meshRes, Math.floor(meshRes * 9/16));
+geometry.rotateX(-Math.PI * 0.4); // tilt toward viewer
+
+const videoTexture = new THREE.VideoTexture(video);
+videoTexture.minFilter = THREE.LinearFilter;
+videoTexture.magFilter = THREE.LinearFilter;
+videoTexture.colorSpace = THREE.SRGBColorSpace;
+
+let material = new THREE.MeshStandardMaterial({
+  map: videoTexture,
+  side: THREE.DoubleSide,
+  wireframe: wireframeMode
+});
+
+let mesh = new THREE.Mesh(geometry, material);
+scene.add(mesh);
+
+// Store original Z positions (all 0 for a plane)
+let basePositions = new Float32Array(geometry.attributes.position.array);
+
+// =====================================================
+// Depth extraction from video
+// =====================================================
+function getDepthValue(r, g, b) {
+  switch (depthMode) {
+    case 'luma':
+      return (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+    case 'r':
+      return r / 255;
+    case 'g':
+      return g / 255;
+    case 'b':
+      return b / 255;
+    case 'chroma': {
+      const max = Math.max(r, g, b);
+      const min = Math.min(r, g, b);
+      return (max - min) / 255; // saturation-ish
+    }
+    default:
+      return (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+  }
+}
+
+function updateDisplacement() {
+  if (video.readyState < 2) return;
+
+  const vw = video.videoWidth;
+  const vh = video.videoHeight;
+  if (vw === 0 || vh === 0) return;
+
+  // Sample at lower res for performance
+  const sampleW = meshRes + 1;
+  const sampleH = Math.floor(meshRes * 9/16) + 1;
+
+  vidCanvas.width = sampleW;
+  vidCanvas.height = sampleH;
+  vidCtx.drawImage(video, 0, 0, sampleW, sampleH);
+
+  let imageData;
+  try {
+    imageData = vidCtx.getImageData(0, 0, sampleW, sampleH);
+  } catch (e) {
+    return; // tainted canvas
+  }
+
+  const pixels = imageData.data;
+  const positions = geometry.attributes.position.array;
+  const verticesPerRow = sampleW;
+
+  for (let iy = 0; iy < sampleH; iy++) {
+    for (let ix = 0; ix < verticesPerRow; ix++) {
+      const vertIdx = iy * verticesPerRow + ix;
+      const pixIdx = (iy * sampleW + ix) * 4;
+
+      const r = pixels[pixIdx];
+      const g = pixels[pixIdx + 1];
+      const b = pixels[pixIdx + 2];
+
+      const depth = getDepthValue(r, g, b);
+
+      // Displace along Z (which is the plane's normal before rotation)
+      const baseIdx = vertIdx * 3;
+      positions[baseIdx] = basePositions[baseIdx];         // x
+      positions[baseIdx + 1] = basePositions[baseIdx + 1]; // y
+      positions[baseIdx + 2] = basePositions[baseIdx + 2] + depth * depthScale; // z
+    }
+  }
+
+  geometry.attributes.position.needsUpdate = true;
+  geometry.computeVertexNormals();
+}
+
+// =====================================================
+// Rebuild mesh (when resolution changes)
+// =====================================================
+function rebuildMesh() {
+  scene.remove(mesh);
+  geometry.dispose();
+
+  const hRes = meshRes;
+  const vRes = Math.floor(meshRes * 9/16);
+  geometry = new THREE.PlaneGeometry(planeWidth, planeHeight, hRes, vRes);
+  geometry.rotateX(-Math.PI * 0.4);
+
+  basePositions = new Float32Array(geometry.attributes.position.array);
+
+  material.wireframe = wireframeMode;
+  material.map = textureOn ? videoTexture : null;
+  material.needsUpdate = true;
+
+  mesh = new THREE.Mesh(geometry, material);
+  scene.add(mesh);
+
+  updateControls();
+}
+
+// =====================================================
+// Input
+// =====================================================
+let lookYaw = 0, lookPitch = 20;
+const keysDown = {};
+
+document.addEventListener('keydown', (e) => {
+  keysDown[e.key] = true;
+  if (e.key === 'f') document.documentElement.requestFullscreen().catch(() => {});
+  if (e.key === 'w') { wireframeMode = !wireframeMode; material.wireframe = wireframeMode; updateControls(); }
+  if (e.key === 't') { textureOn = !textureOn; material.map = textureOn ? videoTexture : null; material.color.set(textureOn ? 0xffffff : 0x44aaff); material.needsUpdate = true; updateControls(); }
+  if (e.key === 'm') {
+    const modes = ['luma', 'r', 'g', 'b', 'chroma'];
+    depthMode = modes[(modes.indexOf(depthMode) + 1) % modes.length];
+    updateControls();
+  }
+  if (e.key === '=' || e.key === '+') { depthScale = Math.min(30, depthScale + 1); updateControls(); }
+  if (e.key === '-') { depthScale = Math.max(0, depthScale - 1); updateControls(); }
+  if (e.key === ']') { meshRes = Math.min(512, meshRes * 2); rebuildMesh(); }
+  if (e.key === '[') { meshRes = Math.max(16, meshRes / 2); rebuildMesh(); }
+});
+document.addEventListener('keyup', (e) => { keysDown[e.key] = false; });
+
+// Touch look
+let touchStartX = 0, touchStartY = 0;
+let touchStartYaw = 0, touchStartPitch = 0;
+let touching = false;
+
+renderer.domElement.addEventListener('touchstart', (e) => {
+  if (e.touches.length === 1) {
+    e.preventDefault();
+    touching = true;
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+    touchStartYaw = lookYaw;
+    touchStartPitch = lookPitch;
+  }
+}, { passive: false });
+
+renderer.domElement.addEventListener('touchmove', (e) => {
+  if (touching && e.touches.length === 1) {
+    e.preventDefault();
+    const dx = e.touches[0].clientX - touchStartX;
+    const dy = e.touches[0].clientY - touchStartY;
+    lookYaw = touchStartYaw + dx * 0.2;
+    lookPitch = Math.max(-85, Math.min(85, touchStartPitch + dy * 0.2));
+  }
+}, { passive: false });
+
+renderer.domElement.addEventListener('touchend', () => { touching = false; });
+renderer.domElement.addEventListener('touchcancel', () => { touching = false; });
+
+function updateControls() {
+  controlsEl.textContent = `depth: ${depthScale} (+/-) | mode: ${depthMode} (m) | res: ${meshRes} ([/]) | wire: ${wireframeMode ? 'on' : 'off'} (w) | tex: ${textureOn ? 'on' : 'off'} (t) | f=fullscreen`;
+}
+updateControls();
+
+// Mouse drag orbit
+let mouseDown = false;
+let mouseStartX = 0, mouseStartY = 0;
+let mouseStartYaw = 0, mouseStartPitch = 0;
+
+renderer.domElement.addEventListener('mousedown', (e) => {
+  mouseDown = true;
+  mouseStartX = e.clientX;
+  mouseStartY = e.clientY;
+  mouseStartYaw = lookYaw;
+  mouseStartPitch = lookPitch;
+});
+window.addEventListener('mousemove', (e) => {
+  if (!mouseDown) return;
+  const dx = e.clientX - mouseStartX;
+  const dy = e.clientY - mouseStartY;
+  lookYaw = mouseStartYaw + dx * 0.3;
+  lookPitch = Math.max(-85, Math.min(85, mouseStartPitch + dy * 0.3));
+});
+window.addEventListener('mouseup', () => { mouseDown = false; });
+
+// Scroll wheel for depth scale
+renderer.domElement.addEventListener('wheel', (e) => {
+  e.preventDefault();
+  depthScale = Math.max(0, Math.min(30, depthScale - e.deltaY * 0.02));
+  updateControls();
+}, { passive: false });
+
+// =====================================================
+// Animation
+// =====================================================
+function animate() {
+  // Arrow key orbit
+  if (!webxrMode) {
+    const rotSpeed = 0.5;
+    if (keysDown['ArrowUp']) lookPitch += rotSpeed;
+    if (keysDown['ArrowDown']) lookPitch -= rotSpeed;
+    if (keysDown['ArrowLeft']) lookYaw += rotSpeed;
+    if (keysDown['ArrowRight']) lookYaw -= rotSpeed;
+    lookPitch = Math.max(-85, Math.min(85, lookPitch));
+
+    // Orbit camera around center
+    const radius = 14;
+    const yawRad = lookYaw * Math.PI / 180;
+    const pitchRad = lookPitch * Math.PI / 180;
+    camera.position.x = radius * Math.sin(yawRad) * Math.cos(pitchRad);
+    camera.position.y = radius * Math.sin(pitchRad);
+    camera.position.z = radius * Math.cos(yawRad) * Math.cos(pitchRad);
+    camera.lookAt(0, 0, 0);
+  }
+
+  // Update displacement
+  updateDisplacement();
+
+  renderer.render(scene, camera);
+}
+
+showStatus('loading...', 2000);
+video.addEventListener('canplay', () => {
+  showStatus('arrows/touch=look  +/-=depth  m=mode  w=wire  t=texture', 5000);
+});
+
+renderer.setAnimationLoop(animate);
+</script>
+</body>
+</html>
