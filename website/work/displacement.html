@@ -159,9 +159,15 @@ async function startStream() {
     hlsInstance.loadSource(hlsUrl);
     hlsInstance.attachMedia(video);
     hlsInstance.on(Hls.Events.MANIFEST_PARSED, () => {
-      video.play();
-      showStatus(`live: twitch.tv/${TWITCH_CHANNEL}`, 5000);
+      video.play().then(() => {
+        showStatus(`live: twitch.tv/${TWITCH_CHANNEL}`, 5000);
+      }).catch(e => {
+        showStatus('play blocked: ' + e.message, 5000);
+      });
       updateControls();
+    });
+    hlsInstance.on(Hls.Events.FRAG_LOADED, () => {
+      showStatus(`buffering... ${video.readyState}/4 ${video.videoWidth}x${video.videoHeight}`, 0);
     });
     hlsInstance.on(Hls.Events.ERROR, (event, errData) => {
       if (errData.fatal) {
