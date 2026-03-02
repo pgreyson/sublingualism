@@ -96,7 +96,12 @@ async function startStream() {
       startClip();
       return;
     }
-    hlsInstance = new Hls({ liveSyncDurationCount: 3 });
+    hlsInstance = new Hls({
+      liveSyncDurationCount: 1,
+      liveMaxLatencyDurationCount: 3,
+      lowLatencyMode: true,
+      backBufferLength: 0,
+    });
     hlsInstance.loadSource(IVS_STREAM);
     hlsInstance.attachMedia(video);
     hlsInstance.on(Hls.Events.MANIFEST_PARSED, () => {
