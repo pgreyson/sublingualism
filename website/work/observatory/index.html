@@ -656,10 +656,12 @@ function enableDeviceOrientation() {
   }
 }
 
-// Request on first touch (iOS requires user gesture for permission)
-document.addEventListener('touchstart', () => { enableDeviceOrientation(); }, { once: true });
-// Also try immediately for Android
-enableDeviceOrientation();
+// iOS requires permission from a click (not touchstart) user gesture
+document.addEventListener('click', () => { enableDeviceOrientation(); }, { once: true });
+// Android doesn't need permission — try immediately
+if (typeof DeviceOrientationEvent.requestPermission !== 'function') {
+  enableDeviceOrientation();
+}
 
 // Touch look
 let touchStartX = 0, touchStartY = 0;
