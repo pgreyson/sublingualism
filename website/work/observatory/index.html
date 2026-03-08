@@ -637,30 +637,41 @@ let deviceOrientationActive = false;
 let deviceAlpha = 0, deviceBeta = 0, deviceGamma = 0;
 let deviceAlphaOffset = null;
 
-function enableDeviceOrientation() {
-  if (deviceOrientationActive) return;
-  const handler = (e) => {
-    if (e.alpha === null) return;
-    if (deviceAlphaOffset === null) deviceAlphaOffset = e.alpha;
-    deviceAlpha = e.alpha;
-    deviceBeta = e.beta;
-    deviceGamma = e.gamma;
-    deviceOrientationActive = true;
-  };
-  if (typeof DeviceOrientationEvent.requestPermission === 'function') {
-    DeviceOrientationEvent.requestPermission().then((state) => {
-      if (state === 'granted') window.addEventListener('deviceorientation', handler);
-    });
-  } else {
-    window.addEventListener('deviceorientation', handler);
-  }
-}
+const orientationHandler = (e) => {
+  if (e.alpha === null) return;
+  if (deviceAlphaOffset === null) deviceAlphaOffset = e.alpha;
+  deviceAlpha = e.alpha;
+  deviceBeta = e.beta;
+  deviceGamma = e.gamma;
+  deviceOrientationActive = true;
+  showStatus('Gyroscope active', 2000);
+};
 
-// iOS requires permission from a click (not touchstart) user gesture
-document.addEventListener('click', () => { enableDeviceOrientation(); }, { once: true });
-// Android doesn't need permission — try immediately
-if (typeof DeviceOrientationEvent.requestPermission !== 'function') {
-  enableDeviceOrientation();
+const needsPermission = typeof DeviceOrientationEvent !== 'undefined' &&
+  typeof DeviceOrientationEvent.requestPermission === 'function';
+
+if (needsPermission) {
+  // iOS — show a button that requests permission on tap
+  const gyroBtn = document.createElement('button');
+  gyroBtn.textContent = 'Enable Gyroscope';
+  gyroBtn.style.cssText = 'position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:100;padding:12px 24px;font:16px monospace;background:#333;color:#fff;border:1px solid #666;border-radius:8px;cursor:pointer;';
+  document.body.appendChild(gyroBtn);
+  gyroBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    DeviceOrientationEvent.requestPermission().then((state) => {
+      showStatus('Permission: ' + state, 3000);
+      if (state === 'granted') {
+        window.addEventListener('deviceorientation', orientationHandler);
+      }
+      gyroBtn.remove();
+    }).catch((err) => {
+      showStatus('Error: ' + err.message, 5000);
+      gyroBtn.remove();
+    });
+  });
+} else if (typeof DeviceOrientationEvent !== 'undefined') {
+  // Android — no permission needed
+  window.addEventListener('deviceorientation', orientationHandler);
 }
 
 // Touch look
