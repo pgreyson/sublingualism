@@ -632,6 +632,35 @@ document.addEventListener('keydown', (e) => {
 });
 document.addEventListener('keyup', (e) => { keysDown[e.key] = false; });
 
+// Device orientation (phone gyroscope)
+let deviceOrientationActive = false;
+let deviceAlpha = 0, deviceBeta = 0, deviceGamma = 0;
+let deviceAlphaOffset = null;
+
+function enableDeviceOrientation() {
+  if (deviceOrientationActive) return;
+  const handler = (e) => {
+    if (e.alpha === null) return;
+    if (deviceAlphaOffset === null) deviceAlphaOffset = e.alpha;
+    deviceAlpha = e.alpha;
+    deviceBeta = e.beta;
+    deviceGamma = e.gamma;
+    deviceOrientationActive = true;
+  };
+  if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+    DeviceOrientationEvent.requestPermission().then((state) => {
+      if (state === 'granted') window.addEventListener('deviceorientation', handler);
+    });
+  } else {
+    window.addEventListener('deviceorientation', handler);
+  }
+}
+
+// Request on first touch (iOS requires user gesture for permission)
+document.addEventListener('touchstart', () => { enableDeviceOrientation(); }, { once: true });
+// Also try immediately for Android
+enableDeviceOrientation();
+
 // Touch look
 let touchStartX = 0, touchStartY = 0;
 let touchStartYaw = 0, touchStartPitch = 0;
@@ -685,17 +714,28 @@ function animate(time, frame) {
     satelliteRotation += 0.5;
   }
 
-  // Arrow key look (yaw/pitch) — only when Viture not connected
+  // Look control — Viture > device orientation > arrow keys/touch
   if (!vitureConnected) {
-    const rotSpeed = 0.5;
-    if (keysDown['ArrowUp']) lookPitch += rotSpeed;
-    if (keysDown['ArrowDown']) lookPitch -= rotSpeed;
-    if (keysDown['ArrowLeft']) lookYaw += rotSpeed;
-    if (keysDown['ArrowRight']) lookYaw -= rotSpeed;
-    lookPitch = Math.max(-85, Math.min(85, lookPitch));
-    _qYaw.setFromAxisAngle(_axisY, lookYaw * DEG2RAD);
-    _qPitch.setFromAxisAngle(_axisX, lookPitch * DEG2RAD);
-    cameraRig.quaternion.copy(_qYaw).multiply(_qPitch);
+    if (deviceOrientationActive && !touching) {
+      // Phone gyroscope: alpha=yaw, beta=pitch, gamma=roll
+      const yaw = -(deviceAlpha - deviceAlphaOffset) * DEG2RAD;
+      const pitch = -(deviceBeta - 90) * DEG2RAD; // 90° = phone held upright
+      const roll = -deviceGamma * DEG2RAD;
+      const qY = new THREE.Quaternion().setFromAxisAngle(_axisY, yaw);
+      const qX = new THREE.Quaternion().setFromAxisAngle(_axisX, pitch);
+      const qZ = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0, 0, 1), roll);
+      cameraRig.quaternion.copy(qY).multiply(qX).multiply(qZ);
+    } else {
+      const rotSpeed = 0.5;
+      if (keysDown['ArrowUp']) lookPitch += rotSpeed;
+      if (keysDown['ArrowDown']) lookPitch -= rotSpeed;
+      if (keysDown['ArrowLeft']) lookYaw += rotSpeed;
+      if (keysDown['ArrowRight']) lookYaw -= rotSpeed;
+      lookPitch = Math.max(-85, Math.min(85, lookPitch));
+      _qYaw.setFromAxisAngle(_axisY, lookYaw * DEG2RAD);
+      _qPitch.setFromAxisAngle(_axisX, lookPitch * DEG2RAD);
+      cameraRig.quaternion.copy(_qYaw).multiply(_qPitch);
+    }
   }
 
   // Update SBS video textures
