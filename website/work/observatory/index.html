@@ -730,14 +730,17 @@ function animate(time, frame) {
   // Look control — Viture > device orientation > arrow keys/touch
   if (!vitureConnected) {
     if (deviceOrientationActive && !touching) {
-      // Phone gyroscope: alpha=yaw, beta=pitch, gamma=roll
-      const yaw = -(deviceAlpha - deviceAlphaOffset) * DEG2RAD;
-      const pitch = -(deviceBeta - 90) * DEG2RAD; // 90° = phone held upright
-      const roll = -deviceGamma * DEG2RAD;
-      const qY = new THREE.Quaternion().setFromAxisAngle(_axisY, yaw);
-      const qX = new THREE.Quaternion().setFromAxisAngle(_axisX, pitch);
-      const qZ = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0, 0, 1), roll);
-      cameraRig.quaternion.copy(qY).multiply(qX).multiply(qZ);
+      // Standard phone VR orientation mapping (same as Three.js DeviceOrientationControls)
+      const alpha = deviceAlpha * DEG2RAD;
+      const beta = deviceBeta * DEG2RAD;
+      const gamma = deviceGamma * DEG2RAD;
+      const orient = (window.orientation || 0) * DEG2RAD;
+      const euler = new THREE.Euler(beta, alpha, -gamma, 'YXZ');
+      cameraRig.quaternion.setFromEuler(euler);
+      // Rotate so camera looks out the back of the device (not the top)
+      cameraRig.quaternion.multiply(new THREE.Quaternion(-Math.SQRT1_2, 0, 0, Math.SQRT1_2));
+      // Adjust for screen orientation (portrait/landscape)
+      cameraRig.quaternion.multiply(new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0, 0, 1), -orient));
     } else {
       const rotSpeed = 0.5;
       if (keysDown['ArrowUp']) lookPitch += rotSpeed;
