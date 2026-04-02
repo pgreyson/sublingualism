@@ -1,3 +1,3 @@
-I am currently working on stereoscopic video using modular synthesis, processed through a shader to derive a stereoscopic image.
+Processed through a shader to derive a stereoscopic image.
 
 Any phone-based VR viewer works [$15 cardboard viewer](https://a.co/d/09W8LgKW).
