@@ -322,7 +322,7 @@
         }
     }
 
-    function loadPanel(panelIndex, clipIndex, isCenter) {
+    function loadPanel(panelIndex, clipIndex) {
         var vid = panelVideos[panelIndex];
         if (clipIndex < 0 || clipIndex >= allClips.length) {
             vid.removeAttribute('src');
@@ -332,13 +332,20 @@
         var src = getClipSrc(clipIndex);
         if (vid.getAttribute('src') === src) return;
         vid.src = src;
+        vid.preload = 'auto';
         vid.muted = true;
         vid.currentTime = 0;
-        if (isCenter) {
-            vid.preload = 'auto';
-        } else {
-            // Side panels: only fetch metadata to avoid bandwidth contention
-            vid.preload = 'metadata';
+        // Force mobile Safari to fetch and decode the first frame.
+        // Only pause if this video hasn't become the active center panel
+        // by the time the promise resolves (avoids race condition).
+        var playPromise = vid.play();
+        if (playPromise) {
+            playPromise.then(function() {
+                if (vid !== panelVideos[1] || currentIndex === -1) {
+                    vid.pause();
+                    vid.currentTime = 0;
+                }
+            }).catch(function() {});
         }
     }
 
@@ -361,8 +368,8 @@
             track.style.transform = 'translateX(' + (-viewW) + 'px)';
             // Panel 1 (center) already has the right video playing — don't touch it
             // Just load the new next panel
-            loadPanel(0, index - 1, false);
-            loadPanel(2, index + 1, false);
+            loadPanel(0, index - 1);
+            loadPanel(2, index + 1);
         } else if (direction === -1) {
             // Swiped to prev: panel 0 has the clip we want, swap it to center
             var tmpVid2 = panelVideos[2];
@@ -374,13 +381,13 @@
             track.appendChild(panelVideos[2].parentNode);
             track.style.transition = 'none';
             track.style.transform = 'translateX(' + (-viewW) + 'px)';
-            loadPanel(0, index - 1, false);
-            loadPanel(2, index + 1, false);
+            loadPanel(0, index - 1);
+            loadPanel(2, index + 1);
         } else {
             // Initial load
-            loadPanel(0, index - 1, false);
-            loadPanel(1, index, true);
-            loadPanel(2, index + 1, false);
+            loadPanel(0, index - 1);
+            loadPanel(1, index);
+            loadPanel(2, index + 1);
             track.style.transition = 'none';
             track.style.transform = 'translateX(' + (-viewW) + 'px)';
         }
