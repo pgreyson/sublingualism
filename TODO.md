@@ -3,6 +3,7 @@
 ## Site content
 
 - [ ] Add Luna Theria mojave camping photo (other-events.html). User will pick the photo and provide the path.
+- [ ] Include the DV video of the RV ride through Mojave desert on the way to Luna Theria (other-events.html luna theria section).
 - [ ] Verify whether IMG_0271 and IMG_0280 in the "cell space, sf, march 2006" section of rhythm-society.html are actually from March 2006. If not, move them out or relabel.
 
 ## DIY Structure module
