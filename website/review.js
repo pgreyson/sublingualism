@@ -116,8 +116,15 @@
         countEl.textContent = parts.length > 0 ? parts.join(', ') : 'no changes';
     }
 
-    // Fullscreen playback with swipe-to-slide navigation
-    var allClips = Array.prototype.slice.call(document.querySelectorAll('.clip'));
+    // Fullscreen playback with swipe-to-slide navigation.
+    // Only video clips (data-src points at an .mp4) are handled here, so this
+    // viewer can coexist with the photo lightbox (review-photos.js) on a page
+    // that mixes photos and video.
+    function isVideoClip(c) { return (c.getAttribute('data-src') || '').indexOf('.mp4') !== -1; }
+    function videoClips() {
+        return Array.prototype.slice.call(document.querySelectorAll('.clip')).filter(isVideoClip);
+    }
+    var allClips = videoClips();
     var overlay = null;
     var track = null;        // sliding track with 3 panels
     var panels = [];         // [prev, current, next] panel elements
@@ -454,7 +461,7 @@
 
     // Add/remove review overlay buttons
     function enableReview() {
-        document.querySelectorAll('.clip').forEach(function(clip) {
+        videoClips().forEach(function(clip) {
             var videoId = clip.getAttribute('data-id');
             if (!videoId || clip.querySelector('.review-btn')) return;
 
@@ -523,7 +530,7 @@
         document.querySelectorAll('.review-btn').forEach(function(btn) {
             btn.remove();
         });
-        document.querySelectorAll('.clip').forEach(function(clip) {
+        videoClips().forEach(function(clip) {
             clip.style.outline = 'none';
             clip.style.opacity = '1';
             clip.style.position = '';

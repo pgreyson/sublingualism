@@ -98,7 +98,13 @@
     }
 
     // ---- PhotoSwipe gallery ----
-    var allClips = Array.prototype.slice.call(document.querySelectorAll('.clip'));
+    // Skip video clips (data-src points at an .mp4) so they fall through to the
+    // video viewer (review.js) instead of being rendered as broken images.
+    function isVideoClip(c) { return (c.getAttribute('data-src') || '').indexOf('.mp4') !== -1; }
+    function photoClips() {
+        return Array.prototype.slice.call(document.querySelectorAll('.clip')).filter(function(c) { return !isVideoClip(c); });
+    }
+    var allClips = photoClips();
 
     // Load PhotoSwipe CSS
     var link = document.createElement('link');
@@ -174,7 +180,7 @@
 
     // ---- Review mode ----
     function enableReview() {
-        document.querySelectorAll('.clip').forEach(function(clip) {
+        photoClips().forEach(function(clip) {
             var photoId = clip.getAttribute('data-id');
             if (!photoId || clip.querySelector('.photo-review-btn')) return;
 
@@ -218,7 +224,7 @@
     function disableReview() {
         document.querySelectorAll('.photo-review-btn').forEach(function(btn) { btn.remove(); });
         document.querySelectorAll('.photo-number-badge').forEach(function(b) { b.remove(); });
-        document.querySelectorAll('.clip').forEach(function(clip) {
+        photoClips().forEach(function(clip) {
             clip.style.opacity = '1';
             clip.style.position = '';
         });
