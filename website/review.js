@@ -157,6 +157,9 @@
             vid.setAttribute('loop', '');
             vid.setAttribute('playsinline', '');
             vid.setAttribute('preload', 'auto');
+            // iPhone Safari: native video fullscreen is the only way to hide the URL bar;
+            // when the user taps Done there, return to the page cleanly.
+            vid.addEventListener('webkitendfullscreen', function () { closeOverlay(); });
             panel.appendChild(vid);
             track.appendChild(panel);
             panels.push(panel);
@@ -421,6 +424,37 @@
         }
     }
 
+    // True fullscreen so mobile browser chrome (the URL bar) is hidden during playback.
+    // Standard Fullscreen API covers Android/iPad/desktop; iPhone Safari only allows the
+    // <video> element itself, so fall back to webkitEnterFullscreen on the center video.
+    function enterFullscreen() {
+        var el = overlay, v = panelVideos[1];
+        try {
+            if (el.requestFullscreen) { el.requestFullscreen().catch(function () {}); }
+            else if (el.webkitRequestFullscreen) { el.webkitRequestFullscreen(); }
+            else if (v && v.webkitEnterFullscreen) {
+                if (v.readyState >= 1) { v.webkitEnterFullscreen(); }
+                else { v.addEventListener('loadedmetadata', function onmd() {
+                    v.removeEventListener('loadedmetadata', onmd);
+                    try { v.webkitEnterFullscreen(); } catch (e) {}
+                }, { once: true }); }
+            }
+        } catch (e) {}
+    }
+    function exitFullscreen() {
+        try {
+            if (document.fullscreenElement && document.exitFullscreen) { document.exitFullscreen(); }
+            else if (document.webkitFullscreenElement && document.webkitExitFullscreen) { document.webkitExitFullscreen(); }
+        } catch (e) {}
+    }
+    // Exiting fullscreen (Esc / swipe-down / Done) closes the viewer for a uniform exit.
+    function onFsChange() {
+        var fsEl = document.fullscreenElement || document.webkitFullscreenElement;
+        if (!fsEl && currentIndex !== -1) closeOverlay();
+    }
+    document.addEventListener('fullscreenchange', onFsChange);
+    document.addEventListener('webkitfullscreenchange', onFsChange);
+
     function openOverlay(index) {
         if (!overlay) createOverlay();
         savedScrollY = window.scrollY;
@@ -430,10 +464,12 @@
         updateViewW();
 
         setCurrentClip(index, 0);
+        enterFullscreen();   // must be in the click gesture
     }
 
     function closeOverlay() {
         if (!overlay || currentIndex === -1) return;
+        exitFullscreen();
         panelVideos.forEach(function(v) { v.pause(); v.removeAttribute('src'); v.load(); });
         overlay.style.display = 'none';
         document.body.classList.remove('overlay-open');
