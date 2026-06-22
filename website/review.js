@@ -157,9 +157,11 @@
             vid.setAttribute('loop', '');
             vid.setAttribute('playsinline', '');
             vid.setAttribute('preload', 'auto');
-            // iPhone Safari: native video fullscreen is the only way to hide the URL bar;
-            // when the user taps Done there, return to the page cleanly.
-            vid.addEventListener('webkitendfullscreen', function () { closeOverlay(); });
+            // Returning from native (iPhone) fullscreen drops back into the swipe overlay —
+            // keep the center clip playing rather than closing the whole viewer.
+            vid.addEventListener('webkitendfullscreen', function () {
+                if (this === panelVideos[1] && currentIndex !== -1) this.play().catch(function () {});
+            });
             panel.appendChild(vid);
             track.appendChild(panel);
             panels.push(panel);
@@ -177,6 +179,23 @@
             closeOverlay();
         });
         overlay.appendChild(closeBtn);
+
+        // Fullscreen button — only where the overlay itself can't go fullscreen (iPhone Safari),
+        // so the user can pop the current clip into native fullscreen (no URL bar) on demand.
+        // Elsewhere (Android/iPad/desktop) the whole overlay already fullscreens on open.
+        var hasElementFS = document.fullscreenEnabled || document.webkitFullscreenEnabled;
+        var canVideoFS = typeof panelVideos[0].webkitEnterFullscreen === 'function';
+        if (!hasElementFS && canVideoFS) {
+            var fsBtn = document.createElement('div');
+            fsBtn.style.cssText = 'position:absolute;top:12px;left:16px;z-index:10;color:#fff;font-size:24px;opacity:0.6;cursor:pointer;padding:8px;line-height:1;';
+            fsBtn.innerHTML = '⛶';
+            fsBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                var v = panelVideos[1];
+                try { if (v && v.webkitEnterFullscreen) v.webkitEnterFullscreen(); } catch (err) {}
+            });
+            overlay.appendChild(fsBtn);
+        }
 
         // Add button — single centered button at bottom
         var overlayAddBtn = document.createElement('button');
