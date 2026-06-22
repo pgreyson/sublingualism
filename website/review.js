@@ -425,20 +425,15 @@
     }
 
     // True fullscreen so mobile browser chrome (the URL bar) is hidden during playback.
-    // Standard Fullscreen API covers Android/iPad/desktop; iPhone Safari only allows the
-    // <video> element itself, so fall back to webkitEnterFullscreen on the center video.
+    // Standard Fullscreen API (Android/iPad/desktop) makes the whole overlay fullscreen, so
+    // the custom swipe-nav survives. iPhone Safari only allows the bare <video> to go
+    // fullscreen — which would kill swipe — so on iPhone we deliberately DON'T, and rely on
+    // standalone (Add to Home Screen) for a chrome-free swipeable view instead.
     function enterFullscreen() {
-        var el = overlay, v = panelVideos[1];
+        var el = overlay;
         try {
             if (el.requestFullscreen) { el.requestFullscreen().catch(function () {}); }
             else if (el.webkitRequestFullscreen) { el.webkitRequestFullscreen(); }
-            else if (v && v.webkitEnterFullscreen) {
-                if (v.readyState >= 1) { v.webkitEnterFullscreen(); }
-                else { v.addEventListener('loadedmetadata', function onmd() {
-                    v.removeEventListener('loadedmetadata', onmd);
-                    try { v.webkitEnterFullscreen(); } catch (e) {}
-                }, { once: true }); }
-            }
         } catch (e) {}
     }
     function exitFullscreen() {
